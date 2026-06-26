@@ -431,6 +431,9 @@ footer{
   position:relative;z-index:1;
 }
 
+/* ── MOBILE INLINE VISUALS ── */
+.mobile-visual{display:none;margin:0 auto 20px;text-align:center;}
+
 /* ── DESKTOP UPGRADES ── */
 @media(min-width:700px){
   .sec{padding:100px 32px;}
@@ -451,104 +454,101 @@ footer{
   .nav-logo{font-size:18px;}
   .nav-cta{font-size:13px;padding:8px 18px;}
 
-  /* Side SVG decorations — shrink and fade instead of hiding */
-  section > svg[aria-hidden="true"],
-  .hero > svg[aria-hidden="true"]{
-    width:55px!important;
-    opacity:0.25!important;
+  /* Hide side SVG decorations on mobile — replaced by inline visuals */
+  section > svg[aria-hidden="true"][style*="position:absolute"],
+  .hero > svg[aria-hidden="true"][style*="position:absolute"]{
+    display:none!important;
   }
 
-  /* Hero: tighter, less vertical space */
+  /* Show mobile inline visuals */
+  .mobile-visual{display:block!important;}
+
+  /* Hero */
   .hero{
     padding:88px 20px 52px;
     min-height:auto;
   }
-  .hero h1{font-size:clamp(28px,7vw,40px);margin-bottom:16px;}
-  .hero-sub{font-size:15px;margin-bottom:24px;}
-  .hero-eyebrow{margin-bottom:14px;}
+  .hero h1{font-size:clamp(28px,7vw,38px);margin-bottom:16px;}
+  .hero-sub{font-size:15px;margin-bottom:28px;line-height:1.75;}
+  .hero-eyebrow{margin-bottom:14px;font-size:10px;}
 
-  /* Badges: stack if needed */
-  .badge-row{gap:6px;margin-bottom:22px;}
-  .badge{font-size:11px;padding:4px 10px;}
+  /* Badges */
+  .badge-row{gap:6px;margin-bottom:24px;}
+  .badge{font-size:11px;padding:5px 11px;}
 
   /* Hero button: full width */
   .hero-btn{
     display:block;width:100%;text-align:center;
-    padding:15px 24px;font-size:15px;
+    padding:16px 24px;font-size:16px;
     margin-bottom:10px;
   }
-  .hero-deadline{font-size:12px;}
+  .hero-deadline{font-size:13px;}
   .scroll-hint{display:none;}
 
-  /* Sections: tighter padding */
-  .sec{padding:52px 20px;}
+  /* Sections */
+  .sec{padding:56px 20px;}
   .sec-inner{padding:0;}
-  h2.sec-title{font-size:clamp(22px,6vw,30px);margin-bottom:14px;}
-  .sec-sub{font-size:14px;}
+  h2.sec-title{font-size:clamp(24px,6.5vw,32px);margin-bottom:16px;}
+  .sec-sub{font-size:15px;line-height:1.75;}
 
   /* Journey section */
   .sec-journey{padding:44px 0 60px;}
   .journey-label{padding:0 20px;margin-bottom:32px;}
   .path-container{padding:0 16px;}
 
-  /* Island nodes: tighter */
+  /* Island nodes */
   .island-node{gap:12px;padding:0 0 24px;}
   .node-icon{width:52px;height:52px;flex-shrink:0;}
   .node-icon svg{width:52px!important;height:52px!important;}
-  .node-body{padding:14px;}
-  .node-body h3{font-size:15px;margin-bottom:4px;}
-  .node-body p{font-size:12px;}
+  .node-body{padding:16px;}
+  .node-body h3{font-size:16px;margin-bottom:5px;}
+  .node-body p{font-size:13px;line-height:1.65;}
   .node-tag{font-size:9px;}
-  .npill{font-size:10px;padding:3px 8px;}
-  .node-pills{gap:4px;margin-top:8px;}
+  .npill{font-size:10px;padding:3px 9px;}
+  .node-pills{gap:5px;margin-top:10px;}
 
   /* Island stack line */
   .island-stack::before{left:26px;}
 
   /* Requirements */
-  .req-card{padding:14px;}
-  .req-card h4{font-size:14px;}
-  .req-card p{font-size:12px;}
-  .req-num{width:26px;height:26px;font-size:12px;flex-shrink:0;}
-  .gates-block{padding:16px;}
+  .req-card{padding:16px;}
+  .req-card h4{font-size:15px;}
+  .req-card p{font-size:13px;line-height:1.6;}
+  .req-num{width:28px;height:28px;font-size:12px;flex-shrink:0;}
+  .gates-block{padding:18px;}
   .gate-row{gap:10px;}
   .gate-ico{font-size:16px;}
-  .gate-txt{font-size:12px;}
-  .gate-txt strong{font-size:12px;}
+  .gate-txt{font-size:13px;}
+  .gate-txt strong{font-size:13px;}
 
   /* Hours table */
   .h-row{border-radius:10px;}
-  .h-label{padding:12px 12px;font-size:12px;}
-  .h-label strong{font-size:12px;}
-  .h-val{padding:12px 14px;font-size:22px;min-width:72px;}
-  .commit-note{padding:14px;font-size:13px;}
+  .h-label{padding:14px 14px;font-size:13px;}
+  .h-label strong{font-size:13px;}
+  .h-val{padding:12px 14px;font-size:24px;min-width:76px;}
+  .commit-note{padding:16px;font-size:14px;line-height:1.7;}
 
   /* Objections */
-  details summary{padding:14px;font-size:14px;}
-  .obj-ans{font-size:13px;}
+  details summary{padding:16px;font-size:15px;}
+  .obj-ans{font-size:14px;line-height:1.7;}
 
   /* Filter cards */
-  .f-card{padding:16px;gap:12px;}
+  .f-card{padding:18px;gap:12px;}
   .f-icon{font-size:20px;}
-  .f-card h4{font-size:14px;margin-bottom:4px;}
-  .f-card p{font-size:12px;}
+  .f-card h4{font-size:15px;margin-bottom:5px;}
+  .f-card p{font-size:13px;line-height:1.65;}
 
   /* CTA section */
   .sec-cta{padding:60px 20px 56px;}
-  .sec-cta h2{font-size:clamp(24px,6vw,34px);margin-bottom:14px;}
-  .sec-cta p{font-size:14px;margin-bottom:26px;}
-  .cta-btn{padding:15px 28px;font-size:15px;}
-  .cta-micro{font-size:12px;}
+  .sec-cta h2{font-size:clamp(24px,6.5vw,34px);margin-bottom:16px;}
+  .sec-cta p{font-size:15px;margin-bottom:28px;line-height:1.7;}
+  .cta-btn{padding:16px 28px;font-size:16px;}
+  .cta-micro{font-size:13px;}
 
   /* CTA panoramic illustration: scale for mobile */
   .sec-cta > svg[aria-hidden="true"][viewBox="0 0 560 260"]{
-    width:min(360px,92vw)!important;
+    width:min(340px,90vw)!important;
     margin-bottom:20px!important;
-  }
-  /* CTA side decorations: same subtle treatment */
-  .sec-cta > svg[aria-hidden="true"][viewBox*="0 0 180"]{
-    width:55px!important;
-    opacity:0.25!important;
   }
 }
 
@@ -750,6 +750,25 @@ footer{
     </svg>
   <!-- Left: drifting asteroids / rock shards -->
   <!-- Right: mirror side with different elements -->
+  <!-- Mobile visual: floating islands with path -->
+  <div class="mobile-visual">
+    <svg viewBox="0 0 300 80" width="260" aria-hidden="true">
+      <ellipse cx="45" cy="58" rx="38" ry="12" fill="#1A2F50"/>
+      <rect x="14" y="44" width="62" height="16" rx="5" fill="#1F3560"/>
+      <ellipse cx="45" cy="44" rx="30" ry="6" fill="#2D4A28"/>
+      <line x1="35" y1="44" x2="35" y2="30" stroke="#7EC8A0" stroke-width="2"/>
+      <circle cx="35" cy="27" r="6" fill="#3A6030" opacity=".7"/>
+      <path d="M85 48 Q150 20 215 48" fill="none" stroke="#7EC8A0" stroke-width="1.5" stroke-dasharray="5 4" opacity=".5"/>
+      <circle cx="150" cy="30" r="2.5" fill="#7EC8A0" opacity=".5"><animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/></circle>
+      <ellipse cx="255" cy="58" rx="38" ry="12" fill="#1A2F50"/>
+      <rect x="224" y="44" width="62" height="16" rx="5" fill="#1F3560"/>
+      <ellipse cx="255" cy="44" rx="30" ry="6" fill="#2D4A28"/>
+      <line x1="255" y1="44" x2="255" y2="28" stroke="#F0C040" stroke-width="2"/>
+      <polygon points="255,28 265,34 255,40" fill="#F0C040" opacity=".8"/>
+      <circle cx="80" cy="18" r="1.5" fill="white" opacity=".4"><animate attributeName="opacity" values=".4;.9;.4" dur="2.3s" repeatCount="indefinite"/></circle>
+      <circle cx="200" cy="12" r="1" fill="white" opacity=".5"><animate attributeName="opacity" values=".5;1;.5" dur="1.8s" repeatCount="indefinite"/></circle>
+    </svg>
+  </div>
   <div class="journey-label">
     <span class="sec-eyebrow" style="justify-content:center;">El recorrido</span>
     <h2 class="sec-title" style="text-align:center;">De donde estás<br>a donde quieres estar.</h2>
@@ -938,6 +957,22 @@ footer{
   <!-- Left: vertical dotted path with checkpoint markers -->
   <!-- Right: floating gate icon suggestion -->
   <div class="sec-inner">
+    <!-- Mobile visual: checkpoint markers -->
+    <div class="mobile-visual">
+      <svg viewBox="0 0 260 70" width="240" aria-hidden="true">
+        <line x1="30" y1="35" x2="230" y2="35" stroke="rgba(126,200,160,0.3)" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <circle cx="30" cy="35" r="8" fill="none" stroke="rgba(126,200,160,0.5)" stroke-width="1.5"/><circle cx="30" cy="35" r="3.5" fill="#7EC8A0" opacity=".8"/>
+        <circle cx="80" cy="35" r="8" fill="none" stroke="rgba(126,200,160,0.5)" stroke-width="1.5"/><circle cx="80" cy="35" r="3.5" fill="#7EC8A0" opacity=".8"/>
+        <circle cx="130" cy="35" r="8" fill="none" stroke="rgba(126,200,160,0.5)" stroke-width="1.5"/><circle cx="130" cy="35" r="3.5" fill="#7EC8A0" opacity=".8"/>
+        <circle cx="180" cy="35" r="8" fill="none" stroke="rgba(126,200,160,0.5)" stroke-width="1.5"/><circle cx="180" cy="35" r="3.5" fill="#7EC8A0" opacity=".8"/>
+        <circle cx="230" cy="35" r="10" fill="none" stroke="rgba(240,192,64,0.6)" stroke-width="2"/><circle cx="230" cy="35" r="4.5" fill="#F0C040" opacity=".9"/>
+        <text x="30" y="58" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.35)" font-family="Georgia">1</text>
+        <text x="80" y="58" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.35)" font-family="Georgia">2</text>
+        <text x="130" y="58" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.35)" font-family="Georgia">3</text>
+        <text x="180" y="58" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.35)" font-family="Georgia">4</text>
+        <text x="230" y="58" text-anchor="middle" font-size="8" fill="rgba(240,192,64,0.5)" font-family="Georgia">5</text>
+      </svg>
+    </div>
     <span class="sec-eyebrow">Por qué este es diferente</span>
     <h2 class="sec-title">Esto no es un curso.<br>Es algo que se gana.</h2>
     <p class="sec-sub">5 requisitos de graduación. Binarios. Verificados por alguien externo al programa. Si los cumples todos, te gradúas. Si no, no hay diploma de participación.</p>
@@ -1030,6 +1065,23 @@ footer{
   <!-- Left: time spiral suggestion -->
   <!-- Right: hours visual hint -->
   <div class="sec-inner">
+    <!-- Mobile visual: clock with energy wave -->
+    <div class="mobile-visual">
+      <svg viewBox="0 0 200 80" width="180" aria-hidden="true">
+        <circle cx="100" cy="40" r="30" fill="none" stroke="rgba(126,200,160,0.35)" stroke-width="1.8"/>
+        <circle cx="100" cy="40" r="3" fill="#7EC8A0" opacity=".7"/>
+        <line x1="100" y1="40" x2="100" y2="18" stroke="#7EC8A0" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+        <line x1="100" y1="40" x2="118" y2="48" stroke="#7EC8A0" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+        <circle cx="100" cy="10" r="2" fill="#7EC8A0" opacity=".5"/>
+        <circle cx="130" cy="40" r="2" fill="#7EC8A0" opacity=".4"/>
+        <circle cx="100" cy="70" r="2" fill="#7EC8A0" opacity=".4"/>
+        <circle cx="70" cy="40" r="2" fill="#7EC8A0" opacity=".4"/>
+        <path d="M145 30 Q160 15 175 30 Q190 45 175 55" fill="none" stroke="rgba(240,192,64,0.4)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <circle cx="175" cy="55" r="3" fill="#F0C040" opacity=".6"><animate attributeName="opacity" values=".6;1;.6" dur="2s" repeatCount="indefinite"/></circle>
+        <path d="M55 50 Q40 65 25 50 Q10 35 25 25" fill="none" stroke="rgba(106,176,245,0.35)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <circle cx="25" cy="25" r="3" fill="#6AB0F5" opacity=".5"><animate attributeName="opacity" values=".5;.9;.5" dur="2.4s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
     <span class="sec-eyebrow">La carga real</span>
     <h2 class="sec-title">Sin letra chica.</h2>
     <p class="sec-sub">No son "solo 3 horas". Son entre 2 y 5, dependiendo de la fase. Te lo decimos de frente: si no puedes asegurarlas, este no es tu momento — y eso está bien.</p>
@@ -1102,6 +1154,18 @@ footer{
     <circle cx="148" cy="390" r="2" fill="#F0C040" opacity="0.35"><animate attributeName="cy" values="390;355;390" dur="4.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.35;0;0.35" dur="4.5s" repeatCount="indefinite"/></circle>
     </svg>
   <div class="sec-inner">
+    <!-- Mobile visual: thought bubbles -->
+    <div class="mobile-visual">
+      <svg viewBox="0 0 240 70" width="210" aria-hidden="true">
+        <rect x="40" y="8" width="160" height="38" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(126,200,160,0.3)" stroke-width="1.2"/>
+        <text x="120" y="32" text-anchor="middle" font-size="11" fill="rgba(126,200,160,0.6)" font-family="Georgia,serif" font-style="italic">¿Y si…?</text>
+        <circle cx="70" cy="52" r="4" fill="rgba(126,200,160,0.15)" stroke="rgba(126,200,160,0.25)" stroke-width="1"/>
+        <circle cx="56" cy="60" r="2.5" fill="rgba(126,200,160,0.1)" stroke="rgba(126,200,160,0.2)" stroke-width="1"/>
+        <circle cx="46" cy="65" r="1.5" fill="rgba(126,200,160,0.08)"/>
+        <circle cx="18" cy="20" r="1.5" fill="white" opacity=".4"><animate attributeName="opacity" values=".4;.9;.4" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="222" cy="14" r="1" fill="#F0C040" opacity=".5"><animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
     <span class="sec-eyebrow">Lo que probablemente estás pensando</span>
     <h2 class="sec-title">Preguntas directas.<br>Respuestas sin relleno.</h2>
     <div class="obj-list">
@@ -1174,6 +1238,23 @@ footer{
     </svg>
   <!-- Right: two diverging paths visual -->
   <div class="sec-inner">
+    <!-- Mobile visual: diverging paths -->
+    <div class="mobile-visual">
+      <svg viewBox="0 0 220 80" width="200" aria-hidden="true">
+        <circle cx="110" cy="68" r="5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <circle cx="110" cy="68" r="2" fill="rgba(255,255,255,0.4)"/>
+        <path d="M110 63 Q80 40 45 20" fill="none" stroke="rgba(126,200,160,0.5)" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <circle cx="45" cy="20" r="7" fill="rgba(126,200,160,0.2)" stroke="rgba(126,200,160,0.5)" stroke-width="1.5"/>
+        <line x1="41" y1="17" x2="49" y2="23" stroke="#7EC8A0" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="43" y1="24" x2="49" y2="18" stroke="#7EC8A0" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+        <path d="M110 63 Q140 40 175 20" fill="none" stroke="rgba(240,112,96,0.4)" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <circle cx="175" cy="20" r="7" fill="rgba(240,112,96,0.15)" stroke="rgba(240,112,96,0.4)" stroke-width="1.5"/>
+        <line x1="171" y1="16" x2="179" y2="24" stroke="#F07060" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+        <line x1="179" y1="16" x2="171" y2="24" stroke="#F07060" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+        <circle cx="25" cy="50" r="1.5" fill="white" opacity=".35"><animate attributeName="opacity" values=".35;.8;.35" dur="2.6s" repeatCount="indefinite"/></circle>
+        <circle cx="195" cy="48" r="1" fill="white" opacity=".4"><animate attributeName="opacity" values=".4;.9;.4" dur="2.2s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
     <span class="sec-eyebrow">¿Esto es para ti?</span>
     <h2 class="sec-title">Sé honesto<br>antes de inscribirte.</h2>
     <p class="sec-sub" style="margin-bottom:0;">Este programa no es para todos — y eso no es un defecto, es el diseño.</p>
