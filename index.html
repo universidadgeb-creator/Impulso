@@ -261,6 +261,15 @@ h2.sec-title{
   padding:4px 10px;border-radius:8px;
   letter-spacing:.01em;
 }
+.malla-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:14px;font-size:12px;font-weight:700;
+  padding:8px 16px;border-radius:100px;
+  border:1px solid currentColor;
+  text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.malla-btn:hover{background:rgba(255,255,255,.08);transform:translateY(-1px);}
 
 /* ── REQUIREMENTS ── */
 .sec-reqs{background:var(--deep);}
@@ -569,9 +578,9 @@ footer{
 <!-- NAV -->
 <nav>
   <!-- Logo text as fallback until PNG is provided -->
-  <div class="nav-logo">Impulso<sup>GEB</sup></div>
+  <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
   <a href="https://wa.me/523314112703?text=Quiero%20formar%20parte%20de%20Impulso%20GEB"
-     class="nav-cta" target="_blank" rel="noopener">Inscribirme →</a>
+     class="nav-cta" target="_blank" rel="noopener">Inscribirme</a>
 </nav>
 
 <!-- ══ HERO ══ -->
@@ -688,16 +697,16 @@ footer{
     <circle cx="160" cy="55" r="1" fill="#7EC8A0" opacity=".2"/>
   </svg>
 
-  <div class="hero-eyebrow">GEB University · Generación 1</div>
+  <div class="hero-eyebrow">GEB University · SEGUNDA GENERACIÓN</div>
   <h1>En 6 semanas, tu plan de vida.<br>En 10 meses, <em>tu siguiente nivel.</em></h1>
-  <p class="hero-sub">Dos programas en secuencia. El primero es para todos. El segundo, para quien demuestre que lo quiere.</p>
+  <p class="hero-sub">Dos niveles, un solo programa.</p>
   <div class="badge-row">
-    <span class="badge badge-sage">Abierto a todos los colaboradores</span>
+    <span class="badge badge-sage">Abierto para todos los colaboradores GEB</span>
     <span class="badge badge-gold">Sin costo</span>
-    <span class="badge badge-mist">Arranca 18 agosto</span>
+    <span class="badge badge-mist">Modalidad híbrida</span>
   </div>
   <a href="https://wa.me/523314112703?text=Quiero%20formar%20parte%20de%20Impulso%20GEB"
-     class="hero-btn" target="_blank" rel="noopener">Quiero empezar →</a>
+     class="hero-btn" target="_blank" rel="noopener">Quiero conocer más</a>
   <p class="hero-deadline">Inscripciones abiertas hasta el <strong>8 de agosto</strong></p>
   <div class="scroll-hint">Conoce el camino</div>
 </section>
@@ -773,7 +782,7 @@ footer{
   <div class="journey-label">
     <span class="sec-eyebrow" style="justify-content:center;">El recorrido</span>
     <h2 class="sec-title" style="text-align:center;">De donde estás<br>a donde quieres estar.</h2>
-    <p class="sec-sub" style="text-align:center;max-width:420px;margin:12px auto 0;">No son dos cursos paralelos. Es una escalera. Empieza por Ruta — cualquiera entra, te llevas algo real aunque no continúes.</p>
+    <p class="sec-sub" style="text-align:center;max-width:420px;margin:12px auto 0;">Dos niveles, un solo programa.</p>
   </div>
   <div class="path-container">
     <div class="island-stack">
@@ -802,13 +811,13 @@ footer{
           </svg>
         </div>
         <div class="node-body">
-          <span class="node-tag" style="color:var(--sage);">Programa 1 · Puerta abierta</span>
+          <span class="node-tag" style="color:var(--sage);">Programa 1</span>
           <h3>Ruta GEB — 6 semanas</h3>
-          <p>Construyes tu Plan de Vida: IKIGAI, visión a 24 meses, presupuesto real. Cierra con conferencia presencial en sede ONU. <strong style="color:var(--white);">El plan es tuyo aunque no continúes.</strong></p>
+          <p>Te otorga el control absoluto sobre tu propósito, tu dirección y tus medios, eliminando la brecha entre lo que sueñas y lo que puedes ejecutar.</p>
           <div class="node-pills">
             <span class="npill" style="border-color:var(--sage);color:var(--sage);">Todos los colaboradores</span>
-            <span class="npill" style="border-color:var(--border);color:var(--fog);">Ago 18 – Sep 25</span>
-            <span class="npill" style="border-color:var(--border);color:var(--fog);">~3.6 hrs/sem</span>
+            <span class="npill" style="border-color:var(--border);color:var(--fog);">Ago – Sep 2026</span>
+            <span class="npill" style="border-color:var(--border);color:var(--fog);">Dedicación 3.6 hrs/sem</span>
           </div>
           <div class="node-topics">
             <span class="topic-chip">IKIGAI</span>
@@ -816,6 +825,7 @@ footer{
             <span class="topic-chip">Presupuesto real</span>
             <span class="topic-chip">Plan de Vida</span>
           </div>
+          <a href="mallas/malla-ruta-geb.pdf" class="malla-btn" style="color:var(--sage);" target="_blank" rel="noopener">📄 Ver malla curricular</a>
         </div>
       </div>
 
@@ -829,9 +839,9 @@ footer{
           </svg>
         </div>
         <div class="node-body" style="background:rgba(106,176,245,0.04);border-color:rgba(106,176,245,0.15);">
-          <span class="node-tag" style="color:var(--blue-hi);">Proceso de selección</span>
-          <h3 style="font-size:15px;">Sep 29 – Oct 19</h3>
-          <p>Ensayos, entrevistas, asignación de tríadas. Bootcamp inaugural presencial 18–19 octubre. 27–29 lugares disponibles.</p>
+          <span class="node-tag" style="color:var(--blue-hi);">Proceso de selección para quienes deciden continuar</span>
+          <h3 style="font-size:15px;">Sep – Oct 2026</h3>
+          <p>Ensayos y entrevistas de ingreso.<br>Asignación de tríadas y bootcamp inaugural. Cupo limitado.</p>
         </div>
       </div>
 
@@ -858,17 +868,19 @@ footer{
         <div class="node-body" style="background:rgba(106,176,245,0.04);border-color:rgba(106,176,245,0.15);">
           <span class="node-tag" style="color:var(--blue-hi);">Impulso · Fase 1</span>
           <h3>Forja — Meses 1 y 2</h3>
-          <p>Profundización del Plan de Vida. Defensa ante panel en diciembre. La fase más intensa porque construir tu dirección bien hecha se hace una sola vez.</p>
+          <p>Profundiza en tu visión con determinación absoluta, transformando tu propósito en una estrategia real.</p>
           <div class="node-pills">
-            <span class="npill" style="border-color:rgba(106,176,245,.3);color:var(--blue-hi);">Oct 20 – Dic 12</span>
-            <span class="npill" style="border-color:var(--border);color:var(--fog);">3.6–4 hrs/sem</span>
+            <span class="npill" style="border-color:rgba(106,176,245,.3);color:var(--blue-hi);">Oct – Dic 2026</span>
+            <span class="npill" style="border-color:var(--border);color:var(--fog);">Dedicación 3.6–4 hrs/sem</span>
           </div>
           <div class="node-topics">
             <span class="topic-chip">Autoconocimiento</span>
             <span class="topic-chip">Hábito</span>
-            <span class="topic-chip">Maestría técnica</span>
-            <span class="topic-chip">Red de pares</span>
+            <span class="topic-chip">Comunicación asertiva</span>
+            <span class="topic-chip">Fortalezas y zonas de desarrollo</span>
+            <span class="topic-chip">Mentalidad y agencia</span>
           </div>
+          <a href="mallas/malla-impulso-geb.pdf" class="malla-btn" style="color:var(--blue-hi);" target="_blank" rel="noopener">📄 Ver malla curricular</a>
         </div>
       </div>
 
@@ -897,17 +909,21 @@ footer{
         <div class="node-body" style="background:rgba(240,192,64,0.03);border-color:rgba(240,192,64,0.15);">
           <span class="node-tag" style="color:var(--gold);">Impulso · Fase 2</span>
           <h3>Producción — Meses 3 a 8</h3>
-          <p>Ejecución del proyecto de impacto. Sesiones entre pares. Hábito sostenido 6 meses. Coaching grupal mensual. La carga baja — la inercia ya es tuya.</p>
+          <p>Ejecuta con fluidez total tu visión, consolidando tu impacto a través de la sinergia con otros líderes que te impulsan.</p>
           <div class="node-pills">
-            <span class="npill" style="border-color:rgba(240,192,64,.3);color:var(--gold);">Ene 5 – Jun 30, 2027</span>
-            <span class="npill" style="border-color:var(--border);color:var(--fog);">2–3 hrs/sem</span>
+            <span class="npill" style="border-color:rgba(240,192,64,.3);color:var(--gold);">Ene – Jun 2027</span>
+            <span class="npill" style="border-color:var(--border);color:var(--fog);">Dedicación 2–3 hrs/sem</span>
           </div>
           <div class="node-topics">
             <span class="topic-chip">Proyecto de impacto</span>
             <span class="topic-chip">Excel</span>
             <span class="topic-chip">IA aplicada</span>
             <span class="topic-chip">Liderazgo</span>
+            <span class="topic-chip">Finanzas</span>
+            <span class="topic-chip">Salud mental</span>
+            <span class="topic-chip">Bienestar físico</span>
           </div>
+          <a href="mallas/malla-impulso-geb.pdf" class="malla-btn" style="color:var(--gold);" target="_blank" rel="noopener">📄 Ver malla curricular</a>
         </div>
       </div>
 
@@ -932,16 +948,16 @@ footer{
         <div class="node-body" style="background:rgba(240,112,96,0.05);border-color:rgba(240,112,96,0.2);">
           <span class="node-tag" style="color:var(--coral);">El destino · Agosto 2027</span>
           <h3>Demo Day público</h3>
-          <p>Presentas tu trayectoria en 5 minutos ante reclutadores reales. Pueden ofrecerte entrevista en el momento. Es la evidencia que sobrevive a este programa y a tu jefe actual.</p>
+          <p>Presentas tu trayectoria en el programa, aprendizajes y siguientes pasos, con la oportunidad de recibir retroalimentación real. Es el resultado y evidencia de tu dedicación y propósito.</p>
           <div class="node-pills">
-            <span class="npill" style="border-color:rgba(240,112,96,.35);color:var(--coral);">Semana del 11 Ago 2027</span>
+            <span class="npill" style="border-color:rgba(240,112,96,.35);color:var(--coral);">Ago 2027</span>
             <span class="npill" style="border-color:var(--border);color:var(--fog);">Reclutadores presentes</span>
           </div>
           <div class="node-topics">
             <span class="topic-chip">CV y portafolio</span>
             <span class="topic-chip">Simulacros de entrevista</span>
             <span class="topic-chip">Negociación salarial</span>
-            <span class="topic-chip">Demo Day</span>
+            <span class="topic-chip">Preparación para la presentación</span>
           </div>
         </div>
       </div>
@@ -998,49 +1014,49 @@ footer{
         <text x="230" y="58" text-anchor="middle" font-size="8" fill="rgba(240,192,64,0.5)" font-family="Georgia">5</text>
       </svg>
     </div>
-    <span class="sec-eyebrow">Por qué este es diferente</span>
-    <h2 class="sec-title">Esto no es un curso.<br>Es algo que se gana.</h2>
-    <p class="sec-sub">5 requisitos de graduación. Binarios. Verificados por alguien externo al programa. Si los cumples todos, te gradúas. Si no, no hay diploma de participación.</p>
+    <span class="sec-eyebrow">La evolución de la Generación 1</span>
+    <h2 class="sec-title">Esto no es solo un curso.<br>Es experiencia que se gana.</h2>
+    <p class="sec-sub">5 requisitos de graduación. Verificados por alguien externo al programa. Si los cumples todos, te gradúas.</p>
 
     <div class="req-grid">
       <div class="req-card">
         <div class="req-num">1</div>
         <div>
-          <h4>Plan de Vida + Presupuesto defendido</h4>
-          <p>Ante un panel de 3 personas al mes 2. Tienes hasta el mes 4 si necesitas corregirlo.</p>
+          <h4>Plan de Vida + Presupuesto</h4>
+          <p>Defendido ante un panel de 3 personas.</p>
         </div>
       </div>
       <div class="req-card">
         <div class="req-num">2</div>
         <div>
           <h4>Proyecto de impacto con métrica cuantificable</h4>
-          <p>Carta de validación firmada por alguien fuera del programa. No basta decir que lo hiciste.</p>
+          <p>Dentro de GEB, fuera de GEB, en tu comunidad. Carta de validación firmada, no basta decir que lo hiciste.</p>
         </div>
       </div>
       <div class="req-card">
         <div class="req-num">3</div>
         <div>
-          <h4>Salto profesional real: +30% de ingreso</h4>
-          <p>Promoción, oferta externa, pivote o emprendimiento. El piso mínimo es treinta por ciento sostenido.</p>
+          <h4>Salto profesional real: aumento en el % de ingreso</h4>
+          <p>Promoción, oferta externa, pivote o emprendimiento.</p>
         </div>
       </div>
       <div class="req-card">
         <div class="req-num">4</div>
         <div>
           <h4>Un hábito sostenido durante 6 meses</h4>
-          <p>Validado mensualmente por tu tríada de pares — no por ti solo.</p>
+          <p>Validado mensualmente por tu tríada de pares.</p>
         </div>
       </div>
       <div class="req-card">
         <div class="req-num">5</div>
         <div>
           <h4>Producir 2 sesiones para tu cohorte</h4>
-          <p>Facilitas, retas, documentas o conectas. Aprendes enseñando a los demás.</p>
+          <p>Facilitas, retas, documentas y conectas. Aprendes enseñando a los demás.</p>
         </div>
       </div>
     </div>
 
-    <p style="font-size:12px;color:var(--mist);margin-top:14px;">Inspirado en el modelo Pixza (Alejandro Souza): 250 graduados con 4 requisitos binarios verificables por terceros.</p>
+    <p style="font-size:12px;color:var(--mist);margin-top:14px;">Inspirado en el modelo Pixza (Alejandro Souza).</p>
   </div>
 </section>
 
@@ -1049,10 +1065,10 @@ footer{
   <div class="sec-inner">
     <span class="sec-eyebrow">Cómo se aprende aquí</span>
     <h2 class="sec-title">Cinco ritmos.<br>Un solo compromiso.</h2>
-    <p class="sec-sub">No es un curso semanal genérico. Es una mezcla deliberada de canales, cada uno con su función.</p>
+    <p class="sec-sub">Durante todo el programa, vivirás una mezcla deliberada de canales.</p>
 
     <div class="method-block">
-      <h3 class="method-block-title">5 momentos de aprendizaje</h3>
+      <h3 class="method-block-title">Momentos de aprendizaje</h3>
       <div class="moments-list">
         <div class="moment-row">
           <span class="moment-ico">📱</span>
@@ -1061,7 +1077,7 @@ footer{
         </div>
         <div class="moment-row">
           <span class="moment-ico">💬</span>
-          <div class="moment-txt"><strong>Tríada</strong><span>WhatsApp, grupo pequeño</span></div>
+          <div class="moment-txt"><strong>Tríada de colaboradores</strong><span>WhatsApp, grupo pequeño</span></div>
           <span class="moment-freq">Semanal</span>
         </div>
         <div class="moment-row">
@@ -1076,7 +1092,7 @@ footer{
         </div>
         <div class="moment-row">
           <span class="moment-ico">🤝</span>
-          <div class="moment-txt"><strong>Coaching grupal</strong><span>Presencial</span></div>
+          <div class="moment-txt"><strong>Coaching grupal</strong><span>Presencial / Zoom</span></div>
           <span class="moment-freq">Mensual</span>
         </div>
       </div>
@@ -1086,7 +1102,7 @@ footer{
       <h3 class="method-block-title">Promedio de dedicación</h3>
       <div class="dedication-card">
         <div class="dedication-num">3.6 hrs / semana<br>en promedio</div>
-        <p class="dedication-note">Distribuidas en los 5 momentos. La carga varía por fase: más intensa al inicio, más ligera en Producción.</p>
+        <p class="dedication-note">Distribuidas en los 5 momentos. La carga varía según la fase. En ocasiones dentro de horario laboral, la mayoría de las veces fuera de horario.</p>
       </div>
     </div>
 
@@ -1118,8 +1134,8 @@ footer{
 <section class="sec sec-proof">
   <!-- Left: person silhouettes hinting at community -->
   <div class="sec-inner">
-    <span class="sec-eyebrow">Quiénes ya lo vivieron</span>
-    <h2 class="sec-title">Personas de GEB<br>que lo cambiaron.</h2>
+    <span class="sec-eyebrow">TESTIMONIOS GENERACIÓN 1</span>
+    <h2 class="sec-title">Colaboradores de GEB que ya lo vivieron.</h2>
     <div class="proof-placeholder">
       <strong>Aquí van los testimonios reales</strong>
       Tres historias de colaboradores. Nombres, puestos al entrar, puestos al salir, cambio de ingreso, sus propias palabras.<br><br>
@@ -1171,36 +1187,36 @@ footer{
       </svg>
     </div>
     <span class="sec-eyebrow">Lo que probablemente estás pensando</span>
-    <h2 class="sec-title">Preguntas directas.<br>Respuestas sin relleno.</h2>
+    <h2 class="sec-title">Preguntas y respuestas sin relleno.</h2>
     <div class="obj-list">
       <div class="obj-item">
         <details>
           <summary>"No tengo tiempo para esto."</summary>
-          <div class="obj-ans">Son 3.6 horas semanales distribuidas en actividades cortas — no un bloque de tiempo. No te pedimos que renuncies a nada, te pedimos que elijas deliberadamente dónde va ese tiempo. Si genuinamente no puedes ahora, no entres. Este programa existe cuando estés listo.</div>
+          <div class="obj-ans">Son 3.6 horas semanales distribuidas en actividades cortas — no un bloque de tiempo. No te pedimos que renuncies a nada, te pedimos que elijas deliberadamente dónde va ese tiempo. Si aún no estás listo entendemos.</div>
         </details>
       </div>
       <div class="obj-item">
         <details>
           <summary>"Esto debe ser para gente con más estudios."</summary>
-          <div class="obj-ans">El filtro de admisión a Impulso no es la escolaridad. Es poder articular qué quieres en 5 minutos. Una persona estudiando la secundaria a los 26 puede tener más hambre —y más claridad— que alguien con licenciatura sin dirección. Ruta está abierta sin excepción.</div>
+          <div class="obj-ans">El filtro de admisión a Impulso no es la escolaridad, es poder articular qué quieres lograr, con hambre y con claridad. Ruta además está abierta sin excepción.</div>
         </details>
       </div>
       <div class="obj-item">
         <details>
-          <summary>"Ya tomé cursos en GEB y no cambió nada."</summary>
-          <div class="obj-ans">Eso es exactamente el problema que este programa viene a resolver. Los programas anteriores entregaban contenido, no evidencia. Aquí hay 5 requisitos binarios que un tercero externo valida. Si no los cumples, no te gradúas. Si los cumples, la evidencia es tuya.</div>
+          <summary>"Ya tomé cursos y no cambió nada."</summary>
+          <div class="obj-ans">Es exactamente el problema que queremos resolver. Un programa que no solo entregue contenido, sino que produzca evidencia que podrás utilizar dentro y fuera de GEB.</div>
         </details>
       </div>
       <div class="obj-item">
         <details>
-          <summary>"¿GEB hace esto para que no me vaya?"</summary>
-          <div class="obj-ans">No. El programa se llama Impulso, no Retención. Si el mejor siguiente paso para ti es fuera de GEB, te ayudamos a darlo. El Plan de Vida es tuyo, el portafolio es tuyo, las habilidades son tuyas. Decides tú.</div>
+          <summary>"¿Por qué GEB querría promover que sus colaboradores cambien de puesto?"</summary>
+          <div class="obj-ans">El programa se llama Impulso, no retención. Si el mejor siguiente paso para ti es fuera de GEB, te ayudamos a darlo. Aunque nos encantaría que fuera dentro de GEB. El Plan de Vida es tuyo, el portafolio es tuyo, las habilidades son tuyas.</div>
         </details>
       </div>
       <div class="obj-item">
         <details>
           <summary>"¿Y si llego al Demo Day y quedo mal?"</summary>
-          <div class="obj-ans">No llegas al Demo Day sin haber pasado tres compuertas antes. Primero defiendes en privado. Luego validas tu proyecto. Al Demo Day llegan solo las personas que ya demostraron tener algo real. No es una exposición pública de quien no está listo.</div>
+          <div class="obj-ans">No llegas al Demo Day sin haber pasado tres compuertas antes. Primero defiendes en privado. Luego validas tu proyecto. Al Demo Day llegan las personas que ya demostraron tener algo real.</div>
         </details>
       </div>
     </div>
@@ -1261,27 +1277,27 @@ footer{
     </div>
     <span class="sec-eyebrow">¿Esto es para ti?</span>
     <h2 class="sec-title">Sé honesto<br>antes de inscribirte.</h2>
-    <p class="sec-sub" style="margin-bottom:0;">Este programa no es para todos — y eso no es un defecto, es el diseño.</p>
+    <p class="sec-sub" style="margin-bottom:0;">El primer paso es para todos, el siguiente solo para quienes lo desean.</p>
     <div class="filter-duo">
       <div class="f-card f-yes">
         <div class="f-icon">✓</div>
         <div>
           <h4>Ruta es para ti si…</h4>
-          <p>Eres colaborador activo de GEB y quieres saber hacia dónde vas. La única condición: ~3.6 horas semanales durante 6 semanas.</p>
+          <p>Eres colaborador activo de GEB y quieres saber hacia dónde vas. La única condición: dedicarle 3.6 horas semanales durante 6 semanas.</p>
         </div>
       </div>
       <div class="f-card f-yes">
         <div class="f-icon">✓</div>
         <div>
           <h4>Impulso es para ti si…</h4>
-          <p>Terminaste Ruta, puedes decirle a alguien en 5 minutos qué carrera quieres construir a 24 meses, y tienes 5–7 horas semanales disponibles. La escolaridad no importa.</p>
+          <p>Terminaste Ruta, tienes claridad de qué quieres construir a 24 meses, y tienes 5–7 horas semanales disponibles.</p>
         </div>
       </div>
       <div class="f-card f-no">
         <div class="f-icon">✗</div>
         <div>
-          <h4>Impulso no es para ti si…</h4>
-          <p>No tienes claro qué quieres o no puedes comprometer el tiempo. Ruta existe exactamente para ayudarte a llegar a ese punto.</p>
+          <h4>Ruta e Impulso no son para ti si…</h4>
+          <p>No tienes claro si quieres descubrir lo que quieres o no puedes comprometer el tiempo.</p>
         </div>
       </div>
     </div>
@@ -1473,16 +1489,16 @@ footer{
     <circle cx="450" cy="140" r="1.2" fill="white" opacity="0.4"><animate attributeName="cy" values="140;115;140" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0;0.4" dur="3.2s" repeatCount="indefinite"/></circle>
   </svg>
   <h2>El primer paso<br>no cuesta nada.</h2>
-  <p>Inscríbete a Ruta GEB antes del 8 de agosto. En 6 semanas tendrás un Plan de Vida que es tuyo, pase lo que pase después.</p>
+  <p>Inscríbete a Ruta GEB antes del 8 de agosto.<br>En 6 semanas tendrás un Plan de Vida que es tuyo, pase lo que pase después.</p>
   <a href="https://wa.me/523314112703?text=Quiero%20formar%20parte%20de%20Impulso%20GEB"
-     class="cta-btn" target="_blank" rel="noopener">Quiero empezar → WhatsApp</a>
-  <p class="cta-micro">Manda el mensaje, te contactamos en menos de 24 horas.<br><strong>Inscripciones cierran el 8 de agosto.</strong></p>
+     class="cta-btn" target="_blank" rel="noopener">Quiero inscribirme</a>
+  <p class="cta-micro"><strong>Inscripciones cierran el 8 de agosto.</strong></p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <strong style="color:rgba(255,255,255,.4);">GEB University · Impulso GEB · Generación 1</strong><br>
-  Programa de movilidad social sin costo para colaboradores activos de GEB · 2026–2027
+  <strong style="color:rgba(255,255,255,.4);">Impulso GEB · Generación 2</strong><br>
+  Movilidad social · 2026–2027
 </footer>
 
 </body>
