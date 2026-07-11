@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta GEB — Plataforma | Impulso GEB</title>
+<style>
+:root {
+  --void:    #080C14;
+  --deep:    #0D1525;
+  --mid-bg:  #111B2E;
+  --surface: #172038;
+  --border:  rgba(255,255,255,0.08);
+  --sage:    #7EC8A0;
+  --gold:    #F0C040;
+  --coral:   #F07060;
+  --blue-hi: #6AB0F5;
+  --white:   #FFFFFF;
+  --fog:     rgba(255,255,255,0.55);
+  --mist:    rgba(255,255,255,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.15;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(8,12,20,0.95),transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.nav-logo{font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.01em;}
+.nav-logo sup{font-size:11px;color:var(--sage);vertical-align:super;letter-spacing:0.05em;font-family:sans-serif;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-back{font-size:13px;font-weight:600;color:var(--fog);}
+.nav-back:hover{color:var(--white);}
+.nav-menu{position:relative;}
+.nav-menu-btn{
+  background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);
+  font-size:13px;font-weight:600;padding:9px 16px;border-radius:100px;
+  display:flex;align-items:center;gap:6px;cursor:pointer;
+}
+.nav-menu-btn:hover{background:rgba(255,255,255,.1);}
+.nav-menu-caret{font-size:9px;transition:transform .2s;}
+.nav-menu.open .nav-menu-caret{transform:rotate(180deg);}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 8px);right:0;min-width:210px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:8px;box-shadow:0 20px 50px rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .15s,transform .15s;
+}
+.nav-menu.open .nav-dropdown{opacity:1;pointer-events:auto;transform:translateY(0);}
+.nav-dropdown-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 12px;border-radius:9px;font-size:13.5px;font-weight:600;color:var(--white);
+}
+.nav-dropdown-item:hover{background:rgba(255,255,255,.06);}
+.nav-dropdown-item.active{background:rgba(126,200,160,.1);color:var(--sage);}
+.nav-dropdown-item .lock-ico{font-size:11px;opacity:.5;}
+
+/* ── LOCK SCREEN ── */
+html:not(.unlocked) .site-content{display:none;}
+html.unlocked .lock-screen{display:none;}
+.lock-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 24px 40px;
+}
+.lock-card{
+  width:100%;max-width:380px;background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:32px 28px;text-align:center;
+}
+.lock-ico-big{
+  width:52px;height:52px;border-radius:50%;background:rgba(126,200,160,.12);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;
+}
+.lock-card h1{font-size:22px;color:var(--white);margin-bottom:8px;}
+.lock-card p{font-size:13.5px;color:var(--fog);line-height:1.6;margin-bottom:24px;}
+.lock-form{display:flex;flex-direction:column;gap:10px;}
+.lock-input{
+  font-size:14px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,.04);color:var(--white);font-family:inherit;text-align:center;
+  letter-spacing:.04em;
+}
+.lock-input:focus{outline:none;border-color:var(--sage);}
+.lock-input::placeholder{color:var(--mist);}
+.lock-submit{
+  background:var(--sage);color:var(--void);font-size:14px;font-weight:700;
+  padding:13px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s;
+}
+.lock-submit:hover{transform:translateY(-1px);}
+.lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
+.lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
+
+/* ── DASHBOARD ── */
+.dash-wrap{max-width:900px;margin:0 auto;padding:110px 24px 24px;}
+.dash-card{
+  background:linear-gradient(180deg,#FFFFFF 0%,#F7F5F0 100%);color:#14181F;
+  border-radius:24px;padding:30px 34px;position:relative;overflow:hidden;
+  box-shadow:0 30px 80px rgba(20,24,31,.35);border:1px solid rgba(20,24,31,.06);
+}
+.dash-topbar{height:6px;margin:-30px -34px 26px;background:linear-gradient(90deg,#7EC8A0,#6AB0F5,#F0C040,#F07060);}
+.dash-top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:6px;}
+.dash-eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3F8F63;
+  display:flex;align-items:center;gap:6px;margin-bottom:8px;
+}
+.dash-eyebrow::before{content:'●';font-size:8px;}
+.dash-card h2{font-size:clamp(24px,4.5vw,32px);color:#14181F;margin-bottom:6px;}
+.dash-meta{font-size:13px;color:rgba(20,24,31,.55);}
+.dash-cta{
+  background:#14181F;color:#fff;font-size:13px;font-weight:700;padding:11px 20px;
+  border-radius:100px;white-space:nowrap;border:none;cursor:pointer;
+}
+
+/* day stepper */
+.day-stepper{
+  display:flex;align-items:center;margin:28px 0 6px;position:relative;
+  overflow-x:auto;padding-bottom:6px;
+}
+.day-stepper::-webkit-scrollbar{display:none;}
+.day-node{
+  display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:56px;
+  cursor:pointer;position:relative;background:none;border:none;padding:0;
+}
+.day-node:not(:last-child)::after{
+  content:'';position:absolute;top:16px;left:calc(50% + 20px);right:calc(-50% + 20px);
+  height:2px;background:rgba(20,24,31,.12);z-index:0;
+}
+.day-dot{
+  width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:rgba(20,24,31,.4);background:#fff;
+  border:1.5px solid rgba(20,24,31,.15);position:relative;z-index:1;transition:all .15s;
+}
+.day-node.active .day-dot{background:#14181F;color:#fff;border-color:#14181F;}
+.day-node:hover .day-dot{border-color:#7EC8A0;}
+.day-node-label{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(20,24,31,.4);}
+.day-node.active .day-node-label{color:#14181F;}
+
+.day-panel-head{
+  margin-top:22px;padding:14px 0 16px;border-top:1px solid rgba(20,24,31,.08);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+}
+.day-panel-title{font-size:16px;color:#14181F;}
+.day-panel-sub{font-size:12px;color:rgba(20,24,31,.45);margin-top:2px;}
+.pilar-badge{
+  font-size:11px;font-weight:700;padding:5px 13px;border-radius:100px;white-space:nowrap;
+}
+
+/* module list */
+.module-list{display:flex;flex-direction:column;gap:8px;}
+.module-row{
+  display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;
+  background:rgba(20,24,31,.025);border:1px solid rgba(20,24,31,.06);
+}
+.module-ico{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;
+  justify-content:center;background:#fff;border:1.5px solid rgba(20,24,31,.15);font-size:12px;
+}
+.module-body{flex:1;min-width:0;}
+.module-title{font-size:14.5px;color:#14181F;margin-bottom:2px;}
+.module-sub{font-size:11.5px;color:rgba(20,24,31,.45);letter-spacing:.02em;}
+.module-sub b{color:rgba(20,24,31,.6);}
+.module-arrow{color:rgba(20,24,31,.3);font-size:15px;flex-shrink:0;}
+
+.day-placeholder-note{
+  margin-top:14px;font-size:11.5px;color:rgba(20,24,31,.4);font-style:italic;
+}
+
+/* about section */
+.about-card{
+  max-width:900px;margin:20px auto 0;background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:20px;padding:26px 28px;
+}
+.about-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-bottom:14px;}
+.pillar-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+.pillar-tag{
+  display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+  padding:6px 14px;border-radius:100px;border:1px solid;white-space:nowrap;
+}
+.ritmos-note{font-size:12.5px;color:var(--fog);margin-bottom:18px;line-height:1.7;}
+.ritmos-note strong{color:var(--white);}
+.bridge{
+  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;
+  padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+}
+.bridge-label{font-size:13.5px;font-weight:700;color:var(--white);white-space:nowrap;}
+.bridge-step{
+  font-size:11.5px;font-weight:600;color:var(--fog);padding:6px 13px;
+  border-radius:100px;background:rgba(255,255,255,.05);border:1px solid var(--border);white-space:nowrap;
+}
+.bridge-step.hi{background:rgba(240,192,64,.15);color:var(--gold);border-color:var(--gold);font-weight:700;}
+.bridge-step.dest{background:var(--sage);color:var(--void);border-color:var(--sage);font-weight:700;}
+.bridge-arrow{color:var(--mist);font-size:12px;}
+.quote{
+  text-align:center;font-style:italic;font-size:13.5px;color:var(--fog);
+  max-width:480px;margin:24px auto 0;line-height:1.7;
+}
+
+@media(max-width:699px){
+  .dash-wrap{padding:90px 16px 16px;}
+  .dash-card{padding:22px 18px;}
+  .dash-topbar{margin:-22px -18px 20px;}
+  .about-card{padding:20px 18px;margin-top:16px;}
+  .day-node-label{font-size:9px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
+  <div class="nav-right">
+    <div class="nav-menu" id="platform-menu">
+      <button type="button" class="nav-menu-btn" onclick="document.getElementById('platform-menu').classList.toggle('open')">
+        Plataforma <span class="nav-menu-caret">▾</span>
+      </button>
+      <div class="nav-dropdown">
+        <a href="ruta-geb.html" class="nav-dropdown-item active">Ruta GEB <span class="lock-ico">🔓</span></a>
+        <a href="impulso-geb.html" class="nav-dropdown-item">Impulso GEB <span class="lock-ico">🔒</span></a>
+      </div>
+    </div>
+    <a href="index.html" class="nav-back">← Inicio</a>
+  </div>
+</nav>
+
+<!-- ══ LOCK SCREEN ══ -->
+<div class="lock-screen">
+  <div class="lock-card">
+    <div class="lock-ico-big">🔒</div>
+    <h1>Ruta GEB</h1>
+    <p>Esta es la plataforma de aprendizaje del curso. Ingresa la contraseña del curso para continuar.</p>
+    <form class="lock-form" id="lock-form">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <button type="submit" class="lock-submit">Acceder →</button>
+      <div class="lock-error" id="lock-error"></div>
+    </form>
+    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+  </div>
+</div>
+
+<!-- ══ SITE CONTENT (post-login) ══ -->
+<div class="site-content">
+
+  <div class="dash-wrap">
+    <div class="dash-card">
+      <div class="dash-topbar"></div>
+      <div class="dash-top-row">
+        <div>
+          <div class="dash-eyebrow">Cohorte · Generación 2</div>
+          <h2>Ruta GEB</h2>
+          <div class="dash-meta" id="dash-meta">Día 1 de 6 · 1 módulo</div>
+        </div>
+      </div>
+
+      <div class="day-stepper" id="day-stepper"></div>
+
+      <div class="day-panel-head">
+        <div>
+          <div class="day-panel-title" id="day-title">—</div>
+          <div class="day-panel-sub" id="day-sub">—</div>
+        </div>
+        <span class="pilar-badge" id="day-pilar"></span>
+      </div>
+
+      <div class="module-list" id="module-list"></div>
+      <p class="day-placeholder-note">Esta es una vista general del curso — no guarda avance. El desglose exacto de cada día se terminará de diseñar más adelante.</p>
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-title">Sobre este curso</div>
+    <p style="font-size:13.5px;color:var(--fog);line-height:1.7;margin-bottom:18px;">Te otorga el control absoluto sobre tu propósito, tu dirección y tus medios, eliminando la brecha entre lo que sueñas y lo que puedes ejecutar.</p>
+    <div class="pillar-legend">
+      <span class="pillar-tag" style="border-color:#F0C040;color:#F0C040;background:rgba(240,192,64,.08);">🟠 Propósito</span>
+      <span class="pillar-tag" style="border-color:#6AB0F5;color:#6AB0F5;background:rgba(106,176,245,.08);">🔵 Maestría</span>
+      <span class="pillar-tag" style="border-color:#7EC8A0;color:#7EC8A0;background:rgba(126,200,160,.08);">🟢 Comunidad — se activa en Impulso</span>
+    </div>
+    <p class="ritmos-note"><strong>Ritmos activos en Ruta:</strong> AUT · autogestivo, semanal &nbsp;·&nbsp; CONF · conferencia magistral</p>
+
+    <div class="bridge" id="bridge"></div>
+
+    <p class="quote">"Este programa y sus entregables te pertenecen, dentro o fuera de GEB."</p>
+  </div>
+
+</div>
+
+<script>
+/* ── LOCK / PASSWORD GATE ──
+   Contraseña compartida por curso (no es autenticación real: cualquiera con acceso
+   al código fuente puede verla). Cambiar aquí cuando se necesite rotarla. */
+const COURSE_PASSWORD = 'rutageb26';
+const STORAGE_KEY = 'impulso_unlock_ruta';
+
+if (localStorage.getItem(STORAGE_KEY) === '1') {
+  document.documentElement.classList.add('unlocked');
+}
+
+document.getElementById('lock-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const val = document.getElementById('lock-input').value.trim();
+  if (val === COURSE_PASSWORD) {
+    localStorage.setItem(STORAGE_KEY, '1');
+    document.documentElement.classList.add('unlocked');
+  } else {
+    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+  }
+});
+
+document.addEventListener('click', function(e){
+  var menu = document.getElementById('platform-menu');
+  if (menu && !menu.contains(e.target)) menu.classList.remove('open');
+});
+
+/* ── DAY-BASED COURSE VIEW ── */
+const PILLARS = {
+  'Propósito':  { color:'#F0C040' },
+  'Maestría':   { color:'#6AB0F5' },
+  'Transición': { color:'#F07060' },
+};
+
+const days = [
+  { label:'Sem 1', pillar:'Propósito', title:'IKIGAI parte 1', modules:[
+    { icon:'📱', title:'IKIGAI parte 1', type:'AUTOGESTIVO' },
+  ]},
+  { label:'Sem 2', pillar:'Propósito', title:'IKIGAI parte 2', modules:[
+    { icon:'📱', title:'IKIGAI parte 2', type:'AUTOGESTIVO' },
+  ]},
+  { label:'Sem 3', pillar:'Transición', title:'Plan de Vida parte 1', modules:[
+    { icon:'📱', title:'Plan de Vida parte 1', type:'AUTOGESTIVO' },
+  ]},
+  { label:'Sem 4', pillar:'Maestría', title:'Plan de Vida parte 2', modules:[
+    { icon:'📱', title:'Plan de Vida parte 2', type:'AUTOGESTIVO' },
+  ]},
+  { label:'Sem 5', pillar:'Maestría', title:'Presupuesto parte 1', modules:[
+    { icon:'📱', title:'Presupuesto parte 1', type:'AUTOGESTIVO' },
+  ]},
+  { label:'Sem 6', pillar:'Maestría', title:'Presupuesto p.2 + cierre Plan de Vida', modules:[
+    { icon:'📱', title:'Presupuesto parte 2', type:'AUTOGESTIVO' },
+    { icon:'🎤', title:'Conferencia magistral de cierre', type:'CONFERENCIA' },
+  ]},
+];
+
+let activeDay = 0;
+
+function renderStepper() {
+  const stepper = document.getElementById('day-stepper');
+  stepper.innerHTML = '';
+  days.forEach((d, i) => {
+    const node = document.createElement('button');
+    node.type = 'button';
+    node.className = 'day-node' + (i === activeDay ? ' active' : '');
+    node.innerHTML = `<span class="day-dot">${i + 1}</span><span class="day-node-label">Día ${i + 1}</span>`;
+    node.addEventListener('click', () => { activeDay = i; render(); });
+    stepper.appendChild(node);
+  });
+}
+
+function render() {
+  renderStepper();
+  const d = days[activeDay];
+  const color = PILLARS[d.pillar].color;
+
+  document.getElementById('dash-meta').textContent = `Día ${activeDay + 1} de ${days.length} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
+  document.getElementById('day-title').textContent = `${d.label} · ${d.title}`;
+  document.getElementById('day-sub').textContent = `Día ${activeDay + 1} de ${days.length}`;
+
+  const badge = document.getElementById('day-pilar');
+  badge.textContent = d.pillar;
+  badge.style.background = color + '20';
+  badge.style.color = color;
+
+  const list = document.getElementById('module-list');
+  list.innerHTML = d.modules.map(m => {
+    const template = m.type === 'CONFERENCIA' ? 'momento-video.html' : 'momento-guia.html';
+    const url = `${template}?curso=Ruta%20GEB&semana=${encodeURIComponent(d.label)}&titulo=${encodeURIComponent(m.title)}&pilar=${encodeURIComponent(d.pillar)}`;
+    return `
+    <a class="module-row" href="${url}">
+      <span class="module-ico">${m.icon}</span>
+      <div class="module-body">
+        <div class="module-title">${m.title}</div>
+        <div class="module-sub"><b>${m.type}</b></div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+  `;
+  }).join('');
+}
+
+render();
+
+const bridgeSteps = [
+  { label:'Puente hacia Impulso →', type:'label' },
+  { label:'Ensayo de postulación', type:'step' },
+  { label:'Entrevista + Stoplight inicial', type:'step' },
+  { label:'Selección + tríadas asignadas', type:'step' },
+  { label:'★ Bootcamp inaugural', type:'hi' },
+  { label:'Impulso Sem 1', type:'dest' },
+];
+const bridge = document.getElementById('bridge');
+bridgeSteps.forEach((s, i) => {
+  if (i > 0) bridge.appendChild(Object.assign(document.createElement('span'), { className:'bridge-arrow', textContent:'→' }));
+  const el = document.createElement('span');
+  el.textContent = s.label;
+  el.className = s.type === 'label' ? 'bridge-label' : `bridge-step${s.type !== 'step' ? ' ' + s.type : ''}`;
+  bridge.appendChild(el);
+});
+</script>
+
+</body>
+</html>

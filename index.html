@@ -31,7 +31,7 @@ body{
   -webkit-font-smoothing:antialiased;
   position:relative;
 }
-h1,h2,h3{font-family:Georgia,'Times New Roman',serif;line-height:1.15;}
+h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.15;}
 a{color:inherit;text-decoration:none;}
 
 /* ── STARS ── */
@@ -85,6 +85,30 @@ nav{
   box-shadow:0 0 20px rgba(126,200,160,0.3);
 }
 .nav-cta:hover{transform:scale(1.04);box-shadow:0 0 30px rgba(126,200,160,0.5);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-menu{position:relative;}
+.nav-menu-btn{
+  background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);
+  font-size:13px;font-weight:600;padding:9px 16px;border-radius:100px;
+  display:flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;
+}
+.nav-menu-btn:hover{background:rgba(255,255,255,.1);}
+.nav-menu-caret{font-size:9px;transition:transform .2s;}
+.nav-menu.open .nav-menu-caret{transform:rotate(180deg);}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 8px);right:0;min-width:210px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:8px;box-shadow:0 20px 50px rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .15s,transform .15s;
+}
+.nav-menu.open .nav-dropdown{opacity:1;pointer-events:auto;transform:translateY(0);}
+.nav-dropdown-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 12px;border-radius:9px;font-size:13.5px;font-weight:600;color:var(--white);
+}
+.nav-dropdown-item:hover{background:rgba(255,255,255,.06);}
+.nav-dropdown-item .lock-ico{font-size:11px;opacity:.5;}
 
 /* ── HERO ── */
 .hero{
@@ -295,9 +319,9 @@ h2.sec-title{
   flex-shrink:0;width:32px;height:32px;border-radius:50%;
   background:rgba(126,200,160,.15);color:var(--sage);
   display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:700;font-family:Georgia,serif;
+  font-size:13px;font-weight:700;
 }
-.req-card h4{font-family:Georgia,serif;font-size:15px;color:var(--white);margin-bottom:4px;}
+.req-card h4{font-size:15px;color:var(--white);margin-bottom:4px;}
 .req-card p{font-size:13px;color:var(--fog);line-height:1.55;}
 
 /* ── METODOLOGÍA ── */
@@ -305,7 +329,7 @@ h2.sec-title{
 .method-block{margin-top:40px;}
 .method-block:first-of-type{margin-top:32px;}
 .method-block-title{
-  font-family:Georgia,serif;font-size:17px;color:var(--white);
+  font-size:17px;color:var(--white);
   margin-bottom:16px;
 }
 .moments-list{display:flex;flex-direction:column;gap:10px;}
@@ -344,7 +368,7 @@ h2.sec-title{
   border-radius:14px;padding:18px;
   border:1px solid var(--border);background:rgba(255,255,255,.03);
 }
-.hybrid-col h4{font-family:Georgia,serif;font-size:15px;margin-bottom:4px;}
+.hybrid-col h4{font-size:15px;margin-bottom:4px;}
 .hybrid-col.digital h4{color:var(--blue-hi);}
 .hybrid-col.presencial h4{color:var(--gold);}
 .hybrid-col p{font-size:12px;color:var(--mist);margin-bottom:10px;}
@@ -364,7 +388,6 @@ h2.sec-title{
 }
 details summary{
   padding:18px;
-  font-family:Georgia,serif;
   font-size:15px;color:var(--white);
   cursor:pointer;list-style:none;
   display:flex;justify-content:space-between;align-items:center;
@@ -394,7 +417,7 @@ details .obj-ans{
 .f-yes{background:rgba(126,200,160,.08);border:1px solid rgba(126,200,160,.25);}
 .f-no{background:rgba(240,112,96,.06);border:1px solid rgba(240,112,96,.2);}
 .f-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
-.f-card h4{font-family:Georgia,serif;font-size:15px;margin-bottom:6px;}
+.f-card h4{font-size:15px;margin-bottom:6px;}
 .f-yes h4{color:var(--sage);}
 .f-no h4{color:var(--coral);}
 .f-card p{font-size:13px;color:var(--fog);line-height:1.65;}
@@ -579,9 +602,26 @@ footer{
 <nav>
   <!-- Logo text as fallback until PNG is provided -->
   <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
-  <a href="https://wa.me/523314112703?text=Quiero%20formar%20parte%20de%20Impulso%20GEB"
-     class="nav-cta" target="_blank" rel="noopener">Inscribirme</a>
+  <div class="nav-right">
+    <div class="nav-menu" id="platform-menu">
+      <button type="button" class="nav-menu-btn" onclick="document.getElementById('platform-menu').classList.toggle('open')">
+        Plataforma <span class="nav-menu-caret">▾</span>
+      </button>
+      <div class="nav-dropdown">
+        <a href="ruta-geb.html" class="nav-dropdown-item">Ruta GEB <span class="lock-ico">🔒</span></a>
+        <a href="impulso-geb.html" class="nav-dropdown-item">Impulso GEB <span class="lock-ico">🔒</span></a>
+      </div>
+    </div>
+    <a href="https://wa.me/523314112703?text=Quiero%20formar%20parte%20de%20Impulso%20GEB"
+       class="nav-cta" target="_blank" rel="noopener">Inscribirme</a>
+  </div>
 </nav>
+<script>
+document.addEventListener('click', function(e){
+  var menu = document.getElementById('platform-menu');
+  if (menu && !menu.contains(e.target)) menu.classList.remove('open');
+});
+</script>
 
 <!-- ══ HERO ══ -->
 <section class="hero">

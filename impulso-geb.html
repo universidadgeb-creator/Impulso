@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impulso GEB — Plataforma | Impulso GEB</title>
+<style>
+:root {
+  --void:    #080C14;
+  --deep:    #0D1525;
+  --mid-bg:  #111B2E;
+  --surface: #172038;
+  --border:  rgba(255,255,255,0.08);
+  --sage:    #7EC8A0;
+  --gold:    #F0C040;
+  --coral:   #F07060;
+  --blue-hi: #6AB0F5;
+  --white:   #FFFFFF;
+  --fog:     rgba(255,255,255,0.55);
+  --mist:    rgba(255,255,255,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.15;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(8,12,20,0.95),transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.nav-logo{font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.01em;}
+.nav-logo sup{font-size:11px;color:var(--sage);vertical-align:super;letter-spacing:0.05em;font-family:sans-serif;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-back{font-size:13px;font-weight:600;color:var(--fog);display:flex;align-items:center;gap:6px;}
+.nav-back:hover{color:var(--white);}
+.nav-menu{position:relative;}
+.nav-menu-btn{
+  background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);
+  font-size:13px;font-weight:600;padding:9px 16px;border-radius:100px;
+  display:flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;
+}
+.nav-menu-btn:hover{background:rgba(255,255,255,.1);}
+.nav-menu-caret{font-size:9px;transition:transform .2s;}
+.nav-menu.open .nav-menu-caret{transform:rotate(180deg);}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 8px);right:0;min-width:210px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:8px;box-shadow:0 20px 50px rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .15s,transform .15s;
+}
+.nav-menu.open .nav-dropdown{opacity:1;pointer-events:auto;transform:translateY(0);}
+.nav-dropdown-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 12px;border-radius:9px;font-size:13.5px;font-weight:600;color:var(--white);
+}
+.nav-dropdown-item:hover{background:rgba(255,255,255,.06);}
+.nav-dropdown-item.active{background:rgba(126,200,160,.1);color:var(--sage);}
+.nav-dropdown-item .lock-ico{font-size:11px;opacity:.5;}
+
+/* ── LOCK SCREEN ── */
+html:not(.unlocked) .site-content{display:none;}
+html.unlocked .lock-screen{display:none;}
+.lock-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 24px 40px;
+}
+.lock-card{
+  width:100%;max-width:380px;background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:32px 28px;text-align:center;
+}
+.lock-ico-big{
+  width:52px;height:52px;border-radius:50%;background:rgba(106,176,245,.12);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;
+}
+.lock-card h1{font-size:22px;color:var(--white);margin-bottom:8px;}
+.lock-card p{font-size:13.5px;color:var(--fog);line-height:1.6;margin-bottom:24px;}
+.lock-form{display:flex;flex-direction:column;gap:10px;}
+.lock-input{
+  font-size:14px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,.04);color:var(--white);font-family:inherit;text-align:center;
+  letter-spacing:.04em;
+}
+.lock-input:focus{outline:none;border-color:var(--blue-hi);}
+.lock-input::placeholder{color:var(--mist);}
+.lock-submit{
+  background:var(--blue-hi);color:var(--void);font-size:14px;font-weight:700;
+  padding:13px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s;
+}
+.lock-submit:hover{transform:translateY(-1px);}
+.lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
+.lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
+
+/* PAGE HEADER */
+.page-head{padding:110px 24px 32px;max-width:1080px;margin:0 auto;}
+.page-eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--blue-hi);margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.page-eyebrow::before{content:'';width:20px;height:1px;background:var(--blue-hi);opacity:.6;}
+.page-head h1{font-size:clamp(28px,5.5vw,42px);color:var(--white);margin-bottom:12px;}
+.page-sub{font-size:15px;color:var(--fog);max-width:640px;line-height:1.7;margin-bottom:6px;}
+.page-sub + .page-sub{margin-bottom:22px;}
+.pillar-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+.pillar-tag{
+  display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+  padding:6px 14px;border-radius:100px;border:1px solid;white-space:nowrap;
+}
+
+/* CARD SHELL */
+.overview-wrap{max-width:1080px;margin:0 auto;padding:0 24px 60px;}
+.overview-card{
+  background:linear-gradient(180deg,#FFFFFF 0%,#F7F5F0 100%);
+  border-radius:24px;padding:32px 32px 40px;position:relative;overflow:hidden;
+  box-shadow:0 30px 80px rgba(20,24,31,.35);border:1px solid rgba(20,24,31,.06);
+  color:#14181F;
+}
+.overview-topbar{height:6px;margin:-32px -32px 24px;background:linear-gradient(90deg,#6AB0F5,#F0C040,#F07060,#7EC8A0);}
+
+.ritmos-note{font-size:12px;color:rgba(20,24,31,.5);margin-bottom:24px;line-height:1.8;}
+.ritmos-note strong{color:#14181F;}
+
+.gate-note{
+  font-size:12.5px;font-weight:700;color:#B8860B;background:rgba(240,192,64,.12);
+  border:1px solid rgba(240,192,64,.4);border-radius:100px;padding:7px 16px;
+  display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;
+}
+
+/* PHASE */
+.phase-block{margin-bottom:8px;}
+.phase-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 18px;border-radius:100px;margin:28px 0 16px;color:#fff;
+}
+.phase-head .p-name{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.phase-head .p-range{font-size:11px;opacity:.85;}
+
+.month-label{font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(20,24,31,.4);margin:16px 0 8px;}
+.week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+
+.week-card{
+  background:var(--card-bg,rgba(20,24,31,.03));border:1px solid rgba(20,24,31,.07);
+  border-left:3px solid var(--card-color,#9A968C);border-radius:14px;padding:13px 14px;
+}
+.week-num{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--card-color,rgba(20,24,31,.5));margin-bottom:3px;}
+.week-title{font-size:13px;color:#14181F;margin-bottom:9px;line-height:1.35;}
+.week-title .req{display:block;font-size:11px;font-weight:700;color:#C9503F;margin-top:2px;font-family:'Segoe UI',sans-serif;}
+.week-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.ritmo-chip{
+  font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:100px;
+  background:#fff;color:rgba(20,24,31,.55);border:1px solid rgba(20,24,31,.08);white-space:nowrap;
+}
+.ritmo-chip.tag{background:rgba(20,24,31,.06);color:rgba(20,24,31,.6);}
+
+.gate-card{
+  grid-column:1/-1;background:rgba(240,112,96,.06);border:1px solid rgba(240,112,96,.35);
+  border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;
+}
+.gate-card .g-title{font-size:13.5px;font-weight:700;color:#C9503F;}
+.gate-card .g-sub{font-size:11.5px;color:rgba(20,24,31,.55);}
+
+.pause-note{
+  grid-column:1/-1;text-align:center;font-size:12px;color:rgba(20,24,31,.4);
+  padding:8px 0;font-style:italic;
+}
+
+/* REQUISITOS */
+.reqs-block{margin-top:32px;}
+.reqs-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(20,24,31,.45);margin-bottom:12px;}
+.reqs-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+.req-item{
+  background:rgba(20,24,31,.03);border:1px solid rgba(20,24,31,.08);border-radius:12px;padding:12px 14px;
+}
+.req-item .r-num{font-size:12.5px;font-weight:700;color:#14181F;margin-bottom:3px;}
+.req-item .r-when{font-size:10.5px;color:rgba(20,24,31,.45);}
+
+.demo-note{
+  margin-top:18px;background:rgba(240,112,96,.05);border:1px solid rgba(240,112,96,.2);
+  border-radius:14px;padding:16px 18px;font-size:12.5px;color:rgba(20,24,31,.65);line-height:1.7;
+}
+.demo-note strong{color:#C9503F;}
+
+.quote{
+  text-align:center;font-style:italic;font-size:14px;color:var(--fog);
+  max-width:520px;margin:44px auto 0;line-height:1.7;
+}
+
+/* CTA */
+.page-cta{text-align:center;padding:60px 24px 90px;}
+.page-cta h2{font-size:clamp(24px,5vw,34px);max-width:480px;margin:0 auto 14px;}
+.page-cta p{font-size:14px;color:var(--fog);max-width:420px;margin:0 auto 26px;line-height:1.7;}
+.cta-btn{
+  display:inline-block;background:var(--sage);color:var(--void);font-size:16px;font-weight:700;
+  padding:16px 36px;border-radius:100px;box-shadow:0 0 40px rgba(126,200,160,0.4);
+  transition:transform .15s,box-shadow .2s;
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(126,200,160,.6);}
+
+footer{
+  background:var(--void);border-top:1px solid var(--border);padding:28px 24px;text-align:center;
+  color:rgba(255,255,255,.25);font-size:12px;line-height:1.8;
+}
+
+@media(max-width:900px){
+  .week-grid{grid-template-columns:repeat(2,1fr);}
+  .reqs-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:699px){
+  .page-head{padding:90px 20px 24px;}
+  .overview-wrap{padding:0 16px 44px;}
+  .overview-card{padding:24px 18px 30px;}
+  .overview-topbar{margin:-24px -18px 20px;}
+  .week-grid{grid-template-columns:1fr;}
+  .reqs-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
+  <div class="nav-right">
+    <div class="nav-menu" id="platform-menu">
+      <button type="button" class="nav-menu-btn" onclick="document.getElementById('platform-menu').classList.toggle('open')">
+        Plataforma <span class="nav-menu-caret">▾</span>
+      </button>
+      <div class="nav-dropdown">
+        <a href="ruta-geb.html" class="nav-dropdown-item">Ruta GEB <span class="lock-ico">🔒</span></a>
+        <a href="impulso-geb.html" class="nav-dropdown-item active">Impulso GEB <span class="lock-ico">🔓</span></a>
+      </div>
+    </div>
+    <a href="index.html" class="nav-back">← Inicio</a>
+  </div>
+</nav>
+
+<!-- ══ LOCK SCREEN ══ -->
+<div class="lock-screen">
+  <div class="lock-card">
+    <div class="lock-ico-big">🔒</div>
+    <h1>Impulso GEB</h1>
+    <p>Esta es la plataforma de aprendizaje del curso. Ingresa la contraseña del curso para continuar.</p>
+    <form class="lock-form" id="lock-form">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <button type="submit" class="lock-submit">Acceder →</button>
+      <div class="lock-error" id="lock-error"></div>
+    </form>
+    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+  </div>
+</div>
+
+<div class="site-content">
+
+<div class="page-head">
+  <div class="page-eyebrow">GEB University · Generación 2</div>
+  <h1>Experiencia de aprendizaje Impulso GEB</h1>
+  <p class="page-sub">Profundiza en tu visión con determinación absoluta, transformando tu propósito en una estrategia real.</p>
+  <p class="page-sub">Ejecuta con fluidez total tu visión, consolidando tu impacto a través de la sinergia con otros líderes que te impulsan.</p>
+  <div class="pillar-legend">
+    <span class="pillar-tag" style="border-color:#6AB0F5;color:#3A7FC9;background:rgba(106,176,245,.1);">🔵 Maestría</span>
+    <span class="pillar-tag" style="border-color:#7EC8A0;color:#3F8F63;background:rgba(126,200,160,.1);">🟢 Comunidad</span>
+    <span class="pillar-tag" style="border-color:#F0C040;color:#B8860B;background:rgba(240,192,64,.1);">🟠 Propósito</span>
+  </div>
+</div>
+
+<div class="overview-wrap">
+  <div class="overview-card">
+    <div class="overview-topbar"></div>
+    <p class="ritmos-note">
+      <strong>Los 5 ritmos:</strong> AUT autogestivo · semanal &nbsp;·&nbsp; TRI tríada de pares · semanal &nbsp;·&nbsp;
+      P2P sesión entre pares · quincenal &nbsp;·&nbsp; CONF conferencia magistral · mensual &nbsp;·&nbsp;
+      COACH coaching grupal · mensual &nbsp;·&nbsp; 📖 Libro: <em>Fuera de serie</em> (Gladwell) · 10 partes
+    </p>
+    <span class="gate-note">★ Bootcamp inaugural · previo a Sem 1</span>
+
+    <div id="phases"></div>
+
+    <div class="reqs-block">
+      <div class="reqs-title">5 requisitos de graduación</div>
+      <div class="reqs-grid" id="reqs-grid"></div>
+      <div class="demo-note">
+        <strong>Demo Day.</strong> Presentas tu trayectoria en el programa, aprendizajes y siguientes pasos, con la oportunidad de recibir retroalimentación real. Es el resultado y evidencia de tu dedicación y propósito.
+      </div>
+    </div>
+
+    <p class="quote">"Este programa y sus entregables te pertenecen, dentro o fuera de GEB."</p>
+  </div>
+</div>
+
+<section class="page-cta">
+  <h2>46 semanas. Un solo compromiso.</h2>
+  <p>Cohorte cerrada de 27–29 participantes tras el proceso de postulación desde Ruta GEB.</p>
+  <a href="index.html#top" class="cta-btn">Conocer Ruta GEB primero</a>
+</section>
+
+<footer>
+  <strong style="color:rgba(255,255,255,.4);">Impulso GEB · Generación 2</strong><br>
+  Movilidad social · 2026–2027
+</footer>
+
+</div>
+
+<script>
+/* ── LOCK / PASSWORD GATE ──
+   Contraseña compartida por curso (no es autenticación real: cualquiera con acceso
+   al código fuente puede verla). Cambiar aquí cuando se necesite rotarla. */
+const COURSE_PASSWORD = 'impulsogeb26';
+const STORAGE_KEY = 'impulso_unlock_impulso';
+
+if (localStorage.getItem(STORAGE_KEY) === '1') {
+  document.documentElement.classList.add('unlocked');
+}
+
+document.getElementById('lock-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const val = document.getElementById('lock-input').value.trim();
+  if (val === COURSE_PASSWORD) {
+    localStorage.setItem(STORAGE_KEY, '1');
+    document.documentElement.classList.add('unlocked');
+  } else {
+    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+  }
+});
+
+document.addEventListener('click', function(e){
+  var menu = document.getElementById('platform-menu');
+  if (menu && !menu.contains(e.target)) menu.classList.remove('open');
+});
+
+const PILLARS = {
+  'Propósito':   '#F0C040',
+  'Maestría':    '#6AB0F5',
+  'Comunidad':   '#7EC8A0',
+  'Transición':  '#F07060',
+  'Integración': '#F07060',
+};
+
+const phases = [
+  {
+    label: 'FORJA', range: 'Fase 1 de 3 · Sem 1–8', color: '#6AB0F5',
+    months: [
+      { label:'M1', weeks:[
+        { num:'SEM 1 · PROPÓSITO', pillar:'Propósito', title:'IKIGAI / Autoconocimiento', ritmos:['AUT','TRI','CONF'], tags:['★ Invitada'] },
+        { num:'SEM 2 · COMUNIDAD', pillar:'Comunidad', title:'Comunicación asertiva', ritmos:['AUT','TRI'] },
+        { num:'SEM 3 · PROPÓSITO', pillar:'Propósito', title:'Fortalezas y zonas de desarrollo', req:'Arranque de hábito', ritmos:['AUT','TRI','COACH'] },
+        { num:'SEM 4 · COMUNIDAD', pillar:'Comunidad', title:'Mindfulness y semáforo emocional', ritmos:['AUT','TRI'] },
+      ]},
+      { label:'M2', weeks:[
+        { num:'SEM 5 · TRANSICIÓN 🟠→🔵', pillar:'Transición', title:'Visión 24 meses + investigación de mercado', ritmos:['AUT','TRI','CONF'] },
+        { num:'SEM 6 · PROPÓSITO', pillar:'Propósito', title:'Mentalidad y dueñez + cultura GEB', ritmos:['AUT','TRI'] },
+        { num:'SEM 7 · INTEGRACIÓN', pillar:'Integración', title:'Preparación defensa Plan de Vida', ritmos:['AUT','TRI','COACH'] },
+        { gate:true, title:'⬛ Compuerta 1', sub:'Defensa Plan de Vida ante panel · Requisito #1', ritmos:['TRI'] },
+      ], pause:'❄ Pausa decembrina — solo hábito + check-in de tríada' },
+    ],
+  },
+  {
+    label: 'PRODUCCIÓN', range: 'Fase 2 de 3 · Sem 9–34', color: '#F0C040',
+    months: [
+      { label:'M3', weeks:[
+        { num:'SEM 9 · MAESTRÍA', pillar:'Maestría', title:'Diseño del proyecto de impacto', ritmos:['AUT','TRI','P2P','CONF'] },
+        { num:'SEM 10 · MAESTRÍA', pillar:'Maestría', title:'Métricas y documentación + Finanzas I', ritmos:['AUT','TRI','COACH'] },
+        { num:'SEM 11 · COMUNIDAD', pillar:'Comunidad', title:'Voz y autoridad', ritmos:['AUT','TRI','P2P','CÍRC'], tags:['⚥ Género'] },
+        { num:'SEM 12 · MAESTRÍA', pillar:'Maestría', title:'Finanzas II: deuda y crédito sano', ritmos:['AUT','TRI'] },
+      ]},
+      { label:'M4', weeks:[
+        { num:'SEM 13 · MAESTRÍA', pillar:'Maestría', title:'IA fluency #1: fundamentos y prompting', ritmos:['AUT','TRI','P2P','CONF'] },
+        { num:'SEM 14 · MAESTRÍA', pillar:'Maestría', title:'IA fluency #2: aplicada a tu trabajo', ritmos:['AUT','TRI','COACH'] },
+        { num:'SEM 15 · MAESTRÍA', pillar:'Maestría', title:'IA fluency #3: copiloto del proyecto', ritmos:['AUT','TRI','P2P'] },
+        { num:'SEM 16 · COMUNIDAD', pillar:'Comunidad', title:'Resiliencia + salud mental', ritmos:['AUT','TRI'] },
+      ]},
+      { label:'M5', weeks:[
+        { num:'SEM 17 · PROPÓSITO', pillar:'Propósito', title:'Revisión del proyecto', ritmos:['AUT','TRI','P2P','CONF'], tags:['★ Invitada'] },
+        { num:'SEM 18 · COMUNIDAD', pillar:'Comunidad', title:'Carrera y vida personal / corresponsabilidad', ritmos:['AUT','TRI','COACH'], tags:['⚥ Género'] },
+        { num:'SEM 19 · MAESTRÍA', pillar:'Maestría', title:'Comunicación profesional escrita', ritmos:['AUT','TRI','P2P'] },
+        { num:'SEM 20 · MAESTRÍA', pillar:'Maestría', title:'Finanzas III: fondo de emergencia', ritmos:['AUT','TRI'] },
+      ]},
+      { label:'M6', weeks:[
+        { num:'SEM 21 · MAESTRÍA', pillar:'Maestría', title:'Excel aplicado #1: fundamentos + dashboard', ritmos:['AUT','TRI','P2P','CONF'] },
+        { num:'SEM 22 · MAESTRÍA', pillar:'Maestría', title:'Excel aplicado #2: intermedio', ritmos:['AUT','TRI','COACH'] },
+        { num:'SEM 23 · COMUNIDAD', pillar:'Comunidad', title:'Bienestar físico', ritmos:['AUT','TRI','P2P','CÍRC'] },
+        { num:'SEM 24 · MAESTRÍA', pillar:'Maestría', title:'Finanzas IV: inversión básica + nómina', ritmos:['AUT','TRI'] },
+      ]},
+      { label:'M7', weeks:[
+        { num:'SEM 25 · COMUNIDAD', pillar:'Comunidad', title:'Facilitación entre pares', req:'Inicia Requisito #5', ritmos:['AUT','TRI','P2P','CONF'] },
+        { num:'SEM 26 · MAESTRÍA + COMUNIDAD', pillar:'Maestría', title:'Portafolio público + red genuina', ritmos:['AUT','TRI','P2P'] },
+        { num:'SEM 27 · COMUNIDAD', pillar:'Comunidad', title:'Empatía y trabajo en equipo · cierre hábito', req:'Requisito #4', ritmos:['AUT','TRI','P2P','COACH'] },
+        { num:'SEM 28 · MAESTRÍA', pillar:'Maestría', title:'Presentaciones ejecutivas', ritmos:['AUT','TRI','P2P'] },
+      ]},
+      { label:'M8', weeks:[
+        { num:'SEM 29 · MAESTRÍA', pillar:'Maestría', title:'Cierre del proyecto: caso + carta de validación', req:'Requisito #2 en cierre', ritmos:['AUT','TRI','P2P','CONF'] },
+        { num:'SEM 30 · COMUNIDAD', pillar:'Comunidad', title:'Manejo de conflicto en el trabajo', ritmos:['AUT','TRI','COACH'] },
+        { num:'SEM 31 · COMUNIDAD', pillar:'Comunidad', title:'Gestión de la incertidumbre', ritmos:['AUT','TRI','P2P'] },
+        { num:'SEM 32 · MAESTRÍA', pillar:'Maestría', title:'Productividad personal sostenible', ritmos:['AUT','TRI'] },
+        { num:'SEM 33 · INTEGRACIÓN', pillar:'Integración', title:'Preparación de evidencias · Compuerta 2', ritmos:['AUT','TRI'] },
+        { gate:true, title:'⬛ Compuerta 2', sub:'Proyecto + hábito + P2P verificados · Requisitos #2, #4, #5', ritmos:['TRI'] },
+      ]},
+    ],
+  },
+  {
+    label: 'LANZAMIENTO', range: 'Fase 3 de 3 · Sem 35–40', color: '#F07060',
+    months: [
+      { label:'M9', weeks:[
+        { num:'SEM 35 · MAESTRÍA', pillar:'Maestría', title:'Narrativa profesional: CV + LinkedIn', ritmos:['AUT','TRI','CONF'], tags:['★ Invitada'] },
+        { num:'SEM 36 · COMUNIDAD', pillar:'Comunidad', title:'Negociación salarial y cotidiana', req:'Requisito #3 en habilitación', ritmos:['AUT','TRI','P2P'], tags:['⚥ Género'] },
+        { num:'SEM 37 · MAESTRÍA', pillar:'Maestría', title:'Inglés funcional para entrevistas', ritmos:['AUT','TRI','CÍRC','COACH'] },
+        { num:'SEM 38 · MAESTRÍA', pillar:'Maestría', title:'Simulacros + sprint de aplicaciones', req:'Requisito #3 en ejecución', ritmos:['AUT','TRI'] },
+      ]},
+      { label:'M10', weeks:[
+        { num:'SEM 39 · PROPÓSITO', pillar:'Propósito', title:'Preparación Demo Day', ritmos:['AUT','TRI','CONF','COACH'] },
+        { gate:true, title:'⬛ Demo Day + Compuerta 3', sub:'Evento presencial público · 5 requisitos verificados = graduación' },
+      ]},
+    ],
+  },
+];
+
+const requisitos = [
+  { num:'1 · Plan de Vida defendido', when:'Semana 8' },
+  { num:'2 · Proyecto de impacto validado', when:'Semana 9 en adelante' },
+  { num:'3 · Salto profesional +30%', when:'Semana 38' },
+  { num:'4 · Hábito sostenido 6 meses', when:'Semana 27' },
+  { num:'5 · 2 sesiones P2P producidas', when:'Semana 25/26' },
+];
+
+function weekCardHTML(w) {
+  if (w.gate) {
+    return `
+      <div class="gate-card">
+        <div>
+          <div class="g-title">${w.title}</div>
+          <div class="g-sub">${w.sub}</div>
+        </div>
+        <div class="week-tags">${(w.ritmos||[]).map(r => `<span class="ritmo-chip">${r}</span>`).join('')}</div>
+      </div>`;
+  }
+  const color = PILLARS[w.pillar] || '#9A968C';
+  const tags = [...(w.ritmos||[]).map(r => `<span class="ritmo-chip">${r}</span>`), ...(w.tags||[]).map(t => `<span class="ritmo-chip tag">${t}</span>`)].join('');
+  return `
+    <div class="week-card" style="--card-color:${color};--card-bg:${color}14;">
+      <div class="week-num">${w.num}</div>
+      <div class="week-title">${w.title}${w.req ? `<span class="req">${w.req}</span>` : ''}</div>
+      <div class="week-tags">${tags}</div>
+    </div>`;
+}
+
+const phasesEl = document.getElementById('phases');
+phases.forEach(phase => {
+  const block = document.createElement('div');
+  block.className = 'phase-block';
+  block.innerHTML = `<div class="phase-head" style="background:${phase.color};">
+      <span class="p-name">${phase.label}</span><span class="p-range">${phase.range}</span>
+    </div>`;
+  phase.months.forEach(month => {
+    const monthLabel = document.createElement('div');
+    monthLabel.className = 'month-label';
+    monthLabel.textContent = month.label;
+    block.appendChild(monthLabel);
+
+    const grid = document.createElement('div');
+    grid.className = 'week-grid';
+    grid.innerHTML = month.weeks.map(weekCardHTML).join('');
+    block.appendChild(grid);
+
+    if (month.pause) {
+      const grid2 = document.createElement('div');
+      grid2.className = 'week-grid';
+      grid2.innerHTML = `<div class="pause-note">${month.pause}</div>`;
+      block.appendChild(grid2);
+    }
+  });
+  phasesEl.appendChild(block);
+});
+
+const reqsGrid = document.getElementById('reqs-grid');
+requisitos.forEach(r => {
+  const el = document.createElement('div');
+  el.className = 'req-item';
+  el.innerHTML = `<div class="r-num">${r.num}</div><div class="r-when">${r.when}</div>`;
+  reqsGrid.appendChild(el);
+});
+</script>
+
+</body>
+</html>
