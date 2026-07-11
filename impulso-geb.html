@@ -71,6 +71,15 @@ nav{
 .nav-dropdown-item .lock-ico{font-size:11px;opacity:.5;}
 
 /* ── LOCK SCREEN ── */
+.help-fab{
+  position:fixed;bottom:22px;left:22px;z-index:180;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--sage);color:var(--void);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 10px 30px rgba(126,200,160,.45);
+  transition:transform .15s,box-shadow .2s;
+}
+.help-fab:hover{transform:scale(1.06);box-shadow:0 12px 36px rgba(126,200,160,.6);}
 html:not(.unlocked) .site-content{display:none;}
 html.unlocked .lock-screen{display:none;}
 .lock-screen{
@@ -309,6 +318,8 @@ footer{
   <strong style="color:rgba(255,255,255,.4);">Impulso GEB · Generación 2</strong><br>
   Movilidad social · 2026–2027
 </footer>
+
+<a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
 
 </div>
 

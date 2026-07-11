@@ -75,7 +75,7 @@ html.unlocked .lock-screen{display:none;}
 .card-topbar{height:5px;background:linear-gradient(90deg,#7EC8A0,#6AB0F5,#F0C040,#F07060);}
 .momento-grid{display:grid;grid-template-columns:220px 1fr 300px;}
 
-/* left rail */
+/* left rail: temario de la semana */
 .rail{border-right:1px solid #ECEAE4;padding:24px 18px;background:#FAFAF8;}
 .rail-pct{font-family:Georgia,serif;font-size:30px;color:#14181F;font-weight:700;}
 .rail-sub{font-size:11px;color:#9A968C;margin-bottom:14px;}
@@ -87,6 +87,7 @@ html.unlocked .lock-screen{display:none;}
 .rail-item.pending .dot{background:none;border:1.5px dashed #D8D3C6;}
 .rail-item.current{background:#0B0F16;color:#fff;font-weight:700;}
 .rail-item.current .dot{background:#F0C040;color:#0B0F16;}
+.rail-note{margin-top:16px;font-size:11px;color:#B8B2A4;line-height:1.5;font-style:italic;}
 
 /* center */
 .center{padding:26px 28px;}
@@ -99,27 +100,42 @@ html.unlocked .lock-screen{display:none;}
 .play-btn{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;}
 .video-caption{position:absolute;bottom:14px;left:16px;font-size:11px;color:rgba(255,255,255,.5);font-family:monospace;}
 
-/* right rail: tabs */
-.side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;}
-.tabs{display:flex;gap:18px;border-bottom:1px solid #ECEAE4;margin-bottom:16px;}
+/* right side: recursos + resumen/discusión + entrega (siempre presente) */
+.side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:18px;}
+.label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:10px;}
+.recurso-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#3A7FC9;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;}
+.tabs{display:flex;gap:18px;border-bottom:1px solid #ECEAE4;margin-bottom:14px;}
 .tab-btn{background:none;border:none;padding:0 0 10px;font-size:13px;font-weight:700;cursor:pointer;color:#9A968C;border-bottom:2px solid transparent;}
 .tab-btn.active{color:#14181F;border-bottom-color:#F0C040;}
-.label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:10px;}
-.recurso-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#3A7FC9;margin-bottom:18px;}
 .summary-list{display:flex;flex-direction:column;gap:8px;}
 .summary-item{background:#fff;border-radius:0 10px 10px 0;padding:12px 14px;}
 .summary-item div:first-child{font-size:12px;font-weight:700;color:#14181F;margin-bottom:3px;}
 .summary-item div:last-child{font-size:12px;color:#6B6558;line-height:1.5;}
 .discusion-placeholder{font-size:13px;color:#9A968C;text-align:center;padding:30px 10px;}
 
+.entrega-form{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.entrega-form input{font-size:13px;padding:11px 13px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;}
+.entrega-form button{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
+
 .placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:18px;}
 
-/* ── MOBILE: reorder to stacked (video first, then tags/tabs/recursos/resumen), hide rail ── */
+/* ── HELP / WHATSAPP FAB ── */
+.help-fab{
+  position:fixed;bottom:22px;left:22px;z-index:180;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--sage);color:var(--void);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 10px 30px rgba(126,200,160,.45);
+  transition:transform .15s,box-shadow .2s;
+}
+.help-fab:hover{transform:scale(1.06);box-shadow:0 12px 36px rgba(126,200,160,.6);}
+
+/* ── MOBILE: reorder (video first, temario/rail y recursos abajo), nada se oculta ── */
 @media(max-width:900px){
   .momento-grid{display:flex;flex-direction:column;}
-  .rail{display:none;}
-  .center{order:1;padding:22px 20px 4px;}
-  .side{order:2;border-left:none;border-top:1px solid #ECEAE4;padding:20px;}
+  .center{order:1;padding:22px 20px;}
+  .rail{order:2;border-right:none;border-top:1px solid #ECEAE4;}
+  .side{order:3;border-left:none;border-top:1px solid #ECEAE4;}
   .momento-wrap{padding:88px 16px 44px;max-width:520px;}
   .momento-title{font-size:19px;}
 }
@@ -166,6 +182,7 @@ html.unlocked .lock-screen{display:none;}
           <div class="rail-sub" id="rail-sub">Momentos de la semana</div>
           <div class="rail-track"><div class="rail-fill"></div></div>
           <div class="rail-list" id="rail-list"></div>
+          <div class="rail-note">Esta semana puede sumar más actividades más adelante.</div>
         </div>
 
         <div class="center">
@@ -181,21 +198,35 @@ html.unlocked .lock-screen{display:none;}
         </div>
 
         <div class="side">
-          <div class="tabs">
-            <button type="button" class="tab-btn active" id="tab-temario">TEMARIO</button>
-            <button type="button" class="tab-btn" id="tab-discusion">DISCUSIÓN</button>
-          </div>
-          <div id="panel-temario">
-            <div class="label-caps">Recursos</div>
+          <div>
+            <div class="label-caps">Recursos necesarios</div>
             <div class="recurso-row">📄 [verificar recurso]</div>
-            <div class="label-caps">Resumen</div>
-            <div class="summary-list">
-              <div class="summary-item" style="border-left:3px solid #7EC8A0;"><div>[verificar punto clave 1]</div><div>[verificar descripción breve]</div></div>
-              <div class="summary-item" style="border-left:3px solid #6AB0F5;"><div>[verificar punto clave 2]</div><div>[verificar descripción breve]</div></div>
+          </div>
+
+          <div>
+            <div class="tabs">
+              <button type="button" class="tab-btn active" id="tab-resumen">RESUMEN</button>
+              <button type="button" class="tab-btn" id="tab-discusion">DISCUSIÓN</button>
+            </div>
+            <div id="panel-resumen">
+              <div class="summary-list">
+                <div class="summary-item" style="border-left:3px solid #7EC8A0;"><div>[verificar punto clave 1]</div><div>[verificar descripción breve]</div></div>
+                <div class="summary-item" style="border-left:3px solid #6AB0F5;"><div>[verificar punto clave 2]</div><div>[verificar descripción breve]</div></div>
+              </div>
+            </div>
+            <div id="panel-discusion" style="display:none;">
+              <div class="discusion-placeholder">Espacio de discusión de la tríada — [verificar si aplica a este momento]</div>
             </div>
           </div>
-          <div id="panel-discusion" style="display:none;">
-            <div class="discusion-placeholder">Espacio de discusión de la tríada — [verificar si aplica a este momento]</div>
+
+          <div>
+            <div class="label-caps">Espacio de entrega</div>
+            <form class="entrega-form" action="YOUR_APPS_SCRIPT_WEB_APP_URL" method="POST" target="_blank">
+              <input name="nombre" placeholder="Nombre completo">
+              <input name="correo" placeholder="Correo" type="email">
+              <input name="drive_link" placeholder="Liga de Google Drive">
+              <button type="submit">Enviar</button>
+            </form>
           </div>
         </div>
 
@@ -204,6 +235,8 @@ html.unlocked .lock-screen{display:none;}
 
     <p class="placeholder-note">Plantilla de momento — el contenido específico de cada video se completará más adelante.</p>
   </div>
+
+  <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
 </div>
 
 <script>
@@ -226,17 +259,17 @@ document.getElementById('lock-form').addEventListener('submit', function(e){
 const params = new URLSearchParams(window.location.search);
 const curso = params.get('curso') || 'Ruta GEB';
 const semana = params.get('semana') || 'Sem. 6';
-const titulo = params.get('titulo');
+const titulo = params.get('titulo') || '[verificar título del momento]';
 
 document.getElementById('breadcrumb').innerHTML = `Impulso › <b>${curso}</b> › ${semana}`;
 document.getElementById('rail-sub').textContent = `Momentos de ${semana}`;
-if (titulo) document.getElementById('momento-title').textContent = titulo;
+document.getElementById('momento-title').textContent = titulo;
 
-/* ── RAIL (placeholder momentos of the week) ── */
+/* ── RAIL (placeholder momentos of the week — se irá ampliando con más actividades) ── */
 const railItems = [
   { label:'Autogestivo semanal', state:'done' },
   { label:'Tríada de colaboradores', state:'done' },
-  { label:'Este momento', state:'current' },
+  { label:titulo, state:'current' },
   { label:'Siguiente momento', state:'pending' },
 ];
 const railList = document.getElementById('rail-list');
@@ -247,19 +280,19 @@ railList.innerHTML = railItems.map(it => `
 `).join('');
 
 /* ── TABS ── */
-const tabTemario = document.getElementById('tab-temario');
+const tabResumen = document.getElementById('tab-resumen');
 const tabDiscusion = document.getElementById('tab-discusion');
-const panelTemario = document.getElementById('panel-temario');
+const panelResumen = document.getElementById('panel-resumen');
 const panelDiscusion = document.getElementById('panel-discusion');
 
 function setTab(which) {
-  const isTemario = which === 'temario';
-  tabTemario.classList.toggle('active', isTemario);
-  tabDiscusion.classList.toggle('active', !isTemario);
-  panelTemario.style.display = isTemario ? 'block' : 'none';
-  panelDiscusion.style.display = isTemario ? 'none' : 'block';
+  const isResumen = which === 'resumen';
+  tabResumen.classList.toggle('active', isResumen);
+  tabDiscusion.classList.toggle('active', !isResumen);
+  panelResumen.style.display = isResumen ? 'block' : 'none';
+  panelDiscusion.style.display = isResumen ? 'none' : 'block';
 }
-tabTemario.addEventListener('click', () => setTab('temario'));
+tabResumen.addEventListener('click', () => setTab('resumen'));
 tabDiscusion.addEventListener('click', () => setTab('discusion'));
 </script>
 
