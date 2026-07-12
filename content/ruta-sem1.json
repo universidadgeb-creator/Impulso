@@ -1,0 +1,37 @@
+{
+  "contexto": "Vas a construir el primer lenguaje de tu ikigai: lo que amas, y en lo que eres buena — con evidencia real, no solo lo que crees de ti misma.",
+  "media": null,
+  "steps": [
+    {
+      "label": "1 · Diagnóstico",
+      "instruction": "¿Alguna vez te han preguntado qué quieres hacer con tu vida... y no supiste qué contestar?<br><br>No pasa nada si no tienes la respuesta todavía. Esta semana no te la vamos a pedir — vas a empezar a construir el lenguaje para encontrarla, con evidencia real, no con lo primero que se te ocurra.<br><br><strong>Cómo funciona esta semana:</strong> esto no se resuelve en una sentada. Ve a tu ritmo — sugerencia: lunes-martes Aplicación parte 1, miércoles parte 2, jueves el cruce, viernes compártelo. Lo único fijo es subir tu avance el viernes, directo en esta guía.<br><br>En Recursos está la plantilla de las dos listas en PDF editable y en Word, por si te es más fácil llenarla ahí que a mano."
+    },
+    {
+      "label": "2 · Marco",
+      "instruction": "Si llegaste aquí sin haber hecho todavía tus dos listas y tu cruce en Aplicación, ve para allá primero — esto te va a servir más después de haberlo vivido.<br><br>Eso que encontraste en tu cruce tiene nombre: <strong>ikigai</strong> (生き甲斐), una palabra japonesa que significa, más o menos, \"razón para despertar cada mañana\". No es sobre elegir ser feliz — es sobre diseñar una vida que valga la pena vivir y disfrutar. No se descubre de la noche a la mañana: se necesita curiosidad silenciosa, un ritmo constante, y el coraje de seguir descubriendo y convirtiéndote. Lo que acabas de cruzar es tu primer paso significativo en ese camino.<br><br>Hay otra palabra japonesa que vas a escuchar en este programa, aunque la vamos a retomar con más profundidad más adelante: <strong>shimei</strong> (使命), propósito de vida. Es hacia afuera — lo que haces, para qué lo haces. Si te enfocas solo en el shimei desde ahora, puede cansar mucho, porque ese \"para qué\" se descubre a lo largo de toda una vida, no en una semana.<br><br>Lo que cruzaste hoy es ikigai, no shimei: es hacia adentro, es lo que eres, independientemente de la actividad o del resultado. Guarda la palabra shimei — la vas a necesitar cuando trabajes tu proyecto de impacto, más adelante en el programa.<br><br><strong>Si quieres profundizar (opcional):</strong> busca 2 o 3 historias reales — no de gente famosa, gente común — de personas que describan haber encontrado algo parecido a su ikigai. Compara lo que encuentres con lo que te pasó a ti."
+    },
+    {
+      "label": "3 · Aplicación",
+      "instruction": "<strong>Parte 1 — Lo que amo.</strong> Antes de la lista, dos columnas rápidas, lo primero que se te ocurra: (A) cosas que hago para algo o alguien, aunque no me encanten hacerlas; (B) cosas que hago porque soy así, sin pensar en el resultado.<br><br>Ahora la lista completa: escribe entre 10 y 15 cosas que amas hacer, dentro y fuera del trabajo. No filtres si \"sirven\" para algo o no. Tómate más de una sesión si hace falta.<br><br><em>¿Cómo se ve una respuesta profunda?</em> Superficial: \"Me gusta ver películas.\" Profunda: \"Me gusta ver películas de misterio y tratar de adivinar el final antes que los demás.\" Busca la versión específica, no la genérica.<br><br><strong>Parte 2 — En lo que soy buena.</strong> Escribe entre 10 y 15 cosas en las que eres buena. Para cada una: ¿quién me lo ha dicho? ¿en qué momento lo noté yo misma?<br><br><strong>Acción real (no te la saltes):</strong> pregúntale a una persona real — una compañera, tu supervisor, alguien de tu casa — qué cree que se te da bien. No lo que tú imaginas que diría: lo que realmente te responda. Anota su respuesta, textual.<br><br><strong>El cruce:</strong> compara tus dos listas completas. ¿Qué se repite en ambas? Anótalo aparte — sigue con el paso Marco para saber qué significa."
+    },
+    {
+      "label": "4 · Caso",
+      "instruction": "Ana lleva tres años en la recepción de la sucursal Interlomas. En su lista de \"lo que amo\", la mitad de los ejemplos terminaron siendo momentos explicando algo: el manual de bienvenida a un compañero nuevo, cómo funciona el sistema de citas a un cliente confundido, la tarea de matemáticas de su sobrino los domingos.<br><br>Cuando le preguntó a una compañera qué creía que se le daba bien, la respuesta la sorprendió: \"tienes paciencia para explicar, yo me desespero\". Ana no lo había anotado nunca — nadie se lo había preguntado directamente.<br><br>Cuando cruzó las dos listas, ahí estaba: explicar con paciencia hasta que el otro entiende. Todavía no sabe para qué le va a servir eso — ese es su shimei, y lo va a descubrir más adelante en el programa. Por ahora, solo lo anota, y se lo cuenta a su hermana el viernes."
+    },
+    {
+      "label": "5 · Reflexión",
+      "instruction": "<ul><li>¿Qué de lo que escribiste esta semana lo harías aunque nadie te lo pidiera?</li><li>¿Qué te dijo la persona a la que le preguntaste, que tú no habías anotado?</li><li>¿Qué apareció en tu cruce que no esperabas encontrar ahí?</li></ul><br><strong>Testigo:</strong> elige a una persona real de tu vida y cuéntale qué encontraste en tu cruce. Pídele que la próxima semana te pregunte cómo vas.<br><br><strong>Grupo (opcional):</strong> si quieres, comparte una línea corta en el grupo de WhatsApp de tu cohorte de Ruta GEB — no hace falta que sea profundo, basta con que alguien más lo sepa."
+    }
+  ],
+  "checklistLabels": [
+    "Escribí mi lista de lo que amo (10-15)",
+    "Le pregunté a una persona real qué cree que se me da bien",
+    "Encontré mi cruce entre las dos listas",
+    "Compartí mi resultado con un testigo",
+    "Subí mi avance a la plataforma"
+  ],
+  "recursos": [
+    { "icon": "📄", "label": "Plantilla de las dos listas — PDF editable", "href": "recursos/ruta-sem1-plantilla-listas.pdf" },
+    { "icon": "📝", "label": "Plantilla de las dos listas — Word", "href": "recursos/ruta-sem1-plantilla-listas.docx" }
+  ]
+}
