@@ -130,6 +130,9 @@ html.unlocked .lock-screen{display:none;}
 /* right side: recursos + entrega (siempre presente) */
 .side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
 .recurso-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;font-size:13px;color:#3A7FC9;}
+.media-block{margin-bottom:2px;}
+.media-label{font-size:12px;color:#6B6558;margin-bottom:6px;font-weight:600;}
+.media-block audio,.media-block video{width:100%;border-radius:10px;}
 .entrega-form{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;}
 .entrega-form input{font-size:13px;padding:11px 13px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;}
 .entrega-form button{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
@@ -210,8 +213,10 @@ html.unlocked .lock-screen{display:none;}
 
           <div>
             <h2 class="momento-title" id="momento-title">[verificar título del momento]</h2>
-            <p class="momento-context">[verificar frase de contexto breve — 1-2 líneas de introducción a la guía]</p>
+            <p class="momento-context" id="momento-context">[verificar frase de contexto breve — 1-2 líneas de introducción a la guía]</p>
           </div>
+
+          <div id="media-block" style="display:none;"></div>
 
           <div>
             <div class="label-caps" style="margin-bottom:8px;">En esta guía</div>
@@ -232,7 +237,7 @@ html.unlocked .lock-screen{display:none;}
         <div class="side">
           <div>
             <div class="label-caps" style="margin-bottom:10px;">Recursos necesarios</div>
-            <div class="recurso-row">📄 [verificar recurso]</div>
+            <div id="recursos-list"></div>
           </div>
           <div>
             <div class="label-caps" style="margin-bottom:10px;">Espacio de entrega</div>
@@ -293,7 +298,7 @@ pilarTag.textContent = `${pStyle.emoji} ${pilar}`;
 pilarTag.style.color = pStyle.color;
 pilarTag.style.background = pStyle.bg;
 
-/* ── RAIL: temario / momentos de la semana (placeholder — se irá ampliando con más actividades) ── */
+/* ── RAIL: temario / momentos de la semana (placeholder — se irá ampliando) ── */
 const railItems = [
   { label:'Autogestivo semanal', state:'done' },
   { label:'Tríada de colaboradores', state:'done' },
@@ -307,7 +312,13 @@ railList.innerHTML = railItems.map(it => `
   </div>
 `).join('');
 
-/* ── STEPS ── */
+/* ── CONTENIDO DE LA SEMANA: fetch por JSON, con placeholder de respaldo ──
+   Convención: content/{curso}-{semana}.json — ej. content/ruta-sem1.json.
+   Si el archivo todavía no existe (semana sin diseñar), se queda el placeholder. */
+const cursoSlug = curso.toLowerCase().includes('impulso') ? 'impulso' : 'ruta';
+const semanaSlug = semana.toLowerCase().replace(/[.\s]/g, '');
+const contentUrl = `content/${cursoSlug}-${semanaSlug}.json`;
+
 const steps = [
   { label:'1 · Diagnóstico', instruction:'[verificar instrucción]' },
   { label:'2 · Marco', instruction:'[verificar instrucción]' },
@@ -315,7 +326,35 @@ const steps = [
   { label:'4 · Caso', instruction:'[verificar instrucción]' },
   { label:'5 · Reflexión', instruction:'[verificar instrucción]' },
 ];
+const checklistLabels = [
+  'Leíste el marco completo',
+  'Completaste la tabla de diagnóstico',
+  'Escribiste tu reflexión final',
+  'Subiste tu archivo a Drive',
+];
+const checked = new Array(checklistLabels.length).fill(false);
+const recursos = [ { icon:'📄', label:'[verificar recurso]', href:'#' } ];
+
 let activeStep = 0;
+
+function renderRecursos() {
+  const wrap = document.getElementById('recursos-list');
+  wrap.innerHTML = recursos.map(r => `
+    <a class="recurso-row" href="${r.href}" target="_blank" rel="noopener" style="text-decoration:none;margin-bottom:8px;">
+      ${r.icon || '📄'} ${r.label}
+    </a>
+  `).join('');
+}
+
+function renderMedia(media) {
+  const block = document.getElementById('media-block');
+  if (!media || !media.src) { block.style.display = 'none'; block.innerHTML = ''; return; }
+  const tag = media.tipo === 'video'
+    ? `<video controls src="${media.src}"></video>`
+    : `<audio controls src="${media.src}"></audio>`;
+  block.innerHTML = `<div class="media-label">${media.label || 'Escucha a Lupita'}</div>${tag}`;
+  block.style.display = 'block';
+}
 
 function renderSteps() {
   const chips = document.getElementById('step-chips');
@@ -339,15 +378,6 @@ function renderSteps() {
   `;
 }
 
-/* ── CHECKLIST ── */
-const checklistLabels = [
-  'Leíste el marco completo',
-  'Completaste la tabla de diagnóstico',
-  'Escribiste tu reflexión final',
-  'Subiste tu archivo a Drive',
-];
-const checked = new Array(checklistLabels.length).fill(false);
-
 function renderChecklist() {
   const wrap = document.getElementById('checklist-items');
   wrap.innerHTML = '';
@@ -366,7 +396,35 @@ function render() {
   renderSteps();
   renderChecklist();
 }
+
+function applyContent(data) {
+  if (data.contexto) document.getElementById('momento-context').textContent = data.contexto;
+  if (Array.isArray(data.steps) && data.steps.length) {
+    steps.length = 0;
+    data.steps.forEach(s => steps.push(s));
+  }
+  if (Array.isArray(data.checklistLabels) && data.checklistLabels.length) {
+    checklistLabels.length = 0;
+    data.checklistLabels.forEach(l => checklistLabels.push(l));
+    checked.length = 0;
+    checklistLabels.forEach(() => checked.push(false));
+  }
+  if (Array.isArray(data.recursos) && data.recursos.length) {
+    recursos.length = 0;
+    data.recursos.forEach(r => recursos.push(r));
+  }
+  renderRecursos();
+  renderMedia(data.media || null);
+  render();
+}
+
+renderRecursos();
 render();
+
+fetch(contentUrl)
+  .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
+  .then(applyContent)
+  .catch(() => { /* semana sin JSON todavía — se queda el placeholder, no romper la página */ });
 </script>
 
 </body>
