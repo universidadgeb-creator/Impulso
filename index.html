@@ -424,13 +424,42 @@ details .obj-ans{
 
 /* ── TESTIMONIALS ── */
 .sec-proof{background:var(--mid-bg);}
-.proof-placeholder{
-  margin-top:28px;
-  border:2px dashed rgba(255,255,255,.12);
-  border-radius:16px;padding:48px 24px;text-align:center;
-  color:var(--mist);font-size:14px;line-height:1.7;
+.proof-grid{
+  display:flex;flex-direction:column;gap:16px;
+  margin-top:32px;
 }
-.proof-placeholder strong{display:block;font-size:16px;color:rgba(255,255,255,.45);margin-bottom:8px;}
+.proof-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+  position:relative;overflow:hidden;
+}
+.proof-card::before{
+  content:'"';
+  position:absolute;top:-8px;left:18px;
+  font-family:Georgia,serif;font-size:80px;
+  color:var(--sage);opacity:.12;line-height:1;
+  pointer-events:none;
+}
+.proof-quote{
+  font-size:14px;color:var(--fog);line-height:1.8;
+  margin-bottom:20px;
+  font-style:italic;
+}
+.proof-author{
+  display:flex;align-items:center;gap:12px;
+  border-top:1px solid var(--border);
+  padding-top:16px;
+}
+.proof-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(126,200,160,.25),rgba(106,176,245,.15));
+  border:1px solid rgba(126,200,160,.3);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:Georgia,serif;font-size:15px;font-weight:700;color:var(--sage);
+}
+.proof-name{font-size:14px;font-weight:700;color:var(--white);}
+.proof-role{font-size:12px;color:var(--sage);margin-top:2px;}
 
 /* ── CTA FINAL ── */
 .sec-cta{
@@ -1172,14 +1201,44 @@ document.addEventListener('click', function(e){
 
 <!-- ══ TESTIMONIALS PLACEHOLDER ══ -->
 <section class="sec sec-proof">
-  <!-- Left: person silhouettes hinting at community -->
   <div class="sec-inner">
-    <span class="sec-eyebrow">TESTIMONIOS GENERACIÓN 1</span>
-    <h2 class="sec-title">Colaboradores de GEB que ya lo vivieron.</h2>
-    <div class="proof-placeholder">
-      <strong>Aquí van los testimonios reales</strong>
-      Tres historias de colaboradores. Nombres, puestos al entrar, puestos al salir, cambio de ingreso, sus propias palabras.<br><br>
-      <span style="font-size:12px;opacity:.6;">En construcción — no se inventa nada.</span>
+    <span class="sec-eyebrow">Quiénes ya lo vivieron</span>
+    <h2 class="sec-title">Personas de GEB<br>que lo cambiaron.</h2>
+    <div class="proof-grid">
+
+      <div class="proof-card">
+        <p class="proof-quote">"Antes de Impulso GEB hacía bien mi trabajo, pero sentía que no estaba aprovechando todo mi potencial — me faltaba confianza en mí mismo y claridad sobre hacia dónde quería crecer. El Plan de Vida fue el parteaguas: me hizo pausar y definir qué quería para mi futuro, no solo qué habilidades aprender. Aprovechen cada oportunidad, salgan de su zona de confort y sean constantes. Invertir en tu desarrollo es invertir en tu futuro — es algo que nadie te puede quitar."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">M</div>
+          <div>
+            <div class="proof-name">Marc Altiery</div>
+            <div class="proof-role">Certificándose como coach deportivo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <p class="proof-quote">"Lo que me hacía falta era que me dieran la oportunidad. Impulso GEB me la dio, y hoy trabajo en algo que disfruto: soy cocinero en Onara. También noté un cambio en mí: soy más sociable, y sé que si me siguen dando oportunidades en otras áreas, puedo seguir creciendo. A mis compañeros les diría que estén abiertos a cada enseñanza que se les presente — toda enseñanza trae una recompensa, y depende de cada quien qué hacer con ella."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">C</div>
+          <div>
+            <div class="proof-name">Cesar Medina</div>
+            <div class="proof-role">Cocinero en Onara</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <p class="proof-quote">"Lo que me hacía falta era ese empujoncito — sentir el apoyo del equipo y saber que sí existía la posibilidad de seguir avanzando. Plan de Vida e Ikigai fueron los que realmente me hicieron clic. Eso despertó en mí las ganas de querer más, de afrontar nuevos retos y no quedarme solo con lo que ya estaba haciendo. A mis compañeros les diría que aprovechen todos los programas que ofrece la empresa: te cambian la mentalidad, te dan un mejor enfoque y te ayudan a saber a qué aspirar."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">I</div>
+          <div>
+            <div class="proof-name">Isaac Madrigal</div>
+            <div class="proof-role">Auxiliar Administrativo en Capital Humano</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
