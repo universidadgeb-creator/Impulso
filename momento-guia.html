@@ -253,7 +253,7 @@ html.unlocked .lock-screen{display:none;}
       </div>
     </div>
 
-    <p class="placeholder-note">Plantilla de momento — el contenido específico de cada guía se completará más adelante.</p>
+    <p class="placeholder-note" id="placeholder-note">Plantilla de momento — el contenido específico de cada guía se completará más adelante.</p>
   </div>
 
   <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
@@ -416,6 +416,8 @@ function applyContent(data) {
   renderRecursos();
   renderMedia(data.media || null);
   render();
+  const note = document.getElementById('placeholder-note');
+  if (note) note.style.display = 'none';
 }
 
 renderRecursos();
