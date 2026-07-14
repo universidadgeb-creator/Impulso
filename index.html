@@ -425,41 +425,36 @@ details .obj-ans{
 /* ── TESTIMONIALS ── */
 .sec-proof{background:var(--mid-bg);}
 .proof-grid{
-  display:flex;flex-direction:column;gap:16px;
+  display:flex;flex-direction:column;gap:28px;
   margin-top:32px;
 }
 .proof-card{
   background:rgba(255,255,255,.04);
   border:1px solid var(--border);
-  border-radius:16px;padding:24px;
-  position:relative;overflow:hidden;
+  border-radius:22px;overflow:hidden;
+  position:relative;
+  display:flex;flex-direction:column;
+  transition:border-color .2s,background .2s;
 }
-.proof-card::before{
-  content:'"';
-  position:absolute;top:-8px;left:18px;
-  font-family:Georgia,serif;font-size:80px;
-  color:var(--sage);opacity:.12;line-height:1;
-  pointer-events:none;
+.proof-card:hover{border-color:rgba(126,200,160,.28);background:rgba(126,200,160,.05);}
+.proof-photo-wrap{
+  position:relative;width:132px;height:132px;
+  border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:3px solid rgba(126,200,160,.4);
+  box-shadow:0 0 0 5px rgba(126,200,160,.08),0 10px 26px rgba(0,0,0,.35);
+  margin:28px auto 0;
 }
+.proof-photo-wrap img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 15%;
+}
+.proof-body{padding:16px 26px 28px;text-align:center;position:relative;}
+.proof-name{font-size:17px;font-weight:700;color:var(--white);}
+.proof-role{font-size:12.5px;color:var(--sage);margin-top:4px;margin-bottom:16px;}
 .proof-quote{
-  font-size:14px;color:var(--fog);line-height:1.8;
-  margin-bottom:20px;
-  font-style:italic;
+  font-size:14.5px;color:var(--fog);line-height:1.85;
+  font-style:italic;text-align:left;
 }
-.proof-author{
-  display:flex;align-items:center;gap:12px;
-  border-top:1px solid var(--border);
-  padding-top:16px;
-}
-.proof-avatar{
-  width:40px;height:40px;border-radius:50%;
-  background:linear-gradient(135deg,rgba(126,200,160,.25),rgba(106,176,245,.15));
-  border:1px solid rgba(126,200,160,.3);
-  flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-family:Georgia,serif;font-size:15px;font-weight:700;color:var(--sage);
-}
-.proof-name{font-size:14px;font-weight:700;color:var(--white);}
-.proof-role{font-size:12px;color:var(--sage);margin-top:2px;}
 
 /* ── CTA FINAL ── */
 .sec-cta{
@@ -509,6 +504,11 @@ footer{
   .hero{padding:120px 32px 80px;}
   .node-body{padding:20px 22px;}
   .node-body h3{font-size:18px;}
+  .proof-grid{gap:24px;}
+  .proof-card{flex-direction:row;align-items:center;}
+  .proof-photo-wrap{width:150px;height:150px;margin:0 0 0 32px;}
+  .proof-body{text-align:left;flex:1;padding:24px 32px 24px 28px;}
+  .proof-role{margin-bottom:14px;}
 }
 
 /* Section-level relative positioning for ambient layers */
@@ -1207,35 +1207,35 @@ document.addEventListener('click', function(e){
     <div class="proof-grid">
 
       <div class="proof-card">
-        <p class="proof-quote">"Antes de Impulso GEB hacía bien mi trabajo, pero sentía que no estaba aprovechando todo mi potencial — me faltaba confianza en mí mismo y claridad sobre hacia dónde quería crecer. El Plan de Vida fue el parteaguas: me hizo pausar y definir qué quería para mi futuro, no solo qué habilidades aprender. Aprovechen cada oportunidad, salgan de su zona de confort y sean constantes. Invertir en tu desarrollo es invertir en tu futuro — es algo que nadie te puede quitar."</p>
-        <div class="proof-author">
-          <div class="proof-avatar">M</div>
-          <div>
-            <div class="proof-name">Marc Altiery</div>
-            <div class="proof-role">Certificándose como coach deportivo</div>
-          </div>
+        <div class="proof-photo-wrap">
+          <img src="img/marc-altiery.jpg" alt="Marc Altiery">
+        </div>
+        <div class="proof-body">
+          <div class="proof-name">Marc Altiery</div>
+          <div class="proof-role">Certificándose como coach deportivo</div>
+          <p class="proof-quote">"Antes de Impulso GEB hacía bien mi trabajo, pero sentía que no estaba aprovechando todo mi potencial — me faltaba confianza en mí mismo y claridad sobre hacia dónde quería crecer. El Plan de Vida fue el parteaguas: me hizo pausar y definir qué quería para mi futuro, no solo qué habilidades aprender. Aprovechen cada oportunidad, salgan de su zona de confort y sean constantes. Invertir en tu desarrollo es invertir en tu futuro — es algo que nadie te puede quitar."</p>
         </div>
       </div>
 
       <div class="proof-card">
-        <p class="proof-quote">"Lo que me hacía falta era que me dieran la oportunidad. Impulso GEB me la dio, y hoy trabajo en algo que disfruto: soy cocinero en Onara. También noté un cambio en mí: soy más sociable, y sé que si me siguen dando oportunidades en otras áreas, puedo seguir creciendo. A mis compañeros les diría que estén abiertos a cada enseñanza que se les presente — toda enseñanza trae una recompensa, y depende de cada quien qué hacer con ella."</p>
-        <div class="proof-author">
-          <div class="proof-avatar">C</div>
-          <div>
-            <div class="proof-name">Cesar Medina</div>
-            <div class="proof-role">Cocinero en Onara</div>
-          </div>
+        <div class="proof-photo-wrap">
+          <img src="img/cesar-medina.jpg" alt="Cesar Medina">
+        </div>
+        <div class="proof-body">
+          <div class="proof-name">Cesar Medina</div>
+          <div class="proof-role">Cocinero en Onara</div>
+          <p class="proof-quote">"Lo que me hacía falta era que me dieran la oportunidad. Impulso GEB me la dio, y hoy trabajo en algo que disfruto: soy cocinero en Onara. También noté un cambio en mí: soy más sociable, y sé que si me siguen dando oportunidades en otras áreas, puedo seguir creciendo. A mis compañeros les diría que estén abiertos a cada enseñanza que se les presente — toda enseñanza trae una recompensa, y depende de cada quien qué hacer con ella."</p>
         </div>
       </div>
 
       <div class="proof-card">
-        <p class="proof-quote">"Lo que me hacía falta era ese empujoncito — sentir el apoyo del equipo y saber que sí existía la posibilidad de seguir avanzando. Plan de Vida e Ikigai fueron los que realmente me hicieron clic. Eso despertó en mí las ganas de querer más, de afrontar nuevos retos y no quedarme solo con lo que ya estaba haciendo. A mis compañeros les diría que aprovechen todos los programas que ofrece la empresa: te cambian la mentalidad, te dan un mejor enfoque y te ayudan a saber a qué aspirar."</p>
-        <div class="proof-author">
-          <div class="proof-avatar">I</div>
-          <div>
-            <div class="proof-name">Isaac Madrigal</div>
-            <div class="proof-role">Auxiliar Administrativo en Capital Humano</div>
-          </div>
+        <div class="proof-photo-wrap">
+          <img src="img/isaac-madrigal.jpg" alt="Isaac Madrigal">
+        </div>
+        <div class="proof-body">
+          <div class="proof-name">Isaac Madrigal</div>
+          <div class="proof-role">Auxiliar Administrativo en Capital Humano</div>
+          <p class="proof-quote">"Lo que me hacía falta era ese empujoncito — sentir el apoyo del equipo y saber que sí existía la posibilidad de seguir avanzando. Plan de Vida e Ikigai fueron los que realmente me hicieron clic. Eso despertó en mí las ganas de querer más, de afrontar nuevos retos y no quedarme solo con lo que ya estaba haciendo. A mis compañeros les diría que aprovechen todos los programas que ofrece la empresa: te cambian la mentalidad, te dan un mejor enfoque y te ayudan a saber a qué aspirar."</p>
         </div>
       </div>
 
