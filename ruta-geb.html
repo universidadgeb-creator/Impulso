@@ -344,10 +344,11 @@ const PILLARS = {
 
 const days = [
   { label:'Sem 1', pillar:'Propósito', title:'IKIGAI parte 1', modules:[
-    { icon:'📱', title:'IKIGAI parte 1', type:'AUTOGESTIVO' },
+    { icon:'📱', title:'IKIGAI parte 1', type:'AUTOGESTIVO', data:'ruta-sem1.json' },
   ]},
   { label:'Sem 2', pillar:'Propósito', title:'IKIGAI parte 2', modules:[
-    { icon:'📱', title:'IKIGAI parte 2', type:'AUTOGESTIVO' },
+    { icon:'🎥', title:'Marcos descubre su Cuadrante 4', type:'VIDEO', data:'ruta-sem2-video.json' },
+    { icon:'📱', title:'IKIGAI parte 2', type:'AUTOGESTIVO', data:'ruta-sem2-aut.json' },
   ]},
   { label:'Sem 3', pillar:'Transición', title:'Plan de Vida parte 1', modules:[
     { icon:'📱', title:'Plan de Vida parte 1', type:'AUTOGESTIVO' },
@@ -395,8 +396,9 @@ function render() {
 
   const list = document.getElementById('module-list');
   list.innerHTML = d.modules.map(m => {
-    const template = m.type === 'CONFERENCIA' ? 'momento-video.html' : 'momento-guia.html';
-    const url = `${template}?curso=Ruta%20GEB&semana=${encodeURIComponent(d.label)}&titulo=${encodeURIComponent(m.title)}&pilar=${encodeURIComponent(d.pillar)}`;
+    const template = (m.type === 'CONFERENCIA' || m.type === 'VIDEO') ? 'momento-video.html' : 'momento-guia.html';
+    const dataQuery = m.data ? `&data=${encodeURIComponent(m.data)}` : '';
+    const url = `${template}?curso=Ruta%20GEB&semana=${encodeURIComponent(d.label)}&titulo=${encodeURIComponent(m.title)}&pilar=${encodeURIComponent(d.pillar)}${dataQuery}`;
     return `
     <a class="module-row" href="${url}">
       <span class="module-ico">${m.icon}</span>

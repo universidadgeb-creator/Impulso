@@ -1,0 +1,34 @@
+{
+  "steps": [
+    {
+      "label": "1 · Diagnóstico",
+      "instruction": "Antes de seguir, regresa un momento a tus cuadrantes de la Semana 1. De lo que escribiste en 'lo que amas' y 'en lo que eres bueno', ¿qué se te quedó pegado esta semana? ¿Confirmaste algo? ¿Cambió algo? No hay que rehacer nada, solo tenerlo fresco."
+    },
+    {
+      "label": "2 · Marco",
+      "instruction": "Ya tienes dos piezas de tu mapa: lo que amas, y en lo que eres bueno. Son piezas internas — las puedes contestar solo. Las dos de esta semana son distintas: necesitan al mundo de afuera para confirmarse. Lo que el mundo necesita: ¿qué problema ves repetirse en tu sucursal, tu comunidad, tu día a día, que nadie resuelve? Por lo que te pueden pagar: una habilidad se vuelve profesión cuando alguien más, sin que tú se lo pidas, ya estuvo dispuesto a darte algo a cambio de ella."
+    },
+    {
+      "label": "3 · Aplicación",
+      "instruction": "Cuadrante 3 — Lo que el mundo necesita: escribe mínimo 20 ítems en gerundio. ¿Qué problema ves repetirse que nadie resuelve? ¿A quién específico le cambiarías la vida si lo resolvieras? Cuadrante 4 — Por lo que te pueden pagar: mínimo 20 ítems. ¿Qué te han ofrecido pagar alguna vez? ¿Qué comentario positivo se repite sobre tu trabajo? Investigación real: Ruta A (con IA) — pega tus cuadrantes 3 y 4 en la IA que tengas a mano con este prompt: 'Aquí están mis respuestas a dos preguntas: 1) problemas que veo que nadie resuelve: [cuadrante 3]. 2) habilidades por las que me han pagado o podrían pagarme: [cuadrante 4]. Dime 3 sectores o puestos reales donde esto ya se está pagando hoy, por qué están creciendo, y cómo alguien con mi perfil podría entrar.' Ruta B (sin IA) — saca 3-4 palabras clave que combinen un problema con una habilidad y búscalas en Google, Indeed, OCC o Computrabajo. Para ambas: busca 1 a 3 vacantes reales con salario visible que confirmen alguna pista."
+    },
+    {
+      "label": "4 · Caso",
+      "instruction": "Marcos lleva 6 años en mantenimiento. En su cuadrante 4 escribió 'reparar cosas que otros ya tiraron por perdidas' — nunca lo había visto como algo que alguien pagaría aparte. Con la Ruta A descubre puestos de 'supervisor de mantenimiento preventivo' con 25% más salario, exactamente por esa habilidad. Busca una vacante real que lo confirma. (Ve el video de Marcos y Lupita en el momento anterior de esta semana.)"
+    },
+    {
+      "label": "5 · Reflexión",
+      "instruction": "Ya tienes tus 4 cuadrantes completos. Crúzalos dos por dos: Amas + Bueno = tu Pasión. Amas + Mundo necesita = tu Misión. Mundo necesita + Te pagan = tu Vocación. Bueno + Te pagan = tu Profesión. Y en el centro, donde las cuatro se tocan, eso se llama IKIGAI — tu razón de ser. Última pregunta, para tu testigo: léele tus 4 cruces y pregúntale '¿esto suena a mí?'. Anota qué te respondió."
+    }
+  ],
+  "checklistLabels": [
+    "Cuadrante 3 completo (mínimo 20 ítems)",
+    "Cuadrante 4 completo (mínimo 20 ítems)",
+    "Evidencia de investigación (Ruta A o B) + 1-3 vacantes con salario",
+    "4 cruces + respuesta del testigo"
+  ],
+  "recursos": [
+    { "icon": "📄", "label": "Hoja de trabajo — Mis cuadrantes 3 y 4 (descargable)", "url": "GEB_Ruta_Sem2_Hoja-Cuadrantes.docx" },
+    { "icon": "🎧", "label": "Podcast — Oso Trava, \"Así Encontrarás tu Propósito\"", "url": "[verificar liga del episodio]" }
+  ]
+}

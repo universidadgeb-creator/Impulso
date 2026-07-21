@@ -1,0 +1,11 @@
+{
+  "momento_title": "Marcos descubre su Cuadrante 4",
+  "duracion_min": 3,
+  "recursos": [
+    { "icon": "📄", "label": "Hoja de trabajo — Mis cuadrantes 3 y 4 (descargable)", "url": "GEB_Ruta_Sem2_Hoja-Cuadrantes.docx" }
+  ],
+  "resumen": [
+    { "color": "#7EC8A0", "punto": "Una habilidad 'normal' puede tener precio real", "detalle": "Lo que para ti es rutina, otros lo pagan — Marcos lo comprueba en vivo." },
+    { "color": "#6AB0F5", "punto": "La comprobación es en el celular, ahí mismo", "detalle": "No es teoría: Marcos busca el puesto y ve el salario mientras habla con Lupita." }
+  ]
+}

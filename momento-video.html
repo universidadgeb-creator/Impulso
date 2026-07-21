@@ -103,7 +103,7 @@ html.unlocked .lock-screen{display:none;}
 /* right side: recursos + resumen/discusión + entrega (siempre presente) */
 .side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:18px;}
 .label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:10px;}
-.recurso-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#3A7FC9;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;}
+.recurso-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#3A7FC9;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;text-decoration:none;margin-bottom:8px;}
 .tabs{display:flex;gap:18px;border-bottom:1px solid #ECEAE4;margin-bottom:14px;}
 .tab-btn{background:none;border:none;padding:0 0 10px;font-size:13px;font-weight:700;cursor:pointer;color:#9A968C;border-bottom:2px solid transparent;}
 .tab-btn.active{color:#14181F;border-bottom-color:#F0C040;}
@@ -200,22 +200,22 @@ html.unlocked .lock-screen{display:none;}
         <div class="side">
           <div>
             <div class="label-caps">Recursos necesarios</div>
-            <div class="recurso-row">📄 [verificar recurso]</div>
+            <div id="recursos-list"></div>
           </div>
 
           <div>
-            <div class="tabs">
+            <div class="tabs" id="tabs-row">
               <button type="button" class="tab-btn active" id="tab-resumen">RESUMEN</button>
               <button type="button" class="tab-btn" id="tab-discusion">DISCUSIÓN</button>
             </div>
             <div id="panel-resumen">
-              <div class="summary-list">
+              <div class="summary-list" id="summary-list">
                 <div class="summary-item" style="border-left:3px solid #7EC8A0;"><div>[verificar punto clave 1]</div><div>[verificar descripción breve]</div></div>
                 <div class="summary-item" style="border-left:3px solid #6AB0F5;"><div>[verificar punto clave 2]</div><div>[verificar descripción breve]</div></div>
               </div>
             </div>
             <div id="panel-discusion" style="display:none;">
-              <div class="discusion-placeholder">Espacio de discusión de la tríada — [verificar si aplica a este momento]</div>
+              <div class="discusion-placeholder" id="discusion-content">Espacio de discusión de la tríada — [verificar si aplica a este momento]</div>
             </div>
           </div>
 
@@ -260,6 +260,7 @@ const params = new URLSearchParams(window.location.search);
 const curso = params.get('curso') || 'Ruta GEB';
 const semana = params.get('semana') || 'Sem. 6';
 const titulo = params.get('titulo') || '[verificar título del momento]';
+const dataParam = params.get('data');
 
 document.getElementById('breadcrumb').innerHTML = `Impulso › <b>${curso}</b> › ${semana}`;
 document.getElementById('rail-sub').textContent = `Momentos de ${semana}`;
@@ -294,6 +295,55 @@ function setTab(which) {
 }
 tabResumen.addEventListener('click', () => setTab('resumen'));
 tabDiscusion.addEventListener('click', () => setTab('discusion'));
+
+/* ── CONTENIDO DEL MOMENTO: fetch por JSON (?data=archivo.json), con placeholder de respaldo ──
+   Si no viene el param `data`, o el fetch falla, se queda el placeholder — no truena en blanco. */
+const recursos = [ { icon:'📄', label:'[verificar recurso]', url:'#' } ];
+
+function renderRecursos() {
+  const wrap = document.getElementById('recursos-list');
+  wrap.innerHTML = recursos.map(r => `
+    <a class="recurso-row" href="${r.url || '#'}" target="_blank" rel="noopener">
+      ${r.icon || '📄'} ${r.label}
+    </a>
+  `).join('');
+}
+
+function applyContent(data) {
+  if (data.momento_title) document.getElementById('momento-title').textContent = data.momento_title;
+  if (data.duracion_min != null) {
+    const tagMin = document.querySelector('.tag-min');
+    if (tagMin) tagMin.textContent = `${data.duracion_min} min`;
+  }
+  if (Array.isArray(data.recursos) && data.recursos.length) {
+    recursos.length = 0;
+    data.recursos.forEach(r => recursos.push(r));
+  }
+  renderRecursos();
+  if (Array.isArray(data.resumen) && data.resumen.length) {
+    document.getElementById('summary-list').innerHTML = data.resumen.map(item => `
+      <div class="summary-item" style="border-left:3px solid ${item.color || '#7EC8A0'};"><div>${item.punto}</div><div>${item.detalle}</div></div>
+    `).join('');
+  }
+  if (data.discusion) {
+    document.getElementById('discusion-content').textContent = data.discusion;
+  } else {
+    document.getElementById('tabs-row').style.display = 'none';
+    document.getElementById('panel-discusion').style.display = 'none';
+    setTab('resumen');
+  }
+  const note = document.querySelector('.placeholder-note');
+  if (note) note.style.display = 'none';
+}
+
+renderRecursos();
+
+if (dataParam) {
+  fetch(`content/${dataParam}`)
+    .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
+    .then(applyContent)
+    .catch(() => { /* falló el fetch — se queda el placeholder, no romper la página */ });
+}
 </script>
 
 </body>

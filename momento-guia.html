@@ -312,12 +312,10 @@ railList.innerHTML = railItems.map(it => `
   </div>
 `).join('');
 
-/* ── CONTENIDO DE LA SEMANA: fetch por JSON, con placeholder de respaldo ──
-   Convención: content/{curso}-{semana}.json — ej. content/ruta-sem1.json.
-   Si el archivo todavía no existe (semana sin diseñar), se queda el placeholder. */
-const cursoSlug = curso.toLowerCase().includes('impulso') ? 'impulso' : 'ruta';
-const semanaSlug = semana.toLowerCase().replace(/[.\s]/g, '');
-const contentUrl = `content/${cursoSlug}-${semanaSlug}.json`;
+/* ── CONTENIDO DE LA SEMANA: fetch por JSON (?data=archivo.json), con placeholder de respaldo ──
+   Si no viene el param `data`, o el fetch falla, se queda el placeholder — no truena en blanco. */
+const dataParam = params.get('data');
+const contentUrl = dataParam ? `content/${dataParam}` : null;
 
 const steps = [
   { label:'1 · Diagnóstico', instruction:'[verificar instrucción]' },
@@ -333,14 +331,14 @@ const checklistLabels = [
   'Subiste tu archivo a Drive',
 ];
 const checked = new Array(checklistLabels.length).fill(false);
-const recursos = [ { icon:'📄', label:'[verificar recurso]', href:'#' } ];
+const recursos = [ { icon:'📄', label:'[verificar recurso]', url:'#' } ];
 
 let activeStep = 0;
 
 function renderRecursos() {
   const wrap = document.getElementById('recursos-list');
   wrap.innerHTML = recursos.map(r => `
-    <a class="recurso-row" href="${r.href}" target="_blank" rel="noopener" style="text-decoration:none;margin-bottom:8px;">
+    <a class="recurso-row" href="${r.url || r.href || '#'}" target="_blank" rel="noopener" style="text-decoration:none;margin-bottom:8px;">
       ${r.icon || '📄'} ${r.label}
     </a>
   `).join('');
@@ -423,10 +421,12 @@ function applyContent(data) {
 renderRecursos();
 render();
 
-fetch(contentUrl)
-  .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
-  .then(applyContent)
-  .catch(() => { /* semana sin JSON todavía — se queda el placeholder, no romper la página */ });
+if (contentUrl) {
+  fetch(contentUrl)
+    .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
+    .then(applyContent)
+    .catch(() => { /* falló el fetch — se queda el placeholder, no romper la página */ });
+}
 </script>
 
 </body>
