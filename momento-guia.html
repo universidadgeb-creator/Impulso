@@ -137,6 +137,16 @@ html.unlocked .lock-screen{display:none;}
 .entrega-form input{font-size:13px;padding:11px 13px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;}
 .entrega-form button{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
 
+.nps-block{display:flex;flex-direction:column;gap:6px;}
+.nps-label{font-size:12px;color:#4A463C;line-height:1.5;}
+.nps-required{color:#C9503F;}
+.nps-scale{display:flex;gap:4px;}
+.nps-btn{flex:1;min-width:0;font-size:11.5px;font-weight:700;padding:8px 0;border-radius:6px;border:1.5px solid #ECEAE4;background:#fff;color:#6B6558;cursor:pointer;transition:.15s;}
+.nps-btn:hover{border-color:#D8D3C6;}
+.nps-btn.selected{border-color:#F0C040;background:#F0C040;color:#0B0F16;}
+.nps-scale-caption{display:flex;justify-content:space-between;font-size:10px;color:#9A968C;}
+.nps-error{font-size:11.5px;color:#C9503F;min-height:14px;}
+
 .placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:18px;}
 
 /* ── HELP / WHATSAPP FAB ── */
@@ -241,10 +251,17 @@ html.unlocked .lock-screen{display:none;}
           </div>
           <div>
             <div class="label-caps" style="margin-bottom:10px;">Espacio de entrega</div>
-            <form class="entrega-form" action="YOUR_APPS_SCRIPT_WEB_APP_URL" method="POST" target="_blank">
+            <form class="entrega-form" id="entrega-form" action="YOUR_APPS_SCRIPT_WEB_APP_URL" method="POST" target="_blank">
               <input name="nombre" placeholder="Nombre completo">
               <input name="correo" placeholder="Correo" type="email">
               <input name="drive_link" placeholder="Liga de Google Drive">
+              <div class="nps-block">
+                <div class="nps-label">¿Qué tan probable es que recomiendes esta semana de Ruta GEB a una compañera? <span class="nps-required">*</span></div>
+                <div class="nps-scale" id="nps-scale"></div>
+                <div class="nps-scale-caption"><span>Nada probable</span><span>Totalmente probable</span></div>
+                <input type="hidden" name="nps" id="nps-value">
+                <div class="nps-error" id="nps-error"></div>
+              </div>
               <button type="submit">Enviar</button>
             </form>
           </div>
@@ -420,6 +437,31 @@ function applyContent(data) {
 
 renderRecursos();
 render();
+
+/* ── NPS de la semana: escala 0-10, obligatoria antes de enviar la entrega ── */
+const npsScale = document.getElementById('nps-scale');
+const npsValue = document.getElementById('nps-value');
+const npsError = document.getElementById('nps-error');
+for (let i = 0; i <= 10; i++) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'nps-btn';
+  btn.textContent = i;
+  btn.dataset.val = i;
+  btn.addEventListener('click', () => {
+    npsScale.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    npsValue.value = i;
+    npsError.textContent = '';
+  });
+  npsScale.appendChild(btn);
+}
+document.getElementById('entrega-form').addEventListener('submit', function (e) {
+  if (!npsValue.value) {
+    e.preventDefault();
+    npsError.textContent = 'Falta calificar del 0 al 10 antes de enviar.';
+  }
+});
 
 if (contentUrl) {
   fetch(contentUrl)
