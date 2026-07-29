@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenida — Ruta GEB | Impulso GEB</title>
+<style>
+:root {
+  --void:    #080C14;
+  --deep:    #0D1525;
+  --surface: #172038;
+  --border:  rgba(255,255,255,0.08);
+  --sage:    #7EC8A0;
+  --gold:    #F0C040;
+  --coral:   #F07060;
+  --blue-hi: #6AB0F5;
+  --white:   #FFFFFF;
+  --fog:     rgba(255,255,255,0.55);
+  --mist:    rgba(255,255,255,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);color:var(--white);
+  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.2;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(8,12,20,0.95),transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.nav-logo{font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--white);}
+.nav-logo sup{font-size:11px;color:var(--sage);vertical-align:super;letter-spacing:0.05em;font-family:sans-serif;}
+.nav-back{font-size:13px;font-weight:600;color:var(--fog);}
+.nav-back:hover{color:var(--white);}
+
+/* LOCK SCREEN (misma contraseña compartida que el resto de la plataforma) */
+html:not(.unlocked) .site-content{display:none;}
+html.unlocked .lock-screen{display:none;}
+.lock-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 40px;}
+.lock-card{width:100%;max-width:380px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px 28px;text-align:center;}
+.lock-ico-big{width:52px;height:52px;border-radius:50%;background:rgba(126,200,160,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;}
+.lock-card h1{font-size:22px;color:var(--white);margin-bottom:8px;}
+.lock-card p{font-size:13.5px;color:var(--fog);line-height:1.6;margin-bottom:24px;}
+.lock-form{display:flex;flex-direction:column;gap:10px;}
+.lock-input{font-size:14px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--white);font-family:inherit;text-align:center;letter-spacing:.04em;}
+.lock-input:focus{outline:none;border-color:var(--sage);}
+.lock-input::placeholder{color:var(--mist);}
+.lock-submit{background:var(--sage);color:var(--void);font-size:14px;font-weight:700;padding:13px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s;}
+.lock-submit:hover{transform:translateY(-1px);}
+.lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
+.lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
+
+/* PAGE */
+.bienvenida-wrap{max-width:720px;margin:0 auto;padding:96px 20px 60px;display:flex;flex-direction:column;gap:22px;}
+.top-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:-4px;}
+.breadcrumb{font-size:11.5px;color:var(--fog);}
+.breadcrumb b{color:var(--white);}
+.status-badge{font-size:10.5px;font-weight:700;padding:5px 12px;border-radius:100px;background:rgba(240,192,64,.18);color:var(--gold);border:1px solid rgba(240,192,64,.4);white-space:nowrap;}
+
+/* CARD (mismo lenguaje visual que momento-guia.html) */
+.bienvenida-card{
+  background:#FFFFFF;color:#14181F;border-radius:22px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
+}
+.card-topbar{height:5px;background:linear-gradient(90deg,#F0C040,#F07060,#7EC8A0,#6AB0F5);}
+.card-body{padding:30px 32px;display:flex;flex-direction:column;gap:26px;}
+
+.bienvenida-title{font-family:Georgia,serif;font-size:24px;color:#14181F;}
+.bienvenida-sub{font-size:13.5px;color:#6B6558;margin-top:4px;line-height:1.6;}
+
+.label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:10px;}
+
+/* Bloque 1 — cómo funciona (mismo tratamiento que .momento-context + .step-box) */
+.como-funciona{
+  background:rgba(240,192,64,.07);border:1px solid rgba(240,192,64,.28);border-radius:14px;padding:18px 20px;
+}
+.como-funciona p{font-size:13.5px;color:#4A463C;line-height:1.75;}
+
+/* Bloque 2 — mini-diagnóstico */
+.diag-block{display:flex;flex-direction:column;gap:18px;}
+.diag-pregunta{display:flex;flex-direction:column;gap:9px;}
+.diag-pregunta p{font-size:13.5px;color:#14181F;font-weight:600;line-height:1.5;}
+.campo-radios{display:flex;flex-wrap:wrap;gap:8px;}
+.campo-radio-item{
+  position:relative;font-size:12.5px;font-weight:600;color:#6B6558;
+  border:1.5px solid #ECEAE4;border-radius:100px;padding:9px 16px;cursor:pointer;
+  transition:.15s;display:flex;align-items:center;gap:6px;
+}
+.campo-radio-item input{position:absolute;opacity:0;width:0;height:0;}
+.campo-radio-item:has(input:checked),
+.campo-radio-item.is-checked{border-color:#F0C040;color:#B8860B;background:rgba(240,192,64,.08);font-weight:700;}
+.campo-radio-item:hover{border-color:#D8D3C6;}
+
+/* Bloque 3 — registro de identidad (usa las clases que pinta EntregaEngine.montarIdentidad) */
+#registro-identidad{margin-top:2px;}
+.identidad-caja{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;}
+.identidad-intro{font-size:13px;color:#6B6558;line-height:1.6;margin-bottom:4px;}
+.identidad-input{font-size:14px;padding:12px 14px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;color:#14181F;}
+.identidad-input:focus{outline:none;border-color:#F0C040;}
+.campo-hint{font-size:11.5px;color:#9A968C;line-height:1.5;margin-top:-2px;}
+.identidad-error{font-size:12.5px;color:#C9503F;min-height:16px;}
+.campo-enviar{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13.5px;font-weight:700;padding:13px;border-radius:9px;cursor:pointer;transition:transform .15s;}
+.campo-enviar:hover{transform:translateY(-1px);}
+.campo-enviar:disabled{opacity:.6;cursor:default;transform:none;}
+.campo-estado{font-size:12px;color:#9A968C;text-align:center;}
+
+.placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:4px;}
+
+/* ── HELP / WHATSAPP FAB ── */
+.help-fab{
+  position:fixed;bottom:22px;left:22px;z-index:180;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--sage);color:var(--void);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 10px 30px rgba(126,200,160,.45);
+  transition:transform .15s,box-shadow .2s;
+}
+.help-fab:hover{transform:scale(1.06);box-shadow:0 12px 36px rgba(126,200,160,.6);}
+
+@media(max-width:699px){
+  .bienvenida-wrap{padding:88px 16px 44px;}
+  .card-body{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
+  <a href="ruta-geb.html" class="nav-back">← Volver a Ruta GEB</a>
+</nav>
+
+<!-- ══ LOCK SCREEN ══ -->
+<div class="lock-screen">
+  <div class="lock-card">
+    <div class="lock-ico-big">🔒</div>
+    <h1>Ruta GEB</h1>
+    <p>Ingresa la contraseña del curso para continuar.</p>
+    <form class="lock-form" id="lock-form">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <button type="submit" class="lock-submit">Acceder →</button>
+      <div class="lock-error" id="lock-error"></div>
+    </form>
+    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+  </div>
+</div>
+
+<div class="site-content">
+  <div class="bienvenida-wrap">
+    <div class="top-strip">
+      <div class="breadcrumb">Impulso › <b>Ruta GEB</b> › Bienvenida</div>
+      <span class="status-badge">ANTES DE SEM. 1</span>
+    </div>
+
+    <div class="bienvenida-card">
+      <div class="card-topbar"></div>
+      <div class="card-body">
+
+        <div>
+          <h1 class="bienvenida-title">Bienvenida a Ruta GEB</h1>
+          <p class="bienvenida-sub">Antes de empezar tu primera semana, esto es lo que necesitas saber.</p>
+        </div>
+
+        <!-- ═══ BLOQUE 1 — Cómo funciona Ruta GEB ═══ -->
+        <div>
+          <div class="label-caps">Cómo funciona Ruta GEB</div>
+          <div class="como-funciona">
+            <p>Ruta GEB son 6 semanas, una por semana, a tu ritmo. Cada semana tiene una guía
+            autogestiva — la trabajas cuando puedas, sola o con apoyo — y entregas tu avance antes
+            de que abra la siguiente. No hay clases en vivo ni horarios fijos. Al final te llevas
+            un Plan de Vida completo: es tuyo, dentro o fuera de GEB.</p>
+          </div>
+        </div>
+
+        <!-- ═══ BLOQUE 2 — Mini-diagnóstico de apertura ═══ -->
+        <div>
+          <div class="label-caps">Antes de empezar, cuéntanos de ti</div>
+          <div class="diag-block" id="diag-block">
+            <div class="diag-pregunta">
+              <p>¿Alguna vez sentiste que tu trabajo no muestra todo lo que sabes hacer?</p>
+              <div class="campo-radios">
+                <label class="campo-radio-item"><input type="radio" name="diag1" value="Sí, seguido"> Sí, seguido</label>
+                <label class="campo-radio-item"><input type="radio" name="diag1" value="A veces"> A veces</label>
+                <label class="campo-radio-item"><input type="radio" name="diag1" value="No, casi nunca"> No, casi nunca</label>
+              </div>
+            </div>
+
+            <div class="diag-pregunta">
+              <p>¿Ya tienes claro qué te gustaría estar haciendo en 2 años, o todavía no?</p>
+              <div class="campo-radios">
+                <label class="campo-radio-item"><input type="radio" name="diag2" value="Sí, bastante claro"> Sí, bastante claro</label>
+                <label class="campo-radio-item"><input type="radio" name="diag2" value="Más o menos"> Más o menos</label>
+                <label class="campo-radio-item"><input type="radio" name="diag2" value="Para nada todavía"> Para nada todavía</label>
+              </div>
+            </div>
+
+            <div class="diag-pregunta">
+              <p>¿Qué tanto sabes hoy de tu propio dinero — cuánto entra, cuánto sale?</p>
+              <div class="campo-radios">
+                <label class="campo-radio-item"><input type="radio" name="diag3" value="Lo tengo clarísimo"> Lo tengo clarísimo</label>
+                <label class="campo-radio-item"><input type="radio" name="diag3" value="Una idea general"> Una idea general</label>
+                <label class="campo-radio-item"><input type="radio" name="diag3" value="La verdad, no mucho"> La verdad, no mucho</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ BLOQUE 3 — Registro (CURP + PIN), vía EntregaEngine ═══ -->
+        <div>
+          <div class="label-caps">Regístrate para empezar</div>
+          <div id="registro-identidad"></div>
+        </div>
+
+        <p class="placeholder-note">Al guardar tu registro, se abre directo tu primera semana.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
+</div>
+
+<script src="config.js"></script>
+<script src="entrega-engine.js"></script>
+<script>
+/* ── LOCK / PASSWORD GATE (comparte contraseña y storage key con el resto de la plataforma) ── */
+const COURSE_PASSWORD = 'rutageb26';
+const STORAGE_KEY = 'impulso_unlock_ruta';
+if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
+document.getElementById('lock-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const val = document.getElementById('lock-input').value.trim();
+  if (val === COURSE_PASSWORD) {
+    localStorage.setItem(STORAGE_KEY, '1');
+    document.documentElement.classList.add('unlocked');
+  } else {
+    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+  }
+});
+
+/* ── FALLBACK VISUAL para navegadores sin soporte de :has() ── */
+document.querySelectorAll('#diag-block input[type="radio"]').forEach(input => {
+  input.addEventListener('change', () => {
+    document.querySelectorAll(`input[name="${input.name}"]`).forEach(i => {
+      i.closest('.campo-radio-item').classList.toggle('is-checked', i.checked);
+    });
+  });
+});
+
+/* ── REGISTRO DE IDENTIDAD + DIAGNÓSTICO DE APERTURA ──
+   No es un campo de EntregaEngine — es HTML propio de esta página. Las 3
+   respuestas no bloquean el registro: se mandan si están, vacías si no. */
+EntregaEngine.montarIdentidad(document.getElementById('registro-identidad'), () => {
+  const identidad = EntregaEngine.obtenIdentidad();
+  const diag = {
+    diag1: document.querySelector('input[name="diag1"]:checked')?.value || '',
+    diag2: document.querySelector('input[name="diag2"]:checked')?.value || '',
+    diag3: document.querySelector('input[name="diag3"]:checked')?.value || '',
+  };
+
+  fetch(CONFIG.BACKEND, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      id: identidad.curp,
+      nombre: identidad.nombre,
+      curso: 'Ruta GEB',
+      semana: 'Sem. 0',
+      campos: diag,
+      pin: identidad.pinEnviado ? undefined : identidad.pin
+    })
+  }).then(() => {
+    window.location.href = 'momento-guia.html?curso=Ruta%20GEB&semana=Sem.%201&titulo=IKIGAI%20parte%201%3A%20lo%20que%20amo%20%2B%20en%20lo%20que%20soy%20bueno&pilar=Prop%C3%B3sito';
+  });
+});
+</script>
+
+</body>
+</html>
