@@ -337,12 +337,16 @@ document.addEventListener('click', function(e){
 
 /* ── DAY-BASED COURSE VIEW ── */
 const PILLARS = {
+  'Bienvenida': { color:'#F0C040' },
   'Propósito':  { color:'#F0C040' },
   'Maestría':   { color:'#6AB0F5' },
   'Transición': { color:'#F07060' },
 };
 
 const days = [
+  { label:'Sem 0', pillar:'Bienvenida', title:'Bienvenida a Ruta GEB', modules:[
+    { icon:'👋', title:'Bienvenida a Ruta GEB', type:'BIENVENIDA', url:'bienvenida.html' },
+  ]},
   { label:'Sem 1', pillar:'Propósito', title:'IKIGAI parte 1', modules:[
     { icon:'📱', title:'IKIGAI parte 1', type:'AUTOGESTIVO', data:'ruta-sem1.json' },
   ]},
@@ -374,7 +378,7 @@ function renderStepper() {
     const node = document.createElement('button');
     node.type = 'button';
     node.className = 'day-node' + (i === activeDay ? ' active' : '');
-    node.innerHTML = `<span class="day-dot">${i + 1}</span><span class="day-node-label">Día ${i + 1}</span>`;
+    node.innerHTML = `<span class="day-dot">${i}</span><span class="day-node-label">${i === 0 ? 'Bienvenida' : 'Día ' + i}</span>`;
     node.addEventListener('click', () => { activeDay = i; render(); });
     stepper.appendChild(node);
   });
@@ -384,10 +388,16 @@ function render() {
   renderStepper();
   const d = days[activeDay];
   const color = PILLARS[d.pillar].color;
+  const totalSemanas = days.length - 1; // sin contar Bienvenida
 
-  document.getElementById('dash-meta').textContent = `Día ${activeDay + 1} de ${days.length} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
+  if (activeDay === 0) {
+    document.getElementById('dash-meta').textContent = `Antes de Sem. 1 · ${d.modules.length} paso`;
+    document.getElementById('day-sub').textContent = `Un solo paso, antes de tu primera semana`;
+  } else {
+    document.getElementById('dash-meta').textContent = `Día ${activeDay} de ${totalSemanas} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
+    document.getElementById('day-sub').textContent = `Día ${activeDay} de ${totalSemanas}`;
+  }
   document.getElementById('day-title').textContent = `${d.label} · ${d.title}`;
-  document.getElementById('day-sub').textContent = `Día ${activeDay + 1} de ${days.length}`;
 
   const badge = document.getElementById('day-pilar');
   badge.textContent = d.pillar;
@@ -396,6 +406,18 @@ function render() {
 
   const list = document.getElementById('module-list');
   list.innerHTML = d.modules.map(m => {
+    if (m.type === 'BIENVENIDA') {
+      return `
+    <a class="module-row" href="${m.url}">
+      <span class="module-ico">${m.icon}</span>
+      <div class="module-body">
+        <div class="module-title">${m.title}</div>
+        <div class="module-sub"><b>${m.type}</b></div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+  `;
+    }
     const template = (m.type === 'CONFERENCIA' || m.type === 'VIDEO') ? 'momento-video.html' : 'momento-guia.html';
     const dataQuery = m.data ? `&data=${encodeURIComponent(m.data)}` : '';
     const url = `${template}?curso=Ruta%20GEB&semana=${encodeURIComponent(d.label)}&titulo=${encodeURIComponent(m.title)}&pilar=${encodeURIComponent(d.pillar)}${dataQuery}`;
