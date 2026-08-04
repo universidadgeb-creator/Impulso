@@ -1,0 +1,69 @@
+{
+  "curso": "Ruta GEB",
+  "semana": "Sem. 0",
+  "titulo": "Bienvenida a Ruta GEB",
+  "contexto": "Ruta GEB son 6 semanas, una por semana, a tu ritmo. Cada semana tiene una guía autogestiva — la trabajas cuando puedas, sola o con apoyo — y entregas tu avance antes de que abra la siguiente. No hay clases en vivo ni horarios fijos. Al final te llevas un Plan de Vida completo: es tuyo, dentro o fuera de GEB.",
+  "escena": {
+    "audio": {
+      "src": "[verificar mp3 de NotebookLM — guion de bienvenida abajo]",
+      "duracion_ms": null
+    },
+    "subtitulos_forzados": true,
+    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real y se mida la duración con ffmpeg, como se acordó para el resto del sistema de video.",
+    "eventos": [
+      {
+        "t": 0,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "foco",
+        "accion": "entra",
+        "texto": "Ruta GEB son 6 semanas, una por semana, a tu ritmo.",
+        "tag": null
+      },
+      {
+        "t": 4000,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "recorrido",
+        "accion": "bob",
+        "texto": "Cada semana tiene una guía — la trabajas cuando puedas, sola o con apoyo.",
+        "tag": null
+      },
+      {
+        "t": 9000,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "No hay clases en vivo ni horarios fijos. Solo entregas tu avance antes de que abra la siguiente semana.",
+        "tag": null
+      },
+      {
+        "t": 15000,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "constelacion",
+        "accion": "pulsa",
+        "texto": "Al final te llevas un Plan de Vida completo. Es tuyo, dentro o fuera de GEB.",
+        "tag": null
+      }
+    ]
+  },
+  "diagnostico": [
+    {
+      "id": "diag1",
+      "pregunta": "¿Alguna vez sentiste que tu trabajo no muestra todo lo que sabes hacer?",
+      "opciones": ["Sí, seguido", "A veces", "No, casi nunca"]
+    },
+    {
+      "id": "diag2",
+      "pregunta": "¿Ya tienes claro qué te gustaría estar haciendo en 2 años, o todavía no?",
+      "opciones": ["Sí, bastante claro", "Más o menos", "Para nada todavía"]
+    },
+    {
+      "id": "diag3",
+      "pregunta": "¿Qué tanto sabes hoy de tu propio dinero — cuánto entra, cuánto sale?",
+      "opciones": ["Lo tengo clarísimo", "Una idea general", "La verdad, no mucho"]
+    }
+  ]
+}

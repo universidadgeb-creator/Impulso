@@ -84,10 +84,17 @@ html.unlocked .lock-screen{display:none;}
 }
 .como-funciona p{font-size:13.5px;color:#4A463C;line-height:1.75;}
 
+.media-block{margin-top:14px;}
+.media-label{font-size:12px;color:#6B6558;margin-bottom:6px;font-weight:600;}
+.media-placeholder{background:#14181F;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;}
+.media-placeholder-ico{font-size:26px;flex-shrink:0;}
+.media-placeholder-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+.media-placeholder-sub{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;}
+
 /* Bloque 2 — mini-diagnóstico */
 .diag-block{display:flex;flex-direction:column;gap:18px;}
 .diag-pregunta{display:flex;flex-direction:column;gap:9px;}
-.diag-pregunta p{font-size:13.5px;color:#14181F;font-weight:600;line-height:1.5;}
+.campo-label{font-size:13.5px;color:#14181F;font-weight:600;line-height:1.5;}
 .campo-radios{display:flex;flex-wrap:wrap;gap:8px;}
 .campo-radio-item{
   position:relative;font-size:12.5px;font-weight:600;color:#6B6558;
@@ -165,52 +172,23 @@ html.unlocked .lock-screen{display:none;}
       <div class="card-body">
 
         <div>
-          <h1 class="bienvenida-title">Bienvenida a Ruta GEB</h1>
+          <h1 class="bienvenida-title" id="bienvenida-title">Bienvenida a Ruta GEB</h1>
           <p class="bienvenida-sub">Antes de empezar tu primera semana, esto es lo que necesitas saber.</p>
         </div>
 
-        <!-- ═══ BLOQUE 1 — Cómo funciona Ruta GEB ═══ -->
+        <!-- ═══ BLOQUE 1 — Cómo funciona Ruta GEB (texto + video, desde content/ruta-sem0.json) ═══ -->
         <div>
           <div class="label-caps">Cómo funciona Ruta GEB</div>
           <div class="como-funciona">
-            <p>Ruta GEB son 6 semanas, una por semana, a tu ritmo. Cada semana tiene una guía
-            autogestiva — la trabajas cuando puedas, sola o con apoyo — y entregas tu avance antes
-            de que abra la siguiente. No hay clases en vivo ni horarios fijos. Al final te llevas
-            un Plan de Vida completo: es tuyo, dentro o fuera de GEB.</p>
+            <p id="bienvenida-contexto">[verificar contenido de bienvenida]</p>
           </div>
+          <div class="media-block" id="media-block" style="display:none;"></div>
         </div>
 
-        <!-- ═══ BLOQUE 2 — Mini-diagnóstico de apertura ═══ -->
+        <!-- ═══ BLOQUE 2 — Mini-diagnóstico de apertura (desde content/ruta-sem0.json) ═══ -->
         <div>
           <div class="label-caps">Antes de empezar, cuéntanos de ti</div>
-          <div class="diag-block" id="diag-block">
-            <div class="diag-pregunta">
-              <p>¿Alguna vez sentiste que tu trabajo no muestra todo lo que sabes hacer?</p>
-              <div class="campo-radios">
-                <label class="campo-radio-item"><input type="radio" name="diag1" value="Sí, seguido"> Sí, seguido</label>
-                <label class="campo-radio-item"><input type="radio" name="diag1" value="A veces"> A veces</label>
-                <label class="campo-radio-item"><input type="radio" name="diag1" value="No, casi nunca"> No, casi nunca</label>
-              </div>
-            </div>
-
-            <div class="diag-pregunta">
-              <p>¿Ya tienes claro qué te gustaría estar haciendo en 2 años, o todavía no?</p>
-              <div class="campo-radios">
-                <label class="campo-radio-item"><input type="radio" name="diag2" value="Sí, bastante claro"> Sí, bastante claro</label>
-                <label class="campo-radio-item"><input type="radio" name="diag2" value="Más o menos"> Más o menos</label>
-                <label class="campo-radio-item"><input type="radio" name="diag2" value="Para nada todavía"> Para nada todavía</label>
-              </div>
-            </div>
-
-            <div class="diag-pregunta">
-              <p>¿Qué tanto sabes hoy de tu propio dinero — cuánto entra, cuánto sale?</p>
-              <div class="campo-radios">
-                <label class="campo-radio-item"><input type="radio" name="diag3" value="Lo tengo clarísimo"> Lo tengo clarísimo</label>
-                <label class="campo-radio-item"><input type="radio" name="diag3" value="Una idea general"> Una idea general</label>
-                <label class="campo-radio-item"><input type="radio" name="diag3" value="La verdad, no mucho"> La verdad, no mucho</label>
-              </div>
-            </div>
-          </div>
+          <div class="diag-block" id="diagnostico-preguntas"></div>
         </div>
 
         <!-- ═══ BLOQUE 3 — Registro (CURP + PIN), vía EntregaEngine ═══ -->
@@ -246,14 +224,61 @@ document.getElementById('lock-form').addEventListener('submit', function(e){
   }
 });
 
-/* ── FALLBACK VISUAL para navegadores sin soporte de :has() ── */
-document.querySelectorAll('#diag-block input[type="radio"]').forEach(input => {
-  input.addEventListener('change', () => {
-    document.querySelectorAll(`input[name="${input.name}"]`).forEach(i => {
-      i.closest('.campo-radio-item').classList.toggle('is-checked', i.checked);
-    });
+/* ── FALLBACK VISUAL para navegadores sin soporte de :has() (delegado — los radios se pintan por JS) ── */
+document.getElementById('diagnostico-preguntas').addEventListener('change', (e) => {
+  if (e.target.type !== 'radio') return;
+  document.querySelectorAll(`input[name="${e.target.name}"]`).forEach(i => {
+    i.closest('.campo-radio-item').classList.toggle('is-checked', i.checked);
   });
 });
+
+/* ── BLOQUE 2: pinta las preguntas del diagnóstico desde el JSON ── */
+function renderDiagnostico(preguntas) {
+  const wrap = document.getElementById('diagnostico-preguntas');
+  wrap.innerHTML = preguntas.map(p => `
+    <div class="diag-pregunta">
+      <p class="campo-label">${p.pregunta}</p>
+      <div class="campo-radios">
+        ${p.opciones.map(op => `
+          <label class="campo-radio-item">
+            <input type="radio" name="${p.id}" value="${op}"> ${op}
+          </label>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ── BLOQUE 1: video de bienvenida — el reproductor de escena[] todavía no existe
+   en momento-guia.html, así que se muestra el estado "en producción", nunca un
+   reproductor roto ni una página en blanco. ── */
+function renderEscena(escena) {
+  const block = document.getElementById('media-block');
+  if (!escena) { block.style.display = 'none'; block.innerHTML = ''; return; }
+  block.innerHTML = `
+    <div class="media-label">Video de bienvenida — Lupita</div>
+    <div class="media-placeholder">
+      <span class="media-placeholder-ico">🎬</span>
+      <div>
+        <div class="media-placeholder-title">En producción</div>
+        <div class="media-placeholder-sub">El video de bienvenida está por terminarse — mientras tanto, sigue con tu registro.</div>
+      </div>
+    </div>
+  `;
+  block.style.display = 'block';
+}
+
+/* ── CONTENIDO DE LA PÁGINA: todo sale de content/ruta-sem0.json, nada hardcodeado ──
+   Si el fetch falla, se queda el placeholder — no truena en blanco. ── */
+fetch('content/ruta-sem0.json')
+  .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
+  .then(data => {
+    if (data.titulo) document.getElementById('bienvenida-title').textContent = data.titulo;
+    if (data.contexto) document.getElementById('bienvenida-contexto').textContent = data.contexto;
+    renderEscena(data.escena);
+    if (Array.isArray(data.diagnostico)) renderDiagnostico(data.diagnostico);
+  })
+  .catch(() => { /* falló el fetch — se queda el placeholder, no romper la página */ });
 
 /* ── REGISTRO DE IDENTIDAD + DIAGNÓSTICO DE APERTURA ──
    No es un campo de EntregaEngine — es HTML propio de esta página. Las 3

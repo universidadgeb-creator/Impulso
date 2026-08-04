@@ -308,6 +308,7 @@ html.unlocked .lock-screen{display:none;}
 
 </div>
 
+<script src="entrega-engine.js"></script>
 <script>
 /* ── LOCK / PASSWORD GATE ──
    Contraseña compartida por curso (no es autenticación real: cualquiera con acceso
@@ -407,12 +408,15 @@ function render() {
   const list = document.getElementById('module-list');
   list.innerHTML = d.modules.map(m => {
     if (m.type === 'BIENVENIDA') {
+      const yaRegistrada = typeof EntregaEngine !== 'undefined' && !!EntregaEngine.obtenIdentidad();
+      const icon = yaRegistrada ? '✅' : m.icon;
+      const estado = yaRegistrada ? 'COMPLETADO' : 'PENDIENTE';
       return `
     <a class="module-row" href="${m.url}">
-      <span class="module-ico">${m.icon}</span>
+      <span class="module-ico">${icon}</span>
       <div class="module-body">
         <div class="module-title">${m.title}</div>
-        <div class="module-sub"><b>${m.type}</b></div>
+        <div class="module-sub"><b>${estado}</b></div>
       </div>
       <span class="module-arrow">→</span>
     </a>
