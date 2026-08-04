@@ -105,6 +105,8 @@ html.unlocked .lock-screen{display:none;}
 .campo-radio-item:has(input:checked),
 .campo-radio-item.is-checked{border-color:#F0C040;color:#B8860B;background:rgba(240,192,64,.08);font-weight:700;}
 .campo-radio-item:hover{border-color:#D8D3C6;}
+.diag-textarea{font-size:13px;padding:12px 14px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;color:#14181F;resize:vertical;width:100%;}
+.diag-textarea:focus{outline:none;border-color:#F0C040;}
 
 /* Bloque 3 — registro de identidad (usa las clases que pinta EntregaEngine.montarIdentidad) */
 #registro-identidad{margin-top:2px;}
@@ -232,21 +234,46 @@ document.getElementById('diagnostico-preguntas').addEventListener('change', (e) 
   });
 });
 
-/* ── BLOQUE 2: pinta las preguntas del diagnóstico desde el JSON ── */
+/* ── BLOQUE 2: pinta las preguntas del diagnóstico desde el JSON ──
+   tipo "escala" → pastillas de opciones (1-5 u otras); tipo "texto" → textarea libre. */
+let diagnosticoPreguntas = [];
 function renderDiagnostico(preguntas) {
+  diagnosticoPreguntas = preguntas;
   const wrap = document.getElementById('diagnostico-preguntas');
-  wrap.innerHTML = preguntas.map(p => `
-    <div class="diag-pregunta">
-      <p class="campo-label">${p.pregunta}</p>
-      <div class="campo-radios">
-        ${p.opciones.map(op => `
-          <label class="campo-radio-item">
-            <input type="radio" name="${p.id}" value="${op}"> ${op}
-          </label>
-        `).join('')}
+  wrap.innerHTML = preguntas.map(p => {
+    if (p.tipo === 'texto') {
+      return `
+        <div class="diag-pregunta">
+          <p class="campo-label">${p.pregunta}</p>
+          <textarea class="diag-textarea" name="${p.id}" rows="3"></textarea>
+        </div>
+      `;
+    }
+    return `
+      <div class="diag-pregunta">
+        <p class="campo-label">${p.pregunta}</p>
+        <div class="campo-radios">
+          ${p.opciones.map(op => `
+            <label class="campo-radio-item">
+              <input type="radio" name="${p.id}" value="${op}"> ${op}
+            </label>
+          `).join('')}
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
+}
+
+function leerDiagnostico() {
+  const diag = {};
+  diagnosticoPreguntas.forEach(p => {
+    if (p.tipo === 'texto') {
+      diag[p.id] = document.querySelector(`textarea[name="${p.id}"]`)?.value.trim() || '';
+    } else {
+      diag[p.id] = document.querySelector(`input[name="${p.id}"]:checked`)?.value || '';
+    }
+  });
+  return diag;
 }
 
 /* ── BLOQUE 1: video de bienvenida — el reproductor de escena[] todavía no existe
@@ -285,11 +312,7 @@ fetch('content/ruta-sem0.json')
    respuestas no bloquean el registro: se mandan si están, vacías si no. */
 EntregaEngine.montarIdentidad(document.getElementById('registro-identidad'), () => {
   const identidad = EntregaEngine.obtenIdentidad();
-  const diag = {
-    diag1: document.querySelector('input[name="diag1"]:checked')?.value || '',
-    diag2: document.querySelector('input[name="diag2"]:checked')?.value || '',
-    diag3: document.querySelector('input[name="diag3"]:checked')?.value || '',
-  };
+  const diag = leerDiagnostico();
 
   fetch(CONFIG.BACKEND, {
     method: 'POST',
