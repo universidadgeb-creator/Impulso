@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bienvenida — Ruta GEB | Impulso GEB</title>
+<title>Bienvenida a Ruta GEB | Impulso GEB</title>
+<script src="config.js"></script>
+<link rel="stylesheet" href="escena-player.css">
 <style>
 :root {
   --void:    #080C14;
@@ -25,6 +27,7 @@ body{
   font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
   font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
 }
+body.popup-abierto{overflow:hidden;}
 h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.2;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;}
@@ -41,102 +44,156 @@ nav{
 .nav-back{font-size:13px;font-weight:600;color:var(--fog);}
 .nav-back:hover{color:var(--white);}
 
-/* LOCK SCREEN (misma contraseña compartida que el resto de la plataforma) */
+/* LOCK SCREEN */
 html:not(.unlocked) .site-content{display:none;}
 html.unlocked .lock-screen{display:none;}
 .lock-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 40px;}
 .lock-card{width:100%;max-width:380px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px 28px;text-align:center;}
-.lock-ico-big{width:52px;height:52px;border-radius:50%;background:rgba(126,200,160,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;}
+.lock-ico-big{width:52px;height:52px;border-radius:50%;background:rgba(240,192,64,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;}
 .lock-card h1{font-size:22px;color:var(--white);margin-bottom:8px;}
 .lock-card p{font-size:13.5px;color:var(--fog);line-height:1.6;margin-bottom:24px;}
 .lock-form{display:flex;flex-direction:column;gap:10px;}
 .lock-input{font-size:14px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--white);font-family:inherit;text-align:center;letter-spacing:.04em;}
 .lock-input:focus{outline:none;border-color:var(--sage);}
 .lock-input::placeholder{color:var(--mist);}
-.lock-submit{background:var(--sage);color:var(--void);font-size:14px;font-weight:700;padding:13px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s;}
-.lock-submit:hover{transform:translateY(-1px);}
+.lock-submit{background:var(--sage);color:var(--void);font-size:14px;font-weight:700;padding:13px;border-radius:10px;border:none;cursor:pointer;}
 .lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
 .lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
 
 /* PAGE */
-.bienvenida-wrap{max-width:720px;margin:0 auto;padding:96px 20px 60px;display:flex;flex-direction:column;gap:22px;}
-.top-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:-4px;}
-.breadcrumb{font-size:11.5px;color:var(--fog);}
-.breadcrumb b{color:var(--white);}
-.status-badge{font-size:10.5px;font-weight:700;padding:5px 12px;border-radius:100px;background:rgba(240,192,64,.18);color:var(--gold);border:1px solid rgba(240,192,64,.4);white-space:nowrap;}
+.bienvenida-wrap{max-width:640px;margin:0 auto;padding:90px 20px 80px;display:flex;flex-direction:column;gap:16px;}
 
-/* CARD (mismo lenguaje visual que momento-guia.html) */
-.bienvenida-card{
-  background:#FFFFFF;color:#14181F;border-radius:22px;overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,.4);
+/* CARDS */
+.bv-card{background:#FFFFFF;color:#14181F;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.card-topbar{height:4px;background:linear-gradient(90deg,#F0C040,#F07060,#7EC8A0,#6AB0F5);}
+.card-body{padding:22px 24px;}
+
+/* Labels */
+.prog-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A5E0A;background:#FFF3C0;border:1px solid #F0C040;padding:3px 10px;border-radius:100px;margin-bottom:12px;}
+.card-title{font-family:Georgia,serif;font-size:22px;color:#14181F;line-height:1.25;margin-bottom:12px;}
+.context-block{margin-bottom:16px;}
+.context-block p{font-size:13px;color:#4A4640;line-height:1.65;margin-bottom:8px;}
+.context-block p:last-child{margin-bottom:0;}
+
+/* CHECKLIST */
+.checklist-label{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:12px;}
+.check-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;border:1.5px solid #ECEAE4;margin-bottom:8px;cursor:pointer;background:#fff;transition:border-color .15s;}
+.check-item:last-child{margin-bottom:0;}
+.check-item:hover:not(.bloqueado){border-color:#F0C040;background:#FFFDF5;}
+.check-item.hecho{border-color:#7EC8A0;background:#F4FCF7;cursor:default;}
+.check-item.bloqueado{opacity:.45;cursor:not-allowed;}
+.check-box{width:22px;height:22px;border-radius:6px;border:1.5px solid #CFCCC4;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+.check-item.hecho .check-box{background:#7EC8A0;border-color:#7EC8A0;color:#fff;}
+.check-item.bloqueado .check-box{background:#F5F3F0;}
+.check-meta{flex:1;}
+.check-nombre{font-size:13.5px;font-weight:600;color:#14181F;display:block;}
+.check-item.hecho .check-nombre{color:#1A6640;}
+.check-item.bloqueado .check-nombre{color:#9A968C;}
+.check-hint{font-size:11.5px;color:#9A968C;display:block;margin-top:1px;}
+.check-item.hecho .check-hint{color:#3F8F63;}
+.check-arrow{font-size:16px;color:#CFCCC4;flex-shrink:0;}
+.check-item.hecho .check-arrow{color:#7EC8A0;}
+
+/* PROGRESO */
+.progress-dots{display:flex;justify-content:center;gap:7px;padding:4px 0 2px;}
+.pdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);}
+.pdot.done{background:rgba(255,255,255,.4);}
+.pdot.active{background:var(--gold);}
+
+/* ESTADO FINAL */
+.estado-final{background:#FFFFFF;color:#14181F;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);display:none;}
+.estado-final.visible{display:block;}
+.ef-body{padding:28px 24px;text-align:center;}
+.ef-icon{font-size:36px;margin-bottom:14px;}
+.ef-titulo{font-family:Georgia,serif;font-size:20px;color:#14181F;margin-bottom:8px;}
+.ef-texto{font-size:13px;color:#4A4640;line-height:1.6;margin-bottom:20px;}
+.btn-siguiente{background:#7EC8A0;color:#0B0F16;border:none;font-size:14px;font-weight:700;padding:14px 28px;border-radius:12px;cursor:pointer;letter-spacing:.01em;}
+
+/* POPUP OVERLAY */
+.popup-overlay{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(8,12,20,0.72);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .2s;
 }
-.card-topbar{height:5px;background:linear-gradient(90deg,#F0C040,#F07060,#7EC8A0,#6AB0F5);}
-.card-body{padding:30px 32px;display:flex;flex-direction:column;gap:26px;}
+.popup-overlay.abierto{opacity:1;pointer-events:all;}
 
-.bienvenida-title{font-family:Georgia,serif;font-size:24px;color:#14181F;}
-.bienvenida-sub{font-size:13.5px;color:#6B6558;margin-top:4px;line-height:1.6;}
-
-.label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:10px;}
-
-/* Bloque 1 — cómo funciona (mismo tratamiento que .momento-context + .step-box) */
-.como-funciona{
-  background:rgba(240,192,64,.07);border:1px solid rgba(240,192,64,.28);border-radius:14px;padding:18px 20px;
+/* POPUP SHEET */
+.popup-sheet{
+  width:100%;max-width:640px;
+  background:#fff;color:#14181F;
+  border-radius:20px 20px 0 0;
+  transform:translateY(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+  max-height:92vh;
 }
-.como-funciona p{font-size:13.5px;color:#4A463C;line-height:1.75;}
+.popup-overlay.abierto .popup-sheet{transform:translateY(0);}
+.popup-handle{width:40px;height:4px;background:#ECEAE4;border-radius:2px;margin:14px auto 0;}
+.popup-head{padding:14px 22px 12px;border-bottom:1px solid #ECEAE4;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.popup-titulo{font-size:15px;font-weight:700;color:#14181F;}
+.popup-cerrar{width:30px;height:30px;border-radius:50%;border:none;background:#F5F3F0;color:#888780;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
+.popup-body{padding:18px 22px;overflow-y:auto;flex:1;}
+.popup-footer{padding:14px 22px;border-top:1px solid #ECEAE4;flex-shrink:0;}
 
-.media-block{margin-top:14px;}
-.media-label{font-size:12px;color:#6B6558;margin-bottom:6px;font-weight:600;}
-.media-placeholder{background:#14181F;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;}
-.media-placeholder-ico{font-size:26px;flex-shrink:0;}
-.media-placeholder-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
-.media-placeholder-sub{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;}
+/* PREGUNTAS LIKERT */
+.pq-bloque{margin-bottom:20px;}
+.pq-bloque:last-child{margin-bottom:0;}
+.pq-num{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:3px;}
+.pq-texto{font-size:13px;font-weight:600;color:#14181F;line-height:1.45;margin-bottom:10px;}
+.likert-row{display:flex;gap:6px;margin-bottom:4px;}
+.likert-btn{flex:1;padding:9px 4px;border-radius:9px;border:1.5px solid #ECEAE4;font-size:13px;font-weight:700;color:#888780;text-align:center;cursor:pointer;background:#fff;transition:all .1s;}
+.likert-btn:hover{border-color:#F0C040;background:#FFFDF5;}
+.likert-btn.sel{border-color:#F0C040;background:#FFF8E6;color:#7A5E0A;}
+.likert-labs{display:flex;justify-content:space-between;font-size:10px;color:#BEBAB2;padding:0 2px;}
+.pq-divider{height:1px;background:#F0EDE8;margin:20px 0;}
 
-/* Bloque 2 — mini-diagnóstico */
-.diag-block{display:flex;flex-direction:column;gap:18px;}
-.diag-pregunta{display:flex;flex-direction:column;gap:9px;}
-.campo-label{font-size:13.5px;color:#14181F;font-weight:600;line-height:1.5;}
-.campo-radios{display:flex;flex-wrap:wrap;gap:8px;}
-.campo-radio-item{
-  position:relative;font-size:12.5px;font-weight:600;color:#6B6558;
-  border:1.5px solid #ECEAE4;border-radius:100px;padding:9px 16px;cursor:pointer;
-  transition:.15s;display:flex;align-items:center;gap:6px;
+/* PREGUNTAS ABIERTAS */
+.pq-abierta textarea{
+  width:100%;font-size:13px;font-family:inherit;
+  padding:10px 13px;border-radius:9px;border:1.5px solid #ECEAE4;
+  color:#14181F;resize:none;line-height:1.5;
+  transition:border-color .15s;
 }
-.campo-radio-item input{position:absolute;opacity:0;width:0;height:0;}
-.campo-radio-item:has(input:checked),
-.campo-radio-item.is-checked{border-color:#F0C040;color:#B8860B;background:rgba(240,192,64,.08);font-weight:700;}
-.campo-radio-item:hover{border-color:#D8D3C6;}
-.diag-textarea{font-size:13px;padding:12px 14px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;color:#14181F;resize:vertical;width:100%;}
-.diag-textarea:focus{outline:none;border-color:#F0C040;}
+.pq-abierta textarea:focus{outline:none;border-color:#F0C040;}
+.pq-progreso{font-size:11.5px;color:#9A968C;text-align:center;margin-bottom:12px;}
 
-/* Bloque 3 — registro de identidad (usa las clases que pinta EntregaEngine.montarIdentidad) */
-#registro-identidad{margin-top:2px;}
-.identidad-caja{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;}
-.identidad-intro{font-size:13px;color:#6B6558;line-height:1.6;margin-bottom:4px;}
-.identidad-input{font-size:14px;padding:12px 14px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;color:#14181F;}
-.identidad-input:focus{outline:none;border-color:#F0C040;}
-.campo-hint{font-size:11.5px;color:#9A968C;line-height:1.5;margin-top:-2px;}
-.identidad-error{font-size:12.5px;color:#C9503F;min-height:16px;}
-.campo-enviar{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13.5px;font-weight:700;padding:13px;border-radius:9px;cursor:pointer;transition:transform .15s;}
-.campo-enviar:hover{transform:translateY(-1px);}
-.campo-enviar:disabled{opacity:.6;cursor:default;transform:none;}
-.campo-estado{font-size:12px;color:#9A968C;text-align:center;}
+/* FORMULARIO REGISTRO */
+.id-intro{font-size:12.5px;color:#6A6460;line-height:1.6;border-left:3px solid #F0C040;padding:10px 12px 10px 14px;background:#FAFAF8;border-radius:0 8px 8px 0;margin-bottom:18px;}
+.id-campo{margin-bottom:14px;}
+.id-campo label{font-size:12px;font-weight:700;color:#14181F;display:block;margin-bottom:3px;}
+.id-campo small{font-size:11px;color:#9A968C;display:block;margin-bottom:5px;}
+.id-campo input{width:100%;font-size:13px;padding:10px 13px;border-radius:9px;border:1.5px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;transition:border-color .15s;}
+.id-campo input:focus{outline:none;border-color:#F0C040;}
+.id-campo input::placeholder{color:#BEBAB2;}
+.id-error{font-size:11.5px;color:#C0392B;margin-top:3px;min-height:15px;}
+.pin-row{display:flex;gap:10px;margin-bottom:4px;}
+.pin-box{flex:1;text-align:center;font-size:20px;font-weight:700;padding:10px 0;border-radius:9px;border:1.5px solid #ECEAE4;background:#fff;color:#14181F;letter-spacing:.1em;}
+.pin-box.activo{border-color:#F0C040;background:#FFF8E6;}
 
-.placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:4px;}
+/* BOTONES */
+.btn-primario{width:100%;background:#F0C040;color:#0B0F16;border:none;font-size:14px;font-weight:700;padding:14px;border-radius:10px;cursor:pointer;letter-spacing:.01em;}
+.btn-primario:disabled{opacity:.45;cursor:not-allowed;}
+.estado-envio{font-size:12px;color:#9A968C;text-align:center;margin-top:8px;min-height:16px;}
+.estado-envio.ok{color:#3F8F63;}
+.estado-envio.err{color:#C0392B;}
 
-/* ── HELP / WHATSAPP FAB ── */
+/* FAB */
 .help-fab{
   position:fixed;bottom:22px;left:22px;z-index:180;
   width:52px;height:52px;border-radius:50%;
   background:var(--sage);color:var(--void);
   display:flex;align-items:center;justify-content:center;
   font-size:22px;box-shadow:0 10px 30px rgba(126,200,160,.45);
-  transition:transform .15s,box-shadow .2s;
 }
-.help-fab:hover{transform:scale(1.06);box-shadow:0 12px 36px rgba(126,200,160,.6);}
+.help-fab:hover{transform:scale(1.06);}
 
 @media(max-width:699px){
-  .bienvenida-wrap{padding:88px 16px 44px;}
-  .card-body{padding:24px 20px;}
+  .bienvenida-wrap{padding:80px 14px 72px;}
+  .card-body{padding:18px 16px;}
+  .card-title{font-size:19px;}
+  .popup-body{padding:16px 16px;}
+  .popup-head{padding:14px 16px 12px;}
+  .popup-footer{padding:12px 16px;}
 }
 </style>
 </head>
@@ -144,78 +201,130 @@ html.unlocked .lock-screen{display:none;}
 
 <nav>
   <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
-  <a href="ruta-geb.html" class="nav-back">← Volver a Ruta GEB</a>
+  <a href="ruta-geb.html" class="nav-back">← Ruta GEB</a>
 </nav>
 
-<!-- ══ LOCK SCREEN ══ -->
+<!-- LOCK SCREEN -->
 <div class="lock-screen">
   <div class="lock-card">
-    <div class="lock-ico-big">🔒</div>
+    <div class="lock-ico-big">⭐</div>
     <h1>Ruta GEB</h1>
-    <p>Ingresa la contraseña del curso para continuar.</p>
+    <p>Ingresa la contraseña del curso para ver la bienvenida.</p>
     <form class="lock-form" id="lock-form">
       <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
       <button type="submit" class="lock-submit">Acceder →</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
-    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador.</p>
   </div>
 </div>
 
+<!-- CONTENIDO POST-LOGIN -->
 <div class="site-content">
   <div class="bienvenida-wrap">
-    <div class="top-strip">
-      <div class="breadcrumb">Impulso › <b>Ruta GEB</b> › Bienvenida</div>
-      <span class="status-badge">ANTES DE SEM. 1</span>
-    </div>
 
-    <div class="bienvenida-card">
+    <!-- Card 1: video + contexto -->
+    <div class="bv-card">
       <div class="card-topbar"></div>
       <div class="card-body">
-
-        <div>
-          <h1 class="bienvenida-title" id="bienvenida-title">Bienvenida a Ruta GEB</h1>
-          <p class="bienvenida-sub">Antes de empezar tu primera semana, esto es lo que necesitas saber.</p>
-        </div>
-
-        <!-- ═══ BLOQUE 1 — Cómo funciona Ruta GEB (texto + video, desde content/ruta-sem0.json) ═══ -->
-        <div>
-          <div class="label-caps">Cómo funciona Ruta GEB</div>
-          <div class="como-funciona">
-            <p id="bienvenida-contexto">[verificar contenido de bienvenida]</p>
+        <div class="prog-badge">Ruta GEB · Bienvenida</div>
+        <h1 class="card-title" id="bv-titulo">Bienvenida a Ruta GEB</h1>
+        <div id="video-player">
+          <div class="vp-ring" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #F0C040;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+            <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:16px solid #F0C040;margin-left:3px;"></div>
           </div>
-          <div class="media-block" id="media-block" style="display:none;"></div>
         </div>
-
-        <!-- ═══ BLOQUE 2 — Mini-diagnóstico de apertura (desde content/ruta-sem0.json) ═══ -->
-        <div>
-          <div class="label-caps">Antes de empezar, cuéntanos de ti</div>
-          <div class="diag-block" id="diagnostico-preguntas"></div>
-        </div>
-
-        <!-- ═══ BLOQUE 3 — Registro (CURP + PIN), vía EntregaEngine ═══ -->
-        <div>
-          <div class="label-caps">Regístrate para empezar</div>
-          <div id="registro-identidad"></div>
-        </div>
-
-        <p class="placeholder-note">Al guardar tu registro, se abre directo tu primera semana.</p>
-
+        <div class="context-block" id="bv-contexto"></div>
       </div>
+    </div>
+
+    <!-- Card 2: checklist -->
+    <div class="bv-card">
+      <div class="card-topbar"></div>
+      <div class="card-body">
+        <div class="checklist-label">Para empezar</div>
+        <div id="checklist-wrap">
+          <!-- renderizado por JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado final (visible cuando todo está hecho) -->
+    <div class="bv-card estado-final" id="estado-final">
+      <div class="card-topbar"></div>
+      <div class="ef-body">
+        <div class="ef-icon">🎉</div>
+        <h2 class="ef-titulo">¡Listo, ya puedes empezar!</h2>
+        <p class="ef-texto">Completaste los tres pasos de bienvenida. La Semana 1 ya está esperándote.</p>
+        <button class="btn-siguiente" id="btn-ir-sem1">Ir a Semana 1 →</button>
+      </div>
+    </div>
+
+    <div class="progress-dots" id="progress-dots">
+      <div class="pdot" id="dot-video"></div>
+      <div class="pdot" id="dot-encuesta"></div>
+      <div class="pdot" id="dot-registro"></div>
+    </div>
+
+  </div>
+
+  <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Dudas? Escríbenos">💬</a>
+</div>
+
+<!-- POPUP OVERLAY (contiene ambas sheets; solo una visible a la vez) -->
+<div class="popup-overlay" id="popup-overlay">
+
+  <!-- POPUP: Encuesta -->
+  <div class="popup-sheet" id="popup-encuesta" style="display:none;">
+    <div class="popup-handle"></div>
+    <div class="popup-head">
+      <span class="popup-titulo">Encuesta de inicio</span>
+      <button class="popup-cerrar" id="cerrar-encuesta" aria-label="Cerrar">×</button>
+    </div>
+    <div class="popup-body" id="popup-encuesta-body">
+      <!-- renderizado por JS -->
+    </div>
+    <div class="popup-footer">
+      <div class="pq-progreso" id="encuesta-progreso">0 de 10 respondidas</div>
+      <button class="btn-primario" id="btn-guardar-encuesta" disabled>Guardar encuesta →</button>
     </div>
   </div>
 
-  <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
+  <!-- POPUP: Registro único -->
+  <div class="popup-sheet" id="popup-registro" style="display:none;">
+    <div class="popup-handle"></div>
+    <div class="popup-head">
+      <span class="popup-titulo">Registro único</span>
+      <button class="popup-cerrar" id="cerrar-registro" aria-label="Cerrar">×</button>
+    </div>
+    <div class="popup-body" id="popup-registro-body">
+      <!-- renderizado por EntregaEngine -->
+    </div>
+    <div class="popup-footer">
+      <button class="btn-primario" id="btn-guardar-registro">Guardar registro →</button>
+      <div class="estado-envio" id="estado-envio"></div>
+    </div>
+  </div>
+
 </div>
 
-<script src="config.js"></script>
+<script src="escena-player.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
-/* ── LOCK / PASSWORD GATE (comparte contraseña y storage key con el resto de la plataforma) ── */
+/* ---- CONSTANTES ---- */
 const COURSE_PASSWORD = 'rutageb26';
-const STORAGE_KEY = 'impulso_unlock_ruta';
+const STORAGE_KEY     = 'impulso_unlock_ruta';
+const BV_STATE_KEY    = 'bv_ruta_v1';
+const BV_ENCUESTA_KEY = 'bv_ruta_encuesta_v1';
+const CURSO  = 'Ruta GEB';
+const SEMANA = 'Sem. 0';
+const URL_SEM1 = 'momento-guia.html?curso=Ruta%20GEB&semana=Sem.%201'
+  + '&titulo=IKIGAI%20parte%201%3A%20lo%20que%20amo%20%2B%20en%20lo%20que%20soy%20bueno'
+  + '&pilar=Prop%C3%B3sito&data=ruta-sem1.json';
+
+/* ---- LOCK ---- */
 if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
-document.getElementById('lock-form').addEventListener('submit', function(e){
+document.getElementById('lock-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const val = document.getElementById('lock-input').value.trim();
   if (val === COURSE_PASSWORD) {
@@ -226,109 +335,317 @@ document.getElementById('lock-form').addEventListener('submit', function(e){
   }
 });
 
-/* ── FALLBACK VISUAL para navegadores sin soporte de :has() (delegado — los radios se pintan por JS) ── */
-document.getElementById('diagnostico-preguntas').addEventListener('change', (e) => {
-  if (e.target.type !== 'radio') return;
-  document.querySelectorAll(`input[name="${e.target.name}"]`).forEach(i => {
-    i.closest('.campo-radio-item').classList.toggle('is-checked', i.checked);
+/* ---- ESTADO CHECKLIST ---- */
+function cargarEstado() {
+  try { return JSON.parse(localStorage.getItem(BV_STATE_KEY)) || {}; }
+  catch(e) { return {}; }
+}
+function guardarEstado(s) {
+  localStorage.setItem(BV_STATE_KEY, JSON.stringify(s));
+}
+
+var estado = cargarEstado();
+var preguntas = [];      // pobladas desde JSON
+var respuestas = {};     // respuestas encuesta en memoria
+
+/* ---- CHECKLIST ---- */
+var ITEMS = [
+  { id:'video',    nombre:'Ver el video de bienvenida', hintPend:'Se marca al terminar el video',   hintOk:'Visto' },
+  { id:'encuesta', nombre:'Contestar encuesta',          hintPend:'Disponible al terminar el video', hintOk:'Respondida' },
+  { id:'registro', nombre:'Registro único',              hintPend:'Disponible al responder la encuesta', hintOk:'Registrado' }
+];
+
+function renderChecklist() {
+  var wrap = document.getElementById('checklist-wrap');
+  wrap.innerHTML = '';
+
+  var todoHecho = estado.video && estado.encuesta && estado.registro;
+
+  ITEMS.forEach(function(item) {
+    var hecho     = !!estado[item.id];
+    var anterior  = item.id === 'encuesta' ? estado.video : item.id === 'registro' ? estado.encuesta : true;
+    var bloqueado = !anterior && !hecho;
+
+    var div = document.createElement('div');
+    div.className = 'check-item' + (hecho ? ' hecho' : '') + (bloqueado ? ' bloqueado' : '');
+    if (!hecho && !bloqueado) div.setAttribute('data-open', item.id);
+
+    div.innerHTML =
+      '<div class="check-box">' + (hecho ? '✓' : '') + '</div>' +
+      '<div class="check-meta">' +
+        '<span class="check-nombre">' + item.nombre + '</span>' +
+        '<span class="check-hint">' + (hecho ? item.hintOk : item.hintPend) + '</span>' +
+      '</div>' +
+      '<div class="check-arrow">' + (bloqueado ? '🔒' : hecho ? '✓' : '›') + '</div>';
+
+    if (!hecho && !bloqueado && item.id !== 'video') {
+      div.addEventListener('click', function() { abrirPopup(item.id); });
+    }
+    wrap.appendChild(div);
   });
+
+  /* estado final */
+  var ef = document.getElementById('estado-final');
+  if (todoHecho) { ef.classList.add('visible'); } else { ef.classList.remove('visible'); }
+
+  /* dots */
+  actualizarDots();
+}
+
+function actualizarDots() {
+  var ids = ['video','encuesta','registro'];
+  var primeraActiva = -1;
+  ids.forEach(function(id,i) {
+    var dot = document.getElementById('dot-' + id);
+    if (estado[id]) { dot.className = 'pdot done'; }
+    else { dot.className = 'pdot'; if (primeraActiva < 0) primeraActiva = i; }
+  });
+  if (primeraActiva >= 0) {
+    document.getElementById('dot-' + ids[primeraActiva]).className = 'pdot active';
+  }
+}
+
+/* ---- POPUP ---- */
+function abrirPopup(cual) {
+  var overlay = document.getElementById('popup-overlay');
+  document.getElementById('popup-encuesta').style.display = 'none';
+  document.getElementById('popup-registro').style.display = 'none';
+  document.getElementById('popup-' + cual).style.display  = 'flex';
+  document.getElementById('popup-' + cual).style.flexDirection = 'column';
+  requestAnimationFrame(function() {
+    overlay.classList.add('abierto');
+    document.body.classList.add('popup-abierto');
+  });
+}
+
+function cerrarPopup() {
+  var overlay = document.getElementById('popup-overlay');
+  overlay.classList.remove('abierto');
+  document.body.classList.remove('popup-abierto');
+  setTimeout(function() {
+    document.getElementById('popup-encuesta').style.display = 'none';
+    document.getElementById('popup-registro').style.display = 'none';
+  }, 260);
+}
+
+document.getElementById('popup-overlay').addEventListener('click', function(e) {
+  if (e.target === this) cerrarPopup();
+});
+document.getElementById('cerrar-encuesta').addEventListener('click', cerrarPopup);
+document.getElementById('cerrar-registro').addEventListener('click', cerrarPopup);
+
+/* ---- VIDEO: marcar visto cuando termina el audio ---- */
+function marcarVideoVisto() {
+  if (estado.video) return;
+  estado.video = true;
+  guardarEstado(estado);
+  renderChecklist();
+}
+
+/* ---- RENDER ENCUESTA ---- */
+function renderEncuesta(pregs) {
+  var body   = document.getElementById('popup-encuesta-body');
+  var progEl = document.getElementById('encuesta-progreso');
+  var btnOk  = document.getElementById('btn-guardar-encuesta');
+  body.innerHTML = '';
+
+  /* recuperar respuestas guardadas si las hay */
+  try { respuestas = JSON.parse(localStorage.getItem(BV_ENCUESTA_KEY)) || {}; } catch(e) {}
+
+  function actualizarProgreso() {
+    var total = pregs.length;
+    var resp  = 0;
+    pregs.forEach(function(p) { if (respuestas[p.id] !== undefined && respuestas[p.id] !== '') resp++; });
+    progEl.textContent = resp + ' de ' + total + ' respondidas';
+    btnOk.disabled = (resp < total);
+    localStorage.setItem(BV_ENCUESTA_KEY, JSON.stringify(respuestas));
+  }
+
+  pregs.forEach(function(p, idx) {
+    var bloque = document.createElement('div');
+    bloque.className = 'pq-bloque';
+
+    if (idx > 0) {
+      var div = document.createElement('div');
+      div.className = 'pq-divider';
+      body.appendChild(div);
+    }
+
+    var numEl = document.createElement('div');
+    numEl.className = 'pq-num';
+    numEl.textContent = 'Pregunta ' + (idx + 1) + ' de ' + pregs.length;
+    bloque.appendChild(numEl);
+
+    var textoEl = document.createElement('div');
+    textoEl.className = 'pq-texto';
+    textoEl.textContent = p.pregunta;
+    bloque.appendChild(textoEl);
+
+    if (p.tipo === 'likert') {
+      var row = document.createElement('div');
+      row.className = 'likert-row';
+      for (var v = 1; v <= (p.escala || 5); v++) {
+        (function(val) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'likert-btn' + (respuestas[p.id] === val ? ' sel' : '');
+          btn.textContent = val;
+          btn.dataset.id  = p.id;
+          btn.dataset.val = val;
+          btn.addEventListener('click', function() {
+            row.querySelectorAll('.likert-btn').forEach(function(b) { b.classList.remove('sel'); });
+            btn.classList.add('sel');
+            respuestas[p.id] = val;
+            actualizarProgreso();
+          });
+          row.appendChild(btn);
+        })(v);
+      }
+      bloque.appendChild(row);
+
+      var labs = document.createElement('div');
+      labs.className = 'likert-labs';
+      labs.innerHTML = '<span>Nada</span><span>Mucho</span>';
+      bloque.appendChild(labs);
+
+    } else if (p.tipo === 'abierta') {
+      var divAb = document.createElement('div');
+      divAb.className = 'pq-abierta';
+      var ta = document.createElement('textarea');
+      ta.rows = 3;
+      ta.placeholder = p.placeholder || 'Escribe aquí…';
+      ta.value = respuestas[p.id] || '';
+      ta.addEventListener('input', function() {
+        respuestas[p.id] = ta.value.trim();
+        actualizarProgreso();
+      });
+      divAb.appendChild(ta);
+      bloque.appendChild(divAb);
+    }
+
+    body.appendChild(bloque);
+    actualizarProgreso();
+  });
+}
+
+/* ---- GUARDAR ENCUESTA ---- */
+document.getElementById('btn-guardar-encuesta').addEventListener('click', function() {
+  estado.encuesta = true;
+  guardarEstado(estado);
+  renderChecklist();
+  cerrarPopup();
 });
 
-/* ── BLOQUE 2: pinta las preguntas del diagnóstico desde el JSON ──
-   tipo "escala" → pastillas de opciones (1-5 u otras); tipo "texto" → textarea libre. */
-let diagnosticoPreguntas = [];
-function renderDiagnostico(preguntas) {
-  diagnosticoPreguntas = preguntas;
-  const wrap = document.getElementById('diagnostico-preguntas');
-  wrap.innerHTML = preguntas.map(p => {
-    if (p.tipo === 'texto') {
-      return `
-        <div class="diag-pregunta">
-          <p class="campo-label">${p.pregunta}</p>
-          <textarea class="diag-textarea" name="${p.id}" rows="3"></textarea>
-        </div>
-      `;
+/* ---- RENDER REGISTRO (con EntregaEngine) ---- */
+function initRegistro() {
+  var regBody = document.getElementById('popup-registro-body');
+  regBody.innerHTML =
+    '<p class="id-intro">Tu CURP y tu PIN son lo que te identifica aquí. El PIN solo lo sabes tú.</p>' +
+    '<div id="identidad-mount"></div>';
+
+  EntregaEngine.montarIdentidad(
+    document.getElementById('identidad-mount'),
+    function() {
+      /* EntregaEngine ya guardó en localStorage — leerlo con obtenIdentidad */
+      var identidad = EntregaEngine.obtenIdentidad() || {};
+      var estado_el = document.getElementById('estado-envio');
+      estado_el.className = 'estado-envio';
+      estado_el.textContent = 'Guardando…';
+
+      var encuestaGuardada = {};
+      try { encuestaGuardada = JSON.parse(localStorage.getItem(BV_ENCUESTA_KEY)) || {}; } catch(e) {}
+
+      var payload = {
+        accion: 'guardar',
+        curso:  CURSO,
+        semana: SEMANA,
+        curp:   identidad.curp,
+        nombre: identidad.nombre,
+        campos: encuestaGuardada
+      };
+
+      fetch(CONFIG.BACKEND, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res.ok || res.status === 'ok') {
+          estado.registro = true;
+          guardarEstado(estado);
+          estado_el.className = 'estado-envio ok';
+          estado_el.textContent = '¡Listo!';
+          setTimeout(function() { cerrarPopup(); renderChecklist(); }, 700);
+        } else {
+          throw new Error(res.error || 'Error del servidor');
+        }
+      })
+      .catch(function() {
+        /* Si falla el POST, guardamos local y continuamos */
+        estado.registro = true;
+        guardarEstado(estado);
+        estado_el.className = 'estado-envio';
+        estado_el.textContent = 'Sin conexión — registro local guardado.';
+        setTimeout(function() { cerrarPopup(); renderChecklist(); }, 1200);
+      });
     }
-    return `
-      <div class="diag-pregunta">
-        <p class="campo-label">${p.pregunta}</p>
-        <div class="campo-radios">
-          ${p.opciones.map(op => `
-            <label class="campo-radio-item">
-              <input type="radio" name="${p.id}" value="${op}"> ${op}
-            </label>
-          `).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
+  );
 }
 
-function leerDiagnostico() {
-  const diag = {};
-  diagnosticoPreguntas.forEach(p => {
-    if (p.tipo === 'texto') {
-      diag[p.id] = document.querySelector(`textarea[name="${p.id}"]`)?.value.trim() || '';
-    } else {
-      diag[p.id] = document.querySelector(`input[name="${p.id}"]:checked`)?.value || '';
-    }
-  });
-  return diag;
-}
+/* El botón exterior dispara el submit interno del EntregaEngine */
+document.getElementById('btn-guardar-registro').addEventListener('click', function() {
+  var submitBtn = document.querySelector('#identidad-mount .campo-enviar');
+  if (submitBtn) submitBtn.click();
+});
 
-/* ── BLOQUE 1: video de bienvenida — el reproductor de escena[] todavía no existe
-   en momento-guia.html, así que se muestra el estado "en producción", nunca un
-   reproductor roto ni una página en blanco. ── */
-function renderEscena(escena) {
-  const block = document.getElementById('media-block');
-  if (!escena) { block.style.display = 'none'; block.innerHTML = ''; return; }
-  block.innerHTML = `
-    <div class="media-label">Video de bienvenida — Lupita</div>
-    <div class="media-placeholder">
-      <span class="media-placeholder-ico">🎬</span>
-      <div>
-        <div class="media-placeholder-title">En producción</div>
-        <div class="media-placeholder-sub">El video de bienvenida está por terminarse — mientras tanto, sigue con tu registro.</div>
-      </div>
-    </div>
-  `;
-  block.style.display = 'block';
-}
+/* ---- BTN IR SEM1 ---- */
+document.getElementById('btn-ir-sem1').addEventListener('click', function() {
+  window.location.href = URL_SEM1;
+});
 
-/* ── CONTENIDO DE LA PÁGINA: todo sale de content/ruta-sem0.json, nada hardcodeado ──
-   Si el fetch falla, se queda el placeholder — no truena en blanco. ── */
+/* ---- FETCH JSON SEM 0 ---- */
 fetch('content/ruta-sem0.json')
-  .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
-  .then(data => {
-    if (data.titulo) document.getElementById('bienvenida-title').textContent = data.titulo;
-    if (data.contexto) document.getElementById('bienvenida-contexto').textContent = data.contexto;
-    renderEscena(data.escena);
-    if (Array.isArray(data.diagnostico)) renderDiagnostico(data.diagnostico);
+  .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+  .then(function(data) {
+
+    /* Título */
+    if (data.titulo) document.getElementById('bv-titulo').textContent = data.titulo;
+
+    /* Contexto (array de párrafos o string legacy) */
+    var ctxEl = document.getElementById('bv-contexto');
+    if (data.contexto) {
+      if (Array.isArray(data.contexto)) {
+        ctxEl.innerHTML = data.contexto.map(function(p) {
+          return '<p>' + p + '</p>';
+        }).join('');
+      } else {
+        ctxEl.innerHTML = '<p>' + data.contexto + '</p>';
+      }
+    }
+
+    /* Video / EscenaPlayer */
+    if (data.escena) {
+      var vp = document.getElementById('video-player');
+      vp.innerHTML = '';
+      EscenaPlayer.montar(vp, data.escena);
+      /* Escuchar ended directamente sobre el audio que EscenaPlayer crea */
+      var audioEl = vp.querySelector('.escena-audio');
+      if (audioEl) audioEl.addEventListener('ended', marcarVideoVisto);
+    }
+
+    /* Encuesta */
+    if (data.diagnostico && data.diagnostico.preguntas) {
+      preguntas = data.diagnostico.preguntas;
+      renderEncuesta(preguntas);
+    }
+
   })
-  .catch(() => { /* falló el fetch — se queda el placeholder, no romper la página */ });
+  .catch(function() { /* contenido inline permanece */ });
 
-/* ── REGISTRO DE IDENTIDAD + DIAGNÓSTICO DE APERTURA ──
-   No es un campo de EntregaEngine — es HTML propio de esta página. Las 3
-   respuestas no bloquean el registro: se mandan si están, vacías si no. */
-EntregaEngine.montarIdentidad(document.getElementById('registro-identidad'), () => {
-  const identidad = EntregaEngine.obtenIdentidad();
-  const diag = leerDiagnostico();
-
-  fetch(CONFIG.BACKEND, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({
-      id: identidad.curp,
-      nombre: identidad.nombre,
-      curso: 'Ruta GEB',
-      semana: 'Sem. 0',
-      campos: diag,
-      pin: identidad.pinEnviado ? undefined : identidad.pin
-    })
-  }).then(() => {
-    window.location.href = 'momento-guia.html?curso=Ruta%20GEB&semana=Sem.%201&titulo=IKIGAI%20parte%201%3A%20lo%20que%20amo%20%2B%20en%20lo%20que%20soy%20bueno&pilar=Prop%C3%B3sito';
-  });
-});
+/* ---- INIT ---- */
+renderChecklist();
+initRegistro();
 </script>
 
 </body>
