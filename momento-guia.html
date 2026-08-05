@@ -98,6 +98,13 @@ html.unlocked .lock-screen{display:none;}
 .momento-title{font-family:Georgia,serif;font-size:22px;color:#14181F;}
 .momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:-8px;}
 
+.media-box{display:flex;align-items:center;gap:14px;background:#0B0F16;border-radius:14px;padding:14px 16px;}
+.media-play{width:38px;height:38px;border-radius:50%;background:#F0C040;color:#0B0F16;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.media-title{font-size:13.5px;font-weight:700;color:#fff;}
+.media-meta{font-size:11.5px;color:rgba(255,255,255,.5);margin-top:2px;}
+
+.nota-box{display:flex;gap:9px;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:10px;padding:11px 13px;font-size:12px;color:#5C4A1E;line-height:1.5;}
+
 .label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;}
 
 .step-chips{display:flex;flex-wrap:wrap;gap:6px;}
@@ -130,24 +137,38 @@ html.unlocked .lock-screen{display:none;}
 /* right side: recursos + entrega (siempre presente) */
 .side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
 .recurso-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;font-size:13px;color:#3A7FC9;}
-.media-block{margin-bottom:2px;}
-.media-label{font-size:12px;color:#6B6558;margin-bottom:6px;font-weight:600;}
-.media-block audio,.media-block video{width:100%;border-radius:10px;}
 .entrega-form{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;}
 .entrega-form input{font-size:13px;padding:11px 13px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;}
 .entrega-form button{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
 
-.nps-block{display:flex;flex-direction:column;gap:6px;}
-.nps-label{font-size:12px;color:#4A463C;line-height:1.5;}
-.nps-required{color:#C9503F;}
-.nps-scale{display:flex;gap:4px;}
-.nps-btn{flex:1;min-width:0;font-size:11.5px;font-weight:700;padding:8px 0;border-radius:6px;border:1.5px solid #ECEAE4;background:#fff;color:#6B6558;cursor:pointer;transition:.15s;}
-.nps-btn:hover{border-color:#D8D3C6;}
-.nps-btn.selected{border-color:#F0C040;background:#F0C040;color:#0B0F16;}
-.nps-scale-caption{display:flex;justify-content:space-between;font-size:10px;color:#9A968C;}
-.nps-error{font-size:11.5px;color:#C9503F;min-height:14px;}
-
 .placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:18px;}
+
+/* ── CAMPO-ENTREGA (motor de entrega genérico) ── */
+.campo-entrega{display:flex;flex-direction:column;gap:14px;margin-top:4px;}
+.campo-label{font-size:12px;font-weight:700;color:#14181F;display:block;margin-bottom:3px;}
+.campo-hint{font-size:11px;color:#9A968C;margin-bottom:5px;line-height:1.45;}
+.campo-badge-local{display:inline-block;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:100px;background:rgba(106,176,245,.15);color:#185FA5;margin-left:6px;vertical-align:middle;}
+.campo-input{width:100%;font-size:12.5px;padding:9px 11px;border-radius:8px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;resize:vertical;}
+.campo-input:focus{outline:none;border-color:#F0C040;}
+.campo-input::placeholder{color:#BEBAB2;}
+textarea.campo-input{min-height:72px;}
+.campo-texto3{display:flex;flex-direction:column;gap:5px;}
+.campo-texto3 input{font-size:12.5px;padding:8px 10px;border-radius:7px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;}
+.campo-radios{display:flex;flex-direction:column;gap:4px;}
+.campo-radio-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;border:1.5px solid #ECEAE4;cursor:pointer;font-size:12px;color:#4A4640;background:#fff;}
+.campo-radio-item.sel{border-color:#F0C040;background:#FFF8E6;color:#7A5E0A;}
+.campo-calculado{font-size:12.5px;color:#6B6558;padding:8px 11px;background:#F3F1EC;border-radius:7px;min-height:36px;}
+.campo-enviar{width:100%;margin-top:6px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
+.campo-estado{font-size:11px;margin-top:4px;color:#9A968C;text-align:center;min-height:16px;}
+.campo-estado.ok{color:#3F8F63;}
+.campo-estado.err{color:#C0392B;}
+.campo-sep{border:none;border-top:1px dashed #ECEAE4;margin:4px 0;}
+.campo-privacidad{display:flex;gap:8px;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.25);border-radius:9px;padding:9px 11px;font-size:11px;color:#7A5E0A;line-height:1.5;margin-bottom:4px;}
+.identidad-caja{display:flex;flex-direction:column;gap:10px;}
+.identidad-intro{font-size:12px;color:#6A6460;line-height:1.6;border-left:3px solid #F0C040;padding:8px 10px 8px 12px;background:#FAFAF8;border-radius:0 6px 6px 0;margin-bottom:2px;}
+.identidad-input{width:100%;font-size:12.5px;padding:9px 11px;border-radius:8px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;}
+.identidad-input:focus{outline:none;border-color:#F0C040;}
+.identidad-error{font-size:11.5px;color:#C0392B;margin-top:2px;min-height:16px;}
 
 /* ── HELP / WHATSAPP FAB ── */
 .help-fab{
@@ -170,6 +191,8 @@ html.unlocked .lock-screen{display:none;}
   .center{padding:22px 18px;}
 }
 </style>
+<script src="config.js"></script>
+<link rel="stylesheet" href="escena-player.css">
 </head>
 <body>
 
@@ -226,7 +249,13 @@ html.unlocked .lock-screen{display:none;}
             <p class="momento-context" id="momento-context">[verificar frase de contexto breve — 1-2 líneas de introducción a la guía]</p>
           </div>
 
-          <div id="media-block" style="display:none;"></div>
+          <div class="media-box" id="media-box" style="display:none;">
+            <div class="media-play">▶</div>
+            <div>
+              <div class="media-title" id="media-title"></div>
+              <div class="media-meta" id="media-meta"></div>
+            </div>
+          </div>
 
           <div>
             <div class="label-caps" style="margin-bottom:8px;">En esta guía</div>
@@ -247,35 +276,28 @@ html.unlocked .lock-screen{display:none;}
         <div class="side">
           <div>
             <div class="label-caps" style="margin-bottom:10px;">Recursos necesarios</div>
-            <div id="recursos-list"></div>
+            <div id="recursos-list"><div class="recurso-row">📄 [verificar recurso]</div></div>
+          </div>
+          <div id="nota-wrap" style="display:none;">
+            <div class="nota-box" id="nota-box"></div>
           </div>
           <div>
             <div class="label-caps" style="margin-bottom:10px;">Espacio de entrega</div>
-            <form class="entrega-form" id="entrega-form" action="YOUR_APPS_SCRIPT_WEB_APP_URL" method="POST" target="_blank">
-              <input name="nombre" placeholder="Nombre completo">
-              <input name="correo" placeholder="Correo" type="email">
-              <input name="drive_link" placeholder="Liga de Google Drive">
-              <div class="nps-block">
-                <div class="nps-label">¿Qué tan probable es que recomiendes esta semana de Ruta GEB a una compañera? <span class="nps-required">*</span></div>
-                <div class="nps-scale" id="nps-scale"></div>
-                <div class="nps-scale-caption"><span>Nada probable</span><span>Totalmente probable</span></div>
-                <input type="hidden" name="nps" id="nps-value">
-                <div class="nps-error" id="nps-error"></div>
-              </div>
-              <button type="submit">Enviar</button>
-            </form>
+            <div id="entrega-campos"></div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <p class="placeholder-note" id="placeholder-note">Plantilla de momento — el contenido específico de cada guía se completará más adelante.</p>
+    <p class="placeholder-note">Plantilla de momento — el contenido específico de cada guía se completará más adelante.</p>
   </div>
 
   <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
 </div>
 
+<script src="escena-player.js"></script>
+<script src="entrega-engine.js"></script>
 <script>
 /* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
 const COURSE_PASSWORD = 'rutageb26';
@@ -315,61 +337,36 @@ pilarTag.textContent = `${pStyle.emoji} ${pilar}`;
 pilarTag.style.color = pStyle.color;
 pilarTag.style.background = pStyle.bg;
 
-/* ── RAIL: temario / momentos de la semana (placeholder — se irá ampliando) ── */
-const railItems = [
+/* ── RAIL: temario / momentos de la semana (default — se sobrescribe con el JSON de la semana si trae railItems) ── */
+const esRuta = curso.toLowerCase().includes('ruta');
+let railItems = esRuta ? [
+  { label:'Autogestivo semanal', state:'current' },
+  { label:'Siguiente semana', state:'pending' },
+] : [
   { label:'Autogestivo semanal', state:'done' },
   { label:'Tríada de colaboradores', state:'done' },
   { label:titulo, state:'current' },
   { label:'Siguiente momento', state:'pending' },
 ];
-const railList = document.getElementById('rail-list');
-railList.innerHTML = railItems.map(it => `
-  <div class="rail-item ${it.state === 'current' ? 'current' : it.state === 'pending' ? 'pending' : ''}">
-    <span class="dot">${it.state === 'done' ? '✓' : it.state === 'current' ? '▶' : ''}</span>${it.label}
-  </div>
-`).join('');
+function renderRail() {
+  const railList = document.getElementById('rail-list');
+  railList.innerHTML = railItems.map(it => `
+    <div class="rail-item ${it.state === 'current' ? 'current' : it.state === 'pending' ? 'pending' : ''}">
+      <span class="dot">${it.state === 'done' ? '✓' : it.state === 'current' ? '▶' : ''}</span>${it.label}
+    </div>
+  `).join('');
+}
+renderRail();
 
-/* ── CONTENIDO DE LA SEMANA: fetch por JSON (?data=archivo.json), con placeholder de respaldo ──
-   Si no viene el param `data`, o el fetch falla, se queda el placeholder — no truena en blanco. */
-const dataParam = params.get('data');
-const contentUrl = dataParam ? `content/${dataParam}` : null;
-
-const steps = [
+/* ── STEPS (default — se sobrescribe con el JSON de la semana) ── */
+let steps = [
   { label:'1 · Diagnóstico', instruction:'[verificar instrucción]' },
   { label:'2 · Marco', instruction:'[verificar instrucción]' },
   { label:'3 · Aplicación', instruction:'[verificar instrucción]' },
   { label:'4 · Caso', instruction:'[verificar instrucción]' },
   { label:'5 · Reflexión', instruction:'[verificar instrucción]' },
 ];
-const checklistLabels = [
-  'Leíste el marco completo',
-  'Completaste la tabla de diagnóstico',
-  'Escribiste tu reflexión final',
-  'Subiste tu archivo a Drive',
-];
-const checked = new Array(checklistLabels.length).fill(false);
-const recursos = [ { icon:'📄', label:'[verificar recurso]', url:'#' } ];
-
 let activeStep = 0;
-
-function renderRecursos() {
-  const wrap = document.getElementById('recursos-list');
-  wrap.innerHTML = recursos.map(r => `
-    <a class="recurso-row" href="${r.url || r.href || '#'}" target="_blank" rel="noopener" style="text-decoration:none;margin-bottom:8px;">
-      ${r.icon || '📄'} ${r.label}
-    </a>
-  `).join('');
-}
-
-function renderMedia(media) {
-  const block = document.getElementById('media-block');
-  if (!media || !media.src) { block.style.display = 'none'; block.innerHTML = ''; return; }
-  const tag = media.tipo === 'video'
-    ? `<video controls src="${media.src}"></video>`
-    : `<audio controls src="${media.src}"></audio>`;
-  block.innerHTML = `<div class="media-label">${media.label || 'Escucha a Lupita'}</div>${tag}`;
-  block.style.display = 'block';
-}
 
 function renderSteps() {
   const chips = document.getElementById('step-chips');
@@ -393,6 +390,15 @@ function renderSteps() {
   `;
 }
 
+/* ── CHECKLIST (default — se sobrescribe con el JSON de la semana) ── */
+let checklistLabels = [
+  'Leíste el marco completo',
+  'Completaste la tabla de diagnóstico',
+  'Escribiste tu reflexión final',
+  'Subiste tu archivo a Drive',
+];
+let checked = new Array(checklistLabels.length).fill(false);
+
 function renderChecklist() {
   const wrap = document.getElementById('checklist-items');
   wrap.innerHTML = '';
@@ -407,68 +413,95 @@ function renderChecklist() {
   document.getElementById('checklist-count').textContent = `${checked.filter(Boolean).length}/${checklistLabels.length}`;
 }
 
+/* ── MEDIA (video opcional embebido en la guía) ── */
+function renderMedia(data) {
+  const box = document.getElementById('media-box');
+  if (data && data.escena) {
+    box.style.display = 'block';
+    box.innerHTML = '';
+    EscenaPlayer.montar(box, data.escena);
+    return;
+  }
+  const media = data && data.media ? data.media : null;
+  if (!media) { box.style.display = 'none'; return; }
+  box.style.display = 'flex';
+  document.getElementById('media-title').textContent = media.titulo || '';
+  document.getElementById('media-meta').textContent = media.duracion ? `Video · ${media.duracion}` : 'Video';
+  box.onclick = () => { if (media.src) window.open(media.src, '_blank'); };
+}
+
+/* ── RECURSOS ── */
+function renderRecursos(recursos) {
+  const wrap = document.getElementById('recursos-list');
+  if (!recursos || !recursos.length) return;
+  wrap.innerHTML = recursos.map(r => {
+    const texto = r.texto || r.label || r.text || '';
+    const icono = r.icono || r.icon || '📄';
+    return r.url
+      ? `<a class="recurso-row" href="${r.url}" target="_blank" rel="noopener" style="text-decoration:none;">${icono} ${texto}</a>`
+      : `<div class="recurso-row">${icono} ${texto}</div>`;
+  }).join('');
+}
+
+/* ── NOTA / PRIVACIDAD (opcional, ej. semanas de presupuesto) ── */
+function renderNota(nota, entrega) {
+  const wrap = document.getElementById('nota-wrap');
+  let html = '';
+  if (entrega) {
+    html += `<div><strong>${entrega.titulo || 'Entrega de la semana'}</strong><ul style="margin:6px 0 0 16px;padding:0;">${(entrega.items||[]).map(i => `<li>${i}</li>`).join('')}</ul></div>`;
+    if (entrega.nota) html += `<div style="margin-top:8px;">${entrega.nota}</div>`;
+  } else if (nota) {
+    html = nota;
+  }
+  if (!html) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  document.getElementById('nota-box').innerHTML = html;
+}
+
 function render() {
   renderSteps();
   renderChecklist();
 }
-
-function applyContent(data) {
-  if (data.contexto) document.getElementById('momento-context').textContent = data.contexto;
-  if (Array.isArray(data.steps) && data.steps.length) {
-    steps.length = 0;
-    data.steps.forEach(s => steps.push(s));
-  }
-  if (Array.isArray(data.checklistLabels) && data.checklistLabels.length) {
-    checklistLabels.length = 0;
-    data.checklistLabels.forEach(l => checklistLabels.push(l));
-    checked.length = 0;
-    checklistLabels.forEach(() => checked.push(false));
-  }
-  if (Array.isArray(data.recursos) && data.recursos.length) {
-    recursos.length = 0;
-    data.recursos.forEach(r => recursos.push(r));
-  }
-  renderRecursos();
-  renderMedia(data.media || null);
-  render();
-  const note = document.getElementById('placeholder-note');
-  if (note) note.style.display = 'none';
-}
-
-renderRecursos();
 render();
 
-/* ── NPS de la semana: escala 0-10, obligatoria antes de enviar la entrega ── */
-const npsScale = document.getElementById('nps-scale');
-const npsValue = document.getElementById('nps-value');
-const npsError = document.getElementById('nps-error');
-for (let i = 0; i <= 10; i++) {
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'nps-btn';
-  btn.textContent = i;
-  btn.dataset.val = i;
-  btn.addEventListener('click', () => {
-    npsScale.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    npsValue.value = i;
-    npsError.textContent = '';
-  });
-  npsScale.appendChild(btn);
-}
-document.getElementById('entrega-form').addEventListener('submit', function (e) {
-  if (!npsValue.value) {
-    e.preventDefault();
-    npsError.textContent = 'Falta calificar del 0 al 10 antes de enviar.';
-  }
-});
+/* ── FETCH DEL CONTENIDO REAL DE LA SEMANA (prioriza ?data=, si no viene lo adivina por número de semana) ── */
+const dataParam = params.get('data');
+const semNum = (semana.match(/\d+/) || ['1'])[0];
+const programaSlug = esRuta ? 'ruta' : 'impulso';
+const contentUrl = dataParam ? `content/${dataParam}` : `content/${programaSlug}-sem${semNum}.json`;
 
-if (contentUrl) {
-  fetch(contentUrl)
-    .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
-    .then(applyContent)
-    .catch(() => { /* falló el fetch — se queda el placeholder, no romper la página */ });
-}
+fetch(contentUrl)
+  .then(r => r.ok ? r.json() : Promise.reject('no-content'))
+  .then(data => {
+    if (data.titulo) document.getElementById('momento-title').textContent = data.titulo;
+    if (data.contexto) document.getElementById('momento-context').textContent = data.contexto;
+
+    if (data.pilar && data.pilar !== pilar) {
+      const s2 = PILAR_STYLE[data.pilar] || PILAR_STYLE['Propósito'];
+      pilarTag.textContent = `${s2.emoji} ${data.pilar}`;
+      pilarTag.style.color = s2.color;
+      pilarTag.style.background = s2.bg;
+    }
+
+    renderMedia(data);
+
+    if (data.railItems) { railItems = data.railItems; renderRail(); }
+
+    if (data.steps) { steps = data.steps; activeStep = 0; }
+    if (data.checklistLabels) { checklistLabels = data.checklistLabels; checked = new Array(checklistLabels.length).fill(false); }
+    render();
+
+    renderRecursos(data.recursos);
+    renderNota(data.nota, data.entrega);
+
+    if (data.entrega && data.entrega.campos) {
+      EntregaEngine.montar(
+        document.getElementById('entrega-campos'),
+        { curso, semana, campos: data.entrega.campos }
+      );
+    }
+  })
+  .catch(() => { /* sin JSON disponible para esta semana: se queda con el contenido de fallback ya hardcodeado arriba */ });
 </script>
 
 </body>
