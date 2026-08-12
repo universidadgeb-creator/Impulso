@@ -342,6 +342,7 @@ const PILLARS = {
   'Propósito':  { color:'#F0C040' },
   'Maestría':   { color:'#6AB0F5' },
   'Transición': { color:'#F07060' },
+  'Cierre':     { color:'#F07060' },
 };
 
 const days = [
@@ -368,6 +369,9 @@ const days = [
     { icon:'📱', title:'Presupuesto parte 2', type:'AUTOGESTIVO' },
     { icon:'🎤', title:'Conferencia magistral de cierre', type:'CONFERENCIA' },
   ]},
+  { label:'Cierre', pillar:'Cierre', title:'Cierre de Ruta GEB', modules:[
+    { icon:'🏁', title:'Cierre de Ruta GEB', type:'CIERRE', url:'cierre.html' },
+  ]},
 ];
 
 let activeDay = 0;
@@ -379,7 +383,11 @@ function renderStepper() {
     const node = document.createElement('button');
     node.type = 'button';
     node.className = 'day-node' + (i === activeDay ? ' active' : '');
-    node.innerHTML = `<span class="day-dot">${i}</span><span class="day-node-label">${i === 0 ? 'Bienvenida' : 'Día ' + i}</span>`;
+    const isBienvenida = d.pillar === 'Bienvenida';
+    const isCierre = d.pillar === 'Cierre';
+    const dotLabel = isBienvenida ? '0' : isCierre ? '🏁' : i;
+    const subLabel = isBienvenida ? 'Bienvenida' : isCierre ? 'Cierre' : 'Día ' + i;
+    node.innerHTML = `<span class="day-dot">${dotLabel}</span><span class="day-node-label">${subLabel}</span>`;
     node.addEventListener('click', () => { activeDay = i; render(); });
     stepper.appendChild(node);
   });
@@ -389,11 +397,15 @@ function render() {
   renderStepper();
   const d = days[activeDay];
   const color = PILLARS[d.pillar].color;
-  const totalSemanas = days.length - 1; // sin contar Bienvenida
+  // sin contar Bienvenida ni Cierre — solo las semanas reales
+  const totalSemanas = days.filter(x => x.pillar !== 'Bienvenida' && x.pillar !== 'Cierre').length;
 
-  if (activeDay === 0) {
+  if (d.pillar === 'Bienvenida') {
     document.getElementById('dash-meta').textContent = `Antes de Sem. 1 · ${d.modules.length} paso`;
     document.getElementById('day-sub').textContent = `Un solo paso, antes de tu primera semana`;
+  } else if (d.pillar === 'Cierre') {
+    document.getElementById('dash-meta').textContent = `Después de Sem. ${totalSemanas} · ${d.modules.length} paso`;
+    document.getElementById('day-sub').textContent = `Cierra tu ciclo de Ruta GEB`;
   } else {
     document.getElementById('dash-meta').textContent = `Día ${activeDay} de ${totalSemanas} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
     document.getElementById('day-sub').textContent = `Día ${activeDay} de ${totalSemanas}`;
@@ -407,10 +419,12 @@ function render() {
 
   const list = document.getElementById('module-list');
   list.innerHTML = d.modules.map(m => {
-    if (m.type === 'BIENVENIDA') {
-      const yaRegistrada = typeof EntregaEngine !== 'undefined' && !!EntregaEngine.obtenIdentidad();
-      const icon = yaRegistrada ? '✅' : m.icon;
-      const estado = yaRegistrada ? 'COMPLETADO' : 'PENDIENTE';
+    if (m.type === 'BIENVENIDA' || m.type === 'CIERRE') {
+      const completado = m.type === 'BIENVENIDA'
+        ? (typeof EntregaEngine !== 'undefined' && !!EntregaEngine.obtenIdentidad())
+        : localStorage.getItem('geb_cierre_completado') === '1';
+      const icon = completado ? '✅' : m.icon;
+      const estado = completado ? 'COMPLETADO' : 'PENDIENTE';
       return `
     <a class="module-row" href="${m.url}">
       <span class="module-ico">${icon}</span>

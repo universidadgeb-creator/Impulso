@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cierre — Ruta GEB | Impulso GEB</title>
+<style>
+:root {
+  --void:    #080C14;
+  --deep:    #0D1525;
+  --surface: #172038;
+  --border:  rgba(255,255,255,0.08);
+  --sage:    #7EC8A0;
+  --gold:    #F0C040;
+  --coral:   #F07060;
+  --blue-hi: #6AB0F5;
+  --white:   #FFFFFF;
+  --fog:     rgba(255,255,255,0.55);
+  --mist:    rgba(255,255,255,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);color:var(--white);
+  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.2;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(8,12,20,0.95),transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.nav-logo{font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--white);}
+.nav-logo sup{font-size:11px;color:var(--sage);vertical-align:super;letter-spacing:0.05em;font-family:sans-serif;}
+.nav-back{font-size:13px;font-weight:600;color:var(--fog);}
+.nav-back:hover{color:var(--white);}
+
+/* LOCK SCREEN (misma contraseña compartida que el resto de la plataforma) */
+html:not(.unlocked) .site-content{display:none;}
+html.unlocked .lock-screen{display:none;}
+.lock-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 40px;}
+.lock-card{width:100%;max-width:380px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px 28px;text-align:center;}
+.lock-ico-big{width:52px;height:52px;border-radius:50%;background:rgba(240,112,96,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;}
+.lock-card h1{font-size:22px;color:var(--white);margin-bottom:8px;}
+.lock-card p{font-size:13.5px;color:var(--fog);line-height:1.6;margin-bottom:24px;}
+.lock-form{display:flex;flex-direction:column;gap:10px;}
+.lock-input{font-size:14px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--white);font-family:inherit;text-align:center;letter-spacing:.04em;}
+.lock-input:focus{outline:none;border-color:var(--coral);}
+.lock-input::placeholder{color:var(--mist);}
+.lock-submit{background:var(--coral);color:var(--void);font-size:14px;font-weight:700;padding:13px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s;}
+.lock-submit:hover{transform:translateY(-1px);}
+.lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
+.lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
+
+/* PAGE */
+.cierre-wrap{max-width:720px;margin:0 auto;padding:96px 20px 60px;display:flex;flex-direction:column;gap:22px;}
+.top-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:-4px;}
+.breadcrumb{font-size:11.5px;color:var(--fog);}
+.breadcrumb b{color:var(--white);}
+.status-badge{font-size:10.5px;font-weight:700;padding:5px 12px;border-radius:100px;background:rgba(240,112,96,.18);color:var(--coral);border:1px solid rgba(240,112,96,.4);white-space:nowrap;}
+
+/* CARD (mismo lenguaje visual que momento-guia.html / bienvenida.html) */
+.cierre-card{
+  background:#FFFFFF;color:#14181F;border-radius:22px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
+}
+.card-topbar{height:5px;background:linear-gradient(90deg,#F07060,#F0C040,#7EC8A0,#6AB0F5);}
+.card-body{padding:30px 32px;display:flex;flex-direction:column;gap:26px;}
+
+.cierre-title{font-family:Georgia,serif;font-size:24px;color:#14181F;}
+.cierre-sub{font-size:13.5px;color:#6B6558;margin-top:4px;line-height:1.6;}
+
+.label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:10px;}
+
+/* Bloque 1 — contexto de cierre (mismo tratamiento que .momento-context + .step-box) */
+.como-funciona{
+  background:rgba(240,112,96,.07);border:1px solid rgba(240,112,96,.28);border-radius:14px;padding:18px 20px;
+}
+.como-funciona p{font-size:13.5px;color:#4A463C;line-height:1.75;}
+
+.media-block{margin-top:14px;}
+.media-label{font-size:12px;color:#6B6558;margin-bottom:6px;font-weight:600;}
+.media-placeholder{background:#14181F;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;}
+.media-placeholder-ico{font-size:26px;flex-shrink:0;}
+.media-placeholder-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+.media-placeholder-sub{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;}
+
+/* Bloque 2 — cuestionario de cierre (V2, 10 dimensiones) */
+.diag-block{display:flex;flex-direction:column;gap:18px;}
+.diag-pregunta{display:flex;flex-direction:column;gap:9px;}
+.campo-label{font-size:13.5px;color:#14181F;font-weight:600;line-height:1.5;}
+.campo-radios{display:flex;flex-wrap:wrap;gap:8px;}
+.campo-radio-item{
+  position:relative;font-size:12.5px;font-weight:600;color:#6B6558;
+  border:1.5px solid #ECEAE4;border-radius:100px;padding:9px 16px;cursor:pointer;
+  transition:.15s;display:flex;align-items:center;gap:6px;
+}
+.campo-radio-item input{position:absolute;opacity:0;width:0;height:0;}
+.campo-radio-item:has(input:checked),
+.campo-radio-item.is-checked{border-color:#F07060;color:#C9503F;background:rgba(240,112,96,.08);font-weight:700;}
+.campo-radio-item:hover{border-color:#D8D3C6;}
+.diag-textarea{font-size:13px;padding:12px 14px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;color:#14181F;resize:vertical;width:100%;}
+.diag-textarea:focus{outline:none;border-color:#F07060;}
+
+/* Envío del cierre */
+.cierre-enviar{margin-top:2px;background:#F07060;color:#fff;border:none;font-size:13.5px;font-weight:700;padding:13px;border-radius:9px;cursor:pointer;transition:transform .15s;width:100%;}
+.cierre-enviar:hover{transform:translateY(-1px);}
+.cierre-enviar:disabled{opacity:.6;cursor:default;transform:none;}
+.cierre-estado{font-size:12px;color:#9A968C;text-align:center;}
+
+/* Guardia — si todavía no se ha registrado en bienvenida.html */
+.cierre-guardia{background:rgba(240,112,96,.08);border:1px solid rgba(240,112,96,.3);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;text-align:center;}
+.cierre-guardia p{font-size:13.5px;color:#4A463C;line-height:1.6;}
+.cierre-guardia a{display:inline-block;background:#F07060;color:#fff;font-size:13px;font-weight:700;padding:11px 20px;border-radius:9px;}
+
+/* Agradecimiento tras enviar */
+.cierre-gracias{display:none;text-align:center;padding:10px 0;}
+.cierre-gracias-ico{font-size:32px;margin-bottom:10px;}
+.cierre-gracias h2{font-family:Georgia,serif;font-size:19px;color:#14181F;margin-bottom:8px;}
+.cierre-gracias p{font-size:13.5px;color:#6B6558;line-height:1.6;}
+
+.placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:4px;}
+
+/* ── HELP / WHATSAPP FAB ── */
+.help-fab{
+  position:fixed;bottom:22px;left:22px;z-index:180;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--sage);color:var(--void);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 10px 30px rgba(126,200,160,.45);
+  transition:transform .15s,box-shadow .2s;
+}
+.help-fab:hover{transform:scale(1.06);box-shadow:0 12px 36px rgba(126,200,160,.6);}
+
+@media(max-width:699px){
+  .cierre-wrap{padding:88px 16px 44px;}
+  .card-body{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
+  <a href="ruta-geb.html" class="nav-back">← Volver a Ruta GEB</a>
+</nav>
+
+<!-- ══ LOCK SCREEN ══ -->
+<div class="lock-screen">
+  <div class="lock-card">
+    <div class="lock-ico-big">🔒</div>
+    <h1>Ruta GEB</h1>
+    <p>Ingresa la contraseña del curso para continuar.</p>
+    <form class="lock-form" id="lock-form">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <button type="submit" class="lock-submit">Acceder →</button>
+      <div class="lock-error" id="lock-error"></div>
+    </form>
+    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+  </div>
+</div>
+
+<div class="site-content">
+  <div class="cierre-wrap">
+    <div class="top-strip">
+      <div class="breadcrumb">Impulso › <b>Ruta GEB</b> › Cierre</div>
+      <span class="status-badge">DESPUÉS DE SEM. 6</span>
+    </div>
+
+    <div class="cierre-card">
+      <div class="card-topbar"></div>
+      <div class="card-body">
+
+        <div>
+          <h1 class="cierre-title" id="cierre-title">Cierre de Ruta GEB</h1>
+          <p class="cierre-sub">Llegaste al final de tus 6 semanas. Esto cierra tu ciclo.</p>
+        </div>
+
+        <!-- ═══ Guardia: si no hay identidad registrada, no se puede cerrar el ciclo ═══ -->
+        <div class="cierre-guardia" id="cierre-guardia" style="display:none;">
+          <p>Antes de cerrar tu ciclo necesitas haberte registrado en la Bienvenida de Ruta GEB.</p>
+          <a href="bienvenida.html">Ir a la Bienvenida →</a>
+        </div>
+
+        <!-- ═══ Contenido normal (solo si ya hay identidad) ═══ -->
+        <div id="cierre-contenido">
+
+          <!-- ═══ BLOQUE 1 — Contexto de cierre (texto + video, desde content/ruta-cierre.json) ═══ -->
+          <div>
+            <div class="label-caps">Antes de cerrar tu ciclo</div>
+            <div class="como-funciona">
+              <p id="cierre-contexto">[verificar contenido de cierre]</p>
+            </div>
+            <div class="media-block" id="media-block" style="display:none;"></div>
+          </div>
+
+          <!-- ═══ BLOQUE 2 — Evaluación de cierre, 10 dimensiones (desde content/ruta-cierre.json) ═══ -->
+          <div style="margin-top:26px;">
+            <div class="label-caps">Cuéntanos cómo te fue</div>
+            <div class="diag-block" id="diagnostico-preguntas"></div>
+          </div>
+
+          <button type="button" class="cierre-enviar" id="cierre-enviar" style="margin-top:20px;">Enviar y cerrar mi ciclo</button>
+          <div class="cierre-estado" id="cierre-estado"></div>
+
+          <!-- ═══ Agradecimiento, se muestra tras enviar ═══ -->
+          <div class="cierre-gracias" id="cierre-gracias">
+            <div class="cierre-gracias-ico">🎉</div>
+            <h2>Gracias por cerrar tu ciclo</h2>
+            <p>Tu Plan de Vida ya es tuyo, dentro o fuera de GEB. Gracias por compartir cómo te fue.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
+</div>
+
+<script src="config.js"></script>
+<script src="entrega-engine.js"></script>
+<script>
+/* ── LOCK / PASSWORD GATE (comparte contraseña y storage key con el resto de la plataforma) ── */
+const COURSE_PASSWORD = 'rutageb26';
+const STORAGE_KEY = 'impulso_unlock_ruta';
+if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
+document.getElementById('lock-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const val = document.getElementById('lock-input').value.trim();
+  if (val === COURSE_PASSWORD) {
+    localStorage.setItem(STORAGE_KEY, '1');
+    document.documentElement.classList.add('unlocked');
+  } else {
+    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+  }
+});
+
+/* ── GUARDIA: sin identidad registrada, no hay cierre que hacer ── */
+const identidad = EntregaEngine.obtenIdentidad();
+if (!identidad || !identidad.curp) {
+  document.getElementById('cierre-guardia').style.display = 'flex';
+  document.getElementById('cierre-contenido').style.display = 'none';
+}
+
+/* ── FALLBACK VISUAL para navegadores sin soporte de :has() (delegado — los radios se pintan por JS) ── */
+document.getElementById('diagnostico-preguntas').addEventListener('change', (e) => {
+  if (e.target.type !== 'radio') return;
+  document.querySelectorAll(`input[name="${e.target.name}"]`).forEach(i => {
+    i.closest('.campo-radio-item').classList.toggle('is-checked', i.checked);
+  });
+});
+
+/* ── BLOQUE 2: pinta las preguntas del cierre desde el JSON ──
+   tipo "escala" → pastillas de opciones (1-5); tipo "texto" → textarea libre. */
+let diagnosticoPreguntas = [];
+function renderDiagnostico(preguntas) {
+  diagnosticoPreguntas = preguntas;
+  const wrap = document.getElementById('diagnostico-preguntas');
+  wrap.innerHTML = preguntas.map(p => {
+    if (p.tipo === 'texto') {
+      return `
+        <div class="diag-pregunta">
+          <p class="campo-label">${p.pregunta}</p>
+          <textarea class="diag-textarea" name="${p.id}" rows="3"></textarea>
+        </div>
+      `;
+    }
+    return `
+      <div class="diag-pregunta">
+        <p class="campo-label">${p.pregunta}</p>
+        <div class="campo-radios">
+          ${p.opciones.map(op => `
+            <label class="campo-radio-item">
+              <input type="radio" name="${p.id}" value="${op}"> ${op}
+            </label>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function leerDiagnostico() {
+  const diag = {};
+  diagnosticoPreguntas.forEach(p => {
+    if (p.tipo === 'texto') {
+      diag[p.id] = document.querySelector(`textarea[name="${p.id}"]`)?.value.trim() || '';
+    } else {
+      diag[p.id] = document.querySelector(`input[name="${p.id}"]:checked`)?.value || '';
+    }
+  });
+  return diag;
+}
+
+/* ── BLOQUE 1: video de cierre — mismo patrón que bienvenida.html: si escena
+   existe pero el reproductor todavía no está construido, se muestra el estado
+   "en producción". Si no hay escena en el JSON, el bloque se queda oculto. ── */
+function renderEscena(escena) {
+  const block = document.getElementById('media-block');
+  if (!escena) { block.style.display = 'none'; block.innerHTML = ''; return; }
+  block.innerHTML = `
+    <div class="media-label">Video de cierre — Lupita</div>
+    <div class="media-placeholder">
+      <span class="media-placeholder-ico">🎬</span>
+      <div>
+        <div class="media-placeholder-title">En producción</div>
+        <div class="media-placeholder-sub">El video de cierre está por terminarse — mientras tanto, sigue con tu evaluación.</div>
+      </div>
+    </div>
+  `;
+  block.style.display = 'block';
+}
+
+/* ── CONTENIDO DE LA PÁGINA: todo sale de content/ruta-cierre.json, nada hardcodeado ──
+   Si el fetch falla, se queda el placeholder — no truena en blanco. ── */
+fetch('content/ruta-cierre.json')
+  .then(res => { if (!res.ok) throw new Error('sin contenido todavía'); return res.json(); })
+  .then(data => {
+    if (data.titulo) document.getElementById('cierre-title').textContent = data.titulo;
+    if (data.contexto) document.getElementById('cierre-contexto').textContent = data.contexto;
+    renderEscena(data.escena);
+    if (Array.isArray(data.diagnostico)) renderDiagnostico(data.diagnostico);
+  })
+  .catch(() => { /* falló el fetch — se queda el placeholder, no romper la página */ });
+
+/* ── ENVÍO DEL CIERRE — identidad ya existe, no se vuelve a pedir CURP ni PIN ── */
+document.getElementById('cierre-enviar').addEventListener('click', function () {
+  const diag = leerDiagnostico();
+  const btn = this;
+  const estado = document.getElementById('cierre-estado');
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  fetch(CONFIG.BACKEND, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      id: identidad.curp,
+      nombre: identidad.nombre,
+      curso: 'Ruta GEB',
+      semana: 'Cierre',
+      campos: diag
+    })
+  }).then(() => {
+    localStorage.setItem('geb_cierre_completado', '1');
+    document.getElementById('cierre-enviar').style.display = 'none';
+    estado.textContent = '';
+    document.getElementById('cierre-gracias').style.display = 'block';
+  }).catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Reintentar envío';
+    estado.textContent = 'No se pudo enviar, inténtalo de nuevo.';
+  });
+});
+</script>
+
+</body>
+</html>
