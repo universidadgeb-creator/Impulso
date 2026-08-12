@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bienvenida a Ruta GEB | Impulso GEB</title>
 <script src="config.js"></script>
+<link rel="stylesheet" href="escena-player.css">
 <style>
 :root {
   --void:    #080C14;
@@ -69,11 +70,13 @@ html.unlocked .lock-screen{display:none;}
 
 /* Labels */
 .prog-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A5E0A;background:#FFF3C0;border:1px solid #F0C040;padding:3px 10px;border-radius:100px;margin-bottom:12px;}
-.bv-video{width:100%;aspect-ratio:16/9;border-radius:14px;background:#0D1525;display:block;}
 .card-title{font-family:Georgia,serif;font-size:22px;color:#14181F;line-height:1.25;margin-bottom:12px;}
 .context-block{margin-bottom:16px;}
 .context-block p{font-size:13px;color:#4A4640;line-height:1.65;margin-bottom:8px;}
 .context-block p:last-child{margin-bottom:0;}
+
+/* SUBTITLE BOX */
+#subtitle-box{display:none;margin-top:10px;padding:10px 14px;background:#F7F5F0;border-left:3px solid #F0C040;border-radius:8px;font-size:13px;color:#3A3630;line-height:1.6;min-height:40px;}
 
 /* CHECKLIST */
 .checklist-label{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:12px;}
@@ -234,14 +237,19 @@ html.unlocked .lock-screen{display:none;}
 <div class="site-content">
   <div class="bienvenida-wrap">
 
-    <!-- Card 1: video + contexto -->
+    <!-- Card 1: contexto + video -->
     <div class="bv-card">
       <div class="card-topbar"></div>
       <div class="card-body">
         <div class="prog-badge">Ruta GEB · Bienvenida</div>
         <h1 class="card-title" id="bv-titulo">Bienvenida a Ruta GEB</h1>
         <div class="context-block" id="bv-contexto"></div>
-        <div id="video-player"></div>
+        <div id="video-player">
+          <div class="vp-ring" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #F0C040;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+            <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:16px solid #F0C040;margin-left:3px;"></div>
+          </div>
+        </div>
+        <div id="subtitle-box"></div>
       </div>
     </div>
 
@@ -315,6 +323,7 @@ html.unlocked .lock-screen{display:none;}
 
 </div>
 
+<script src="escena-player.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
 /* ---- CONSTANTES ---- */
@@ -630,12 +639,60 @@ fetch('content/ruta-sem0.json')
       }
     }
 
-    /* Video real de bienvenida */
-    if (data.video && data.video.src) {
-      var vp = document.getElementById('video-player');
-      vp.innerHTML = '<video class="bv-video" id="bv-video" controls playsinline preload="metadata" src="' +
-        data.video.src + '"></video>';
-      document.getElementById('bv-video').addEventListener('ended', marcarVideoVisto);
+    /* Video — usa MP4 + VTT cuando existen */
+    var vp = document.getElementById('video-player');
+    var subBox = document.getElementById('subtitle-box');
+    if (data.video_src) {
+      vp.innerHTML = '';
+      var vid = document.createElement('video');
+      vid.src = data.video_src;
+      vid.controls = true;
+      vid.playsInline = true;
+      vid.style.cssText = 'width:100%;border-radius:12px;display:block;';
+      vid.addEventListener('ended', marcarVideoVisto);
+      vp.appendChild(vid);
+
+      /* Subtítulos en caja debajo del video */
+      if (data.subtitulos_src && subBox) {
+        fetch(data.subtitulos_src)
+          .then(function(r) { return r.ok ? r.text() : Promise.reject(); })
+          .then(function(vttText) {
+            /* Parsear VTT — líneas: timestamp --> timestamp \n texto */
+            var cues = [];
+            var blocks = vttText.split(/\n\n+/);
+            blocks.forEach(function(block) {
+              var lines = block.trim().split('\n');
+              var timeLine = lines.find(function(l) { return l.indexOf('-->') !== -1; });
+              if (!timeLine) return;
+              var parts = timeLine.split('-->');
+              function toSec(t) {
+                var s = t.trim().split(':');
+                if (s.length === 3) return (+s[0])*3600 + (+s[1])*60 + parseFloat(s[2]);
+                if (s.length === 2) return (+s[0])*60 + parseFloat(s[1]);
+                return parseFloat(s[0]);
+              }
+              var start = toSec(parts[0]);
+              var end   = toSec(parts[1]);
+              var text  = lines.slice(lines.indexOf(timeLine) + 1).join(' ').trim();
+              if (text) cues.push({ start: start, end: end, text: text });
+            });
+            if (cues.length) {
+              subBox.style.display = 'block';
+              vid.addEventListener('timeupdate', function() {
+                var t = vid.currentTime;
+                var active = cues.find(function(c) { return t >= c.start && t < c.end; });
+                subBox.textContent = active ? active.text : '';
+              });
+              vid.addEventListener('ended', function() { subBox.textContent = ''; });
+            }
+          })
+          .catch(function() { /* sin subtítulos, no pasa nada */ });
+      }
+    } else if (data.escena) {
+      vp.innerHTML = '';
+      EscenaPlayer.montar(vp, data.escena);
+      var audioEl = vp.querySelector('.escena-audio');
+      if (audioEl) audioEl.addEventListener('ended', marcarVideoVisto);
     }
 
     /* Encuesta */
