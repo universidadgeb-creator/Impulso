@@ -15,7 +15,7 @@
   "escena": {
     "audio": {
       "src": "audio/ruta-sem0-bienvenida.mp3",
-      "duracion_ms": 85524
+      "duracion_ms": 91794
     },
     "subtitulos_forzados": true,
     "nota": "Tiempos (t) calibrados sobre duración real de 85524ms. Si se regenera el audio, re-medir con ffmpeg y ajustar proporcionalmente.",
