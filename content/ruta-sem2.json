@@ -1,0 +1,172 @@
+{
+  "curso": "Ruta GEB",
+  "semana": "Sem. 2",
+  "pilar": "Propósito",
+  "titulo": "IKIGAI parte 2: lo que el mundo necesita + por lo que te pueden pagar",
+  "contexto": "Cerramos el tema del IKIGAI esta semana. Ya tienes 2 de las 4 piezas — hoy completas las otras 2, y al final las cruzas todas: ahí aparece, por primera vez con nombre, tu ikigai completo.",
+  "variante": "guia",
+  "duracion": "~3-4 h (incluye el video de Marcos)",
+  "escena": {
+    "audio": {
+      "src": "[verificar mp3 de NotebookLM — guion de Sem. 2, Marcos descubre su Cuadrante 4]",
+      "duracion_ms": null
+    },
+    "subtitulos_forzados": true,
+    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real. Consolidado desde el antiguo ruta-sem2-video.json — ya no es un momento separado en el hub, vive embebido arriba de esta guía.",
+    "eventos": [
+      {
+        "t": 0,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "foco",
+        "accion": "entra",
+        "texto": "Marcos lleva seis años en mantenimiento.",
+        "tag": null
+      },
+      {
+        "t": 4000,
+        "quien": "lupita",
+        "quien_secundario": "marcos",
+        "accion_secundario": "breathe",
+        "set": "taller",
+        "tipo": "careo",
+        "accion": "entra",
+        "texto": "Una habilidad que para ti es rutina, otros la pagan de verdad.",
+        "tag": null
+      },
+      {
+        "t": 9000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "recorrido",
+        "accion": "bob",
+        "texto": "Marcos busca el puesto en su celular, ahí mismo, mientras habla con Lupita.",
+        "tag": "cuadrante4"
+      },
+      {
+        "t": 14000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "constelacion",
+        "accion": "pulsa",
+        "texto": "Encuentra 'supervisor de mantenimiento preventivo' — 25% más salario.",
+        "tag": "vacante"
+      }
+    ]
+  },
+  "railItems": [
+    {
+      "label": "Autogestivo semanal",
+      "state": "current"
+    },
+    {
+      "label": "Siguiente semana",
+      "state": "pending"
+    }
+  ],
+  "steps": [
+    {
+      "label": "1 · Diagnóstico",
+      "instruction": "Antes de seguir, regresa un momento a tus cuadrantes de la Semana 1. De lo que escribiste en 'lo que amas' y 'en lo que eres bueno', ¿qué se te quedó pegado esta semana? ¿Confirmaste algo? ¿Cambió algo? No hay que rehacer nada, solo tenerlo fresco."
+    },
+    {
+      "label": "2 · Marco",
+      "instruction": "Ya tienes dos piezas de tu mapa: lo que amas, y en lo que eres bueno. Son piezas internas — las puedes contestar solo/a. Las dos de esta semana son distintas: necesitan al mundo de afuera para confirmarse. <strong>Lo que el mundo necesita:</strong> ¿qué problema ves repetirse en tu sucursal, tu comunidad, tu día a día, que nadie resuelve? <strong>Por lo que te pueden pagar:</strong> una habilidad se vuelve profesión cuando alguien más, sin que tú se lo pidas, ya estuvo dispuesto a darte algo a cambio de ella."
+    },
+    {
+      "label": "3 · Aplicación",
+      "instruction": "<strong>Cuadrante 3 — Lo que el mundo necesita:</strong> escribe mínimo 20 ítems en gerundio. ¿Qué problema ves repetirse que nadie resuelve? ¿A quién específico le cambiarías la vida si lo resolvieras?<br><br><strong>Cuadrante 4 — Por lo que te pueden pagar:</strong> mínimo 20 ítems. ¿Qué te han ofrecido pagar alguna vez? ¿Qué comentario positivo se repite sobre tu trabajo?<br><br><strong>Investigación real — Ruta A (con IA):</strong> pega tus cuadrantes 3 y 4 en la IA que tengas a mano con este prompt: 'Aquí están mis respuestas a dos preguntas: 1) problemas que veo que nadie resuelve: [cuadrante 3]. 2) habilidades por las que me han pagado o podrían pagarme: [cuadrante 4]. Dime 3 sectores o puestos reales donde esto ya se está pagando hoy, por qué están creciendo, y cómo alguien con mi perfil podría entrar.'<br><br><strong>Ruta B (sin IA):</strong> saca 3-4 palabras clave que combinen un problema con una habilidad y búscalas en Google, Indeed, OCC o Computrabajo.<br><br>Para ambas rutas: busca 1 a 3 vacantes reales con salario visible que confirmen alguna pista."
+    },
+    {
+      "label": "4 · Caso",
+      "instruction": "Marcos lleva 6 años en mantenimiento. En su cuadrante 4 escribió 'reparar cosas que otros ya tiraron por perdidas' — nunca lo había visto como algo que alguien pagaría aparte. Con la Ruta A descubre puestos de 'supervisor de mantenimiento preventivo' con 25% más salario, exactamente por esa habilidad. Busca una vacante real que lo confirma. (Ve el video de Marcos y Lupita al inicio de esta semana.)"
+    },
+    {
+      "label": "5 · Reflexión",
+      "instruction": "Ya tienes tus 4 cuadrantes completos. Crúzalos dos por dos: Amas + Bueno = tu Pasión. Amas + Mundo necesita = tu Misión. Mundo necesita + Te pagan = tu Vocación. Bueno + Te pagan = tu Profesión. Y en el centro, donde las cuatro se tocan, eso se llama IKIGAI — tu razón de ser.<br><br>Última pregunta, para tu testigo: léele tus 4 cruces y pregúntale '¿esto suena a mí?'. Anota qué te respondió."
+    }
+  ],
+  "checklistLabels": [
+    "Cuadrante 3 completo (mínimo 20 ítems)",
+    "Cuadrante 4 completo (mínimo 20 ítems)",
+    "Evidencia de investigación (Ruta A o B) + 1-3 vacantes con salario",
+    "4 cruces + respuesta del testigo",
+    "Subiste tu avance a la plataforma"
+  ],
+  "recursos": [
+    {
+      "icono": "📄",
+      "texto": "Hoja de trabajo — Mis cuadrantes 3 y 4 (descargable)",
+      "url": "recursos/GEB_Ruta_Sem2_Hoja-Cuadrantes.docx"
+    },
+    {
+      "icono": "🎧",
+      "texto": "Podcast Oso Trava — 'Así Encontrarás tu Propósito' · Escúchalo en Spotify antes de completar tus cuadrantes",
+      "url": "https://open.spotify.com/show/5Y4wPln7DbJSh3vLxdVbVs"
+    }
+  ],
+  "entrega": {
+    "campos": [
+      {
+        "id": "local_cuadrante3",
+        "modo": "local",
+        "tipo": "lista",
+        "label": "Lo que el mundo necesita",
+        "hint": "Mínimo 20 ítems. Se queda en tu celular.",
+        "filas": 20
+      },
+      {
+        "id": "local_cuadrante4",
+        "modo": "local",
+        "tipo": "lista",
+        "label": "Por lo que te pueden pagar",
+        "hint": "Mínimo 20 ítems. Se queda en tu celular.",
+        "filas": 20
+      },
+      {
+        "id": "vacantes",
+        "modo": "entrega",
+        "tipo": "texto3",
+        "label": "Tus vacantes reales encontradas",
+        "hint": "1 a 3, con salario visible."
+      },
+      {
+        "id": "evidencia_resumen",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "¿Qué te dijo la IA o tu búsqueda?",
+        "hint": "Resumen corto de la Ruta A o B."
+      },
+      {
+        "id": "cruce_pasion",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Tu Pasión (Amas + Bueno)"
+      },
+      {
+        "id": "cruce_mision",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Tu Misión (Amas + Mundo necesita)"
+      },
+      {
+        "id": "cruce_vocacion",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Tu Vocación (Mundo necesita + Te pagan)"
+      },
+      {
+        "id": "cruce_profesion",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Tu Profesión (Bueno + Te pagan)"
+      },
+      {
+        "id": "testigo_respuesta",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "¿Esto suena a mí? — qué te respondió tu testigo"
+      }
+    ]
+  }
+}

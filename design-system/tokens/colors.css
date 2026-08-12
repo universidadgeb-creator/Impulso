@@ -1,0 +1,32 @@
+/*
+  Tokens de color — Impulso GEB / Ruta GEB.
+  Fuente de verdad: definidos a mano (copiados idénticos) en el <style> de
+  index.html, ruta-geb.html, impulso-geb.html, momento-guia.html,
+  momento-video.html y documentados en ../../styleguide.html.
+  Importar este archivo una vez en la raíz de la app que consuma el paquete.
+*/
+:root {
+  --void:    #080C14;                 /* fondo general del sitio */
+  --deep:    #0D1525;                 /* fondo de sección alterna */
+  --mid-bg:  #111B2E;                 /* fondo intermedio */
+  --surface: #172038;                 /* tarjetas/nav oscuros, lock screen */
+  --border:  rgba(255, 255, 255, 0.08);
+
+  --sage:    #7EC8A0;                 /* primario · CTA · éxito · pilar Comunidad */
+  --gold:    #F0C040;                 /* acento · pilar Propósito · fase Producción */
+  --coral:   #F07060;                 /* alerta · Transición/Integración · fase Lanzamiento */
+  --blue-hi: #6AB0F5;                 /* pilar Maestría · fase Forja */
+
+  --white:   #FFFFFF;
+  --fog:     rgba(255, 255, 255, 0.55); /* texto secundario sobre fondo oscuro */
+  --mist:    rgba(255, 255, 255, 0.3);  /* texto terciario / placeholder */
+
+  /* Tarjetas de "plataforma" (dashboard, momento) usan un esquema claro */
+  --dash-grad-start: #FFFFFF;
+  --dash-grad-end:   #F7F5F0;
+  --dash-text:       #14181F;
+  --dash-text-2:     #5A5647;
+  --dash-eyebrow:    #8A8577;
+  --dash-border:     #ECEAE4;
+  --dash-placeholder:#A8A498;
+}

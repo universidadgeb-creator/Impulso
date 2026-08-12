@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momento — Guía | Impulso GEB</title>
+<style>
+:root {
+  --void:    #080C14;
+  --deep:    #0D1525;
+  --surface: #172038;
+  --border:  rgba(255,255,255,0.08);
+  --sage:    #7EC8A0;
+  --gold:    #F0C040;
+  --coral:   #F07060;
+  --blue-hi: #6AB0F5;
+  --white:   #FFFFFF;
+  --fog:     rgba(255,255,255,0.55);
+  --mist:    rgba(255,255,255,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);color:var(--white);
+  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.2;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(8,12,20,0.95),transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.nav-logo{font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--white);}
+.nav-logo sup{font-size:11px;color:var(--sage);vertical-align:super;letter-spacing:0.05em;font-family:sans-serif;}
+.nav-back{font-size:13px;font-weight:600;color:var(--fog);}
+.nav-back:hover{color:var(--white);}
+
+/* LOCK SCREEN */
+html:not(.unlocked) .site-content{display:none;}
+html.unlocked .lock-screen{display:none;}
+.lock-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 40px;}
+.lock-card{width:100%;max-width:380px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px 28px;text-align:center;}
+.lock-ico-big{width:52px;height:52px;border-radius:50%;background:rgba(126,200,160,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;}
+.lock-card h1{font-size:22px;color:var(--white);margin-bottom:8px;}
+.lock-card p{font-size:13.5px;color:var(--fog);line-height:1.6;margin-bottom:24px;}
+.lock-form{display:flex;flex-direction:column;gap:10px;}
+.lock-input{font-size:14px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--white);font-family:inherit;text-align:center;letter-spacing:.04em;}
+.lock-input:focus{outline:none;border-color:var(--sage);}
+.lock-input::placeholder{color:var(--mist);}
+.lock-submit{background:var(--sage);color:var(--void);font-size:14px;font-weight:700;padding:13px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s;}
+.lock-submit:hover{transform:translateY(-1px);}
+.lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
+.lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
+
+/* PAGE */
+.momento-wrap{max-width:1100px;margin:0 auto;padding:96px 20px 60px;}
+.top-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.breadcrumb{font-size:11.5px;color:var(--fog);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.breadcrumb b{color:var(--white);}
+.status-row{display:flex;align-items:center;gap:8px;}
+.status-badge{font-size:10.5px;font-weight:700;padding:5px 12px;border-radius:100px;background:rgba(126,200,160,.18);color:var(--sage);border:1px solid rgba(126,200,160,.4);white-space:nowrap;}
+.next-btn{font-size:11.5px;font-weight:700;padding:7px 14px;border-radius:100px;background:var(--sage);color:var(--void);white-space:nowrap;}
+
+/* CARD */
+.momento-card{
+  background:#FFFFFF;color:#14181F;border-radius:22px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
+}
+.card-topbar{height:5px;background:linear-gradient(90deg,#F0C040,#F07060,#7EC8A0,#6AB0F5);}
+.momento-grid{display:grid;grid-template-columns:220px 1fr 300px;}
+
+/* left rail: temario de la semana */
+.rail{border-right:1px solid #ECEAE4;padding:24px 18px;background:#FAFAF8;}
+.rail-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9A968C;margin-bottom:14px;}
+.rail-list{display:flex;flex-direction:column;gap:3px;}
+.rail-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:12.5px;color:#6B6558;}
+.rail-item .dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;background:#7EC8A0;color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;}
+.rail-item.pending .dot{background:none;border:1.5px dashed #D8D3C6;}
+.rail-item.current{background:#0B0F16;color:#fff;font-weight:700;}
+.rail-item.current .dot{background:#F0C040;color:#0B0F16;}
+.rail-note{margin-top:16px;font-size:11px;color:#B8B2A4;line-height:1.5;font-style:italic;}
+
+/* center */
+.center{padding:26px 28px;display:flex;flex-direction:column;gap:20px;position:relative;}
+.card-glow{position:absolute;top:-10px;left:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(240,192,64,.12),transparent 70%);pointer-events:none;}
+
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-size:11px;font-weight:700;padding:6px 13px;border-radius:100px;white-space:nowrap;}
+.tag-guia{background:rgba(240,192,64,.12);color:#B8860B;}
+.tag-pilar{color:#3F8F63;background:rgba(126,200,160,.12);}
+
+.momento-title{font-family:Georgia,serif;font-size:22px;color:#14181F;}
+.momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:-8px;}
+
+.media-box{display:flex;align-items:center;gap:14px;background:#0B0F16;border-radius:14px;padding:14px 16px;}
+.media-play{width:38px;height:38px;border-radius:50%;background:#F0C040;color:#0B0F16;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.media-title{font-size:13.5px;font-weight:700;color:#fff;}
+.media-meta{font-size:11.5px;color:rgba(255,255,255,.5);margin-top:2px;}
+
+.nota-box{display:flex;gap:9px;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:10px;padding:11px 13px;font-size:12px;color:#5C4A1E;line-height:1.5;}
+
+.label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;}
+
+.step-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.step-chip{
+  font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:100px;white-space:nowrap;
+  border:1.5px solid #ECEAE4;color:#7A756A;background:none;cursor:pointer;transition:.15s;
+}
+.step-chip.active{border-color:#F0C040;color:#B8860B;background:rgba(240,192,64,.08);}
+.step-chip.done{border-color:#7EC8A0;color:#3F8F63;background:rgba(126,200,160,.06);}
+
+.step-box{background:rgba(240,192,64,.07);border:1px solid rgba(240,192,64,.28);border-radius:14px;padding:16px;}
+.step-box-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.step-num{width:20px;height:20px;border-radius:50%;background:#F0C040;color:#0B0F16;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-box-head span:last-child{font-size:14px;color:#14181F;}
+.step-box p{font-size:12.5px;color:#6B6558;line-height:1.6;}
+
+.checklist-card{background:#0B0F16;border-radius:16px;padding:20px;}
+.checklist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.checklist-head span:first-child{font-size:16px;color:#fff;}
+.checklist-count{font-size:11px;font-weight:700;padding:4px 11px;border-radius:100px;background:#F0C040;color:#0B0F16;}
+.checklist-items{display:flex;flex-direction:column;gap:8px;}
+.check-item{
+  display:flex;align-items:center;gap:10px;border-radius:100px;padding:10px 14px;font-size:12.5px;
+  background:rgba(255,255,255,.03);color:rgba(255,255,255,.6);cursor:pointer;border:none;text-align:left;width:100%;
+}
+.check-mark{width:17px;height:17px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;border:1.5px solid rgba(255,255,255,.25);}
+.check-item.checked{background:rgba(255,255,255,.06);color:#fff;}
+.check-item.checked .check-mark{background:#7EC8A0;color:#0B0F16;border-color:#7EC8A0;}
+
+/* right side: recursos + entrega (siempre presente) */
+.side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
+.recurso-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;font-size:13px;color:#3A7FC9;}
+.entrega-form{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.entrega-form input{font-size:13px;padding:11px 13px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;}
+.entrega-form button{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
+
+.placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:18px;}
+
+/* ── CAMPO-ENTREGA (motor de entrega genérico) ── */
+.campo-entrega{display:flex;flex-direction:column;gap:14px;margin-top:4px;}
+.campo-label{font-size:12px;font-weight:700;color:#14181F;display:block;margin-bottom:3px;}
+.campo-hint{font-size:11px;color:#9A968C;margin-bottom:5px;line-height:1.45;}
+.campo-badge-local{display:inline-block;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:100px;background:rgba(106,176,245,.15);color:#185FA5;margin-left:6px;vertical-align:middle;}
+.campo-input{width:100%;font-size:12.5px;padding:9px 11px;border-radius:8px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;resize:vertical;}
+.campo-input:focus{outline:none;border-color:#F0C040;}
+.campo-input::placeholder{color:#BEBAB2;}
+textarea.campo-input{min-height:72px;}
+.campo-texto3{display:flex;flex-direction:column;gap:5px;}
+.campo-texto3 input{font-size:12.5px;padding:8px 10px;border-radius:7px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;}
+.campo-radios{display:flex;flex-direction:column;gap:4px;}
+.campo-radio-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;border:1.5px solid #ECEAE4;cursor:pointer;font-size:12px;color:#4A4640;background:#fff;}
+.campo-radio-item.sel{border-color:#F0C040;background:#FFF8E6;color:#7A5E0A;}
+.campo-calculado{font-size:12.5px;color:#6B6558;padding:8px 11px;background:#F3F1EC;border-radius:7px;min-height:36px;}
+.campo-enviar{width:100%;margin-top:6px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
+.campo-estado{font-size:11px;margin-top:4px;color:#9A968C;text-align:center;min-height:16px;}
+.campo-estado.ok{color:#3F8F63;}
+.campo-estado.err{color:#C0392B;}
+.campo-sep{border:none;border-top:1px dashed #ECEAE4;margin:4px 0;}
+.campo-privacidad{display:flex;gap:8px;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.25);border-radius:9px;padding:9px 11px;font-size:11px;color:#7A5E0A;line-height:1.5;margin-bottom:4px;}
+.identidad-caja{display:flex;flex-direction:column;gap:10px;}
+.identidad-intro{font-size:12px;color:#6A6460;line-height:1.6;border-left:3px solid #F0C040;padding:8px 10px 8px 12px;background:#FAFAF8;border-radius:0 6px 6px 0;margin-bottom:2px;}
+.identidad-input{width:100%;font-size:12.5px;padding:9px 11px;border-radius:8px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;}
+.identidad-input:focus{outline:none;border-color:#F0C040;}
+.identidad-error{font-size:11.5px;color:#C0392B;margin-top:2px;min-height:16px;}
+
+/* ── HELP / WHATSAPP FAB ── */
+.help-fab{
+  position:fixed;bottom:22px;left:22px;z-index:180;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--sage);color:var(--void);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 10px 30px rgba(126,200,160,.45);
+  transition:transform .15s,box-shadow .2s;
+}
+.help-fab:hover{transform:scale(1.06);box-shadow:0 12px 36px rgba(126,200,160,.6);}
+
+/* ── MOBILE: side panels move below center, stay visible ── */
+@media(max-width:900px){
+  .momento-grid{display:flex;flex-direction:column;}
+  .center{order:1;}
+  .rail{order:2;border-right:none;border-top:1px solid #ECEAE4;}
+  .side{order:3;border-left:none;border-top:1px solid #ECEAE4;}
+  .momento-wrap{padding:88px 16px 44px;max-width:520px;}
+  .center{padding:22px 18px;}
+}
+</style>
+<script src="config.js"></script>
+<link rel="stylesheet" href="escena-player.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
+  <a href="ruta-geb.html" class="nav-back">← Volver a Ruta GEB</a>
+</nav>
+
+<!-- ══ LOCK SCREEN ══ -->
+<div class="lock-screen">
+  <div class="lock-card">
+    <div class="lock-ico-big">🔒</div>
+    <h1>Plataforma</h1>
+    <p>Ingresa la contraseña del curso para continuar.</p>
+    <form class="lock-form" id="lock-form">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <button type="submit" class="lock-submit">Acceder →</button>
+      <div class="lock-error" id="lock-error"></div>
+    </form>
+    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+  </div>
+</div>
+
+<div class="site-content">
+  <div class="momento-wrap">
+    <div class="top-strip">
+      <div class="breadcrumb" id="breadcrumb">Impulso › <b>Ruta GEB</b> › Sem. 1</div>
+      <div class="status-row">
+        <span class="status-badge">EN CURSO</span>
+        <span class="next-btn">Siguiente →</span>
+      </div>
+    </div>
+
+    <div class="momento-card">
+      <div class="card-topbar"></div>
+      <div class="momento-grid">
+
+        <div class="rail">
+          <div class="rail-title" id="rail-title">Temario de la semana</div>
+          <div class="rail-list" id="rail-list"></div>
+          <div class="rail-note">Esta semana puede sumar más actividades más adelante.</div>
+        </div>
+
+        <div class="center">
+          <div class="card-glow"></div>
+
+          <div class="tag-row">
+            <span class="tag tag-guia">📘 Guía</span>
+            <span class="tag tag-pilar" id="pilar-tag">🟠 Propósito</span>
+          </div>
+
+          <div>
+            <h2 class="momento-title" id="momento-title">[verificar título del momento]</h2>
+            <p class="momento-context" id="momento-context">[verificar frase de contexto breve — 1-2 líneas de introducción a la guía]</p>
+          </div>
+
+          <div class="media-box" id="media-box" style="display:none;">
+            <div class="media-play">▶</div>
+            <div>
+              <div class="media-title" id="media-title"></div>
+              <div class="media-meta" id="media-meta"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="label-caps" style="margin-bottom:8px;">En esta guía</div>
+            <div class="step-chips" id="step-chips"></div>
+          </div>
+
+          <div class="step-box" id="step-box"></div>
+
+          <div class="checklist-card">
+            <div class="checklist-head">
+              <span>Checklist del ejercicio</span>
+              <span class="checklist-count" id="checklist-count">0/4</span>
+            </div>
+            <div class="checklist-items" id="checklist-items"></div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div>
+            <div class="label-caps" style="margin-bottom:10px;">Recursos necesarios</div>
+            <div id="recursos-list"><div class="recurso-row">📄 [verificar recurso]</div></div>
+          </div>
+          <div id="nota-wrap" style="display:none;">
+            <div class="nota-box" id="nota-box"></div>
+          </div>
+          <div>
+            <div class="label-caps" style="margin-bottom:10px;">Espacio de entrega</div>
+            <div id="entrega-campos"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="placeholder-note">Plantilla de momento — el contenido específico de cada guía se completará más adelante.</p>
+  </div>
+
+  <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
+</div>
+
+<script src="escena-player.js"></script>
+<script src="entrega-engine.js"></script>
+<script>
+/* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
+const COURSE_PASSWORD = 'rutageb26';
+const STORAGE_KEY = 'impulso_unlock_ruta';
+if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
+document.getElementById('lock-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const val = document.getElementById('lock-input').value.trim();
+  if (val === COURSE_PASSWORD) {
+    localStorage.setItem(STORAGE_KEY, '1');
+    document.documentElement.classList.add('unlocked');
+  } else {
+    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+  }
+});
+
+/* ── CONTEXT FROM QUERY PARAMS ── */
+const params = new URLSearchParams(window.location.search);
+const curso = params.get('curso') || 'Ruta GEB';
+const semana = params.get('semana') || 'Sem. 1';
+const titulo = params.get('titulo') || '[verificar título del momento]';
+const pilar = params.get('pilar') || 'Propósito';
+
+document.getElementById('breadcrumb').innerHTML = `Impulso › <b>${curso}</b> › ${semana}`;
+document.getElementById('rail-title').textContent = `Temario de ${semana}`;
+document.getElementById('momento-title').textContent = titulo;
+
+const PILAR_STYLE = {
+  'Propósito':  { emoji:'🟠', color:'#B8860B', bg:'rgba(240,192,64,.12)' },
+  'Maestría':   { emoji:'🔵', color:'#3A7FC9', bg:'rgba(106,176,245,.12)' },
+  'Comunidad':  { emoji:'🟢', color:'#3F8F63', bg:'rgba(126,200,160,.12)' },
+  'Transición': { emoji:'🟠🔵', color:'#C9503F', bg:'rgba(240,112,96,.12)' },
+};
+const pStyle = PILAR_STYLE[pilar] || PILAR_STYLE['Propósito'];
+const pilarTag = document.getElementById('pilar-tag');
+pilarTag.textContent = `${pStyle.emoji} ${pilar}`;
+pilarTag.style.color = pStyle.color;
+pilarTag.style.background = pStyle.bg;
+
+/* ── RAIL: temario / momentos de la semana (default — se sobrescribe con el JSON de la semana si trae railItems) ── */
+const esRuta = curso.toLowerCase().includes('ruta');
+let railItems = esRuta ? [
+  { label:'Autogestivo semanal', state:'current' },
+  { label:'Siguiente semana', state:'pending' },
+] : [
+  { label:'Autogestivo semanal', state:'done' },
+  { label:'Tríada de colaboradores', state:'done' },
+  { label:titulo, state:'current' },
+  { label:'Siguiente momento', state:'pending' },
+];
+function renderRail() {
+  const railList = document.getElementById('rail-list');
+  railList.innerHTML = railItems.map(it => `
+    <div class="rail-item ${it.state === 'current' ? 'current' : it.state === 'pending' ? 'pending' : ''}">
+      <span class="dot">${it.state === 'done' ? '✓' : it.state === 'current' ? '▶' : ''}</span>${it.label}
+    </div>
+  `).join('');
+}
+renderRail();
+
+/* ── STEPS (default — se sobrescribe con el JSON de la semana) ── */
+let steps = [
+  { label:'1 · Diagnóstico', instruction:'[verificar instrucción]' },
+  { label:'2 · Marco', instruction:'[verificar instrucción]' },
+  { label:'3 · Aplicación', instruction:'[verificar instrucción]' },
+  { label:'4 · Caso', instruction:'[verificar instrucción]' },
+  { label:'5 · Reflexión', instruction:'[verificar instrucción]' },
+];
+let activeStep = 0;
+
+function renderSteps() {
+  const chips = document.getElementById('step-chips');
+  chips.innerHTML = '';
+  steps.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'step-chip' + (i === activeStep ? ' active' : i < activeStep ? ' done' : '');
+    btn.textContent = s.label;
+    btn.addEventListener('click', () => { activeStep = i; render(); });
+    chips.appendChild(btn);
+  });
+  const box = document.getElementById('step-box');
+  const s = steps[activeStep];
+  box.innerHTML = `
+    <div class="step-box-head">
+      <span class="step-num">${activeStep + 1}</span>
+      <span>${s.label.split(' · ')[1]}</span>
+    </div>
+    <p>${s.instruction}</p>
+  `;
+}
+
+/* ── CHECKLIST (default — se sobrescribe con el JSON de la semana) ── */
+let checklistLabels = [
+  'Leíste el marco completo',
+  'Completaste la tabla de diagnóstico',
+  'Escribiste tu reflexión final',
+  'Subiste tu archivo a Drive',
+];
+let checked = new Array(checklistLabels.length).fill(false);
+
+function renderChecklist() {
+  const wrap = document.getElementById('checklist-items');
+  wrap.innerHTML = '';
+  checklistLabels.forEach((label, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'check-item' + (checked[i] ? ' checked' : '');
+    btn.innerHTML = `<span class="check-mark">${checked[i] ? '✓' : ''}</span>${label}`;
+    btn.addEventListener('click', () => { checked[i] = !checked[i]; render(); });
+    wrap.appendChild(btn);
+  });
+  document.getElementById('checklist-count').textContent = `${checked.filter(Boolean).length}/${checklistLabels.length}`;
+}
+
+/* ── MEDIA (video opcional embebido en la guía) ── */
+function renderMedia(data) {
+  const box = document.getElementById('media-box');
+  if (data && data.escena) {
+    box.style.display = 'block';
+    box.innerHTML = '';
+    EscenaPlayer.montar(box, data.escena);
+    return;
+  }
+  const media = data && data.media ? data.media : null;
+  if (!media) { box.style.display = 'none'; return; }
+  box.style.display = 'flex';
+  document.getElementById('media-title').textContent = media.titulo || '';
+  document.getElementById('media-meta').textContent = media.duracion ? `Video · ${media.duracion}` : 'Video';
+  box.onclick = () => { if (media.src) window.open(media.src, '_blank'); };
+}
+
+/* ── RECURSOS ── */
+function renderRecursos(recursos) {
+  const wrap = document.getElementById('recursos-list');
+  if (!recursos || !recursos.length) return;
+  wrap.innerHTML = recursos.map(r => {
+    const texto = r.texto || r.label || r.text || '';
+    const icono = r.icono || r.icon || '📄';
+    return r.url
+      ? `<a class="recurso-row" href="${r.url}" target="_blank" rel="noopener" style="text-decoration:none;">${icono} ${texto}</a>`
+      : `<div class="recurso-row">${icono} ${texto}</div>`;
+  }).join('');
+}
+
+/* ── NOTA / PRIVACIDAD (opcional, ej. semanas de presupuesto) ── */
+function renderNota(nota, entrega) {
+  const wrap = document.getElementById('nota-wrap');
+  let html = '';
+  if (entrega) {
+    html += `<div><strong>${entrega.titulo || 'Entrega de la semana'}</strong><ul style="margin:6px 0 0 16px;padding:0;">${(entrega.items||[]).map(i => `<li>${i}</li>`).join('')}</ul></div>`;
+    if (entrega.nota) html += `<div style="margin-top:8px;">${entrega.nota}</div>`;
+  } else if (nota) {
+    html = nota;
+  }
+  if (!html) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  document.getElementById('nota-box').innerHTML = html;
+}
+
+function render() {
+  renderSteps();
+  renderChecklist();
+}
+render();
+
+/* ── FETCH DEL CONTENIDO REAL DE LA SEMANA (prioriza ?data=, si no viene lo adivina por número de semana) ── */
+const dataParam = params.get('data');
+const semNum = (semana.match(/\d+/) || ['1'])[0];
+const programaSlug = esRuta ? 'ruta' : 'impulso';
+const contentUrl = dataParam ? `content/${dataParam}` : `content/${programaSlug}-sem${semNum}.json`;
+
+fetch(contentUrl)
+  .then(r => r.ok ? r.json() : Promise.reject('no-content'))
+  .then(data => {
+    if (data.titulo) document.getElementById('momento-title').textContent = data.titulo;
+    if (data.contexto) document.getElementById('momento-context').textContent = data.contexto;
+
+    if (data.pilar && data.pilar !== pilar) {
+      const s2 = PILAR_STYLE[data.pilar] || PILAR_STYLE['Propósito'];
+      pilarTag.textContent = `${s2.emoji} ${data.pilar}`;
+      pilarTag.style.color = s2.color;
+      pilarTag.style.background = s2.bg;
+    }
+
+    renderMedia(data);
+
+    if (data.railItems) { railItems = data.railItems; renderRail(); }
+
+    if (data.steps) { steps = data.steps; activeStep = 0; }
+    if (data.checklistLabels) { checklistLabels = data.checklistLabels; checked = new Array(checklistLabels.length).fill(false); }
+    render();
+
+    renderRecursos(data.recursos);
+    renderNota(data.nota, data.entrega);
+
+    if (data.entrega && data.entrega.campos) {
+      EntregaEngine.montar(
+        document.getElementById('entrega-campos'),
+        { curso, semana, campos: data.entrega.campos }
+      );
+    }
+  })
+  .catch(() => { /* sin JSON disponible para esta semana: se queda con el contenido de fallback ya hardcodeado arriba */ });
+</script>
+
+</body>
+</html>

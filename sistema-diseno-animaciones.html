@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sistema de Diseño — Animaciones Ruta GEB</title>
+<style>
+  @keyframes pulseLupita { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+  @keyframes bounceAna { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  @keyframes breatheMarcos { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  @keyframes flickerSoft { 0%,100% { opacity: 1; } 45% { opacity: 0.55; } 55% { opacity: 0.85; } }
+  @keyframes flickerLamp { 0%,100% { opacity: 1; } 40% { opacity: 0.3; } 50% { opacity: 0.9; } 60% { opacity: 0.4; } }
+  @keyframes steamRise { 0% { transform: translateY(0) scaleX(1); opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-26px) scaleX(1.4); opacity: 0; } }
+  @keyframes curtainSway { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(1.5deg); } }
+  @keyframes moveRight { 0%,100% { transform: translateX(-70px); } 50% { transform: translateX(70px); } }
+  @keyframes converge { 0%,100% { transform: translate(0,0); } 50% { transform: translate(var(--tx,0),var(--ty,0)); } }
+
+  :root{
+    --void:#080C14; --deep:#0D1525; --mid-bg:#111B2E; --surface:#172038;
+    --border:rgba(255,255,255,0.08); --sage:#7EC8A0; --gold:#F0C040;
+    --coral:#F07060; --blue-hi:#6AB0F5; --white:#FFFFFF;
+    --fog:rgba(255,255,255,0.55); --mist:rgba(255,255,255,0.3);
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--void); color:var(--white);
+    font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif; }
+  a{ color:var(--blue-hi); }
+  a:hover{ color:var(--gold); }
+
+  .wrap{ max-width:1200px; margin:0 auto; padding:64px 48px 96px; }
+  .eyebrow{ font-size:13px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--sage); font-weight:600; margin-bottom:12px; }
+  h1{ font-family:Georgia,serif; font-size:44px; font-weight:700; margin:0 0 12px; letter-spacing:-0.01em; }
+  .lede{ font-size:17px; line-height:1.6; color:var(--fog); max-width:640px; margin:0 0 20px; }
+  .canvas-note{ display:inline-flex; align-items:center; gap:10px; padding:10px 18px;
+    background:var(--deep); border:1px solid var(--border); border-radius:8px; }
+  .canvas-note .swatch{ width:20px; height:11.25px; border:1.5px solid var(--gold); border-radius:2px; }
+  .canvas-note span{ font-size:14px; font-weight:600; color:var(--gold); }
+
+  section{ margin-bottom:72px; }
+  h2{ font-size:22px; font-weight:700; margin:0 0 6px; color:var(--white); }
+  .sub{ font-size:14px; color:#7A8699; margin:0 0 20px; }
+
+  .palette-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:16px; }
+  .tok-card{ background:var(--deep); border:1px solid var(--border); border-radius:10px; padding:16px; }
+  .tok-swatch{ height:56px; border-radius:6px; border:1px solid var(--border); margin-bottom:12px; }
+  .tok-name{ font-size:13px; font-weight:600; }
+  .tok-hex{ font-size:12px; color:#7A8699; font-family:monospace; }
+  .tok-desc{ font-size:11px; color:#5A6478; margin-top:4px; }
+
+  .cast-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .cast-card{ background:var(--deep); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .cast-stage{ aspect-ratio:16/9; background:var(--void); display:flex; align-items:center; justify-content:center; }
+  .cast-body{ padding:20px; }
+  .cast-name{ font-size:16px; font-weight:700; margin-bottom:6px; }
+  .cast-text{ font-size:13px; color:var(--fog); line-height:1.6; margin-bottom:10px; }
+  .cast-anim{ font-size:12px; font-family:monospace; color:#7A8699; }
+
+  .sets-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .set-stage{ aspect-ratio:16/9; border-radius:10px; overflow:hidden; position:relative; }
+  .set-name{ font-size:13px; font-weight:600; margin-top:10px; }
+  .set-desc{ font-size:11px; color:#7A8699; }
+
+  .scene-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+  .scene-card{ background:var(--deep); border:1px solid var(--border); border-radius:12px; padding:20px; }
+  .scene-stage{ aspect-ratio:16/9; background:var(--void); border-radius:8px;
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px; position:relative; overflow:hidden; }
+  .scene-title{ font-size:15px; font-weight:700; margin-bottom:4px; }
+  .scene-desc{ font-size:13px; color:var(--fog); line-height:1.5; }
+
+  @media (max-width:900px){
+    .palette-grid{ grid-template-columns:repeat(3,1fr); }
+    .cast-grid{ grid-template-columns:1fr; }
+    .sets-grid{ grid-template-columns:repeat(2,1fr); }
+    .scene-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width:699px){
+    .wrap{ padding:40px 20px 64px; }
+    h1{ font-size:32px; }
+    .palette-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div style="max-width:1200px; margin:0 auto 56px;">
+    <div class="eyebrow">Sistema de diseño · Referencia permanente</div>
+    <h1>Ruta GEB — Animaciones</h1>
+    <p class="lede">Serie de animaciones minimalistas para los videos semanales. Elenco de formas geométricas puras, sets de fondo y tipos de escena. Cada guion semanal (skill <code>director-video-geb</code>) referencia este documento sin repetirlo.</p>
+    <div class="canvas-note">
+      <div class="swatch"></div>
+      <span>Canvas obligatorio: 1280 × 720 px · horizontal 16:9 · nunca vertical</span>
+    </div>
+  </div>
+
+  <section>
+    <h2>Paleta de tokens</h2>
+    <div class="palette-grid">
+      <div class="tok-card">
+        <div class="tok-swatch" style="background:var(--void);"></div>
+        <div class="tok-name">Void</div><div class="tok-hex">#080C14</div>
+        <div class="tok-desc">Fondo general</div>
+      </div>
+      <div class="tok-card">
+        <div class="tok-swatch" style="background:var(--deep);"></div>
+        <div class="tok-name">Deep</div><div class="tok-hex">#0D1525</div>
+        <div class="tok-desc">Fondo alterno</div>
+      </div>
+      <div class="tok-card">
+        <div class="tok-swatch" style="background:var(--gold); border:none;"></div>
+        <div class="tok-name">Gold</div><div class="tok-hex">#F0C040</div>
+        <div class="tok-desc">Lupita</div>
+      </div>
+      <div class="tok-card">
+        <div class="tok-swatch" style="background:var(--blue-hi); border:none;"></div>
+        <div class="tok-name">Blue-hi</div><div class="tok-hex">#6AB0F5</div>
+        <div class="tok-desc">Ana</div>
+      </div>
+      <div class="tok-card">
+        <div class="tok-swatch" style="background:var(--coral); border:none;"></div>
+        <div class="tok-name">Coral</div><div class="tok-hex">#F07060</div>
+        <div class="tok-desc">Marcos</div>
+      </div>
+      <div class="tok-card">
+        <div class="tok-swatch" style="background:var(--sage); border:none;"></div>
+        <div class="tok-name">Sage</div><div class="tok-hex">#7EC8A0</div>
+        <div class="tok-desc">Acento positivo</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Elenco</h2>
+    <p class="sub">Formas geométricas puras. Ninguna tiene cara, ojos, boca ni extremidades.</p>
+    <div class="cast-grid">
+
+      <div class="cast-card">
+        <div class="cast-stage">
+          <div style="width:64px; height:64px; border-radius:50%; border:3px solid var(--gold); animation:pulseLupita 1.6s ease-in-out infinite;"></div>
+        </div>
+        <div class="cast-body">
+          <div class="cast-name" style="color:var(--gold);">Lupita</div>
+          <div class="cast-text">Anillo delgado sin relleno, dorado cálido. Flota sola en el cuadro. Es presencia, nunca gesticula.</div>
+          <div class="cast-anim">Pulso: escala 1→1.08→1 · loop ~1.6s</div>
+        </div>
+      </div>
+
+      <div class="cast-card">
+        <div class="cast-stage">
+          <div style="width:36px; height:36px; border-radius:50%; background:var(--blue-hi); animation:bounceAna 1.4s ease-in-out infinite;"></div>
+        </div>
+        <div class="cast-body">
+          <div class="cast-name" style="color:var(--blue-hi);">Ana</div>
+          <div class="cast-text">Esfera sólida azul claro, tamaño pequeño. Rebote suave y curioso, sin rostro.</div>
+          <div class="cast-anim">Rebote: traslación vertical · loop ~1.4s</div>
+        </div>
+      </div>
+
+      <div class="cast-card">
+        <div class="cast-stage">
+          <div style="width:58px; height:58px; border-radius:12px; background:var(--coral); animation:breatheMarcos 2.2s ease-in-out infinite;"></div>
+        </div>
+        <div class="cast-body">
+          <div class="cast-name" style="color:var(--coral);">Marcos</div>
+          <div class="cast-text">Cuadrado de esquinas suavemente redondeadas, coral cálido, más peso visual que Ana.</div>
+          <div class="cast-anim">Respiración: escala 1→1.05→1 · loop ~2.2s</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Sets — fondos</h2>
+    <p class="sub">2–3 elementos reconocibles cada uno. Minimalismo es la identidad.</p>
+    <div class="sets-grid">
+
+      <div>
+        <div class="set-stage" style="background:linear-gradient(100deg,#0A1220,#12203A);">
+          <div style="position:absolute; top:0; right:0; width:36%; height:100%; background:linear-gradient(180deg, rgba(106,176,245,0.25), rgba(106,176,245,0.05));"></div>
+          <div style="position:absolute; left:0; right:0; bottom:22%; height:1px; background:rgba(184,192,204,0.25);"></div>
+          <div style="position:absolute; left:14%; bottom:24%; width:8px; height:8px; border-radius:2px; background:var(--blue-hi); animation:flickerSoft 3s ease-in-out infinite;"></div>
+        </div>
+        <div class="set-name">Recepción</div>
+        <div class="set-desc">Mostrador, luz azulada lateral, líneas sutiles</div>
+      </div>
+
+      <div>
+        <div class="set-stage" style="background:#241A10;">
+          <div style="position:absolute; inset:0; background:repeating-linear-gradient(115deg, rgba(240,192,64,0.06) 0 3px, transparent 3px 22px);"></div>
+          <div style="position:absolute; left:30%; top:35%; width:10px; height:10px; border-radius:50%; background:var(--gold); box-shadow:0 0 14px var(--gold); animation:flickerLamp 2.4s ease-in-out infinite;"></div>
+        </div>
+        <div class="set-name">Taller</div>
+        <div class="set-desc">Textura ocre, diagonales industriales, luz cálida</div>
+      </div>
+
+      <div>
+        <div class="set-stage" style="background:#0E1B14;">
+          <div style="position:absolute; top:0; left:0; right:0; height:16%; background:linear-gradient(180deg, rgba(240,192,64,0.35), transparent);"></div>
+          <div style="position:absolute; left:0; right:0; bottom:30%; height:1px; background:rgba(240,192,64,0.3);"></div>
+        </div>
+        <div class="set-name">Caja</div>
+        <div class="set-desc">Mostrador POS, franja dorada cenital</div>
+      </div>
+
+      <div>
+        <div class="set-stage" style="background:#0C121E;">
+          <div style="position:absolute; inset:0; background:repeating-linear-gradient(180deg, rgba(184,192,204,0.08) 0 2px, transparent 2px 18px);"></div>
+          <div style="position:absolute; right:16%; top:40%; width:8px; height:8px; border-radius:50%; background:var(--sage); box-shadow:0 0 12px var(--sage); animation:flickerSoft 2.8s ease-in-out infinite;"></div>
+        </div>
+        <div class="set-name">Almacén</div>
+        <div class="set-desc">Estantes por líneas repetidas, punto verde</div>
+      </div>
+
+      <div>
+        <div class="set-stage" style="background:#EDEAE3;">
+          <div style="position:absolute; top:0; right:0; width:30%; height:40%; background:radial-gradient(circle at 100% 0%, rgba(240,192,64,0.4), transparent 70%);"></div>
+        </div>
+        <div class="set-name">Oficina</div>
+        <div class="set-desc">Neutro, resplandor cálido en esquina</div>
+      </div>
+
+      <div>
+        <div class="set-stage" style="background:#0A0F1E;">
+          <div style="position:absolute; right:12%; top:8%; width:26%; height:78%; background:linear-gradient(180deg, rgba(240,112,96,0.18), rgba(240,112,96,0.04)); border-radius:0 0 40% 40%; transform-origin:top; animation:curtainSway 4s ease-in-out infinite;"></div>
+        </div>
+        <div class="set-name">Cuarto</div>
+        <div class="set-desc">Íntimo, cortina que se mece, tono nocturno</div>
+      </div>
+
+      <div>
+        <div class="set-stage" style="background:linear-gradient(180deg,#1A1410,#0A0806);">
+          <div style="position:absolute; left:0; bottom:0; width:18%; height:60%; background:#080604;"></div>
+          <div style="position:absolute; left:20%; bottom:0; width:14%; height:44%; background:#0A0806;"></div>
+          <div style="position:absolute; right:10%; bottom:0; width:16%; height:70%; background:#0A0806;"></div>
+          <div style="position:absolute; right:16%; top:30%; width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 14px var(--gold); animation:flickerLamp 2.2s ease-in-out infinite;"></div>
+        </div>
+        <div class="set-name">Calle</div>
+        <div class="set-desc">Siluetas de edificios, farol titilante</div>
+      </div>
+
+      <div>
+        <div class="set-stage" style="background:#241A12;">
+          <div style="position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(240,192,64,0.05) 0 4px, transparent 4px 26px);"></div>
+          <div style="position:absolute; left:38%; bottom:40%; width:6px; height:16px; border-radius:3px; background:rgba(255,255,255,0.5); animation:steamRise 3s ease-out infinite;"></div>
+          <div style="position:absolute; left:46%; bottom:40%; width:6px; height:16px; border-radius:3px; background:rgba(255,255,255,0.5); animation:steamRise 3s ease-out infinite 1s;"></div>
+        </div>
+        <div class="set-name">Café</div>
+        <div class="set-desc">Madera cálida, vapor subiendo, luz lateral</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="margin-bottom:0;">
+    <h2>Tipos de escena</h2>
+    <p class="sub">Dirección de composición y cámara, siempre en 16:9 horizontal.</p>
+    <div class="scene-grid">
+
+      <div class="scene-card">
+        <div class="scene-stage">
+          <div style="width:22px; height:22px; border-radius:50%; background:var(--blue-hi);"></div>
+        </div>
+        <div class="scene-title">Foco</div>
+        <div class="scene-desc">Personaje principal centrado. Cámara estática. Elementos secundarios tenues, sin competir.</div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-stage" style="justify-content:space-between; padding:0 60px;">
+          <div style="width:20px; height:20px; border-radius:6px; background:var(--coral);"></div>
+          <div style="width:20px; height:20px; border-radius:50%; background:var(--blue-hi);"></div>
+        </div>
+        <div class="scene-title">Careo</div>
+        <div class="scene-desc">Dos personajes, uno a cada lado del eje horizontal, espacio negativo entre ellos. Simetría, cámara estática.</div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-stage">
+          <div style="width:20px; height:20px; border-radius:50%; background:var(--blue-hi); animation:moveRight 3.2s ease-in-out infinite;"></div>
+        </div>
+        <div class="scene-title">Recorrido</div>
+        <div class="scene-desc">Personaje se desplaza horizontalmente, avanzando por un proceso. Paneo sutil opcional.</div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-stage">
+          <div style="position:absolute; left:18%; top:22%; width:12px; height:12px; border-radius:50%; background:var(--gold); --tx:60px; --ty:24px; animation:converge 3.5s ease-in-out infinite;"></div>
+          <div style="position:absolute; left:70%; top:20%; width:12px; height:12px; border-radius:50%; background:var(--blue-hi); --tx:-55px; --ty:26px; animation:converge 3.5s ease-in-out infinite;"></div>
+          <div style="position:absolute; left:15%; top:65%; width:12px; height:12px; border-radius:6px; background:var(--coral); --tx:60px; --ty:-22px; animation:converge 3.5s ease-in-out infinite;"></div>
+          <div style="position:absolute; left:75%; top:68%; width:12px; height:12px; border-radius:50%; background:var(--sage); --tx:-58px; --ty:-24px; animation:converge 3.5s ease-in-out infinite;"></div>
+          <div style="position:absolute; left:47%; top:44%; width:8px; height:8px; border-radius:50%; background:var(--white); opacity:0.6;"></div>
+        </div>
+        <div class="scene-title">Constelación</div>
+        <div class="scene-desc">4–5 puntos de color dispersos convergen lento hacia el centro del canvas.</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "@impulso-geb/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Componentes React y tokens de diseño de Impulso GEB / Ruta GEB, extraídos del CSS inline del sitio estático (ver ../styleguide.html) para referencia y para Claude Design Sync. No es la implementación en producción del sitio, que sigue siendo HTML/CSS/JS plano sin build.",
+  "main": "index.ts",
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}
