@@ -223,6 +223,26 @@ const EntregaEngine = (function () {
         break;
       }
 
+      case 'escala': {
+        input = document.createElement('div');
+        input.className = 'campo-escala';
+        const opciones = campo.opciones || ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+        opciones.forEach(op => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'campo-escala-btn' + (String(valorActual) === String(op) ? ' sel' : '');
+          b.textContent = op;
+          b.dataset.val = op;
+          b.addEventListener('click', () => {
+            input.querySelectorAll('.campo-escala-btn').forEach(x => x.classList.remove('sel'));
+            b.classList.add('sel');
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+          });
+          input.appendChild(b);
+        });
+        break;
+      }
+
       case 'calculado': {
         input = document.createElement('div');
         input.className = 'campo-calculado';
@@ -252,7 +272,9 @@ const EntregaEngine = (function () {
       }
     }
 
-    input.className = (input.className ? input.className + ' ' : '') + 'campo-input';
+    if (campo.tipo !== 'escala') {
+      input.className = (input.className ? input.className + ' ' : '') + 'campo-input';
+    }
     wrap.appendChild(input);
 
     return wrap;
@@ -274,6 +296,10 @@ const EntregaEngine = (function () {
     }
     if (campo.tipo === 'calculado') {
       return wrap.querySelector('.campo-calculado').textContent;
+    }
+    if (campo.tipo === 'escala') {
+      const sel = wrap.querySelector('.campo-escala-btn.sel');
+      return sel ? sel.dataset.val : '';
     }
     return wrap.querySelector('.campo-input').value;
   }
@@ -322,22 +348,37 @@ const EntregaEngine = (function () {
     btn.type = 'button';
     btn.className = 'campo-enviar';
     btn.textContent = 'Enviar mi entrega';
-    btn.addEventListener('click', () => enviar(curso, semana, campos, datos, onEnviar, btn));
     contenedor.appendChild(btn);
 
     const estado = document.createElement('div');
     estado.className = 'campo-estado';
     contenedor.appendChild(estado);
 
+    btn.addEventListener('click', () => enviar(curso, semana, campos, datos, onEnviar, btn, estado));
+
     return { datos, wraps, estado };
   }
 
-  async function enviar(curso, semana, campos, datos, onEnviar, boton) {
+  async function enviar(curso, semana, campos, datos, onEnviar, boton, estado) {
     const identidad = obtenIdentidad();
     if (!identidad || !identidad.curp) {
       alert('Falta tu identidad. Ve al inicio del curso para registrarte primero.');
       return;
     }
+
+    // Campos marcados requerido:true bloquean el envío si faltan — antes de tocar la red.
+    const faltantes = campos.filter(c =>
+      c.requerido && (datos[c.id] === undefined || datos[c.id] === '' ||
+        (Array.isArray(datos[c.id]) && datos[c.id].length === 0))
+    );
+    if (faltantes.length) {
+      if (estado) {
+        estado.textContent = `Falta responder: ${faltantes.map(c => c.label).join(', ')}`;
+        estado.classList.add('err');
+      }
+      return;
+    }
+    if (estado) estado.classList.remove('err');
 
     // Filtro por modo, la primera red — el servidor tiene la segunda por prefijo.
     const paraEnviar = {};
