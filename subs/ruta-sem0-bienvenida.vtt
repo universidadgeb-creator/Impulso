@@ -1,66 +1,69 @@
 WEBVTT
-NOTE Tiempos calculados proporcionalmente al audio (97.234s / 227 palabras).
-NOTE Ajustar manualmente si algún subtítulo está desfasado.
+NOTE Tiempos recalculados con silencedetect de ffmpeg (49 pausas reales detectadas
+NOTE en el audio) — proporcional por palabras dentro de cada tramo de habla real,
+NOTE no proporcional al tiempo total. El cálculo anterior (proporcional simple) iba
+NOTE adelantado al audio porque no descontaba las pausas.
+NOTE Ajustar manualmente si algún subtítulo sigue desfasado.
 
-00:00:00.000 --> 00:00:03.000
+00:00:00.000 --> 00:00:05.608
 Hola. Soy Lupita. Sí — soy un triángulo.
 
-00:00:03.000 --> 00:00:08.141
+00:00:05.608 --> 00:00:09.692
 Te preguntarás por qué somos figuras geométricas y no personas con cara.
 
-00:00:08.141 --> 00:00:11.568
+00:00:09.692 --> 00:00:12.358
 Honestamente, nosotros también nos lo preguntamos al principio.
 
-00:00:11.568 --> 00:00:15.852
+00:00:12.358 --> 00:00:15.724
 Pero aquí estamos para acompañarte en esta experiencia de aprendizaje.
 
-00:00:15.852 --> 00:00:20.564
+00:00:15.724 --> 00:00:19.428
 Durante estas 6 semanas van a acompañarte también Ana y Marcos.
 
-00:00:20.564 --> 00:00:23.134
+00:00:19.428 --> 00:00:23.241
 Ana — esfera azul — trabaja en recepción.
 
-00:00:23.134 --> 00:00:25.704
+00:00:23.241 --> 00:00:27.032
 Marcos — cuadro naranja — trabaja en mantenimiento.
 
-00:00:25.704 --> 00:00:27.418
+00:00:27.032 --> 00:00:28.637
 Los tres somos figuras.
 
-00:00:27.418 --> 00:00:33.416
+00:00:28.637 --> 00:00:34.428
 Así es más fácil centrarse en lo que decimos, no en cómo nos vemos.
 
-00:00:33.416 --> 00:00:38.985
+00:00:34.428 --> 00:00:38.853
 Antes de empezar la semana, quiero contarte qué es un plan de vida,
 
-00:00:38.985 --> 00:00:42.841
+00:00:38.853 --> 00:00:42.274
 porque sé que puede sonar a algo muy grande.
 
-00:00:42.841 --> 00:00:46.268
+00:00:42.274 --> 00:00:45.217
 No es tan complicado, pero sí es importante.
 
-00:00:46.268 --> 00:00:51.409
+00:00:45.217 --> 00:00:50.999
 Es una hoja — literal — donde escribes lo que se te da bien.
 
-00:00:51.409 --> 00:00:57.835
+00:00:50.999 --> 00:00:57.050
 Lo que quieres hacer, tus siguientes pasos para lograrlo. Nadie más lo decide por ti.
 
-00:00:57.835 --> 00:01:04.261
+00:00:57.050 --> 00:01:02.691
 Muchas personas nunca han tenido espacio para escribir esto. Este curso es justo ese espacio.
 
-00:01:04.261 --> 00:01:09.402
+00:01:02.691 --> 00:01:06.821
 Cuando termines, ese documento es tuyo. No se queda en ningún expediente.
 
-00:01:09.402 --> 00:01:14.971
+00:01:06.821 --> 00:01:13.679
 No es una evaluación. Lo tienes tú — en tu teléfono, en tu casa.
 
-00:01:14.971 --> 00:01:22.682
+00:01:13.679 --> 00:01:22.276
 Para que lo tengas a la mano y te dé claridad de lo que quieres en tu vida.
 
-00:01:22.682 --> 00:01:26.538
+00:01:22.276 --> 00:01:26.622
 Solo queremos que sepas que este espacio es tuyo.
 
-00:01:26.538 --> 00:01:32.107
+00:01:26.622 --> 00:01:32.641
 Y que nosotros — Lupita, Ana y Marcos — vamos a estar aquí cada semana.
 
-00:01:32.107 --> 00:01:37.234
+00:01:32.641 --> 00:01:37.234
 ¿Estás listo? Completa las actividades y nos vemos en la Semana 1.
