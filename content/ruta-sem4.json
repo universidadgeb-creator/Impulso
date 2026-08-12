@@ -1,0 +1,152 @@
+{
+  "curso": "Ruta GEB",
+  "semana": "Sem. 4",
+  "pilar": "Maestría",
+  "titulo": "Plan de Vida parte 2: 3 conversaciones que abren camino",
+  "contexto": "En la semana 3 aterrizaste tu visión a 24 meses: rol, sector y salario objetivo. Esta semana esa visión sale de tu cabeza y llega a alguien más — 3 conversaciones cortas dentro de GEB, con plantilla lista para copiar.",
+  "variante": "guia",
+  "duracion": "2-3 h",
+  "escena": {
+    "audio": {
+      "src": "[verificar mp3 de NotebookLM — guion de Sem. 4, Ana da el primer paso]",
+      "duracion_ms": null
+    },
+    "subtitulos_forzados": true,
+    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real.",
+    "eventos": [
+      {
+        "t": 0,
+        "quien": "ana",
+        "set": "recepcion",
+        "tipo": "foco",
+        "accion": "entra",
+        "texto": "Ana también sentía pena de escribirle a su coordinadora.",
+        "tag": null
+      },
+      {
+        "t": 4500,
+        "quien": "ana",
+        "set": "recepcion",
+        "tipo": "recorrido",
+        "accion": "bob",
+        "texto": "Usó la plantilla, cambió solo el nombre, y la mandó sin pensarlo dos veces.",
+        "tag": null
+      },
+      {
+        "t": 9000,
+        "quien": "ana",
+        "set": "oficina",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Si lo piensa mucho, no la manda. Su coordinadora respondió en un día.",
+        "tag": null
+      }
+    ]
+  },
+  "railItems": [
+    {
+      "label": "Semana 3 · Plan de Vida parte 1",
+      "state": "done"
+    },
+    {
+      "label": "Autogestivo semanal",
+      "state": "current"
+    },
+    {
+      "label": "Siguiente semana",
+      "state": "pending"
+    }
+  ],
+  "steps": [
+    {
+      "label": "1 · Diagnóstico",
+      "instruction": "¿Ya le has dicho a alguien lo que quieres construir? ¿Quién en tu entorno podría ayudarte a acercarte — y todavía no lo sabe? Es normal sentir pena: nadie nace sabiendo pedir esto, se aprende. Esta semana lo practicas con fórmula, no a ciegas."
+    },
+    {
+      "label": "2 · Marco",
+      "instruction": "Existen 3 tipos de conversación de carrera, cada una con un objetivo distinto. <b>Visibilidad:</b> que tu jefe/a directo/a sepa hacia dónde vas — no es pedir permiso, es informar. <b>Consejo:</b> alguien que ya dio el salto que tú quieres, para aprender de su camino (si no conoces a nadie, pregúntale a tu jefe/a '¿quién ha crecido así aquí?'). <b>Información:</b> Recursos Humanos o quien esté a cargo del puesto que te interesa, para datos reales. Cada tipo tiene su mensaje de plantilla y su guion de conversación completo (apertura → contenido → cierre) en tu guía descargable de esta semana."
+    },
+    {
+      "label": "3 · Aplicación",
+      "instruction": "<b>Paso 1:</b> elige con quién vas a tener cada una de las 3 conversaciones — nombre real, no genérico. <b>Paso 2:</b> usa la plantilla de mensaje de tu guía para pedir la cita; cambia solo el nombre y envíala. <b>Paso 3:</b> en la conversación, sigue el guion de apertura, contenido y cierre. Si te dicen que no tienen tiempo ahora, ofrece otro horario; si no responden en 2-3 días, manda un solo recordatorio, y si aun así no hay respuesta, cambia de persona — el silencio no es sobre ti. <b>Paso 4:</b> llena tu tabla de aplicación (con quién, tipo, mensaje, qué esperas obtener, qué harás con la respuesta) y cierra con tus 3 apuestas del año."
+    },
+    {
+      "label": "4 · Caso",
+      "instruction": "Ana también sentía pena de escribirle a su coordinadora. Usó la plantilla, cambió solo el nombre, y la mandó sin pensarlo dos veces — si lo piensa mucho, no la manda. Su coordinadora respondió en un día. La conversación de consejo le costó más: no conocía a nadie, así que le preguntó a su coordinadora '¿quién ha crecido así aquí?', y ahí consiguió el nombre."
+    },
+    {
+      "label": "5 · Reflexión",
+      "instruction": "¿Cuál de las 3 conversaciones te dio más pena? ¿Qué te ayudó a mandarla de todos modos? La próxima semana: tu presupuesto real, el último tramo antes de cerrar tu Plan de Vida portable."
+    }
+  ],
+  "checklistLabels": [
+    "Elegiste con quién tendrás cada una de las 3 conversaciones",
+    "Enviaste los 3 mensajes usando la plantilla",
+    "Tuviste al menos 1 de las 3 conversaciones",
+    "Llenaste tu tabla de aplicación y tus 3 apuestas del año",
+    "Subiste tu archivo a Drive"
+  ],
+  "recursos": [
+    {
+      "icono": "📄",
+      "texto": "Guía Semana 4 · Plan de Vida parte 2",
+      "url": "recursos/GEB_Ruta_Sem4_PlanDeVidaParte2.docx"
+    },
+    {
+      "icono": "💬",
+      "texto": "Grupo de WhatsApp Ruta GEB, para dudas",
+      "url": "https://wa.me/523314112703"
+    },
+    {
+      "icono": "📺",
+      "texto": "TED — David Burkus: 'How to hack networking' · Por qué tus conocidos lejanos (lazos débiles) abren más puertas que tus amigos cercanos. Míralo antes de elegir a quién le escribes esta semana",
+      "url": "https://www.ted.com/talks/david_burkus_how_to_hack_networking"
+    }
+  ],
+  "entrega": {
+    "campos": [
+      {
+        "id": "conv_visibilidad_nombre",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Visibilidad — ¿con quién?"
+      },
+      {
+        "id": "conv_visibilidad_resultado",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Visibilidad — ¿qué pasó?"
+      },
+      {
+        "id": "conv_consejo_nombre",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Consejo — ¿con quién?"
+      },
+      {
+        "id": "conv_consejo_resultado",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Consejo — ¿qué pasó?"
+      },
+      {
+        "id": "conv_informacion_nombre",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Información — ¿con quién?"
+      },
+      {
+        "id": "conv_informacion_resultado",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Información — ¿qué pasó?"
+      },
+      {
+        "id": "apuestas_ano",
+        "modo": "entrega",
+        "tipo": "texto3",
+        "label": "Tus 3 apuestas del año"
+      }
+    ]
+  }
+}
