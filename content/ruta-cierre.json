@@ -1,0 +1,75 @@
+{
+  "curso": "Ruta GEB",
+  "semana": "Cierre",
+  "titulo": "Cierre de Ruta GEB",
+  "contexto": "Llegaste al final de las 6 semanas de Ruta GEB. Antes de cerrar tu ciclo, cuéntanos cómo te fue — nos sirve para mejorar el programa para las próximas generaciones, y a ti para ver qué tanto cambió desde que empezaste.",
+  "escena": null,
+  "diagnostico": [
+    {
+      "id": "diag1",
+      "dimension": "Claridad de dirección",
+      "tipo": "escala",
+      "pregunta": "Del 1 al 5, ¿qué tan clara tienes hoy la dirección que quieres darle a tu vida y tu carrera?",
+      "opciones": ["1", "2", "3", "4", "5"]
+    },
+    {
+      "id": "diag2",
+      "dimension": "Confianza en finanzas",
+      "tipo": "escala",
+      "pregunta": "Del 1 al 5, ¿qué tan en control te sientes de tu presupuesto y tus finanzas personales?",
+      "opciones": ["1", "2", "3", "4", "5"]
+    },
+    {
+      "id": "diag3",
+      "dimension": "Autoconocimiento",
+      "tipo": "escala",
+      "pregunta": "Del 1 al 5, ¿qué tanto sientes que conoces lo que se te da bien, lo que disfrutas y lo que quieres evitar?",
+      "opciones": ["1", "2", "3", "4", "5"]
+    },
+    {
+      "id": "diag4",
+      "dimension": "Conocimiento de opciones",
+      "tipo": "escala",
+      "pregunta": "Del 1 al 5, ¿qué tanto conoces las opciones de desarrollo que tienes disponibles, dentro o fuera de GEB?",
+      "opciones": ["1", "2", "3", "4", "5"]
+    },
+    {
+      "id": "diag5",
+      "dimension": "Confianza en el siguiente paso",
+      "tipo": "escala",
+      "pregunta": "Del 1 al 5, ¿qué tan seguro/a te sientes de poder dar el siguiente paso profesional que quieres dar?",
+      "opciones": ["1", "2", "3", "4", "5"]
+    },
+    {
+      "id": "diag6",
+      "dimension": "Propiedad del plan",
+      "tipo": "escala",
+      "pregunta": "Del 1 al 5, ¿qué tanto sientes que tienes un plan de vida propio (no uno que \"deberías\" tener)?",
+      "opciones": ["1", "2", "3", "4", "5"]
+    },
+    {
+      "id": "diag7",
+      "dimension": "Motivo/logro central",
+      "tipo": "texto",
+      "pregunta": "De lo que esperabas al empezar, ¿qué fue lo que más te llevaste de Ruta GEB?"
+    },
+    {
+      "id": "diag8",
+      "dimension": "Obstáculo superado",
+      "tipo": "texto",
+      "pregunta": "¿Qué fue lo que más se te dificultó durante estas 6 semanas, y cómo lo manejaste?"
+    },
+    {
+      "id": "diag9",
+      "dimension": "Acción concreta",
+      "tipo": "texto",
+      "pregunta": "¿Qué es lo primero que vas a hacer distinto a partir de esta semana?"
+    },
+    {
+      "id": "diag10",
+      "dimension": "Cierre abierto",
+      "tipo": "texto",
+      "pregunta": "Si algo más quieres contarnos al cerrar este ciclo, este es el espacio."
+    }
+  ]
+}

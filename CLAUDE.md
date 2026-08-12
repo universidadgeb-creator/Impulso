@@ -197,11 +197,68 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
 Lupita, Ana y Marcos son formas geométricas puras, sin cara ni extremidades.
 
 - **Lupita** → **triángulo equilátero dorado (#F0C040), punta hacia arriba.** Antes
-  era un anillo — se cambió a triángulo en agosto 2026. El audio de Sem. 0 actualmente
-  dice "soy un anillo" y hay que regenerarlo con "soy un triángulo" antes de publicar.
+  era un anillo — se cambió a triángulo en agosto 2026. Ya resuelto: el audio vigente de
+  Sem. 0 dice "soy un triángulo".
 - **Ana** → esfera sólida azul claro (#6AB0F5)
 - **Marcos** → cuadrado de esquinas redondeadas, coral (#F07060)
 
 Los videos de apertura semanal se producen en **Claude Design** (MP4 mudo) y se mezclan
 con el audio de ElevenLabs via ffmpeg. El campo `video_src` en cada JSON de semana apunta
 al MP4 final; mientras no exista, `bienvenida.html` usa EscenaPlayer como fallback.
+
+## Sistema de identidad + entregas (EntregaEngine, agosto 2026)
+
+- **`entrega-engine.js`** — motor compartido, se pega una vez y las semanas nunca lo
+  vuelven a tocar. Expone `EntregaEngine.montarIdentidad()` (formulario CURP+PIN, una
+  sola vez, guardado en `localStorage` bajo `geb_identidad`) y `EntregaEngine.montar()`
+  (arma el formulario de entrega de una semana leyendo `entrega.campos[]` del JSON de
+  esa semana — tipos soportados: `texto`, `textarea`, `numero`, `lista`, `seleccion`,
+  `radio`, `escala` (fila de botones, ej. NPS 0-10), `calculado`, `texto3`). Un campo
+  puede llevar `requerido: true` para bloquear el envío si falta (ver NPS abajo).
+- **`bienvenida.html`** — página única antes de Sem. 1, ya NO vive dentro del paso de
+  Diagnóstico de S1. Ahí se registra la identidad (una sola vez para todo el curso) y se
+  contesta el mini-diagnóstico de apertura (checklist de 3 pasos: video → encuesta →
+  registro, cada uno bloqueado hasta completar el anterior, con popups tipo bottom-sheet).
+  Todo el contenido (contexto, video, guion, preguntas) sale de `content/ruta-sem0.json`,
+  nada hardcodeado.
+- **`cierre.html`** — espejo de `bienvenida.html`, después de Sem. 6. No vuelve a pedir
+  CURP/PIN (usa la identidad ya guardada); si no existe, bloquea con link a
+  `bienvenida.html`. Contenido en `content/ruta-cierre.json`.
+- **NPS en cada entrega semanal** — `momento-guia.html` inyecta un campo `escala` 0-10
+  (`requerido: true`) a los `campos` de cada semana antes de llamar
+  `EntregaEngine.montar()`, así no hay que tocar el JSON de cada semana para tenerlo.
+  `momento-video.html` (que todavía usa el formulario estático viejo, no EntregaEngine)
+  trae el mismo campo a mano.
+- **`config.js`** — `CONFIG.BACKEND` es la URL real del Apps Script Web App (ya no
+  placeholder). La usan `bienvenida.html`, `cierre.html`, `momento-guia.html` y
+  `momento-video.html` — un solo lugar para cambiarla si el backend se mueve.
+
+## Video de bienvenida — decisiones sobre subtítulos (agosto 2026)
+
+Se intentó dos veces sincronizar subtítulos VTT al video (primero proporcional al tiempo
+total, después proporcional dentro de los tramos de habla real detectados con
+`ffmpeg silencedetect`) y en ambos casos quedó desfasado — sin poder escuchar el audio
+directamente en este entorno no hay forma confiable de afinar la sincronización al
+segundo exacto.
+
+**Decisión: no más subtítulos sincronizados.** En su lugar, un botón **"📄 Ver
+transcripción"** debajo del video que muestra/oculta el guion completo de un jalón
+(`data.guion_notebooklm` del JSON de la semana), sin intentar cuadrarlo al tiempo de
+reproducción. Aplicar el mismo patrón a videos de semanas futuras en vez de repetir el
+intento de sincronización.
+
+## Producción de video/audio — flujo con ffmpeg
+
+1. Ceci sube el video mudo (de Claude Design) y el audio narrado (de ElevenLabs) por
+   separado.
+2. Se combinan con: `ffmpeg -i video.mp4 -i audio.mp3 -map 0:v:0 -map 1:a:0 -c:v copy
+   -c:a aac -b:a 192k -shortest salida.mp4` — copia el video tal cual, codifica el audio
+   a AAC, y recorta al más corto de los dos.
+3. **Cache-busting obligatorio**: GitHub Pages/el navegador cachean agresivamente los
+   `.mp4` (y en menor medida otros assets) por nombre de archivo. Si se reemplaza un
+   video o audio manteniendo el mismo nombre, hay que subir el parámetro de versión en
+   el JSON (`video_src: "video/archivo.mp4?v=N"`) o nadie va a ver el cambio hasta que
+   expire la caché por su cuenta. Ya pasó dos veces con el video de Sem. 0.
+4. Este entorno de trabajo (sandbox de Claude Code) no tiene `ffmpeg` preinstalado —
+   hay que `apt-get install -y --no-install-recommends ffmpeg` cada vez que se necesita
+   (no persiste entre sesiones).

@@ -158,6 +158,10 @@ textarea.campo-input{min-height:72px;}
 .campo-radio-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;border:1.5px solid #ECEAE4;cursor:pointer;font-size:12px;color:#4A4640;background:#fff;}
 .campo-radio-item.sel{border-color:#F0C040;background:#FFF8E6;color:#7A5E0A;}
 .campo-calculado{font-size:12.5px;color:#6B6558;padding:8px 11px;background:#F3F1EC;border-radius:7px;min-height:36px;}
+.campo-escala{display:flex;gap:4px;}
+.campo-escala-btn{flex:1;min-width:0;font-size:11px;font-weight:700;padding:8px 0;border-radius:7px;border:1.5px solid #ECEAE4;background:#fff;color:#6B6558;cursor:pointer;transition:.15s;}
+.campo-escala-btn:hover{border-color:#D8D3C6;}
+.campo-escala-btn.sel{border-color:#F0C040;background:#F0C040;color:#0B0F16;}
 .campo-enviar{width:100%;margin-top:6px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
 .campo-estado{font-size:11px;margin-top:4px;color:#9A968C;text-align:center;min-height:16px;}
 .campo-estado.ok{color:#3F8F63;}
@@ -495,9 +499,25 @@ fetch(contentUrl)
     renderNota(data.nota, data.entrega);
 
     if (data.entrega && data.entrega.campos) {
+      // NPS: campo fijo del template, se agrega a toda semana con entrega — no
+      // se edita por JSON, así no hay que tocar cada semana para tenerlo.
+      const camposConNps = data.entrega.campos.concat([{
+        id: 'nps',
+        tipo: 'escala',
+        label: '¿Qué tan probable es que recomiendes esta semana de Ruta GEB a una compañera?',
+        opciones: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        requerido: true
+      }]);
       EntregaEngine.montar(
         document.getElementById('entrega-campos'),
-        { curso, semana, campos: data.entrega.campos }
+        {
+          curso, semana, campos: camposConNps,
+          onEnviar: (payload) => fetch(CONFIG.BACKEND, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          }).then(r => ({ ok: r.ok }))
+        }
       );
     }
   })

@@ -75,8 +75,11 @@ html.unlocked .lock-screen{display:none;}
 .context-block p{font-size:13px;color:#4A4640;line-height:1.65;margin-bottom:8px;}
 .context-block p:last-child{margin-bottom:0;}
 
-/* SUBTITLE BOX */
-#subtitle-box{display:none;margin-top:10px;padding:10px 14px;background:#F7F5F0;border-left:3px solid #F0C040;border-radius:8px;font-size:13px;color:#3A3630;line-height:1.6;min-height:40px;}
+/* TRANSCRIPCIÓN */
+.btn-transcripcion{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:none;border:1.5px solid #ECEAE4;color:#6A6460;font-size:12px;font-weight:600;padding:8px 14px;border-radius:100px;cursor:pointer;transition:border-color .15s;}
+.btn-transcripcion:hover{border-color:#F0C040;color:#7A5E0A;}
+#transcripcion-box{display:none;margin-top:10px;padding:12px 14px;background:#F7F5F0;border-left:3px solid #F0C040;border-radius:8px;font-size:12.5px;color:#3A3630;line-height:1.7;}
+#transcripcion-box.abierta{display:block;}
 
 /* CHECKLIST */
 .checklist-label{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;margin-bottom:12px;}
@@ -173,6 +176,17 @@ html.unlocked .lock-screen{display:none;}
 .pin-box{flex:1;text-align:center;font-size:20px;font-weight:700;padding:10px 0;border-radius:9px;border:1.5px solid #ECEAE4;background:#fff;color:#14181F;letter-spacing:.1em;}
 .pin-box.activo{border-color:#F0C040;background:#FFF8E6;}
 
+/* Markup real que pinta EntregaEngine.montarIdentidad() dentro de #identidad-mount —
+   mismo lenguaje visual que .id-campo/.pin-box de arriba. */
+.identidad-caja{display:flex;flex-direction:column;gap:12px;}
+.identidad-intro{display:none;} /* ya hay una intro propia (.id-intro) arriba del mount */
+.identidad-input{width:100%;font-size:13px;padding:10px 13px;border-radius:9px;border:1.5px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;transition:border-color .15s;}
+.identidad-input:focus{outline:none;border-color:#F0C040;}
+.identidad-input::placeholder{color:#BEBAB2;}
+.identidad-caja .campo-hint{font-size:11px;color:#9A968C;line-height:1.5;margin-top:-4px;}
+.identidad-error{font-size:11.5px;color:#C0392B;min-height:15px;}
+#identidad-mount .campo-enviar{display:none;} /* el botón real es "Guardar registro →" en el footer del popup */
+
 /* BOTONES */
 .btn-primario{width:100%;background:#F0C040;color:#0B0F16;border:none;font-size:14px;font-weight:700;padding:14px;border-radius:10px;cursor:pointer;letter-spacing:.01em;}
 .btn-primario:disabled{opacity:.45;cursor:not-allowed;}
@@ -226,19 +240,20 @@ html.unlocked .lock-screen{display:none;}
 <div class="site-content">
   <div class="bienvenida-wrap">
 
-    <!-- Card 1: video + contexto -->
+    <!-- Card 1: contexto + video -->
     <div class="bv-card">
       <div class="card-topbar"></div>
       <div class="card-body">
         <div class="prog-badge">Ruta GEB · Bienvenida</div>
         <h1 class="card-title" id="bv-titulo">Bienvenida a Ruta GEB</h1>
+        <div class="context-block" id="bv-contexto"></div>
         <div id="video-player">
           <div class="vp-ring" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #F0C040;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
             <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:16px solid #F0C040;margin-left:3px;"></div>
           </div>
         </div>
-        <div id="subtitle-box"></div>
-        <div class="context-block" id="bv-contexto"></div>
+        <button type="button" class="btn-transcripcion" id="btn-transcripcion" style="display:none;">📄 Ver transcripción</button>
+        <div id="transcripcion-box"></div>
       </div>
     </div>
 
@@ -628,9 +643,10 @@ fetch('content/ruta-sem0.json')
       }
     }
 
-    /* Video — usa MP4 + VTT cuando existen */
+    /* Video — usa MP4 cuando existe */
     var vp = document.getElementById('video-player');
-    var subBox = document.getElementById('subtitle-box');
+    var btnTrans = document.getElementById('btn-transcripcion');
+    var transBox = document.getElementById('transcripcion-box');
     if (data.video_src) {
       vp.innerHTML = '';
       var vid = document.createElement('video');
@@ -641,41 +657,14 @@ fetch('content/ruta-sem0.json')
       vid.addEventListener('ended', marcarVideoVisto);
       vp.appendChild(vid);
 
-      /* Subtítulos en caja debajo del video */
-      if (data.subtitulos_src && subBox) {
-        fetch(data.subtitulos_src)
-          .then(function(r) { return r.ok ? r.text() : Promise.reject(); })
-          .then(function(vttText) {
-            /* Parsear VTT — líneas: timestamp --> timestamp \n texto */
-            var cues = [];
-            var blocks = vttText.split(/\n\n+/);
-            blocks.forEach(function(block) {
-              var lines = block.trim().split('\n');
-              var timeLine = lines.find(function(l) { return l.indexOf('-->') !== -1; });
-              if (!timeLine) return;
-              var parts = timeLine.split('-->');
-              function toSec(t) {
-                var s = t.trim().split(':');
-                if (s.length === 3) return (+s[0])*3600 + (+s[1])*60 + parseFloat(s[2]);
-                if (s.length === 2) return (+s[0])*60 + parseFloat(s[1]);
-                return parseFloat(s[0]);
-              }
-              var start = toSec(parts[0]);
-              var end   = toSec(parts[1]);
-              var text  = lines.slice(lines.indexOf(timeLine) + 1).join(' ').trim();
-              if (text) cues.push({ start: start, end: end, text: text });
-            });
-            if (cues.length) {
-              subBox.style.display = 'block';
-              vid.addEventListener('timeupdate', function() {
-                var t = vid.currentTime;
-                var active = cues.find(function(c) { return t >= c.start && t < c.end; });
-                subBox.textContent = active ? active.text : '';
-              });
-              vid.addEventListener('ended', function() { subBox.textContent = ''; });
-            }
-          })
-          .catch(function() { /* sin subtítulos, no pasa nada */ });
+      /* Transcripción completa, en vez de subtítulos sincronizados */
+      if (data.guion_notebooklm && btnTrans) {
+        transBox.textContent = data.guion_notebooklm;
+        btnTrans.style.display = 'inline-flex';
+        btnTrans.addEventListener('click', function() {
+          var abierta = transBox.classList.toggle('abierta');
+          btnTrans.textContent = abierta ? '📄 Ocultar transcripción' : '📄 Ver transcripción';
+        });
       }
     } else if (data.escena) {
       vp.innerHTML = '';
