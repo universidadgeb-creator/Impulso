@@ -256,7 +256,10 @@ html.unlocked .lock-screen{display:none;}
   <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
 </div>
 
+<script src="config.js"></script>
 <script>
+document.getElementById('entrega-form').action = CONFIG.BACKEND;
+
 /* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
 const COURSE_PASSWORD = 'rutageb26';
 const STORAGE_KEY = 'impulso_unlock_ruta';
