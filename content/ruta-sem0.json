@@ -9,15 +9,15 @@
     "Al terminar el curso, tendrás un documento completamente tuyo: tu plan profesional y tu presupuesto personal, hechos por ti. Si en algún momento tienes dudas puedes escribirnos al equipo de Universidad."
   ],
   "video": {
-    "src": "video/ruta-sem0-bienvenida.mp4?v=2"
+    "src": "video/ruta-sem0-bienvenida.mp4?v=3"
   },
   "escena": {
     "audio": {
       "src": "audio/ruta-sem0-bienvenida.mp3",
-      "duracion_ms": 91794
+      "duracion_ms": 97227
     },
     "subtitulos_forzados": true,
-    "nota": "Tiempos (t) calibrados sobre duración real de 85524ms. Si se regenera el audio, re-medir con ffmpeg y ajustar proporcionalmente.",
+    "nota": "escena[] sin usar desde que bienvenida.html reproduce el video real (video.src) — se deja como referencia del guion original. Tiempos (t) ya no corresponden al audio vigente (97227ms).",
     "guion_notebooklm": "Hola. Soy Lupita. Sí — soy un anillo. Te preguntarás por qué somos figuras geométricas y no personas con cara. Honestamente, nosotros también nos lo preguntamos al principio. Pero aquí estamos. Durante estas 6 semanas van a acompañarte también Ana y Marcos. Ana — esfera azul — trabaja en recepción. Marcos — cuadro naranja — trabaja en mantenimiento. Los tres vamos a estar aquí contigo. Quiero contarte qué es un plan de vida, porque puede sonar a algo muy grande. No lo es. Es una hoja — literal, una hoja — donde escribes lo que se te da bien, lo que quieres hacer, y cuál es tu siguiente paso. Nadie más lo decide por ti. Muchas personas nunca han tenido espacio para escribir eso. Este programa es ese espacio. Cuando termine, ese documento es tuyo. No se queda en ningún expediente. No es una evaluación. Lo tienes tú — en tu teléfono, en tu casa — para lo que venga en tu vida. Eso es lo que vamos a construir juntos estas 6 semanas. Antes de empezar, necesito dos minutos: una encuesta y tu registro. Ahí nos vemos.",
     "eventos": [
       {
