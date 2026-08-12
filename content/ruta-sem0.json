@@ -9,6 +9,9 @@
     "Al terminar, tienes un documento completamente tuyo. No es un reconocimiento ni un trámite. Es tu plan profesional y tu presupuesto personal, hechos por ti — te los llevas para lo que sigue en tu vida.",
     "¿Tienes dudas? En cualquier momento puedes escribirle al equipo."
   ],
+  "video": {
+    "src": "video/ruta-sem0-bienvenida.mp4"
+  },
   "escena": {
     "audio": {
       "src": "audio/ruta-sem0-bienvenida.mp3",
