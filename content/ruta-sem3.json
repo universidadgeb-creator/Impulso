@@ -1,0 +1,165 @@
+{
+  "curso": "Ruta GEB",
+  "semana": "Sem. 3",
+  "pilar": "Transición",
+  "titulo": "Plan de Vida parte 1: mi rol, sector y salario objetivo a 24 meses",
+  "contexto": "Ya tienes las 4 piezas de tu IKIGAI. Esta semana las ves juntas por primera vez y las usas para aterrizar un rol, un sector y un salario objetivo a 24 meses — con datos reales, no deseos.",
+  "variante": "guia",
+  "duracion": "3-4 h",
+  "escena": {
+    "audio": {
+      "src": "[verificar mp3 de NotebookLM — guion de Sem. 3]",
+      "duracion_ms": null
+    },
+    "subtitulos_forzados": true,
+    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real.",
+    "eventos": [
+      {
+        "t": 0,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "foco",
+        "accion": "entra",
+        "texto": "Ya tienes las 4 piezas de tu ikigai. Esta semana las ves juntas por primera vez.",
+        "tag": null
+      },
+      {
+        "t": 5000,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Y las usas para aterrizar un rol, un sector y un salario objetivo a 24 meses.",
+        "tag": null
+      },
+      {
+        "t": 10000,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Con datos reales, no deseos.",
+        "tag": null
+      }
+    ]
+  },
+  "railItems": [
+    {
+      "label": "Semana 2 · IKIGAI parte 2",
+      "state": "done"
+    },
+    {
+      "label": "Autogestivo semanal",
+      "state": "current"
+    },
+    {
+      "label": "Siguiente semana",
+      "state": "pending"
+    }
+  ],
+  "steps": [
+    {
+      "label": "1 · Diagnóstico",
+      "instruction": "Transcribe en un solo espacio las 4 respuestas que ya escribiste: lo que amas, en lo que eres bueno, lo que el mundo necesita, por lo que te pueden pagar. Nombra, en una sola oración, el punto donde se cruzan las 4 — ese es tu IKIGAI completo."
+    },
+    {
+      "label": "2 · Marco",
+      "instruction": "Un plan de vida no es una lista de lujos — es dirección: quién quieres ser y para qué. Vas a usar el Odyssey Plan (ejercicio real del curso de diseño de vida de Stanford, 'Designing Your Life'): bosquejas 3 versiones de tu vida a 24 meses — Plan A (tu camino actual), Plan B (si ese camino desapareciera mañana), Plan C (tu respuesta más honesta)."
+    },
+    {
+      "label": "3 · Aplicación",
+      "instruction": "<strong>Paso 1:</strong> bosqueja tus 3 Planes — para cada uno, un nombre de capítulo, un martes cualquiera (4-5 líneas), tu Ser/Hacer/Tener, y tu seguridad del 1 al 5. <strong>Paso 2:</strong> elige el que más se parece a tu IKIGAI — los otros 2 quedan de reserva. <strong>Paso 3:</strong> redacta tu Visión escrita en 1 párrafo con 4 partes — nombre del capítulo, resultado ideal (rol + sector + salario, anclado a una vacante de Semana 2), tu motor (conectado al IKIGAI), y cómo vas a medir que lo lograste."
+    },
+    {
+      "label": "4 · Caso",
+      "instruction": "Marcos bosqueja sus 3 planes: seguir igual (5/5 seguridad, no exige nada nuevo), abrir su propio taller (2/5, le da miedo el sueldo fijo), certificarse como técnico electricista industrial (4/5, ya encontró un curso con beca de CONALEP). Elige el Plan C porque conecta con su IKIGAI. Su Visión: 'A 24 meses quiero ser técnico electricista industrial certificado, sector manufactura, $14,000/mes — el rango que confirmé en mi vacante de Semana 2. Elijo esto porque conecta con lo que soy bueno haciendo y con lo que amo.'"
+    },
+    {
+      "label": "5 · Reflexión",
+      "instruction": "Tu Plan de Vida no es una fantasía ni una obligación — es la versión de ti que ya traes dentro, aterrizada en un rol, un sector y un número real. La próxima semana: las 3 conversaciones de carrera que necesitas tener para que este plan deje de ser papel."
+    }
+  ],
+  "checklistLabels": [
+    "Transcribiste tu IKIGAI completo",
+    "Bosquejaste los 3 Planes (A, B y C)",
+    "Elegiste el plan que conecta con tu IKIGAI",
+    "Redactaste tu Visión escrita a 24 meses",
+    "Subiste tu archivo a Drive"
+  ],
+  "recursos": [
+    {
+      "icono": "📋",
+      "texto": "Tus 3 vacantes investigadas en Semana 2 (para anclar tu salario objetivo)",
+      "url": null
+    },
+    {
+      "icono": "📖",
+      "texto": "Lectura — Designing Your Life · Bill Burnett & Dave Evans. Lee los capítulos 'Workview & Lifeview' (eds. en español: 'Tu punto de vista del trabajo y de la vida'). Te ayuda a articular por qué quieres lo que quieres antes de escribir tu visión",
+      "url": null
+    }
+  ],
+  "entrega": {
+    "campos": [
+      {
+        "id": "ikigai_frase",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Tu IKIGAI completo, en una sola oración"
+      },
+      {
+        "id": "local_plan_a",
+        "modo": "local",
+        "tipo": "textarea",
+        "label": "Bosquejo Plan A (tu camino actual)"
+      },
+      {
+        "id": "local_plan_b",
+        "modo": "local",
+        "tipo": "textarea",
+        "label": "Bosquejo Plan B (si ese camino desapareciera mañana)"
+      },
+      {
+        "id": "local_plan_c",
+        "modo": "local",
+        "tipo": "textarea",
+        "label": "Bosquejo Plan C (tu respuesta más honesta)"
+      },
+      {
+        "id": "plan_elegido",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "¿Cuál plan elegiste?",
+        "opciones": [
+          "Plan A",
+          "Plan B",
+          "Plan C"
+        ]
+      },
+      {
+        "id": "vision_capitulo",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Nombre del capítulo de tu Visión"
+      },
+      {
+        "id": "vision_resultado",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Resultado ideal: rol, sector y salario",
+        "hint": "Anclado a tu vacante de Semana 2."
+      },
+      {
+        "id": "vision_motor",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Tu motor — cómo conecta con tu IKIGAI"
+      },
+      {
+        "id": "vision_medicion",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "¿Cómo vas a medir que lo lograste?"
+      }
+    ]
+  }
+}

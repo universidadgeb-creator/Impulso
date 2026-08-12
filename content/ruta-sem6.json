@@ -1,0 +1,246 @@
+{
+  "curso": "Ruta GEB",
+  "semana": "Sem. 6",
+  "titulo": "Presupuesto parte 2: la brecha y las tres palancas",
+  "pilar": "Maestría",
+  "variante": "guia",
+  "duracion": "4–5 h",
+  "escena": {
+    "audio": {
+      "src": "[verificar mp3 de NotebookLM — guion de Sem. 6, La brecha no se cierra ahorrando]",
+      "duracion_ms": null
+    },
+    "subtitulos_forzados": true,
+    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real.",
+    "eventos": [
+      {
+        "t": 0,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "foco",
+        "accion": "entra",
+        "texto": "Tu brecha tiene un número. Pero no se cierra ahorrando.",
+        "tag": null
+      },
+      {
+        "t": 5000,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "constelacion",
+        "accion": "pulsa",
+        "texto": "Solo hay tres formas de moverla, y el orden importa.",
+        "tag": null
+      },
+      {
+        "t": 11000,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "El salto profesional. Reducir la fuga. Ingresos adicionales — un puente, nunca un destino.",
+        "tag": null
+      },
+      {
+        "t": 18000,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "El tiempo hace más que el monto. Empieza hoy, aunque sea poco.",
+        "tag": null
+      }
+    ]
+  },
+  "railItems": [
+    {
+      "label": "Semana 5 · Presupuesto parte 1",
+      "state": "done"
+    },
+    {
+      "label": "Autogestivo semanal",
+      "state": "current"
+    },
+    {
+      "label": "Conferencia de cierre (Por confirmar)",
+      "state": "pending"
+    }
+  ],
+  "steps": [
+    {
+      "label": "1 · Diagnóstico",
+      "instruction": "Tu brecha tiene un número (20 min). Escribe dos números, uno debajo del otro: tu <strong>ingreso real mensual</strong> (el de la semana 5, reconstruido con evidencia) y tu <strong>salario objetivo</strong> (el que escribiste en la semana 3, en tu Plan de Vida). Réstalos: eso es tu brecha. Después escríbela <strong>en palabras</strong>, en una sola frase, sin la cifra. Por ejemplo: «Necesito ganar como la mitad más de lo que gano hoy para poder mudarme y seguir apoyando a mi mamá». Esa frase es la que vas a compartir con tu bina — la cifra se queda contigo."
+    },
+    {
+      "label": "2 · Marco",
+      "instruction": "Las tres palancas (25 min). Solo hay tres formas de mover la brecha, y el orden importa. <strong>1) El salto profesional:</strong> ganar más por lo que ya sabes o por algo nuevo que aprendes. Es la única que mueve la brecha completa. <strong>2) Reducir la fuga:</strong> lo que empezaste la semana pasada — hormiga, fantasma, dinero estancado. Ayuda y sostiene, pero por sí sola no cierra la brecha. <strong>3) Ingresos adicionales:</strong> un puente con fecha de inicio y de fin, nunca un destino. Si ya trabajas jornada completa, más horas no es más movilidad."
+    },
+    {
+      "label": "3 · Marco",
+      "instruction": "El tiempo hace más que el monto (30 min). <strong>Interés compuesto sin fórmulas:</strong> el rendimiento también genera rendimiento, así que el dinero que guardas hoy trabaja más años que el que guardas dentro de tres. No es la palanca que cierra tu brecha — es lo que evita que lo que liberaste se quede estancado. <strong>Semáforo del fondo de emergencia:</strong> 🔴 nada apartado · 🟡 algo, menos de una quincena · 🟢 una quincena completa de tus gastos. Tu primera meta es el verde; los tres meses son horizonte lejano. <strong>Dos hábitos:</strong> aparta el día que te pagan (no el día que sobra), y pon una revisión al mes con fecha en el calendario."
+    },
+    {
+      "label": "4 · Aplicación",
+      "instruction": "Cuatro cosas (2 h). <strong>4.1</strong> Llena la plantilla «Mi presupuesto a dos columnas»: columna A con tus datos reales de la semana 5, columna B con tu salario objetivo. Los gastos fijos no se duplican. <strong>4.2</strong> Pídele a una IA (Meta AI en WhatsApp funciona) la cuenta del interés compuesto — el prompt exacto viene en la guía descargable. <strong>4.3</strong> Escribe tu compromiso: «Voy a [acción] antes del [fecha]. La primera cosa que haré es [acción verificable], el [fecha cercana]». <strong>4.4</strong> Junta con tu bina 20 min, como puedan (presencial, videollamada o notas de voz). Compartes tu brecha en palabras, tu palanca y tu compromiso — <strong>nunca tus cifras</strong> — y llenas la rúbrica sobre el compromiso de la otra persona."
+    },
+    {
+      "label": "5 · Reflexión",
+      "instruction": "Cierre: Mi Ruta en una hoja (30 min). Llena la plantilla que resume las seis semanas: tu ikigai, tu plan de vida, tu presupuesto proyectado y tu compromiso. Está hecha para que se entienda sin ti al lado. Después responde las 8 preguntas de reflexión y súbelas aquí junto con tu rúbrica y tu audio de 60 segundos. Esta hoja es tuya: este programa y sus entregables te pertenecen, dentro o fuera de GEB."
+    }
+  ],
+  "checklistLabels": [
+    "Escribiste los dos números y sacaste tu brecha",
+    "Escribiste tu brecha en una frase, sin la cifra",
+    "Llenaste tu presupuesto a dos columnas",
+    "Le pediste la cuenta del interés compuesto a una IA",
+    "Escribiste tu compromiso con fecha y primera acción",
+    "Tuviste tu sesión de bina y llenaste la rúbrica",
+    "Grabaste tu audio de 60 segundos",
+    "Llenaste tu hoja «Mi Ruta en una hoja»"
+  ],
+  "recursos": [
+    {
+      "icono": "📄",
+      "texto": "Guía Semana 6 · Presupuesto parte 2",
+      "url": "recursos/GEB_Ruta_Sem6_Guia_Presupuesto_Parte2.docx"
+    },
+    {
+      "icono": "📊",
+      "texto": "Plantilla · Mi presupuesto a dos columnas",
+      "url": "recursos/GEB_Ruta_Sem6_Plantilla_DosColumnas.docx"
+    },
+    {
+      "icono": "✅",
+      "texto": "Rúbrica de bina (se entrega)",
+      "url": "recursos/GEB_Ruta_Sem6_Rubrica_Bina.docx"
+    },
+    {
+      "icono": "🗺️",
+      "texto": "Mi Ruta en una hoja",
+      "url": "recursos/GEB_Ruta_Sem6_MiRutaEnUnaHoja.docx"
+    },
+    {
+      "icono": "📺",
+      "texto": "Video — Qué es el interés compuesto · Explicado fácil (YouTube, ~8 min). Míralo antes del ejercicio de la calculadora de IA para entender el número que vas a obtener",
+      "url": "https://www.youtube.com/watch?v=6YiZ5SIMBdY"
+    }
+  ],
+  "entrega": {
+    "campos": [
+      {
+        "id": "local_ingreso",
+        "modo": "local",
+        "tipo": "numero",
+        "label": "Tu ingreso real (Sem. 5)"
+      },
+      {
+        "id": "local_objetivo",
+        "modo": "local",
+        "tipo": "numero",
+        "label": "Tu salario objetivo (Sem. 3)"
+      },
+      {
+        "id": "local_brecha_num",
+        "modo": "local",
+        "tipo": "calculado",
+        "formula": "local_objetivo - local_ingreso",
+        "label": "Tu brecha en número (solo para ti)"
+      },
+      {
+        "id": "brecha_palabras",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Tu brecha, en una frase, sin la cifra"
+      },
+      {
+        "id": "palanca",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "Palanca que elegiste",
+        "opciones": [
+          "Salto profesional",
+          "Reducir la fuga",
+          "Ingresos adicionales"
+        ]
+      },
+      {
+        "id": "compromiso",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Tu compromiso, con fecha y primera acción"
+      },
+      {
+        "id": "rubrica_companero",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "¿A quién revisaste? (tu compañero de bina)"
+      },
+      {
+        "id": "rubrica_1",
+        "modo": "entrega",
+        "tipo": "radio",
+        "label": "El compromiso tiene una fecha concreta",
+        "opciones": [
+          "Sí",
+          "A medias",
+          "No"
+        ]
+      },
+      {
+        "id": "rubrica_2",
+        "modo": "entrega",
+        "tipo": "radio",
+        "label": "La primera acción se puede verificar",
+        "opciones": [
+          "Sí",
+          "A medias",
+          "No"
+        ]
+      },
+      {
+        "id": "rubrica_3",
+        "modo": "entrega",
+        "tipo": "radio",
+        "label": "La palanca elegida corresponde a lo que quiere mover",
+        "opciones": [
+          "Sí",
+          "A medias",
+          "No"
+        ]
+      },
+      {
+        "id": "rubrica_4",
+        "modo": "entrega",
+        "tipo": "radio",
+        "label": "La meta de fondo de emergencia es alcanzable",
+        "opciones": [
+          "Sí",
+          "A medias",
+          "No"
+        ]
+      },
+      {
+        "id": "rubrica_5",
+        "modo": "entrega",
+        "tipo": "radio",
+        "label": "Depende de algo que sí está en sus manos",
+        "opciones": [
+          "Sí",
+          "A medias",
+          "No"
+        ]
+      },
+      {
+        "id": "rubrica_comentario",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Si marcaste \"a medias\" o \"no\" en algo, explica por qué"
+      },
+      {
+        "id": "rubrica_aprendizaje",
+        "modo": "entrega",
+        "tipo": "texto",
+        "label": "Una cosa que te llevas de su compromiso para el tuyo"
+      }
+    ]
+  }
+}
