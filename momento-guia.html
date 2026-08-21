@@ -63,9 +63,8 @@ html.unlocked .lock-screen{display:none;}
 .top-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
 .breadcrumb{font-size:11.5px;color:var(--fog);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .breadcrumb b{color:var(--white);}
-.status-row{display:flex;align-items:center;gap:8px;}
-.status-badge{font-size:10.5px;font-weight:700;padding:5px 12px;border-radius:100px;background:rgba(126,200,160,.18);color:var(--sage);border:1px solid rgba(126,200,160,.4);white-space:nowrap;}
-.next-btn{font-size:11.5px;font-weight:700;padding:7px 14px;border-radius:100px;background:var(--sage);color:var(--void);white-space:nowrap;}
+.nav-return{font-size:11.5px;font-weight:700;color:var(--fog);border:1px solid var(--border);padding:6px 13px;border-radius:100px;white-space:nowrap;}
+.nav-return:hover{color:var(--white);border-color:rgba(255,255,255,.2);}
 
 /* CARD */
 .momento-card{
@@ -79,7 +78,9 @@ html.unlocked .lock-screen{display:none;}
 .rail{border-right:1px solid #ECEAE4;padding:24px 18px;background:#FAFAF8;}
 .rail-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9A968C;margin-bottom:14px;}
 .rail-list{display:flex;flex-direction:column;gap:3px;}
-.rail-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:12.5px;color:#6B6558;}
+.rail-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:12.5px;color:#6B6558;border:none;background:none;width:100%;text-align:left;font-family:inherit;cursor:default;}
+.rail-item.clickable{cursor:pointer;}
+.rail-item.clickable:hover{background:rgba(0,0,0,.03);}
 .rail-item .dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;background:#7EC8A0;color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;}
 .rail-item.pending .dot{background:none;border:1.5px dashed #D8D3C6;}
 .rail-item.current{background:#0B0F16;color:#fff;font-weight:700;}
@@ -87,92 +88,93 @@ html.unlocked .lock-screen{display:none;}
 .rail-note{margin-top:16px;font-size:11px;color:#B8B2A4;line-height:1.5;font-style:italic;}
 
 /* center */
-.center{padding:26px 28px;display:flex;flex-direction:column;gap:20px;position:relative;}
+.center{padding:26px 28px;display:flex;flex-direction:column;gap:18px;position:relative;}
 .card-glow{position:absolute;top:-10px;left:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(240,192,64,.12),transparent 70%);pointer-events:none;}
 
 .tag-row{display:flex;flex-wrap:wrap;gap:8px;}
 .tag{font-size:11px;font-weight:700;padding:6px 13px;border-radius:100px;white-space:nowrap;}
-.tag-guia{background:rgba(240,192,64,.12);color:#B8860B;}
+.tag-dur{background:rgba(0,0,0,.05);color:#6B6558;}
 .tag-pilar{color:#3F8F63;background:rgba(126,200,160,.12);}
 
 .momento-title{font-family:Georgia,serif;font-size:22px;color:#14181F;}
-.momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:-8px;}
+.momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:-6px;}
 
-.media-box{display:flex;align-items:center;gap:14px;background:#0B0F16;border-radius:14px;padding:14px 16px;}
-.media-play{width:38px;height:38px;border-radius:50%;background:#F0C040;color:#0B0F16;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
-.media-title{font-size:13.5px;font-weight:700;color:#fff;}
-.media-meta{font-size:11.5px;color:rgba(255,255,255,.5);margin-top:2px;}
+.step-intro{font-style:italic;color:#6B6558;font-size:12.5px;}
 
-.nota-box{display:flex;gap:9px;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:10px;padding:11px 13px;font-size:12px;color:#5C4A1E;line-height:1.5;}
+.step-content-box{background:#FAFAF9;border-left:3px solid #F0C040;border-radius:0 10px 10px 0;padding:16px 18px;font-size:13px;color:#3A3630;line-height:1.7;}
+.step-content-nobox{font-size:13px;color:#3A3630;line-height:1.7;}
+.step-content-box ul, .step-content-nobox ul{margin:6px 0 6px 18px;}
+.step-content-box li, .step-content-nobox li{margin-bottom:4px;}
 
+.tip-box{border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:12px;line-height:1.65;}
+.tip-gold{background:#FFFBEB;border-left:3px solid #F0C040;color:#78350F;}
+.tip-gold strong{color:#92400E;font-size:11px;}
+.tip-sage{background:#F0FDF4;border-left:3px solid #7EC8A0;color:#166534;}
+.tip-sage strong{color:#14532D;font-size:11px;}
+.audio-placeholder{background:#F0F9FF;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:12.5px;color:#185FA5;flex-wrap:wrap;}
+
+.step-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:2px;}
+.step-nav-btn{font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:100px;border:1.5px solid #ECEAE4;background:none;color:#6B6558;cursor:pointer;transition:.15s;}
+.step-nav-btn:disabled{opacity:.35;cursor:default;}
+.step-nav-btn:not(:disabled):hover{border-color:#D8D3C6;}
+.step-nav-btn.primary{background:#F0C040;color:#0B0F16;border:none;}
+.step-nav-btn.primary.final{background:#7EC8A0;}
+.step-counter{font-size:11.5px;color:#9A968C;font-weight:700;white-space:nowrap;}
+
+/* right side: recursos + avance (siempre presente) */
+.side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
 .label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;}
-
-.step-chips{display:flex;flex-wrap:wrap;gap:6px;}
-.step-chip{
-  font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:100px;white-space:nowrap;
-  border:1.5px solid #ECEAE4;color:#7A756A;background:none;cursor:pointer;transition:.15s;
-}
-.step-chip.active{border-color:#F0C040;color:#B8860B;background:rgba(240,192,64,.08);}
-.step-chip.done{border-color:#7EC8A0;color:#3F8F63;background:rgba(126,200,160,.06);}
-
-.step-box{background:rgba(240,192,64,.07);border:1px solid rgba(240,192,64,.28);border-radius:14px;padding:16px;}
-.step-box-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.step-num{width:20px;height:20px;border-radius:50%;background:#F0C040;color:#0B0F16;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.step-box-head span:last-child{font-size:14px;color:#14181F;}
-.step-box p{font-size:12.5px;color:#6B6558;line-height:1.6;}
+.recurso-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;font-size:13px;color:#3A7FC9;margin-bottom:8px;}
+.recurso-row:last-child{margin-bottom:0;}
 
 .checklist-card{background:#0B0F16;border-radius:16px;padding:20px;}
 .checklist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.checklist-head span:first-child{font-size:16px;color:#fff;}
+.checklist-head span:first-child{font-size:14px;color:#fff;font-weight:700;}
 .checklist-count{font-size:11px;font-weight:700;padding:4px 11px;border-radius:100px;background:#F0C040;color:#0B0F16;}
 .checklist-items{display:flex;flex-direction:column;gap:8px;}
 .check-item{
   display:flex;align-items:center;gap:10px;border-radius:100px;padding:10px 14px;font-size:12.5px;
-  background:rgba(255,255,255,.03);color:rgba(255,255,255,.6);cursor:pointer;border:none;text-align:left;width:100%;
+  background:rgba(255,255,255,.03);color:rgba(255,255,255,.6);border:none;text-align:left;width:100%;
 }
 .check-mark{width:17px;height:17px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;border:1.5px solid rgba(255,255,255,.25);}
 .check-item.checked{background:rgba(255,255,255,.06);color:#fff;}
 .check-item.checked .check-mark{background:#7EC8A0;color:#0B0F16;border-color:#7EC8A0;}
 
-/* right side: recursos + entrega (siempre presente) */
-.side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
-.recurso-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(106,176,245,.2);border-radius:10px;padding:10px 12px;font-size:13px;color:#3A7FC9;}
-.entrega-form{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;}
-.entrega-form input{font-size:13px;padding:11px 13px;border-radius:9px;border:1px solid #ECEAE4;background:#fff;font-family:inherit;}
-.entrega-form button{margin-top:2px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
-
 .placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:18px;}
 
-/* ── CAMPO-ENTREGA (motor de entrega genérico) ── */
-.campo-entrega{display:flex;flex-direction:column;gap:14px;margin-top:4px;}
-.campo-label{font-size:12px;font-weight:700;color:#14181F;display:block;margin-bottom:3px;}
-.campo-hint{font-size:11px;color:#9A968C;margin-bottom:5px;line-height:1.45;}
-.campo-badge-local{display:inline-block;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:100px;background:rgba(106,176,245,.15);color:#185FA5;margin-left:6px;vertical-align:middle;}
-.campo-input{width:100%;font-size:12.5px;padding:9px 11px;border-radius:8px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;resize:vertical;}
-.campo-input:focus{outline:none;border-color:#F0C040;}
-.campo-input::placeholder{color:#BEBAB2;}
-textarea.campo-input{min-height:72px;}
-.campo-texto3{display:flex;flex-direction:column;gap:5px;}
-.campo-texto3 input{font-size:12.5px;padding:8px 10px;border-radius:7px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;}
-.campo-radios{display:flex;flex-direction:column;gap:4px;}
-.campo-radio-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;border:1.5px solid #ECEAE4;cursor:pointer;font-size:12px;color:#4A4640;background:#fff;}
-.campo-radio-item.sel{border-color:#F0C040;background:#FFF8E6;color:#7A5E0A;}
-.campo-calculado{font-size:12.5px;color:#6B6558;padding:8px 11px;background:#F3F1EC;border-radius:7px;min-height:36px;}
-.campo-escala{display:flex;gap:4px;}
-.campo-escala-btn{flex:1;min-width:0;font-size:11px;font-weight:700;padding:8px 0;border-radius:7px;border:1.5px solid #ECEAE4;background:#fff;color:#6B6558;cursor:pointer;transition:.15s;}
-.campo-escala-btn:hover{border-color:#D8D3C6;}
-.campo-escala-btn.sel{border-color:#F0C040;background:#F0C040;color:#0B0F16;}
-.campo-enviar{width:100%;margin-top:6px;background:#F0C040;color:#0B0F16;border:none;font-size:13px;font-weight:700;padding:12px;border-radius:9px;cursor:pointer;}
-.campo-estado{font-size:11px;margin-top:4px;color:#9A968C;text-align:center;min-height:16px;}
-.campo-estado.ok{color:#3F8F63;}
-.campo-estado.err{color:#C0392B;}
-.campo-sep{border:none;border-top:1px dashed #ECEAE4;margin:4px 0;}
-.campo-privacidad{display:flex;gap:8px;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.25);border-radius:9px;padding:9px 11px;font-size:11px;color:#7A5E0A;line-height:1.5;margin-bottom:4px;}
-.identidad-caja{display:flex;flex-direction:column;gap:10px;}
-.identidad-intro{font-size:12px;color:#6A6460;line-height:1.6;border-left:3px solid #F0C040;padding:8px 10px 8px 12px;background:#FAFAF8;border-radius:0 6px 6px 0;margin-bottom:2px;}
-.identidad-input{width:100%;font-size:12.5px;padding:9px 11px;border-radius:8px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;}
-.identidad-input:focus{outline:none;border-color:#F0C040;}
-.identidad-error{font-size:11.5px;color:#C0392B;margin-top:2px;min-height:16px;}
+/* ── POPUP POR PASO ── */
+.popup-overlay{position:fixed;inset:0;background:rgba(8,12,20,.6);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;}
+.popup-overlay.open{display:flex;}
+.popup-card{background:#fff;color:#14181F;border-radius:18px;max-width:520px;width:100%;max-height:86vh;overflow-y:auto;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.5);}
+.popup-title{font-family:Georgia,serif;font-size:19px;margin-bottom:6px;}
+.popup-instr{font-size:12.5px;color:#6B6558;margin-bottom:16px;line-height:1.55;}
+.popup-section-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9A968C;margin:18px 0 8px;}
+.popup-section-title:first-child{margin-top:0;}
+.popup-field{margin-bottom:14px;}
+.popup-field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#14181F;}
+.popup-field input,.popup-field textarea{width:100%;font-size:13px;padding:10px 12px;border-radius:9px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;resize:vertical;}
+.popup-field input:focus,.popup-field textarea:focus{outline:none;border-color:#F0C040;}
+.popup-escala{display:flex;gap:4px;flex-wrap:wrap;}
+.popup-escala-btn{flex:1;min-width:28px;font-size:11px;font-weight:700;padding:8px 0;border-radius:7px;border:1.5px solid #ECEAE4;background:#fff;color:#6B6558;cursor:pointer;transition:.15s;}
+.popup-escala-btn:hover{border-color:#D8D3C6;}
+.popup-escala-btn.sel{border-color:#7EC8A0;background:#7EC8A0;color:#0B0F16;}
+.popup-required{color:#C0392B;}
+.popup-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:6px;}
+.popup-btn{font-size:13px;font-weight:700;padding:11px 20px;border-radius:9px;border:none;cursor:pointer;}
+.popup-btn-primary{background:#7EC8A0;color:#0B0F16;}
+.popup-error{font-size:11.5px;color:#C0392B;margin-top:2px;min-height:16px;text-align:right;}
+
+@media(max-width:699px){
+  .popup-overlay{align-items:flex-end;padding:0;}
+  .popup-card{max-width:100%;border-radius:20px 20px 0 0;max-height:88vh;}
+}
+
+/* ── PANTALLA DE ÉXITO ── */
+.success-screen{text-align:center;padding:90px 24px;}
+.success-emoji{font-size:52px;margin-bottom:16px;}
+.success-title{font-family:Georgia,serif;font-size:24px;color:#fff;margin-bottom:10px;}
+.success-sub{font-size:14px;color:var(--fog);margin-bottom:6px;max-width:420px;margin-left:auto;margin-right:auto;}
+.success-btn{display:inline-block;background:var(--sage);color:var(--void);font-weight:700;font-size:14px;padding:13px 26px;border-radius:100px;margin-top:22px;}
 
 /* ── HELP / WHATSAPP FAB ── */
 .help-fab{
@@ -196,7 +198,6 @@ textarea.campo-input{min-height:72px;}
 }
 </style>
 <script src="config.js"></script>
-<link rel="stylesheet" href="escena-player.css">
 </head>
 <body>
 
@@ -221,59 +222,42 @@ textarea.campo-input{min-height:72px;}
 </div>
 
 <div class="site-content">
-  <div class="momento-wrap">
+  <div class="momento-wrap" id="momento-wrap">
     <div class="top-strip">
-      <div class="breadcrumb" id="breadcrumb">Impulso › <b>Ruta GEB</b> › Sem. 1</div>
-      <div class="status-row">
-        <span class="status-badge">EN CURSO</span>
-        <span class="next-btn">Siguiente →</span>
-      </div>
+      <div class="breadcrumb" id="breadcrumb">Ruta GEB › Sem. 1 · Autogestivo</div>
+      <a href="ruta-geb.html" class="nav-return">← Regresar al curso</a>
     </div>
 
     <div class="momento-card">
       <div class="card-topbar"></div>
-      <div class="momento-grid">
+      <div class="momento-grid" id="momento-grid">
 
         <div class="rail">
-          <div class="rail-title" id="rail-title">Temario de la semana</div>
+          <div class="rail-title" id="rail-title">Momentos de la semana</div>
           <div class="rail-list" id="rail-list"></div>
           <div class="rail-note">Esta semana puede sumar más actividades más adelante.</div>
         </div>
 
-        <div class="center">
+        <div class="center" id="center">
           <div class="card-glow"></div>
 
           <div class="tag-row">
-            <span class="tag tag-guia">📘 Guía</span>
             <span class="tag tag-pilar" id="pilar-tag">🟠 Propósito</span>
+            <span class="tag tag-dur" id="duracion-tag">~3 h</span>
           </div>
 
           <div>
             <h2 class="momento-title" id="momento-title">[verificar título del momento]</h2>
-            <p class="momento-context" id="momento-context">[verificar frase de contexto breve — 1-2 líneas de introducción a la guía]</p>
+            <p class="momento-context" id="momento-context">[verificar frase de contexto breve]</p>
           </div>
 
-          <div class="media-box" id="media-box" style="display:none;">
-            <div class="media-play">▶</div>
-            <div>
-              <div class="media-title" id="media-title"></div>
-              <div class="media-meta" id="media-meta"></div>
-            </div>
-          </div>
+          <p class="step-intro" id="step-intro" style="display:none;"></p>
+          <div id="step-content-wrap"></div>
 
-          <div>
-            <div class="label-caps" style="margin-bottom:8px;">En esta guía</div>
-            <div class="step-chips" id="step-chips"></div>
-          </div>
-
-          <div class="step-box" id="step-box"></div>
-
-          <div class="checklist-card">
-            <div class="checklist-head">
-              <span>Checklist del ejercicio</span>
-              <span class="checklist-count" id="checklist-count">0/4</span>
-            </div>
-            <div class="checklist-items" id="checklist-items"></div>
+          <div class="step-nav">
+            <button type="button" class="step-nav-btn" id="btn-anterior">← Anterior</button>
+            <span class="step-counter" id="step-counter">1 de 5</span>
+            <button type="button" class="step-nav-btn primary" id="btn-siguiente">Siguiente →</button>
           </div>
         </div>
 
@@ -282,12 +266,12 @@ textarea.campo-input{min-height:72px;}
             <div class="label-caps" style="margin-bottom:10px;">Recursos necesarios</div>
             <div id="recursos-list"><div class="recurso-row">📄 [verificar recurso]</div></div>
           </div>
-          <div id="nota-wrap" style="display:none;">
-            <div class="nota-box" id="nota-box"></div>
-          </div>
-          <div>
-            <div class="label-caps" style="margin-bottom:10px;">Espacio de entrega</div>
-            <div id="entrega-campos"></div>
+          <div class="checklist-card">
+            <div class="checklist-head">
+              <span>Avance de la semana</span>
+              <span class="checklist-count" id="checklist-count">0/4</span>
+            </div>
+            <div class="checklist-items" id="checklist-items"></div>
           </div>
         </div>
 
@@ -300,7 +284,11 @@ textarea.campo-input{min-height:72px;}
   <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
 </div>
 
-<script src="escena-player.js"></script>
+<!-- ══ POPUP DE PASO ══ -->
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup-card" id="popup-card"></div>
+</div>
+
 <script src="entrega-engine.js"></script>
 <script>
 /* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
@@ -322,11 +310,10 @@ document.getElementById('lock-form').addEventListener('submit', function(e){
 const params = new URLSearchParams(window.location.search);
 const curso = params.get('curso') || 'Ruta GEB';
 const semana = params.get('semana') || 'Sem. 1';
-const titulo = params.get('titulo') || '[verificar título del momento]';
-const pilar = params.get('pilar') || 'Propósito';
+let titulo = params.get('titulo') || '[verificar título del momento]';
+let pilar = params.get('pilar') || 'Propósito';
 
-document.getElementById('breadcrumb').innerHTML = `Impulso › <b>${curso}</b> › ${semana}`;
-document.getElementById('rail-title').textContent = `Temario de ${semana}`;
+document.getElementById('breadcrumb').innerHTML = `${curso} › <b>${semana}</b> · Autogestivo`;
 document.getElementById('momento-title').textContent = titulo;
 
 const PILAR_STYLE = {
@@ -335,104 +322,112 @@ const PILAR_STYLE = {
   'Comunidad':  { emoji:'🟢', color:'#3F8F63', bg:'rgba(126,200,160,.12)' },
   'Transición': { emoji:'🟠🔵', color:'#C9503F', bg:'rgba(240,112,96,.12)' },
 };
-const pStyle = PILAR_STYLE[pilar] || PILAR_STYLE['Propósito'];
 const pilarTag = document.getElementById('pilar-tag');
-pilarTag.textContent = `${pStyle.emoji} ${pilar}`;
-pilarTag.style.color = pStyle.color;
-pilarTag.style.background = pStyle.bg;
+function pintaPilar(p) {
+  const s = PILAR_STYLE[p] || PILAR_STYLE['Propósito'];
+  pilarTag.textContent = `${s.emoji} ${p}`;
+  pilarTag.style.color = s.color;
+  pilarTag.style.background = s.bg;
+}
+pintaPilar(pilar);
 
-/* ── RAIL: temario / momentos de la semana (default — se sobrescribe con el JSON de la semana si trae railItems) ── */
-const esRuta = curso.toLowerCase().includes('ruta');
-let railItems = esRuta ? [
-  { label:'Autogestivo semanal', state:'current' },
-  { label:'Siguiente semana', state:'pending' },
-] : [
-  { label:'Autogestivo semanal', state:'done' },
-  { label:'Tríada de colaboradores', state:'done' },
-  { label:titulo, state:'current' },
-  { label:'Siguiente momento', state:'pending' },
-];
+/* ── ESTADO ── */
+let steps = [];
+let checklistLabels = [];
+let activeStep = 0;
+let completed = [];       // paralelo a steps: true si ese paso ya guardó su popup
+let answers = {};         // respuestas de todos los popups de paso, en memoria
+let nps = null;
+let entregada = false;
+
+/* ── RAIL: video de apertura (no clickeable) + momentos/pasos ── */
 function renderRail() {
   const railList = document.getElementById('rail-list');
-  railList.innerHTML = railItems.map(it => `
-    <div class="rail-item ${it.state === 'current' ? 'current' : it.state === 'pending' ? 'pending' : ''}">
-      <span class="dot">${it.state === 'done' ? '✓' : it.state === 'current' ? '▶' : ''}</span>${it.label}
-    </div>
-  `).join('');
-}
-renderRail();
-
-/* ── STEPS (default — se sobrescribe con el JSON de la semana) ── */
-let steps = [
-  { label:'1 · Diagnóstico', instruction:'[verificar instrucción]' },
-  { label:'2 · Marco', instruction:'[verificar instrucción]' },
-  { label:'3 · Aplicación', instruction:'[verificar instrucción]' },
-  { label:'4 · Caso', instruction:'[verificar instrucción]' },
-  { label:'5 · Reflexión', instruction:'[verificar instrucción]' },
-];
-let activeStep = 0;
-
-function renderSteps() {
-  const chips = document.getElementById('step-chips');
-  chips.innerHTML = '';
-  steps.forEach((s, i) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'step-chip' + (i === activeStep ? ' active' : i < activeStep ? ' done' : '');
-    btn.textContent = s.label;
-    btn.addEventListener('click', () => { activeStep = i; render(); });
-    chips.appendChild(btn);
+  let html = `
+    <div class="rail-item">
+      <span class="dot">✓</span>Video de apertura
+    </div>`;
+  html += steps.map((s, i) => {
+    const isCurrent = i === activeStep && !entregada;
+    const isDone = completed[i];
+    const cls = isCurrent ? 'current' : (isDone ? '' : 'pending');
+    const dot = isDone ? '✓' : (isCurrent ? '▶' : '');
+    const clickable = isDone || isCurrent;
+    return `<button type="button" class="rail-item ${cls} ${clickable ? 'clickable' : ''}" data-step="${i}" ${clickable ? '' : 'disabled'}>
+      <span class="dot">${dot}</span>${s.label}
+    </button>`;
+  }).join('');
+  railList.innerHTML = html;
+  railList.querySelectorAll('.rail-item.clickable').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeStep = Number(btn.dataset.step);
+      entregada = false;
+      renderAll();
+    });
   });
-  const box = document.getElementById('step-box');
-  const s = steps[activeStep];
-  box.innerHTML = `
-    <div class="step-box-head">
-      <span class="step-num">${activeStep + 1}</span>
-      <span>${s.label.split(' · ')[1]}</span>
-    </div>
-    <p>${s.instruction}</p>
-  `;
 }
 
-/* ── CHECKLIST (default — se sobrescribe con el JSON de la semana) ── */
-let checklistLabels = [
-  'Leíste el marco completo',
-  'Completaste la tabla de diagnóstico',
-  'Escribiste tu reflexión final',
-  'Subiste tu archivo a Drive',
-];
-let checked = new Array(checklistLabels.length).fill(false);
-
+/* ── CHECKLIST DE AVANCE ── */
 function renderChecklist() {
   const wrap = document.getElementById('checklist-items');
-  wrap.innerHTML = '';
-  checklistLabels.forEach((label, i) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'check-item' + (checked[i] ? ' checked' : '');
-    btn.innerHTML = `<span class="check-mark">${checked[i] ? '✓' : ''}</span>${label}`;
-    btn.addEventListener('click', () => { checked[i] = !checked[i]; render(); });
-    wrap.appendChild(btn);
-  });
-  document.getElementById('checklist-count').textContent = `${checked.filter(Boolean).length}/${checklistLabels.length}`;
+  wrap.innerHTML = checklistLabels.map(label => {
+    const stepIdx = steps.findIndex(s => s.checkLabel === label);
+    const done = stepIdx > -1 && completed[stepIdx];
+    return `<div class="check-item ${done ? 'checked' : ''}"><span class="check-mark">${done ? '✓' : ''}</span>${label}</div>`;
+  }).join('');
+  const doneCount = checklistLabels.filter(label => {
+    const stepIdx = steps.findIndex(s => s.checkLabel === label);
+    return stepIdx > -1 && completed[stepIdx];
+  }).length;
+  document.getElementById('checklist-count').textContent = `${doneCount}/${checklistLabels.length}`;
 }
 
-/* ── MEDIA (video opcional embebido en la guía) ── */
-function renderMedia(data) {
-  const box = document.getElementById('media-box');
-  if (data && data.escena) {
-    box.style.display = 'block';
-    box.innerHTML = '';
-    EscenaPlayer.montar(box, data.escena);
-    return;
-  }
-  const media = data && data.media ? data.media : null;
-  if (!media) { box.style.display = 'none'; return; }
-  box.style.display = 'flex';
-  document.getElementById('media-title').textContent = media.titulo || '';
-  document.getElementById('media-meta').textContent = media.duracion ? `Video · ${media.duracion}` : 'Video';
-  box.onclick = () => { if (media.src) window.open(media.src, '_blank'); };
+/* ── CENTRO: contenido del paso activo ── */
+function renderCenter() {
+  const s = steps[activeStep];
+  if (!s) return;
+
+  const intro = document.getElementById('step-intro');
+  if (s.intro) { intro.style.display = 'block'; intro.textContent = s.intro; }
+  else { intro.style.display = 'none'; }
+
+  const contentWrap = document.getElementById('step-content-wrap');
+  contentWrap.innerHTML = `<div class="${s.noBox ? 'step-content-nobox' : 'step-content-box'}">${s.content || ''}</div>`;
+
+  document.getElementById('step-counter').textContent = `${activeStep + 1} de ${steps.length}`;
+
+  const btnAnterior = document.getElementById('btn-anterior');
+  btnAnterior.disabled = activeStep === 0;
+
+  const btnSiguiente = document.getElementById('btn-siguiente');
+  const esUltimo = activeStep === steps.length - 1;
+  btnSiguiente.textContent = esUltimo ? 'Realizar entrega' : 'Siguiente →';
+  btnSiguiente.classList.toggle('final', esUltimo);
 }
+
+function renderAll() {
+  renderRail();
+  renderChecklist();
+  renderCenter();
+}
+
+/* ── NAVEGACIÓN ── */
+document.getElementById('btn-anterior').addEventListener('click', () => {
+  if (activeStep > 0) { activeStep--; renderAll(); }
+});
+
+document.getElementById('btn-siguiente').addEventListener('click', () => {
+  const s = steps[activeStep];
+  if (!s) return;
+  if (s.popup && s.popup.fields === 'FINAL') {
+    abrirPopupFinal();
+  } else if (s.popup) {
+    abrirPopupPaso(activeStep);
+  } else {
+    // paso sin popup (ej. Caso): avanza directo
+    if (activeStep < steps.length - 1) { activeStep++; renderAll(); }
+  }
+});
 
 /* ── RECURSOS ── */
 function renderRecursos(recursos) {
@@ -447,81 +442,185 @@ function renderRecursos(recursos) {
   }).join('');
 }
 
-/* ── NOTA / PRIVACIDAD (opcional, ej. semanas de presupuesto) ── */
-function renderNota(nota, entrega) {
-  const wrap = document.getElementById('nota-wrap');
-  let html = '';
-  if (entrega) {
-    html += `<div><strong>${entrega.titulo || 'Entrega de la semana'}</strong><ul style="margin:6px 0 0 16px;padding:0;">${(entrega.items||[]).map(i => `<li>${i}</li>`).join('')}</ul></div>`;
-    if (entrega.nota) html += `<div style="margin-top:8px;">${entrega.nota}</div>`;
-  } else if (nota) {
-    html = nota;
+/* ── POPUP: overlay genérico ── */
+const overlay = document.getElementById('popup-overlay');
+const popupCard = document.getElementById('popup-card');
+function cerrarPopup() { overlay.classList.remove('open'); popupCard.innerHTML = ''; }
+overlay.addEventListener('click', (e) => { if (e.target === overlay) cerrarPopup(); });
+
+function renderCampoPopup(field) {
+  const val = answers[field.id] || '';
+  if (field.tipo === 'ta') {
+    return `<div class="popup-field"><label>${field.label}</label><textarea rows="${field.rows || 4}" data-id="${field.id}">${val}</textarea></div>`;
   }
-  if (!html) { wrap.style.display = 'none'; return; }
-  wrap.style.display = 'block';
-  document.getElementById('nota-box').innerHTML = html;
+  return `<div class="popup-field"><label>${field.label}</label><input type="text" data-id="${field.id}" value="${val}"></div>`;
 }
 
-function render() {
-  renderSteps();
-  renderChecklist();
+/* ── POPUP DE PASO (Diagnóstico / Marco / Aplicación) ── */
+function abrirPopupPaso(stepIdx) {
+  const s = steps[stepIdx];
+  const p = s.popup;
+  popupCard.innerHTML = `
+    <div class="popup-title">${p.title}</div>
+    <div class="popup-instr">${p.instr}</div>
+    ${p.fields.map(renderCampoPopup).join('')}
+    <div class="popup-actions">
+      <button type="button" class="popup-btn popup-btn-primary" id="popup-guardar">Guardar y continuar</button>
+    </div>
+  `;
+  overlay.classList.add('open');
+  document.getElementById('popup-guardar').addEventListener('click', () => {
+    p.fields.forEach(f => {
+      const el = popupCard.querySelector(`[data-id="${f.id}"]`);
+      if (el) answers[f.id] = el.value;
+    });
+    completed[stepIdx] = true;
+    cerrarPopup();
+    if (activeStep < steps.length - 1) activeStep++;
+    renderAll();
+  });
 }
-render();
 
-/* ── FETCH DEL CONTENIDO REAL DE LA SEMANA (prioriza ?data=, si no viene lo adivina por número de semana) ── */
+/* ── POPUP FINAL: revisión + reflexión + NPS + entrega ── */
+function abrirPopupFinal() {
+  if (!EntregaEngine.obtenIdentidad()) {
+    popupCard.innerHTML = `<div id="identidad-wrap"></div>`;
+    overlay.classList.add('open');
+    EntregaEngine.montarIdentidad(document.getElementById('identidad-wrap'), () => abrirPopupFinal());
+    return;
+  }
+
+  const grupos = [
+    { titulo: 'Diagnóstico', ids: ['d1'] },
+    { titulo: 'Marco', ids: ['m1', 'm2'] },
+    { titulo: 'Aplicación', ids: ['a1', 'a2', 'a3', 'a4', 'a5'] },
+  ];
+
+  function camposDe(ids) {
+    return ids.map(id => {
+      const field = buscarFieldPorId(id);
+      return field ? renderCampoPopup(field) : '';
+    }).join('');
+  }
+
+  popupCard.innerHTML = `
+    <div class="popup-title">Revisión final</div>
+    <div class="popup-instr">Revisa tus respuestas. Si después de platicar con tu compañero quieres editar o completar alguna, adelante.</div>
+    ${grupos.map(g => `<div class="popup-section-title">${g.titulo}</div>${camposDe(g.ids)}`).join('')}
+    <div class="popup-section-title">Reflexión</div>
+    <div class="popup-field"><label>Nombre del compañero con el que conversaste</label><input type="text" data-id="r1" value="${answers.r1 || ''}"></div>
+    <div class="popup-field"><label>¿Qué te ayudó a reflexionar tu compañero sobre tu pasión?</label><textarea rows="3" data-id="r2">${answers.r2 || ''}</textarea></div>
+    <div class="popup-section-title">¿Qué tan útil fue esta semana? <span class="popup-required">*</span></div>
+    <div class="popup-escala" id="popup-nps"></div>
+    <div class="popup-error" id="popup-error"></div>
+    <div class="popup-actions">
+      <button type="button" class="popup-btn popup-btn-primary" id="popup-entregar">Realizar entrega</button>
+    </div>
+  `;
+  overlay.classList.add('open');
+
+  const npsWrap = document.getElementById('popup-nps');
+  for (let i = 0; i <= 10; i++) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'popup-escala-btn' + (nps === i ? ' sel' : '');
+    b.textContent = i;
+    b.addEventListener('click', () => {
+      nps = i;
+      npsWrap.querySelectorAll('.popup-escala-btn').forEach(x => x.classList.remove('sel'));
+      b.classList.add('sel');
+    });
+    npsWrap.appendChild(b);
+  }
+
+  document.getElementById('popup-entregar').addEventListener('click', realizarEntrega);
+}
+
+function buscarFieldPorId(id) {
+  for (const s of steps) {
+    if (s.popup && Array.isArray(s.popup.fields)) {
+      const f = s.popup.fields.find(f => f.id === id);
+      if (f) return f;
+    }
+  }
+  return null;
+}
+
+async function realizarEntrega() {
+  popupCard.querySelectorAll('[data-id]').forEach(el => { answers[el.dataset.id] = el.value; });
+
+  if (nps === null) {
+    document.getElementById('popup-error').textContent = 'Falta seleccionar qué tan útil fue esta semana.';
+    return;
+  }
+
+  const identidad = EntregaEngine.obtenIdentidad();
+  const btn = document.getElementById('popup-entregar');
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  const payload = {
+    id: identidad.curp,
+    nombre: identidad.nombre,
+    curso, semana,
+    campos: Object.assign({}, answers, { nps })
+  };
+
+  try {
+    await fetch(CONFIG.BACKEND, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) { /* el backend registra igual del lado servidor si el fetch no confirma por CORS */ }
+
+  const lastIdx = steps.length - 1;
+  completed[lastIdx] = true;
+  entregada = true;
+  cerrarPopup();
+  mostrarExito();
+}
+
+/* ── PANTALLA DE ÉXITO ── */
+function mostrarExito() {
+  document.getElementById('momento-grid').style.display = 'none';
+  document.querySelector('.top-strip').style.display = 'none';
+  const wrap = document.getElementById('momento-wrap');
+  const success = document.createElement('div');
+  success.className = 'momento-card success-screen';
+  success.innerHTML = `
+    <div class="success-emoji">🎉</div>
+    <div class="success-title">¡Felicidades, terminaste la ${semana}!</div>
+    <p class="success-sub">Tu entrega fue enviada.</p>
+    <p class="success-sub">La siguiente semana estará disponible el día lunes.</p>
+    <a class="success-btn" href="ruta-geb.html">← Regresar al curso</a>
+  `;
+  wrap.appendChild(success);
+}
+
+/* ── FETCH DEL CONTENIDO REAL DE LA SEMANA ── */
 const dataParam = params.get('data');
 const semNum = (semana.match(/\d+/) || ['1'])[0];
+const esRuta = curso.toLowerCase().includes('ruta');
 const programaSlug = esRuta ? 'ruta' : 'impulso';
 const contentUrl = dataParam ? `content/${dataParam}` : `content/${programaSlug}-sem${semNum}.json`;
 
 fetch(contentUrl)
   .then(r => r.ok ? r.json() : Promise.reject('no-content'))
   .then(data => {
-    if (data.titulo) document.getElementById('momento-title').textContent = data.titulo;
+    if (data.titulo) { titulo = data.titulo; document.getElementById('momento-title').textContent = titulo; }
     if (data.contexto) document.getElementById('momento-context').textContent = data.contexto;
+    if (data.duracion) document.getElementById('duracion-tag').textContent = data.duracion;
+    if (data.pilar) { pilar = data.pilar; pintaPilar(pilar); }
 
-    if (data.pilar && data.pilar !== pilar) {
-      const s2 = PILAR_STYLE[data.pilar] || PILAR_STYLE['Propósito'];
-      pilarTag.textContent = `${s2.emoji} ${data.pilar}`;
-      pilarTag.style.color = s2.color;
-      pilarTag.style.background = s2.bg;
-    }
-
-    renderMedia(data);
-
-    if (data.railItems) { railItems = data.railItems; renderRail(); }
-
-    if (data.steps) { steps = data.steps; activeStep = 0; }
-    if (data.checklistLabels) { checklistLabels = data.checklistLabels; checked = new Array(checklistLabels.length).fill(false); }
-    render();
+    if (data.steps) steps = data.steps;
+    completed = new Array(steps.length).fill(false);
+    if (data.checklistLabels) checklistLabels = data.checklistLabels;
 
     renderRecursos(data.recursos);
-    renderNota(data.nota, data.entrega);
-
-    if (data.entrega && data.entrega.campos) {
-      // NPS: campo fijo del template, se agrega a toda semana con entrega — no
-      // se edita por JSON, así no hay que tocar cada semana para tenerlo.
-      const camposConNps = data.entrega.campos.concat([{
-        id: 'nps',
-        tipo: 'escala',
-        label: '¿Qué tan probable es que recomiendes esta semana de Ruta GEB a una compañera?',
-        opciones: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        requerido: true
-      }]);
-      EntregaEngine.montar(
-        document.getElementById('entrega-campos'),
-        {
-          curso, semana, campos: camposConNps,
-          onEnviar: (payload) => fetch(CONFIG.BACKEND, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(payload)
-          }).then(r => ({ ok: r.ok }))
-        }
-      );
-    }
+    renderAll();
   })
-  .catch(() => { /* sin JSON disponible para esta semana: se queda con el contenido de fallback ya hardcodeado arriba */ });
+  .catch(() => { /* sin JSON disponible para esta semana: no hay contenido que pintar */ });
 </script>
 
 </body>

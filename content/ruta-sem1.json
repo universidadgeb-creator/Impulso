@@ -6,13 +6,15 @@
   "contexto": "¿Alguna vez te han preguntado qué quieres hacer con tu vida... y no supiste qué contestar? No pasa nada si no tienes la respuesta todavía. Esta semana no te la vamos a pedir — vas a empezar a construir el lenguaje para encontrarla, con evidencia real, no con lo primero que se te ocurra.",
   "variante": "guia",
   "duracion": "~3 h",
+  "video_src": "video/ruta-sem1-apertura.mp4",
+  "guion_notebooklm": "¿Alguna vez te han preguntado qué quieres hacer con tu vida? ¿Y no supiste qué contestar?\n\nNo pasa nada. La mayoría tampoco tiene la respuesta.\n\nEsta semana no te pediremos que sepas qué quieres. Queremos que lo empieces a pensar y a notar en tu vida diaria.\n\nHay una palabra japonesa que usaremos en este programa: ikigai. No es una fórmula mágica, es más bien una forma de reflexionar y empezar a prestar atención.\n\nAtención a lo que amas — aunque no pague, aunque nadie lo vea.\n\nAtención a lo que se te da bien — y que nunca habías notado.\n\nMás adelante conocerás a Ana, ella lleva tres años en recepción. Ella también te acompañará a realizar el ejercicio de esta semana.\n\nEs muy simple, vamos a pensar, reflexionar y escribir lo que amas, y en lo que eres bueno.\n\nEse es el punto de partida de todo el curso. Recuerda que si tienen dudas puedes buscar al equipo de Universidad. Nos vemos pronto.",
   "escena": {
     "audio": {
-      "src": "[verificar mp3 de NotebookLM — guion de Sem. 1]",
+      "src": "video/ruta-sem1-apertura.mp4",
       "duracion_ms": null
     },
     "subtitulos_forzados": true,
-    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real.",
+    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real. ~72s total.",
     "eventos": [
       {
         "t": 0,
@@ -20,25 +22,115 @@
         "set": "recepcion",
         "tipo": "foco",
         "accion": "entra",
-        "texto": "¿Alguna vez te han preguntado qué quieres hacer con tu vida... y no supiste qué contestar?",
+        "texto": "¿Alguna vez te han preguntado qué quieres hacer con tu vida? ¿Y no supiste qué contestar?",
         "tag": null
       },
       {
-        "t": 5000,
+        "t": 7400,
         "quien": "lupita",
         "set": "recepcion",
         "tipo": "recorrido",
         "accion": "pulsa",
-        "texto": "No pasa nada si no tienes la respuesta todavía.",
+        "texto": "No pasa nada. La mayoría tampoco tiene la respuesta.",
         "tag": null
       },
       {
-        "t": 10000,
+        "t": 11300,
         "quien": "lupita",
         "set": "recepcion",
         "tipo": "foco",
         "accion": "pulsa",
-        "texto": "Esta semana vas a empezar a construir el lenguaje para encontrarla, con evidencia real.",
+        "texto": "Esta semana no te pediremos que sepas qué quieres.",
+        "tag": null
+      },
+      {
+        "t": 15200,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Queremos que lo empieces a pensar y a notar en tu vida diaria.",
+        "tag": null
+      },
+      {
+        "t": 20900,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "constelacion",
+        "accion": "pulsa",
+        "texto": "Hay una palabra japonesa que usaremos en este programa: ikigai.",
+        "tag": null
+      },
+      {
+        "t": 25200,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "No es una fórmula mágica, es más bien una forma de reflexionar y empezar a prestar atención.",
+        "tag": null
+      },
+      {
+        "t": 32600,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Atención a lo que amas — aunque no pague, aunque nadie lo vea.",
+        "tag": null
+      },
+      {
+        "t": 38300,
+        "quien": "lupita",
+        "set": "oficina",
+        "tipo": "constelacion",
+        "accion": "pulsa",
+        "texto": "Atención a lo que se te da bien — y que nunca habías notado.",
+        "tag": null
+      },
+      {
+        "t": 44400,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Más adelante conocerás a Ana, ella lleva tres años en recepción.",
+        "tag": null
+      },
+      {
+        "t": 49200,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Ella también te acompañará a realizar el ejercicio de esta semana.",
+        "tag": null
+      },
+      {
+        "t": 54000,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "constelacion",
+        "accion": "pulsa",
+        "texto": "Es muy simple, vamos a pensar, reflexionar y escribir lo que amas, y en lo que eres bueno.",
+        "tag": null
+      },
+      {
+        "t": 61800,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Ese es el punto de partida de todo el curso.",
+        "tag": null
+      },
+      {
+        "t": 66100,
+        "quien": "lupita",
+        "set": "recepcion",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Recuerda que si tienen dudas puedes buscar al equipo de Universidad. Nos vemos pronto.",
         "tag": null
       }
     ]
@@ -56,111 +148,116 @@
   "steps": [
     {
       "label": "1 · Diagnóstico",
-      "instruction": "Antes de empezar: si nadie te pudiera juzgar — ni tu jefe, ni tu familia, ni tú mismo — y alguien te preguntara qué es lo que te gusta hacer, ¿qué responderías?<br><br>No tiene que ser útil. No tiene que impresionar a nadie. Solo lo primero que se te venga a la mente.<br><br>Escríbelo en una línea arriba, en el espacio de entrega. Cuando termines las dos listas esta semana, vuelve a leer lo que escribiste hoy."
+      "checkLabel": "Realizaste la meditación inicial",
+      "noBox": false,
+      "intro": null,
+      "content": "Antes de empezar con los conceptos y actividades de esta semana, vamos a hacer un breve ejercicio de reflexión. Un espacio para calentar nuestros motores creativos y conectar con lo esencial.<br><br>Realiza la siguiente reflexión escuchando el audio. Cuando termines ve a la siguiente sección.<br><br><div class=\"audio-placeholder\"><span>▶ Audio de meditación inicial</span><span>~5 min · Toca play para comenzar</span></div>",
+      "popup": {
+        "title": "Diagnóstico",
+        "instr": "En base a tu reflexión:",
+        "fields": [
+          {
+            "id": "d1",
+            "label": "Escribe de 3 a 5 cosas que harías sin que nadie te lo pidiera. Es decir, porque realmente lo disfrutas.",
+            "tipo": "ta",
+            "rows": 5
+          }
+        ]
+      }
     },
     {
       "label": "2 · Marco",
-      "instruction": "Si llegaste aquí sin haber hecho todavía tus dos listas y tu cruce en Aplicación, ve para allá primero — esto te va a servir más después de haberlo vivido.<br><br>Eso que encontraste en tu cruce tiene nombre: <strong>ikigai</strong> (生き甲斐), una palabra japonesa que significa, más o menos, \"razón para despertar cada mañana\". No es sobre elegir ser feliz — es sobre diseñar una vida que valga la pena vivir y disfrutar. No se descubre de la noche a la mañana: se necesita curiosidad silenciosa, un ritmo constante, y el coraje de seguir descubriendo y convirtiéndote.<br><br>Hay otra palabra japonesa que vas a escuchar en este programa, aunque la vamos a retomar con más profundidad más adelante: <strong>shimei</strong> (使命), propósito de vida. Es hacia afuera — lo que haces, para qué lo haces. Lo que cruzaste hoy es ikigai, no shimei: es hacia adentro, es lo que eres. Guarda la palabra shimei — la vas a necesitar cuando trabajes tu proyecto de impacto, más adelante en el programa.<br><br><strong>Si quieres profundizar (opcional):</strong> busca 2 o 3 historias reales — no de gente famosa — de personas que describan haber encontrado algo parecido a su ikigai."
+      "checkLabel": "Entendiste el concepto de IKIGAI",
+      "noBox": false,
+      "intro": null,
+      "content": "Antes de ir al ejercicio de esta semana, queremos profundizar en un concepto: <strong>IKIGAI</strong><br><br>El Ikigai es una palabra japonesa que significa \"razón de ser\". Más que un destino fijo, es una brújula personal que nos orienta hacia lo que da sentido a nuestra vida. Encontrarlo implica explorar cuatro preguntas esenciales:<br><br><ul><li>¿Qué amo?</li><li>¿En qué soy bueno/a?</li><li>¿Por qué me podrían pagar?</li><li>¿Qué necesita el mundo?</li></ul><br>Esta semana estaremos trabajando en las <strong>primeras 2 preguntas</strong>.<br><br>Recuerda que acercarte a conocer lo que amas y en lo que eres bueno no es una respuesta definitiva, sino una hipótesis viva que se construye, se prueba y se afina con la experiencia.",
+      "popup": {
+        "title": "Marco",
+        "instr": "Reflexiona antes de continuar:",
+        "fields": [
+          {
+            "id": "m1",
+            "label": "Piensa en una persona real que haya encontrado su IKIGAI. Escribe su nombre.",
+            "tipo": "txt"
+          },
+          {
+            "id": "m2",
+            "label": "¿Por qué crees que esta persona conoce su IKIGAI?",
+            "tipo": "ta",
+            "rows": 4
+          }
+        ]
+      }
     },
     {
       "label": "3 · Aplicación",
-      "instruction": "<strong>Parte 1 — Lo que amo.</strong> Antes de la lista, dos columnas rápidas, lo primero que se te ocurra: (A) cosas que hago para algo o alguien, aunque no me encanten hacerlas; (B) cosas que hago porque soy así, sin pensar en el resultado.<br><br>Ahora la lista completa: escribe entre 10 y 15 cosas que amas hacer, dentro y fuera del trabajo. No filtres si \"sirven\" para algo o no.<br><br><em>¿Cómo se ve una respuesta profunda?</em> Superficial: \"Me gusta ver películas.\" Profunda: \"Me gusta ver películas de misterio y tratar de adivinar el final antes que los demás.\" Busca la versión específica, no la genérica.<br><br><strong>Parte 2 — En lo que soy bueno/a.</strong> Escribe entre 10 y 15 cosas en las que eres bueno/a. Para cada una: ¿quién me lo ha dicho? ¿en qué momento lo noté yo mismo/a?<br><br><strong>Acción real (no te la saltes):</strong> pregúntale a una persona real — un/a compañero/a, tu supervisor/a, alguien de tu casa — qué cree que se te da bien. No lo que tú imaginas que diría: lo que realmente te responda. Anota su respuesta, textual.<br><br><strong>El cruce:</strong> compara tus dos listas completas. ¿Qué se repite en ambas? Anótalo aparte."
+      "checkLabel": "Encontraste tu pasión",
+      "noBox": false,
+      "intro": null,
+      "content": "En la sección de <strong>Recursos</strong> está la plantilla de las dos listas en Word — descárgala si te es más fácil. Si prefieres a mano en un cuaderno, también sirve; lo que importa es el contenido, no el formato. El Test VIA de Fortalezas no es obligatorio, pero contestarlo puede ayudarte con el ejercicio.<br><br><strong>Parte 1. Anota lo que amas.</strong><ul><li><strong>Flujo total (flow):</strong> momentos donde el tiempo desaparece.</li><li><strong>Curiosidades que no sueltas:</strong> temas que investigas por gusto.</li><li><strong>Alegrías pequeñas del día a día:</strong> placeres micro que te iluminan.</li><li><strong>Retos que disfrutas:</strong> difíciles pero deliciosos.</li></ul>Escribe mínimo 20 ítems combinando las categorías. Sin editar, sin juicios. La regla: <em>si da energía, va; si chupa energía, no va</em>.<br><br><div class=\"tip-box tip-gold\"><strong>¿Cómo se ve una respuesta profunda?</strong><br>Superficial: \"Me gusta ver películas.\"<br>Profunda: \"Me gusta ver películas de misterio y tratar de adivinar el final antes que los demás — lo hago hasta con las series que ya vi, releyendo pistas.\"<br><br>No necesitas escribir un párrafo para cada acción, pero sí tratar de hacerlo más específico. Si tu lista se parece más al primer ejemplo, vuelve y pregúntate: ¿qué parte exactamente amo de esto?</div><br><strong>Parte 2. Anota en lo que eres bueno/a.</strong><ul><li><strong>Talentos naturales:</strong> lo que se te da casi sin esfuerzo.</li><li><strong>Habilidades aprendidas:</strong> lo que puliste con estudio, trabajo o práctica.</li><li><strong>Reconocimiento externo:</strong> lo que otros siempre dicen de ti (\"eres buenísimo/a para…\")</li><li><strong>Superpoderes diferenciales:</strong> lo que te distingue del promedio.</li></ul>Escribe mínimo 20 ítems. La regla: que al leerlos pienses: <em>\"Sí, esto soy yo\"</em>.<br><br><div class=\"tip-box tip-sage\"><strong>¿Cómo mejorar esta respuesta?</strong><br>Pregúntale a una persona real — una compañera, tu supervisor, alguien de tu casa — qué cree que se te da bien. No lo que tú imaginas que diría: lo que realmente te responda. Anota su respuesta, textual, junto a tu lista.<br><br>Si esa persona menciona algo que no habías puesto, agrégalo. Eso también cuenta — a veces los demás ven en nosotros lo que nosotros no vemos.</div><br>Ahora haremos una tercera lista, combinando las cosas que se repiten en ambas listas. ¿De lo que amas, en qué eres realmente bueno? Ese cruce es tu <strong>Pasión</strong>.",
+      "popup": {
+        "title": "Aplicación",
+        "instr": "Registra lo que encontraste:",
+        "fields": [
+          { "id": "a1", "label": "Escribe 3 cosas que amas.", "tipo": "ta", "rows": 3 },
+          { "id": "a2", "label": "Escribe 3 cosas en las que eres bueno/a.", "tipo": "ta", "rows": 3 },
+          { "id": "a3", "label": "¿Qué apareció en el cruce de las 2 anteriores que no esperabas?", "tipo": "ta", "rows": 3 },
+          { "id": "a4", "label": "¿Qué te dijo la persona a la que preguntaste que te sorprendió?", "tipo": "ta", "rows": 3 },
+          { "id": "a5", "label": "Redacta tu pasión. Trata de ser específico.", "tipo": "ta", "rows": 4 }
+        ]
+      }
     },
     {
       "label": "4 · Caso",
-      "instruction": "Ana lleva tres años en la recepción de la sucursal Interlomas. En su lista de \"lo que amo\", la mitad de los ejemplos terminaron siendo momentos explicando algo: el manual de bienvenida a un compañero nuevo, cómo funciona el sistema de citas a un cliente confundido, la tarea de matemáticas de su sobrino los domingos.<br><br>Cuando le preguntó a una compañera qué creía que se le daba bien, la respuesta la sorprendió: \"tienes paciencia para explicar, yo me desespero\". Ana no lo había anotado nunca.<br><br>Cuando cruzó las dos listas, ahí estaba: explicar con paciencia hasta que el otro entiende. Todavía no sabe para qué le va a servir eso — ese es su shimei, y lo va a descubrir más adelante en el programa. Por ahora, solo lo anota, y se lo cuenta a su hermana el viernes."
+      "checkLabel": null,
+      "noBox": true,
+      "intro": "Cada semana, leerás un caso que aplica lo que estuviste trabajando.",
+      "content": "Ana lleva tres años en la recepción de su sucursal. En su lista de \"lo que amo\", la mitad de los ejemplos terminaron siendo momentos en los que explica algo a alguien más.<br><br>Cuando le preguntó a su compañera qué se le daba bien, la respuesta la sorprendió: <em>\"tienes paciencia para explicar, yo me desespero\"</em>. Ana no lo había notado nunca. Le gusta enseñar.<br><br>En el cruce Ana escribió: <em>explicar con paciencia hasta que el otro entiende</em>. Todavía no sabe para qué le va a servir, pero lo descubrirá más adelante.",
+      "popup": null
     },
     {
       "label": "5 · Reflexión",
-      "instruction": "<ul><li>¿Qué de lo que escribiste esta semana lo harías aunque nadie te lo pidiera?</li><li>¿Qué te dijo la persona a la que le preguntaste, que tú no habías anotado?</li><li>¿Qué apareció en tu cruce que no esperabas encontrar ahí?</li></ul><br><strong>Testigo:</strong> elige a una persona real de tu vida y cuéntale qué encontraste en tu cruce. Pídele que la próxima semana te pregunte cómo vas.<br><br><strong>Grupo (opcional):</strong> comparte una línea corta en el grupo de WhatsApp de tu cohorte — no hace falta que sea profundo, basta con que alguien más lo sepa."
+      "checkLabel": "Conversaste con un compañero",
+      "noBox": true,
+      "intro": null,
+      "content": "El caso de Ana nos hace pensar en un concepto muy importante: somos seres sociales.<br><br>Con el objetivo de seguir reflexionando sobre tu pasión, elige a un compañero de este curso y cuéntale qué encontraste en tu cruce.<br><br>Cuando termines, da clic en <strong>Realizar entrega</strong> para registrar tu avance y revisar tus respuestas de la semana.",
+      "popup": {
+        "title": "Revisión final",
+        "instr": "Revisa tus respuestas. Si después de platicar con tu compañero quieres editar o completar alguna, adelante.",
+        "fields": "FINAL"
+      }
     }
   ],
   "checklistLabels": [
-    "Hiciste tu lista de lo que amas (10-15 ítems)",
-    "Hiciste tu lista de en lo que eres bueno (10-15 ítems)",
-    "Le preguntaste a una persona real qué cree que se te da bien",
-    "Encontraste el cruce entre ambas listas",
-    "Compartiste tu resultado con un testigo",
-    "Subiste tu avance a la plataforma"
+    "Realizaste la meditación inicial",
+    "Entendiste el concepto de IKIGAI",
+    "Encontraste tu pasión",
+    "Conversaste con un compañero"
   ],
   "recursos": [
-    {
-      "icono": "📄",
-      "texto": "Plantilla de las dos listas — PDF editable",
-      "url": "recursos/ruta-sem1-plantilla-listas.pdf"
-    },
     {
       "icono": "📝",
       "texto": "Plantilla de las dos listas — Word",
       "url": "recursos/ruta-sem1-plantilla-listas.docx"
     },
     {
-      "icono": "🔎",
-      "texto": "Opcional: busca 2-3 historias reales (no de gente famosa) de personas que hayan encontrado su ikigai",
-      "url": null
-    },
-    {
       "icono": "🧪",
-      "texto": "Test VIA de Fortalezas de Carácter — 15 min, gratuito. Haz el test y usa tus 5 fortalezas principales para completar tu lista de 'en lo que soy bueno'",
+      "texto": "Test VIA de Fortalezas de Carácter — 15 min, gratuito",
       "url": "https://www.viacharacter.org/survey/account/register"
     }
   ],
   "entrega": {
     "campos": [
-      {
-        "id": "local_amo",
-        "modo": "local",
-        "tipo": "lista",
-        "label": "Lo que amo hacer",
-        "hint": "Tu lista completa, 10 a 15 ideas. Se queda en tu celular — nunca se sube.",
-        "filas": 15
-      },
-      {
-        "id": "local_bueno",
-        "modo": "local",
-        "tipo": "lista",
-        "label": "En lo que soy buena",
-        "hint": "Tu lista completa, 10 a 15 ideas. Se queda en tu celular — nunca se sube.",
-        "filas": 15
-      },
-      {
-        "id": "respuesta_persona_real",
-        "modo": "entrega",
-        "tipo": "textarea",
-        "label": "Lo que te respondió, textual",
-        "hint": "La persona real a la que le preguntaste qué cree que se te da bien."
-      },
-      {
-        "id": "cruce",
-        "modo": "entrega",
-        "tipo": "texto3",
-        "label": "Tu cruce",
-        "hint": "Lo que se repitió entre tus dos listas. Hasta 3 ideas."
-      },
-      {
-        "id": "testigo_nombre",
-        "modo": "entrega",
-        "tipo": "texto",
-        "label": "¿A quién elegiste como testigo?"
-      },
-      {
-        "id": "refl1",
-        "modo": "entrega",
-        "tipo": "textarea",
-        "label": "¿Qué de lo que escribiste esta semana lo harías aunque nadie te lo pidiera?"
-      },
-      {
-        "id": "refl2",
-        "modo": "entrega",
-        "tipo": "textarea",
-        "label": "¿Qué te dijo la persona a la que le preguntaste, que tú no habías anotado?"
-      },
-      {
-        "id": "refl3",
-        "modo": "entrega",
-        "tipo": "textarea",
-        "label": "¿Qué apareció en tu cruce que no esperabas encontrar ahí?"
-      }
+      { "id": "d1", "tipo": "textarea", "label": "Cosas que harías sin que nadie te lo pidiera" },
+      { "id": "m1", "tipo": "texto", "label": "Persona que encontró su IKIGAI" },
+      { "id": "m2", "tipo": "textarea", "label": "¿Por qué crees que conoce su IKIGAI?" },
+      { "id": "a1", "tipo": "textarea", "label": "3 cosas que amas" },
+      { "id": "a2", "tipo": "textarea", "label": "3 cosas en las que eres bueno/a" },
+      { "id": "a3", "tipo": "textarea", "label": "Lo que apareció en el cruce que no esperabas" },
+      { "id": "a4", "tipo": "textarea", "label": "Lo que te dijo la persona que preguntaste" },
+      { "id": "a5", "tipo": "textarea", "label": "Tu pasión" },
+      { "id": "r1", "tipo": "texto", "label": "Nombre del compañero con el que conversaste" },
+      { "id": "r2", "tipo": "textarea", "label": "¿Qué te ayudó a reflexionar tu compañero sobre tu pasión?" }
     ]
   }
 }
