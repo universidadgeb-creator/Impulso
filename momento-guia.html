@@ -175,8 +175,8 @@ html.unlocked .lock-screen{display:none;}
 /* ── PANTALLA DE ÉXITO ── */
 .success-screen{text-align:center;padding:90px 24px;}
 .success-emoji{font-size:52px;margin-bottom:16px;}
-.success-title{font-family:Georgia,serif;font-size:24px;color:#fff;margin-bottom:10px;}
-.success-sub{font-size:14px;color:var(--fog);margin-bottom:6px;max-width:420px;margin-left:auto;margin-right:auto;}
+.success-title{font-family:Georgia,serif;font-size:24px;color:#14181F;margin-bottom:10px;}
+.success-sub{font-size:14px;color:#6B6558;margin-bottom:6px;max-width:420px;margin-left:auto;margin-right:auto;}
 .success-btn{display:inline-block;background:var(--sage);color:var(--void);font-weight:700;font-size:14px;padding:13px 26px;border-radius:100px;margin-top:22px;}
 
 /* ── HELP / WHATSAPP FAB ── */
@@ -586,8 +586,9 @@ async function realizarEntrega() {
 
 /* ── PANTALLA DE ÉXITO ── */
 function mostrarExito() {
-  document.getElementById('momento-grid').style.display = 'none';
+  document.querySelector('.momento-card').style.display = 'none';
   document.querySelector('.top-strip').style.display = 'none';
+  document.querySelector('.placeholder-note').style.display = 'none';
   const wrap = document.getElementById('momento-wrap');
   const success = document.createElement('div');
   success.className = 'momento-card success-screen';
