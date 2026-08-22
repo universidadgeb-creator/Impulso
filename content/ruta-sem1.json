@@ -149,9 +149,9 @@
     {
       "label": "1 · Diagnóstico",
       "checkLabel": "Realizaste la meditación inicial",
-      "highlight": false,
-      "intro": null,
-      "content": "Antes de empezar con los conceptos y actividades de esta semana, vamos a hacer un breve ejercicio de reflexión. Un espacio para calentar nuestros motores creativos y conectar con lo esencial.<br><br>Realiza la siguiente reflexión escuchando el audio. Cuando termines ve a la siguiente sección.<br><br><div class=\"audio-real\"><div class=\"audio-real-label\">🎧 Audio de meditación inicial · ~5 min</div><audio controls preload=\"none\"><source src=\"audio/ruta-sem1-meditacion.mp3\" type=\"audio/mpeg\"></audio></div>",
+      "highlight": true,
+      "intro": "Antes de empezar con los conceptos y actividades de esta semana, vamos a hacer un breve ejercicio de reflexión. Un espacio para calentar nuestros motores creativos y conectar con lo esencial.<br><br>Realiza la siguiente reflexión escuchando el audio. Cuando termines ve a la siguiente sección.",
+      "content": "<div class=\"audio-real-label\">🎧 Audio de meditación inicial · ~5 min</div><audio controls preload=\"none\" style=\"width:100%;margin-top:8px;\"><source src=\"audio/ruta-sem1-meditacion.mp3\" type=\"audio/mpeg\"></audio>",
       "popup": {
         "title": "Diagnóstico",
         "instr": "En base a tu reflexión:",

@@ -200,8 +200,13 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
   para profundizar. En el JSON de cada semana, el campo del paso es `"highlight":
   true/false` (reemplazó a `"noBox"`) — `true` solo en pasos tipo Caso, cuyo contenido
   se resalta a propósito; el `intro` de ese mismo paso (ej. "Cada semana, leerás un
-  caso...") sigue yendo en caja gris neutra, no en la resaltada. Aplicar este mismo
-  criterio a cualquier semana nueva que se agregue.
+  caso...") sigue yendo en caja gris neutra, no en la resaltada. **Lo mismo aplica a
+  audio/video embebido dentro de un paso** (ej. el audio de meditación de Sem. 1, o el
+  podcast de Sem. 2): el reproductor va en `highlight: true` — texto de contexto en
+  `intro` (caja gris), el reproductor en `content` (caja resaltada). Aplicar este mismo
+  criterio a cualquier semana nueva que se agregue: caja gris para instrucción/contexto,
+  línea de color solo para lo que se quiere resaltar (caso, recurso multimedia,
+  pregunta para profundizar).
 
 ## EscenaPlayer — elenco de personajes (decisiones cerradas)
 

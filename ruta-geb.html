@@ -128,6 +128,7 @@ html.unlocked .lock-screen{display:none;}
 }
 .dash-eyebrow::before{content:'●';font-size:8px;}
 .dash-card h2{font-size:clamp(24px,4.5vw,32px);color:#14181F;margin-bottom:6px;}
+.dash-tagline{font-size:14px;color:rgba(20,24,31,.7);line-height:1.5;margin-bottom:6px;max-width:520px;}
 .dash-meta{font-size:13px;color:rgba(20,24,31,.55);}
 .dash-cta{
   background:#14181F;color:#fff;font-size:13px;font-weight:700;padding:11px 20px;
@@ -153,10 +154,12 @@ html.unlocked .lock-screen{display:none;}
   font-size:12px;font-weight:700;color:rgba(20,24,31,.4);background:#fff;
   border:1.5px solid rgba(20,24,31,.15);position:relative;z-index:1;transition:all .15s;
 }
+.day-node.completed .day-dot{background:#7EC8A0;color:#fff;border-color:#7EC8A0;}
 .day-node.active .day-dot{background:#14181F;color:#fff;border-color:#14181F;}
 .day-node:hover .day-dot{border-color:#7EC8A0;}
 .day-node-label{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(20,24,31,.4);}
 .day-node.active .day-node-label{color:#14181F;}
+.day-node.completed .day-node-label{color:#3F8F63;}
 
 .day-panel-head{
   margin-top:22px;padding:14px 0 16px;border-top:1px solid rgba(20,24,31,.08);
@@ -194,11 +197,26 @@ html.unlocked .lock-screen{display:none;}
   border-radius:20px;padding:26px 28px;
 }
 .about-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-bottom:14px;}
-.pillar-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
-.pillar-tag{
-  display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
-  padding:6px 14px;border-radius:100px;border:1px solid;white-space:nowrap;
+
+/* pilares — acordeón colapsable */
+.pillar-accordion{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.pillar-item{border:1px solid var(--border);border-radius:12px;overflow:hidden;border-left-width:3px;}
+.pillar-head{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 15px;background:rgba(255,255,255,.03);border:none;cursor:pointer;
+  color:var(--white);text-align:left;
 }
+.pillar-head:hover{background:rgba(255,255,255,.05);}
+.pillar-head-left{display:flex;flex-direction:column;gap:2px;}
+.pillar-head-name{font-size:13.5px;font-weight:700;}
+.pillar-head-sub{font-size:11.5px;color:var(--fog);}
+.pillar-caret{font-size:11px;color:var(--fog);transition:transform .2s;flex-shrink:0;}
+.pillar-item.open .pillar-caret{transform:rotate(180deg);}
+.pillar-body{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.pillar-item.open .pillar-body{max-height:700px;}
+.pillar-body-inner{padding:2px 16px 16px;font-size:12.5px;color:var(--fog);line-height:1.75;}
+.pillar-body-inner p{margin-bottom:10px;}
+.pillar-body-inner p:last-child{margin-bottom:0;}
 .ritmos-note{font-size:12.5px;color:var(--fog);margin-bottom:18px;line-height:1.7;}
 .ritmos-note strong{color:var(--white);}
 .bridge{
@@ -270,18 +288,10 @@ html.unlocked .lock-screen{display:none;}
         <div>
           <div class="dash-eyebrow">Cohorte · Generación 2</div>
           <h2>Ruta GEB</h2>
-          <div class="dash-meta" id="dash-meta">Día 1 de 6 · 1 módulo</div>
+          <p class="dash-tagline">Seis semanas para saber a dónde vas, cómo vas a llegar y con qué cuentas para hacerlo.</p>
+          <div class="dash-meta" id="dash-meta">Semana 1 de 6 · 1 módulo</div>
         </div>
       </div>
-
-      <a class="module-row" href="bienvenida.html" style="margin-bottom:8px;background:rgba(240,192,64,.07);border:1px solid rgba(240,192,64,.25);">
-        <span class="module-ico">⭐</span>
-        <div class="module-body">
-          <div class="module-title">Antes de empezar — Bienvenida</div>
-          <div class="module-sub"><b>BIENVENIDA</b> · Video + diagnóstico + registro</div>
-        </div>
-        <span class="module-arrow">→</span>
-      </a>
 
       <div class="day-stepper" id="day-stepper"></div>
 
@@ -294,18 +304,15 @@ html.unlocked .lock-screen{display:none;}
       </div>
 
       <div class="module-list" id="module-list"></div>
-      <p class="day-placeholder-note">Esta es una vista general del curso — no guarda avance. El desglose exacto de cada día se terminará de diseñar más adelante.</p>
     </div>
   </div>
 
   <div class="about-card">
-    <div class="about-title">Sobre este curso</div>
-    <p style="font-size:13.5px;color:var(--fog);line-height:1.7;margin-bottom:18px;">Te otorga el control absoluto sobre tu propósito, tu dirección y tus medios, eliminando la brecha entre lo que sueñas y lo que puedes ejecutar.</p>
-    <div class="pillar-legend">
-      <span class="pillar-tag" style="border-color:#F0C040;color:#F0C040;background:rgba(240,192,64,.08);">🟠 Propósito</span>
-      <span class="pillar-tag" style="border-color:#6AB0F5;color:#6AB0F5;background:rgba(106,176,245,.08);">🔵 Maestría</span>
-      <span class="pillar-tag" style="border-color:#7EC8A0;color:#7EC8A0;background:rgba(126,200,160,.08);">🟢 Comunidad — se activa en Impulso</span>
-    </div>
+    <div class="about-title">Al terminar Ruta GEB</div>
+    <p style="font-size:13.5px;color:var(--fog);line-height:1.7;margin-bottom:18px;">Al concluir Ruta GEB, habrás identificado lo que más te importa en tu vida profesional, construido un plan con metas concretas para los próximos dos años y elaborado un presupuesto personal que traza el camino para llegar.</p>
+
+    <div class="pillar-accordion" id="pillar-accordion"></div>
+
     <p class="ritmos-note"><strong>Ritmos activos en Ruta:</strong> AUT · autogestivo, semanal &nbsp;·&nbsp; CONF · conferencia magistral</p>
 
     <div class="bridge" id="bridge"></div>
@@ -347,13 +354,23 @@ document.addEventListener('click', function(e){
 
 /* ── DAY-BASED COURSE VIEW ── */
 const PILLARS = {
+  'Bienvenida': { color:'#F0C040' },
   'Propósito':  { color:'#F0C040' },
   'Maestría':   { color:'#6AB0F5' },
   'Transición': { color:'#F07060' },
   'Cierre':     { color:'#F07060' },
 };
 
+// Clave de "semana completada" — la misma fórmula que usa momento-guia.html,
+// para que el círculo se pinte en verde en cuanto se envía la entrega.
+function claveCompletado(curso, semNum) {
+  return `geb_completado_${curso}_sem${semNum}`.replace(/\s+/g, '_');
+}
+
 const days = [
+  { label:'Bienvenida', pillar:'Bienvenida', title:'Antes de empezar', especial:true, modules:[
+    { icon:'⭐', title:'Antes de empezar — Bienvenida', type:'BIENVENIDA', url:'bienvenida.html' },
+  ]},
   { label:'Sem 1', pillar:'Propósito', title:'IKIGAI parte 1', modules:[
     { icon:'📱', title:'IKIGAI parte 1', type:'AUTOGESTIVO', data:'ruta-sem1.json' },
   ]},
@@ -373,12 +390,28 @@ const days = [
     { icon:'📱', title:'Presupuesto parte 2', type:'AUTOGESTIVO', data:'ruta-sem6.json' },
     { icon:'🎤', title:'Conferencia magistral de cierre', type:'CONFERENCIA' },
   ]},
-  { label:'Cierre', pillar:'Cierre', title:'Cierre de Ruta GEB', modules:[
+  { label:'Cierre', pillar:'Cierre', title:'Cierre de Ruta GEB', especial:true, modules:[
     { icon:'🏁', title:'Cierre de Ruta GEB', type:'CIERRE', url:'cierre.html' },
   ]},
 ];
 
-let activeDay = 0;
+// Números de semana real (1..6), sin contar Bienvenida ni Cierre.
+const totalSemanas = days.filter(d => !d.especial).length;
+let semCounter = 0;
+days.forEach(d => { d.semNum = d.especial ? null : ++semCounter; });
+
+let activeDay = 1; // arranca en Sem 1, no en Bienvenida
+
+function estaCompletado(d) {
+  if (d.pillar === 'Bienvenida') {
+    try {
+      const s = JSON.parse(localStorage.getItem('bv_ruta_v1')) || {};
+      return !!(s.video && s.encuesta && s.registro);
+    } catch (e) { return false; }
+  }
+  if (d.pillar === 'Cierre') return localStorage.getItem('geb_cierre_completado') === '1';
+  return localStorage.getItem(claveCompletado('Ruta GEB', d.semNum)) === '1';
+}
 
 function renderStepper() {
   const stepper = document.getElementById('day-stepper');
@@ -386,11 +419,14 @@ function renderStepper() {
   days.forEach((d, i) => {
     const node = document.createElement('button');
     node.type = 'button';
-    node.className = 'day-node' + (i === activeDay ? ' active' : '');
-    const isCierre = d.pillar === 'Cierre';
-    const dotLabel = isCierre ? '🏁' : i + 1;
-    const subLabel = isCierre ? 'Cierre' : 'Día ' + (i + 1);
-    node.innerHTML = `<span class="day-dot">${dotLabel}</span><span class="day-node-label">${subLabel}</span>`;
+    const completado = estaCompletado(d);
+    node.className = 'day-node' + (i === activeDay ? ' active' : '') + (completado ? ' completed' : '');
+    let dotLabel;
+    if (completado) dotLabel = '✓';
+    else if (d.pillar === 'Bienvenida') dotLabel = '⭐';
+    else if (d.pillar === 'Cierre') dotLabel = '🏁';
+    else dotLabel = d.semNum;
+    node.innerHTML = `<span class="day-dot">${dotLabel}</span><span class="day-node-label">${d.label}</span>`;
     node.addEventListener('click', () => { activeDay = i; render(); });
     stepper.appendChild(node);
   });
@@ -400,16 +436,16 @@ function render() {
   renderStepper();
   const d = days[activeDay];
   const color = PILLARS[d.pillar].color;
-  // sin contar Cierre — solo las semanas reales
-  const totalSemanas = days.filter(x => x.pillar !== 'Cierre').length;
 
   if (d.pillar === 'Cierre') {
-    document.getElementById('dash-meta').textContent = `Después de Sem. ${totalSemanas} · ${d.modules.length} paso`;
+    document.getElementById('dash-meta').textContent = `Después de Semana ${totalSemanas} · ${d.modules.length} paso`;
     document.getElementById('day-sub').textContent = `Cierra tu ciclo de Ruta GEB`;
+  } else if (d.pillar === 'Bienvenida') {
+    document.getElementById('dash-meta').textContent = `Antes de Semana 1 · ${d.modules.length} paso`;
+    document.getElementById('day-sub').textContent = `Registro y diagnóstico inicial`;
   } else {
-    const numDia = activeDay + 1;
-    document.getElementById('dash-meta').textContent = `Día ${numDia} de ${totalSemanas} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
-    document.getElementById('day-sub').textContent = `Día ${numDia} de ${totalSemanas}`;
+    document.getElementById('dash-meta').textContent = `Semana ${d.semNum} de ${totalSemanas} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
+    document.getElementById('day-sub').textContent = `Semana ${d.semNum} de ${totalSemanas}`;
   }
   document.getElementById('day-title').textContent = `${d.label} · ${d.title}`;
 
@@ -420,8 +456,10 @@ function render() {
 
   const list = document.getElementById('module-list');
   list.innerHTML = d.modules.map(m => {
-    if (m.type === 'CIERRE') {
-      const completado = localStorage.getItem('geb_cierre_completado') === '1';
+    if (m.type === 'CIERRE' || m.type === 'BIENVENIDA') {
+      const completado = m.type === 'CIERRE'
+        ? localStorage.getItem('geb_cierre_completado') === '1'
+        : estaCompletado(d);
       const icon = completado ? '✅' : m.icon;
       const estado = completado ? 'COMPLETADO' : 'PENDIENTE';
       return `
@@ -452,6 +490,72 @@ function render() {
 }
 
 render();
+
+// Títulos reales de cada semana, tomados del JSON de contenido — así se
+// mantienen al día automáticamente conforme se sube el contenido, sin tocar
+// este archivo semana a semana.
+days.forEach(d => {
+  const mod = d.modules.find(m => m.data);
+  if (!mod) return;
+  fetch(`content/${mod.data}`)
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      if (!data.titulo) return;
+      d.title = data.titulo;
+      mod.title = data.titulo;
+      render();
+    })
+    .catch(() => {});
+});
+
+/* ── PILARES: acordeón colapsable ── */
+const pillarInfo = [
+  {
+    emoji:'🟠', nombre:'Propósito', color:'#F0C040',
+    sub:'Quién eres, hacia dónde vas, por qué',
+    parrafos:[
+      'En Ruta trabajas los dos primeros cuadrantes del IKIGAI: lo que te mueve y lo que ya sabes hacer. La segunda semana agregas los otros dos: lo que el mundo necesita y lo que puede pagarte. Con ese cruce empieza a dibujarse tu dirección profesional — y con ella, la primera versión de tu Plan de Vida.',
+      'En Impulso ese plan se defiende ante un panel en la Compuerta 1. Ya no es un ejercicio — es un compromiso que tienes que sostener con datos. Eliges un hábito en la Semana 3 y lo mantienes seis meses, validado cada semana con tu tríada. A lo largo del año te mides tres veces con la misma herramienta (Forward) para ver en qué cambiaste. El Demo Day es donde cuentas todo eso como historia tuya: quién eras, qué decidiste y a dónde llegaste.',
+    ],
+  },
+  {
+    emoji:'🔵', nombre:'Maestría', color:'#6AB0F5',
+    sub:'Lo que sabes hacer y puedes demostrar',
+    parrafos:[
+      'En Ruta construyes dos herramientas concretas: el Plan de Vida — con una visión a 24 meses, metas intermedias y el primer paso el lunes siguiente — y un presupuesto personal que conecta tus finanzas con esas metas. Ambas son portables: te las llevas dentro o fuera de GEB.',
+      'En Impulso la Maestría se amplía semana a semana: Excel aplicado a tu propio trabajo, herramientas de IA para automatizar tareas repetitivas, análisis de datos, dashboard para comunicarle resultados al liderazgo, pitch personal, inglés funcional, portafolio verificable y simulacros de entrevista reales. El proyecto de impacto que construyes en Producción demuestra que puedes identificar un problema, medirlo y resolverlo. El salto profesional de +30% de ingreso que se verifica al cierre es la prueba de que Maestría no fue solo aprendizaje — fue cambio real.',
+    ],
+  },
+  {
+    emoji:'🟢', nombre:'Comunidad', color:'#7EC8A0',
+    sub:'Cómo te relacionas, te adaptas y te sostienes',
+    parrafos:[
+      'En Ruta la Comunidad todavía no tiene ritmo propio — el programa es autogestivo y aún no hay cohorte formada. Pero el trabajo de propósito y maestría que haces solo es la preparación: llegas a Impulso sabiendo qué quieres y con evidencia de que puedes sostener un compromiso.',
+      'En Impulso la Comunidad se activa desde el Bootcamp. Formas una tríada de tres personas con las que te reúnes cada viernes con tres preguntas fijas: ¿qué movió tu proyecto?, ¿qué te detuvo?, ¿qué aplicaste? Cada dos semanas hay una sesión P2P donde aprendes de tus pares — y eventualmente la produces tú, porque enseñar es la prueba más honesta de que algo se aprendió. Hay coaching grupal mensual, sesiones de género y, para las mujeres, un círculo trimestral. Comunidad también significa aprender a negociar, poner límites y construir alianzas profesionales. Lo que se teje aquí dura más que el programa.',
+    ],
+  },
+];
+
+const pillarAccordion = document.getElementById('pillar-accordion');
+pillarAccordion.innerHTML = pillarInfo.map((p, i) => `
+  <div class="pillar-item" id="pillar-item-${i}" style="border-left-color:${p.color};">
+    <button type="button" class="pillar-head" data-idx="${i}">
+      <div class="pillar-head-left">
+        <span class="pillar-head-name">${p.emoji} ${p.nombre}</span>
+        <span class="pillar-head-sub">${p.sub}</span>
+      </div>
+      <span class="pillar-caret">▾</span>
+    </button>
+    <div class="pillar-body">
+      <div class="pillar-body-inner">${p.parrafos.map(t => `<p>${t}</p>`).join('')}</div>
+    </div>
+  </div>
+`).join('');
+pillarAccordion.querySelectorAll('.pillar-head').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById(`pillar-item-${btn.dataset.idx}`).classList.toggle('open');
+  });
+});
 
 const bridgeSteps = [
   { label:'Puente hacia Impulso →', type:'label' },
