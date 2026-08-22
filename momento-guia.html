@@ -173,10 +173,10 @@ html.unlocked .lock-screen{display:none;}
 }
 
 /* ── PANTALLA DE ÉXITO ── */
-.success-screen{text-align:center;padding:90px 24px;}
-.success-emoji{font-size:52px;margin-bottom:16px;}
-.success-title{font-family:Georgia,serif;font-size:24px;color:#14181F;margin-bottom:10px;}
-.success-sub{font-size:14px;color:#6B6558;margin-bottom:6px;max-width:420px;margin-left:auto;margin-right:auto;}
+.success-screen.momento-card{background:var(--deep);color:var(--white);text-align:center;padding:60px 24px 56px;}
+.success-visual{margin:0 auto 12px;display:block;}
+.success-title{font-family:Georgia,serif;font-size:24px;color:var(--white);margin-bottom:10px;}
+.success-sub{font-size:14px;color:var(--fog);margin-bottom:6px;max-width:420px;margin-left:auto;margin-right:auto;}
 .success-btn{display:inline-block;background:var(--sage);color:var(--void);font-weight:700;font-size:14px;padding:13px 26px;border-radius:100px;margin-top:22px;}
 
 /* ── HELP / WHATSAPP FAB ── */
@@ -513,7 +513,7 @@ function abrirPopupFinal() {
     <div class="popup-section-title">Reflexión</div>
     <div class="popup-field"><label>Nombre del compañero con el que conversaste</label><input type="text" data-id="r1" value="${answers.r1 || ''}"></div>
     <div class="popup-field"><label>¿Qué te ayudó a reflexionar tu compañero sobre tu pasión?</label><textarea rows="3" data-id="r2">${answers.r2 || ''}</textarea></div>
-    <div class="popup-section-title">¿Qué tan útil fue esta semana? <span class="popup-required">*</span></div>
+    <div class="popup-section-title">¿Qué tanto recomendarías este tema a alguien más? <span class="popup-required">*</span></div>
     <div class="popup-escala" id="popup-nps"></div>
     <div class="popup-error" id="popup-error"></div>
     <div class="popup-actions">
@@ -553,7 +553,7 @@ async function realizarEntrega() {
   popupCard.querySelectorAll('[data-id]').forEach(el => { answers[el.dataset.id] = el.value; });
 
   if (nps === null) {
-    document.getElementById('popup-error').textContent = 'Falta seleccionar qué tan útil fue esta semana.';
+    document.getElementById('popup-error').textContent = 'Falta seleccionar qué tanto recomendarías este tema.';
     return;
   }
 
@@ -593,7 +593,57 @@ function mostrarExito() {
   const success = document.createElement('div');
   success.className = 'momento-card success-screen';
   success.innerHTML = `
-    <div class="success-emoji">🎉</div>
+    <svg class="success-visual" viewBox="0 0 320 180" width="min(280px,80vw)" aria-hidden="true">
+      <circle cx="30" cy="20" r="1" fill="white" opacity=".5"/>
+      <circle cx="280" cy="35" r="1.5" fill="white" opacity=".4"/>
+      <circle cx="155" cy="12" r="1" fill="white" opacity=".6"/>
+      <circle cx="240" cy="60" r="1" fill="white" opacity=".3"/>
+      <circle cx="65" cy="55" r="1" fill="white" opacity=".4"/>
+      <ellipse cx="60" cy="130" rx="38" ry="14" fill="#172038" opacity=".8"/>
+      <rect x="34" y="108" width="52" height="24" rx="4" fill="#1a2540" opacity=".7"/>
+      <line x1="60" y1="108" x2="60" y2="96" stroke="#7EC8A0" stroke-width="1.5" opacity=".5"/>
+      <circle cx="60" cy="94" r="4" fill="#7EC8A0" opacity=".4"/>
+      <ellipse cx="260" cy="125" rx="35" ry="12" fill="#172038" opacity=".7"/>
+      <rect x="238" y="105" width="44" height="22" rx="4" fill="#1a2540" opacity=".6"/>
+      <line x1="260" y1="105" x2="260" y2="94" stroke="#7EC8A0" stroke-width="1.5" opacity=".5"/>
+      <circle cx="260" cy="92" r="4" fill="#7EC8A0" opacity=".4"/>
+      <ellipse cx="160" cy="155" rx="60" ry="18" fill="#1A2F50"/>
+      <rect x="110" y="132" width="100" height="26" rx="6" fill="#1F3560"/>
+      <ellipse cx="160" cy="132" rx="52" ry="8" fill="#2D4A28" opacity=".9"/>
+      <ellipse cx="140" cy="131" rx="10" ry="4" fill="#3A6030" opacity=".7"/>
+      <ellipse cx="175" cy="130" rx="8" ry="3" fill="#3A6030" opacity=".6"/>
+      <line x1="160" y1="131" x2="160" y2="100" stroke="#7EC8A0" stroke-width="1.5"/>
+      <polygon points="160,100 175,107 160,114" fill="#7EC8A0" opacity=".9"/>
+      <circle cx="145" cy="112" r="5" fill="#E8D5C0"/>
+      <rect x="141" y="117" width="8" height="14" rx="3" fill="#3A5FA0"/>
+      <line x1="141" y1="120" x2="135" y2="125" stroke="#3A5FA0" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="149" y1="120" x2="155" y2="125" stroke="#3A5FA0" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="143" y1="131" x2="140" y2="138" stroke="#1A2F50" stroke-width="2" stroke-linecap="round"/>
+      <line x1="147" y1="131" x2="150" y2="138" stroke="#1A2F50" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="145" cy="132" rx="8" ry="2" fill="#7EC8A0" opacity=".3"/>
+      <line x1="145" y1="106" x2="145" y2="60" stroke="#7EC8A0" stroke-width=".5" opacity=".2" stroke-dasharray="3 4"/>
+      <circle cx="130" cy="105" r="1.5" fill="#F0C040" opacity=".7">
+        <animate attributeName="cy" values="105;100;105" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".7;.2;.7" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="162" cy="100" r="1" fill="#7EC8A0" opacity=".6">
+        <animate attributeName="cy" values="100;95;100" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".6;.1;.6" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="136" cy="118" r="1" fill="#6AB0F5" opacity=".5">
+        <animate attributeName="cy" values="118;113;118" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+      <ellipse cx="160" cy="60" rx="80" ry="30" fill="url(#successHorizonGlow)" opacity=".3"/>
+      <defs>
+        <radialGradient id="successHorizonGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#7EC8A0"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <circle cx="160" cy="75" r="1" fill="#7EC8A0" opacity=".4"/>
+      <circle cx="160" cy="65" r="1" fill="#7EC8A0" opacity=".3"/>
+      <circle cx="160" cy="55" r="1" fill="#7EC8A0" opacity=".2"/>
+    </svg>
     <div class="success-title">¡Felicidades, terminaste la ${semana}!</div>
     <p class="success-sub">Tu entrega fue enviada.</p>
     <p class="success-sub">La siguiente semana estará disponible el día lunes.</p>
