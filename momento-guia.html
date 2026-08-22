@@ -99,12 +99,16 @@ html.unlocked .lock-screen{display:none;}
 .momento-title{font-family:Georgia,serif;font-size:22px;color:#14181F;}
 .momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:-6px;}
 
-.step-intro{font-style:italic;color:#6B6558;font-size:12.5px;}
-
-.step-content-box{background:#FAFAF9;border-left:3px solid #F0C040;border-radius:0 10px 10px 0;padding:16px 18px;font-size:13px;color:#3A3630;line-height:1.7;}
-.step-content-nobox{font-size:13px;color:#3A3630;line-height:1.7;}
-.step-content-box ul, .step-content-nobox ul{margin:6px 0 6px 18px;}
-.step-content-box li, .step-content-nobox li{margin-bottom:4px;}
+/* Regla de diseño: el contenido de un paso va en caja gris neutra por
+   defecto (sin línea de color). La línea de color (step-box-highlight,
+   o los tip-box) se reserva para resaltar algo puntual — ej. el caso
+   de la semana, o una pregunta para profundizar. */
+.step-box-neutral{background:#F3F1EC;border-radius:10px;padding:16px 18px;font-size:13px;color:#3A3630;line-height:1.7;margin-bottom:14px;}
+.step-box-neutral:last-child{margin-bottom:0;}
+.step-box-highlight{background:#FAFAF9;border-left:3px solid #F0C040;border-radius:0 10px 10px 0;padding:16px 18px;font-size:13px;color:#3A3630;line-height:1.7;margin-bottom:14px;}
+.step-box-highlight:last-child{margin-bottom:0;}
+.step-box-neutral ul, .step-box-highlight ul{margin:6px 0 6px 18px;}
+.step-box-neutral li, .step-box-highlight li{margin-bottom:4px;}
 
 .tip-box{border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:12px;line-height:1.65;}
 .tip-gold{background:#FFFBEB;border-left:3px solid #F0C040;color:#78350F;}
@@ -254,7 +258,6 @@ html.unlocked .lock-screen{display:none;}
             <p class="momento-context" id="momento-context">[verificar frase de contexto breve]</p>
           </div>
 
-          <p class="step-intro" id="step-intro" style="display:none;"></p>
           <div id="step-content-wrap"></div>
 
           <div class="step-nav">
@@ -390,12 +393,15 @@ function renderCenter() {
   const s = steps[activeStep];
   if (!s) return;
 
-  const intro = document.getElementById('step-intro');
-  if (s.intro) { intro.style.display = 'block'; intro.textContent = s.intro; }
-  else { intro.style.display = 'none'; }
+  // Regla de diseño: caja gris neutra por defecto. La línea de color
+  // (step-box-highlight) solo se usa para resaltar algo puntual, ej. el
+  // caso de la semana — se marca con "highlight": true en el JSON del paso.
+  const introHtml = s.intro ? `<div class="step-box-neutral">${s.intro}</div>` : '';
+  const contentClass = s.highlight ? 'step-box-highlight' : 'step-box-neutral';
+  const contentHtml = `<div class="${contentClass}">${s.content || ''}</div>`;
 
   const contentWrap = document.getElementById('step-content-wrap');
-  contentWrap.innerHTML = `<div class="${s.noBox ? 'step-content-nobox' : 'step-content-box'}">${s.content || ''}</div>`;
+  contentWrap.innerHTML = introHtml + contentHtml;
 
   document.getElementById('step-counter').textContent = `${activeStep + 1} de ${steps.length}`;
 

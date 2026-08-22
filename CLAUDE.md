@@ -191,6 +191,17 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
 - Placeholders de copy pendiente se marcan como `[verificar ...]` — no inventar
   contenido real ahí sin que Ceci lo confirme (ver testimonios: "en construcción, no
   se inventa nada" es literal, aplica igual a otros placeholders del sitio).
+- **Cajas de contenido en los momentos (`momento-guia.html`): gris neutra por
+  defecto, línea de color solo para resaltar.** El contenido normal de un paso
+  (Diagnóstico, Marco, Aplicación, Reflexión) va en `.step-box-neutral` — fondo gris
+  claro, sin borde de color. La línea de color (`.step-box-highlight`, o los
+  `tip-box` dorado/verde ya existentes dentro del contenido) se reserva para resaltar
+  algo puntual: el caso de la semana (ej. la historia de Ana en Sem. 1) o una pregunta
+  para profundizar. En el JSON de cada semana, el campo del paso es `"highlight":
+  true/false` (reemplazó a `"noBox"`) — `true` solo en pasos tipo Caso, cuyo contenido
+  se resalta a propósito; el `intro` de ese mismo paso (ej. "Cada semana, leerás un
+  caso...") sigue yendo en caja gris neutra, no en la resaltada. Aplicar este mismo
+  criterio a cualquier semana nueva que se agregue.
 
 ## EscenaPlayer — elenco de personajes (decisiones cerradas)
 
