@@ -119,12 +119,38 @@ html.unlocked .lock-screen{display:none;}
 .step-box-neutral ul, .step-box-highlight ul{margin:6px 0 6px 18px;}
 .step-box-neutral li, .step-box-highlight li{margin-bottom:4px;}
 
-.tip-box{border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:12px;line-height:1.65;}
+.tip-box,.tip{border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:12px;line-height:1.65;}
 .tip-gold{background:#FFFBEB;border-left:3px solid #F0C040;color:#78350F;}
 .tip-gold strong{color:#92400E;font-size:11px;}
 .tip-sage{background:#F0FDF4;border-left:3px solid #7EC8A0;color:#166534;}
 .tip-sage strong{color:#14532D;font-size:11px;}
+.tip-blue{background:#EFF8FF;border-left:3px solid #6AB0F5;color:#1E4E7A;}
+.tip-blue strong{color:#1E4E7A;font-size:11px;}
 .audio-real-label{font-size:12.5px;font-weight:700;color:#7A5E0A;}
+
+.sec-divider{border:none;border-top:1px solid #ECEAE4;margin:16px 0;}
+
+.podcast-block{display:flex;align-items:center;gap:12px;background:#F7F5F0;border-radius:12px;padding:12px 14px;margin:10px 0 14px;text-decoration:none;transition:background .15s;}
+.podcast-block:hover{background:#F0EDE5;}
+.pod-ico{font-size:22px;flex-shrink:0;}
+.pod-txt{flex:1;min-width:0;}
+.pod-title{font-size:13px;font-weight:700;color:#14181F;}
+.pod-sub{font-size:11.5px;color:#6B6558;}
+.pod-btn{font-size:12px;font-weight:700;color:#3A7FC9;white-space:nowrap;}
+
+.cross-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
+.cross-card{border-radius:10px;padding:12px 14px;}
+.c-label{font-size:12px;font-weight:700;margin-bottom:4px;}
+.c-desc{font-size:11.5px;line-height:1.5;color:#6B6558;}
+.c-pasion{background:#FFFBEB;border-left:3px solid #F0C040;}
+.c-pasion .c-label{color:#92400E;}
+.c-mision{background:#EFF8FF;border-left:3px solid #6AB0F5;}
+.c-mision .c-label{color:#1E4E7A;}
+.c-vocacion{background:#EFF8FF;border-left:3px solid #6AB0F5;}
+.c-vocacion .c-label{color:#1E4E7A;}
+.c-profesion{background:#FDF0EE;border-left:3px solid #F07060;}
+.c-profesion .c-label{color:#9B1C1C;}
+@media(max-width:699px){.cross-grid{grid-template-columns:1fr;}}
 
 .step-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:2px;}
 .step-nav-btn{font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:100px;border:1.5px solid #ECEAE4;background:none;color:#6B6558;cursor:pointer;transition:.15s;}
@@ -584,11 +610,17 @@ function abrirPopupFinal() {
     return;
   }
 
-  const grupos = [
-    { titulo: 'Diagnóstico', ids: ['d1'] },
-    { titulo: 'Marco', ids: ['m1', 'm2'] },
-    { titulo: 'Aplicación', ids: ['a1', 'a2', 'a3', 'a4', 'a5'] },
-  ];
+  const lastStep = steps[steps.length - 1];
+  const finalInstr = (lastStep.popup && lastStep.popup.instr) || 'Revisa tus respuestas. Si quieres editar o completar alguna, adelante.';
+  const entregaCampos = (weekData.entrega && weekData.entrega.campos) || [];
+  const campoEntrega = id => entregaCampos.find(c => c.id === id);
+  const r1Label = (campoEntrega('r1') || {}).label || 'Nombre del compañero con el que conversaste';
+  const r2Label = (campoEntrega('r2') || {}).label || '¿Qué te ayudó a reflexionar tu compañero sobre tu pasión?';
+  const npsLabel = (campoEntrega('NPS') || {}).label || '¿Qué tanto recomendarías este tema a alguien más?';
+
+  const grupos = steps
+    .filter(s => s.popup && Array.isArray(s.popup.fields))
+    .map(s => ({ titulo: s.label.replace(/^\d+\s*·\s*/, ''), ids: s.popup.fields.map(f => f.id) }));
 
   function camposDe(ids) {
     return ids.map(id => {
@@ -599,12 +631,12 @@ function abrirPopupFinal() {
 
   popupCard.innerHTML = `
     <div class="popup-title">Revisión final</div>
-    <div class="popup-instr">Revisa tus respuestas. Si después de platicar con tu compañero quieres editar o completar alguna, adelante.</div>
+    <div class="popup-instr">${finalInstr}</div>
     ${grupos.map(g => `<div class="popup-section-title">${g.titulo}</div>${camposDe(g.ids)}`).join('')}
     <div class="popup-section-title">Reflexión</div>
-    <div class="popup-field"><label>Nombre del compañero con el que conversaste</label><input type="text" data-id="r1" value="${answers.r1 || ''}"></div>
-    <div class="popup-field"><label>¿Qué te ayudó a reflexionar tu compañero sobre tu pasión?</label><textarea rows="3" data-id="r2">${answers.r2 || ''}</textarea></div>
-    <div class="popup-section-title">¿Qué tanto recomendarías este tema a alguien más? <span class="popup-required">*</span></div>
+    <div class="popup-field"><label>${r1Label}</label><input type="text" data-id="r1" value="${answers.r1 || ''}"></div>
+    <div class="popup-field"><label>${r2Label}</label><textarea rows="3" data-id="r2">${answers.r2 || ''}</textarea></div>
+    <div class="popup-section-title">${npsLabel} <span class="popup-required">*</span></div>
     <div class="popup-escala" id="popup-nps"></div>
     <div class="popup-error" id="popup-error"></div>
     <div class="popup-actions">

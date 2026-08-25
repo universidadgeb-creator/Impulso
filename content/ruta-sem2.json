@@ -3,16 +3,18 @@
   "semana": "Sem. 2",
   "pilar": "Propósito",
   "titulo": "IKIGAI parte 2: lo que el mundo necesita + por lo que te pueden pagar",
-  "contexto": "Cerramos el tema del IKIGAI esta semana. Ya tienes 2 de las 4 piezas — hoy completas las otras 2, y al final las cruzas todas: ahí aparece, por primera vez con nombre, tu ikigai completo.",
+  "contexto": "La semana pasada exploramos lo que amas y en lo que eres bueno. Esta semana está dedicada a cerrar tu IKIGAI reflexionando y descubriendo cómo tu valor único encaja en lo que necesita el mundo.",
   "variante": "guia",
-  "duracion": "~3-4 h (incluye el video de Marcos)",
+  "duracion": "~3-4 h",
+  "video_src": "video/ruta-sem2-apertura.mp4",
+  "guion_notebooklm": "Qué tal chicos, soy Marcos. Trabajo en la empresa, llevo seis años en mantenimiento. La semana pasada empezaste a conocerte mejor: descubriste qué amas, y en qué eres bueno. Yo nunca pensé que este programa me iba a hacer pensar tanto en mí mismo, pero claro, ese es el punto de partida. Cuando yo lo hice me pasó algo inesperado: empecé a notar ideas que siempre estuvieron ahí y nunca había nombrado. Esta semana vienen las dos preguntas que más me costaron, porque nunca me las había hecho y abren mucho el panorama. Sé que puede ser abrumador, pero vamos paso a paso... ... Piensa en ¿Qué de lo que sé hacer me pagarían?... ... ¿Qué problema del mundo me enciende las ganas de resolverlo?... Son incómodas porque para contestarlas tienes que mirar hacia afuera, hacia tu contexto, no solo hacia adentro. Conforme transcurra la semana y completes las actividades, verás que cuando las cruzas con lo que ya encontraste la semana pasada, aparece algo que probablemente ya estaba en ti: Tu pasión... Tu misión... Tu vocación... Tu profesión... Y en el centro de todo eso, por primera vez le pones nombre a un concepto: tu razón de ser. Espero esta semana te ayude a encontrar claridad tanto como a mí. Recuerda que si tienes alguna duda puedes buscar al equipo de Universidad. Adelante con el reto, ¡tú puedes!",
   "escena": {
     "audio": {
-      "src": "[verificar mp3 de NotebookLM — guion de Sem. 2, Marcos descubre su Cuadrante 4]",
+      "src": "video/ruta-sem2-apertura.mp4",
       "duracion_ms": null
     },
     "subtitulos_forzados": true,
-    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real. Consolidado desde el antiguo ruta-sem2-video.json — ya no es un momento separado en el hub, vive embebido arriba de esta guía.",
+    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real. ~80s total.",
     "eventos": [
       {
         "t": 0,
@@ -20,37 +22,79 @@
         "set": "taller",
         "tipo": "foco",
         "accion": "entra",
-        "texto": "Marcos lleva seis años en mantenimiento.",
-        "tag": null
+        "texto": "Qué tal chicos, soy Marcos. Trabajo en la empresa, llevo seis años en mantenimiento."
       },
       {
-        "t": 4000,
-        "quien": "lupita",
-        "quien_secundario": "marcos",
-        "accion_secundario": "breathe",
-        "set": "taller",
-        "tipo": "careo",
-        "accion": "entra",
-        "texto": "Una habilidad que para ti es rutina, otros la pagan de verdad.",
-        "tag": null
-      },
-      {
-        "t": 9000,
+        "t": 6000,
         "quien": "marcos",
         "set": "taller",
         "tipo": "recorrido",
-        "accion": "bob",
-        "texto": "Marcos busca el puesto en su celular, ahí mismo, mientras habla con Lupita.",
-        "tag": "cuadrante4"
+        "accion": "pulsa",
+        "texto": "La semana pasada empezaste a conocerte mejor: descubriste qué amas, y en qué eres bueno. Yo nunca pensé que este programa me iba a hacer pensar tanto en mí mismo, pero claro, ese es el punto de partida."
       },
       {
-        "t": 14000,
+        "t": 18000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Cuando yo lo hice me pasó algo inesperado: empecé a notar ideas que siempre estuvieron ahí y nunca había nombrado."
+      },
+      {
+        "t": 26000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Esta semana vienen las dos preguntas que más me costaron, porque nunca me las había hecho y abren mucho el panorama. Sé que puede ser abrumador, pero vamos paso a paso."
+      },
+      {
+        "t": 36000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Piensa en ¿Qué de lo que sé hacer me pagarían?... ¿Qué problema del mundo me enciende las ganas de resolverlo?..."
+      },
+      {
+        "t": 44000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Son incómodas porque para contestarlas tienes que mirar hacia afuera, hacia tu contexto, no solo hacia adentro."
+      },
+      {
+        "t": 52000,
         "quien": "marcos",
         "set": "taller",
         "tipo": "constelacion",
         "accion": "pulsa",
-        "texto": "Encuentra 'supervisor de mantenimiento preventivo' — 25% más salario.",
-        "tag": "vacante"
+        "texto": "Conforme transcurra la semana y completes las actividades, verás que cuando las cruzas con lo que ya encontraste la semana pasada, aparece algo que probablemente ya estaba en ti:"
+      },
+      {
+        "t": 62000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Tu pasión. Tu misión. Tu vocación. Tu profesión."
+      },
+      {
+        "t": 68000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "foco",
+        "accion": "pulsa",
+        "texto": "Y en el centro de todo eso, por primera vez le pones nombre a un concepto: tu razón de ser."
+      },
+      {
+        "t": 75000,
+        "quien": "marcos",
+        "set": "taller",
+        "tipo": "recorrido",
+        "accion": "pulsa",
+        "texto": "Espero esta semana te ayude a encontrar claridad tanto como a mí. Recuerda que si tienes alguna duda puedes buscar al equipo de Universidad. Adelante con el reto, ¡tú puedes!"
       }
     ]
   },
@@ -67,105 +111,225 @@
   "steps": [
     {
       "label": "1 · Diagnóstico",
-      "instruction": "Antes de seguir, regresa un momento a tus cuadrantes de la Semana 1. De lo que escribiste en 'lo que amas' y 'en lo que eres bueno', ¿qué se te quedó pegado esta semana? ¿Confirmaste algo? ¿Cambió algo? No hay que rehacer nada, solo tenerlo fresco."
+      "checkLabel": "Escuchaste el podcast completo",
+      "noBox": false,
+      "intro": null,
+      "content": "Antes de empezar con los conceptos y actividades de esta semana, vamos a escuchar un capítulo de podcast. En este episodio, <strong>Oso Trava</strong> desmitifica la idea de que el propósito de vida es algo \"místico\" que te cae del cielo como un rayo. En lugar de eso, nos invita a verlo como un proceso continuo de autoconocimiento y exploración que se vive día a día.<br><br><a class=\"podcast-block\" href=\"https://open.spotify.com/show/5Y4wPln7DbJSh3vLxdVbVs\" target=\"_blank\"><span class=\"pod-ico\">🎧</span><div class=\"pod-txt\"><div class=\"pod-title\">Podcast Oso Trava</div><div class=\"pod-sub\">\"Así Encontrarás tu Propósito\" · Spotify</div></div><span class=\"pod-btn\">Escuchar →</span></a>Cuando termines ve a la siguiente sección.",
+      "popup": {
+        "title": "Diagnóstico",
+        "instr": "En base a lo que escuchaste:",
+        "fields": [
+          {
+            "id": "d1",
+            "label": "Escribe lo que recuerdas sobre tu pasión en base a lo que trabajaste la semana pasada. ¿Confirmaste algo, cambió algo?",
+            "tipo": "ta",
+            "rows": 3
+          },
+          {
+            "id": "d2",
+            "label": "Oso Trava habla de cómo nuestro impacto crece cuando lo que hacemos tiene un \"para qué\" más grande que nosotros mismos. De todo lo que haces en tu día a día, ¿cuál es esa pequeña acción que, al realizarla, sientes que realmente le resuelve un problema o le hace la vida más fácil a alguien más?",
+            "tipo": "ta",
+            "rows": 4
+          }
+        ]
+      }
     },
     {
       "label": "2 · Marco",
-      "instruction": "Ya tienes dos piezas de tu mapa: lo que amas, y en lo que eres bueno. Son piezas internas — las puedes contestar solo/a. Las dos de esta semana son distintas: necesitan al mundo de afuera para confirmarse. <strong>Lo que el mundo necesita:</strong> ¿qué problema ves repetirse en tu sucursal, tu comunidad, tu día a día, que nadie resuelve? <strong>Por lo que te pueden pagar:</strong> una habilidad se vuelve profesión cuando alguien más, sin que tú se lo pidas, ya estuvo dispuesto a darte algo a cambio de ella."
+      "checkLabel": "Entendiste el concepto de IKIGAI",
+      "noBox": false,
+      "intro": null,
+      "content": "Recordando, el <strong>Ikigai</strong> es una palabra japonesa que significa \"razón de ser\". Más que un destino fijo, es una brújula personal que nos orienta hacia lo que da sentido a nuestra vida. Ya trabajamos las primeras dos preguntas: <em>¿Qué amo?</em> y <em>¿En qué soy bueno/a?</em> Esta semana trabajaremos en las últimas dos:<br><br><ul><li><strong>¿Por qué me podrían pagar?</strong></li><li><strong>¿Qué necesita el mundo?</strong></li></ul><br>A menudo caemos en la trampa de buscar la respuesta a estas preguntas como si fuera un tesoro escondido: una vez que lo encuentras, te detienes, clavas una bandera y listo. Pero la realidad es que no es un destino estático, sino una brújula en constante movimiento.<br><br>Piensa en ti mismo hace cinco o diez años. Tus prioridades, tus retos, lo que te motivaba han cambiado. Tus circunstancias evolucionan, y por lo tanto, tu propósito también lo hace.<br><br><hr class=\"sec-divider\"><h4>SHIMEI: misión o deber</h4>Hay otro concepto japonés del que queremos hablarte: <strong>SHIMEI</strong> que significa \"misión\" o \"deber\", coloquialmente le llamamos propósito. El <strong>IKIGAI</strong> es de ti hacia adentro — lo que eres, cómo encuentras alegría de vivir y bienestar cotidiano. El <strong>SHIMEI</strong> es hacia afuera — el para qué, aquello que sientes que estás llamado a hacer.<br><br>Enfocarse solamente en el propósito es sumamente cansado, porque se descubre a lo largo de toda una vida. Nos vamos a concentrar en terminar el IKIGAI. SHIMEI es un concepto que retomaremos en el siguiente curso: <em>Impulso GEB</em>.",
+      "popup": {
+        "title": "Marco",
+        "instr": "Reflexiona antes de seguir:",
+        "fields": [
+          {
+            "id": "m1",
+            "label": "Escribe un problema que ves repetirse en tu sucursal o comunidad que nadie resuelve.",
+            "tipo": "ta",
+            "rows": 3
+          },
+          {
+            "id": "m2",
+            "label": "¿Qué habilidad tuya ya alguien valoró o pagó alguna vez — aunque fuera poca cosa?",
+            "tipo": "ta",
+            "rows": 3
+          },
+          {
+            "id": "m3",
+            "label": "¿Cómo explicarías la diferencia entre IKIGAI y SHIMEI?",
+            "tipo": "ta",
+            "rows": 3
+          }
+        ]
+      }
     },
     {
       "label": "3 · Aplicación",
-      "instruction": "<strong>Cuadrante 3 — Lo que el mundo necesita:</strong> escribe mínimo 20 ítems en gerundio. ¿Qué problema ves repetirse que nadie resuelve? ¿A quién específico le cambiarías la vida si lo resolvieras?<br><br><strong>Cuadrante 4 — Por lo que te pueden pagar:</strong> mínimo 20 ítems. ¿Qué te han ofrecido pagar alguna vez? ¿Qué comentario positivo se repite sobre tu trabajo?<br><br><strong>Investigación real — Ruta A (con IA):</strong> pega tus cuadrantes 3 y 4 en la IA que tengas a mano con este prompt: 'Aquí están mis respuestas a dos preguntas: 1) problemas que veo que nadie resuelve: [cuadrante 3]. 2) habilidades por las que me han pagado o podrían pagarme: [cuadrante 4]. Dime 3 sectores o puestos reales donde esto ya se está pagando hoy, por qué están creciendo, y cómo alguien con mi perfil podría entrar.'<br><br><strong>Ruta B (sin IA):</strong> saca 3-4 palabras clave que combinen un problema con una habilidad y búscalas en Google, Indeed, OCC o Computrabajo.<br><br>Para ambas rutas: busca 1 a 3 vacantes reales con salario visible que confirmen alguna pista."
+      "checkLabel": "Encontraste tu misión, vocación y profesión",
+      "noBox": false,
+      "intro": null,
+      "content": "En la sección de <strong>Recursos</strong> está la plantilla de las dos listas en Word — descárgala si te es más fácil. Si prefieres a mano en un cuaderno, también sirve.<br><br><h4>Parte 3 · Valor económico — Lo que te pueden pagar</h4><ul><li>Lo que ya paga el mercado de desarrollo humano.</li><li>Lo que ya paga el mercado corporativo / empresarial.</li><li>Lo que pagan gobiernos / ONGs / sociedad.</li></ul>Escribe mínimo 20 ítems de cosas concretas la gente ya paga —o pagaría—, que conectan con lo que sé hacer. Anota tanto productos como servicios. La regla de oro: <em>¿Ves oportunidades concretas de ingreso, no solo buenas intenciones?</em><div class=\"tip tip-gold\"><strong>¿Cómo mejorar esta respuesta?</strong><br><em>Lo obvio:</em> \"Soy asistente administrativo.\" <em>Lo que el mercado paga:</em> Sabes coordinar agendas complejas, negociar con proveedores difíciles, armar eventos corporativos.<br><br><em>Lo obvio:</em> \"Se me da hablar con la gente.\" <em>Lo que el mercado paga:</em> Tienes la paciencia para capacitar personas nuevas, explicar procesos técnicos con manzanas, traducir conceptos complicados en instrucciones sencillas.</div><div class=\"tip tip-blue\"><strong>Instrucción para IA:</strong><br>\"Actúa como un orientador vocacional. Mi puesto actual es [escribe tu puesto]. Te voy a enlistar cosas que sé hacer, que me gustan o experiencias de mi pasado: [escribe aquí]. Ayúdame a traducir esto en habilidades profesionales atractivas y dime qué tipo de problemas reales resuelven.\"</div><hr class=\"sec-divider\"><h4>Parte 4 · Necesidades del mundo</h4><ul><li>Dolores humanos: lo que ves que falta en las personas.</li><li>Dolores sociales: lo que la comunidad / país necesita.</li><li>Dolores de empresas: lo que las compañías necesitan urgentemente.</li><li>Dolores de tu industria.</li></ul>Escribe mínimo 20 necesidades que te encienden las ganas de resolverlas. ¿Qué problema ves repetirse que nadie resuelve? La regla de oro: <em>¿Se te prende la chispa de \"quiero hacer algo al respecto\"?</em><div class=\"tip tip-gold\"><strong>¿Cómo se ve una respuesta profunda?</strong><br>Superficial: \"Ayudo a los demás en el trabajo.\"<br>Profunda: \"Me aseguro de revisar los reportes antes de enviarlos para atrapar cualquier error a tiempo, evitando que el equipo de operaciones pierda horas corrigiendo sobre la marcha.\"</div><hr class=\"sec-divider\"><h4>Ahora cruza los 4 cuadrantes</h4><svg viewBox=\"-10 -10 500 500\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;max-width:380px;display:block;margin:14px auto\">\n  <defs>\n    <clipPath id=\"cl-tl\"><circle cx=\"155\" cy=\"155\" r=\"110\"/></clipPath>\n    <clipPath id=\"cl-tr\"><circle cx=\"285\" cy=\"155\" r=\"110\"/></clipPath>\n    <clipPath id=\"cl-bl\"><circle cx=\"155\" cy=\"285\" r=\"110\"/></clipPath>\n    <clipPath id=\"cl-br\"><circle cx=\"285\" cy=\"285\" r=\"110\"/></clipPath>\n  </defs>\n  <circle cx=\"155\" cy=\"155\" r=\"110\" fill=\"rgba(240,192,64,0.13)\" stroke=\"#F0C040\" stroke-width=\"1.5\"/>\n  <circle cx=\"285\" cy=\"155\" r=\"110\" fill=\"rgba(126,200,160,0.13)\" stroke=\"#7EC8A0\" stroke-width=\"1.5\"/>\n  <circle cx=\"155\" cy=\"285\" r=\"110\" fill=\"rgba(106,176,245,0.13)\" stroke=\"#6AB0F5\" stroke-width=\"1.5\"/>\n  <circle cx=\"285\" cy=\"285\" r=\"110\" fill=\"rgba(240,96,96,0.13)\" stroke=\"#F07060\" stroke-width=\"1.5\"/>\n  <text x=\"88\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#92400E\" font-family=\"Segoe UI,Arial,sans-serif\">LO QUE</text>\n  <text x=\"88\" y=\"126\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#92400E\" font-family=\"Segoe UI,Arial,sans-serif\">AMAS</text>\n  <text x=\"352\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#166534\" font-family=\"Segoe UI,Arial,sans-serif\">EN LO QUE</text>\n  <text x=\"352\" y=\"126\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#166534\" font-family=\"Segoe UI,Arial,sans-serif\">ERES BUENO</text>\n  <text x=\"88\" y=\"368\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#1E40AF\" font-family=\"Segoe UI,Arial,sans-serif\">LO QUE EL</text>\n  <text x=\"88\" y=\"382\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#1E40AF\" font-family=\"Segoe UI,Arial,sans-serif\">MUNDO NECESITA</text>\n  <text x=\"352\" y=\"368\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#9B1C1C\" font-family=\"Segoe UI,Arial,sans-serif\">POR LO QUE TE</text>\n  <text x=\"352\" y=\"382\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#9B1C1C\" font-family=\"Segoe UI,Arial,sans-serif\">PUEDEN PAGAR</text>\n  <text x=\"220\" y=\"88\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#78350F\" font-family=\"Segoe UI,Arial,sans-serif\">PASIÓN</text>\n  <text x=\"97\" y=\"218\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#1E3A8A\" font-family=\"Segoe UI,Arial,sans-serif\">MISIÓN</text>\n  <text x=\"343\" y=\"218\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#7F1D1D\" font-family=\"Segoe UI,Arial,sans-serif\">PROFESIÓN</text>\n  <text x=\"220\" y=\"392\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#1E3A8A\" font-family=\"Segoe UI,Arial,sans-serif\">VOCACIÓN</text>\n  <circle cx=\"220\" cy=\"220\" r=\"30\" fill=\"rgba(255,255,255,0.85)\" stroke=\"rgba(0,0,0,0.1)\" stroke-width=\"1\"/>\n  <text x=\"220\" y=\"217\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#14181F\" font-family=\"Georgia,serif\">IKIGAI</text>\n  <text x=\"220\" y=\"230\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"#555\" font-family=\"Segoe UI,Arial,sans-serif\">razón de ser</text>\n</svg><div class=\"cross-grid\">\n  <div class=\"cross-card c-pasion\"><div class=\"c-label\">Pasión</div><div class=\"c-desc\">De lo que amas, ¿en qué eres realmente bueno?</div></div>\n  <div class=\"cross-card c-mision\"><div class=\"c-label\">Misión</div><div class=\"c-desc\">¿Qué problemas quieres resolver que conectan con lo que amas?</div></div>\n  <div class=\"cross-card c-vocacion\"><div class=\"c-label\">Vocación</div><div class=\"c-desc\">¿Cuáles de tus habilidades son monetizables?</div></div>\n  <div class=\"cross-card c-profesion\"><div class=\"c-label\">Profesión</div><div class=\"c-desc\">¿Qué habilidades tienes y podrías enseñar? ¿En qué te felicitan?</div></div>\n</div>",
+      "popup": {
+        "title": "Aplicación",
+        "instr": "Registra lo que encontraste:",
+        "fields": [
+          {
+            "id": "a1",
+            "label": "Escribe 3 cosas por las que te pueden pagar.",
+            "tipo": "ta",
+            "rows": 3
+          },
+          {
+            "id": "a2",
+            "label": "Escribe 3 necesidades del mundo que quieres resolver.",
+            "tipo": "ta",
+            "rows": 3
+          },
+          {
+            "id": "a3",
+            "label": "Redacta tu misión. Trata de ser específico.",
+            "tipo": "ta",
+            "rows": 2
+          },
+          {
+            "id": "a4",
+            "label": "Redacta tu vocación. Trata de ser específico.",
+            "tipo": "ta",
+            "rows": 2
+          },
+          {
+            "id": "a5",
+            "label": "Redacta tu profesión. Trata de ser específico.",
+            "tipo": "ta",
+            "rows": 2
+          }
+        ]
+      }
     },
     {
       "label": "4 · Caso",
-      "instruction": "Marcos lleva 6 años en mantenimiento. En su cuadrante 4 escribió 'reparar cosas que otros ya tiraron por perdidas' — nunca lo había visto como algo que alguien pagaría aparte. Con la Ruta A descubre puestos de 'supervisor de mantenimiento preventivo' con 25% más salario, exactamente por esa habilidad. Busca una vacante real que lo confirma. (Ve el video de Marcos y Lupita al inicio de esta semana.)"
+      "checkLabel": "Realizaste una investigación de mercado",
+      "noBox": true,
+      "intro": "Cada semana, leerás un caso que aplica lo que estuviste trabajando.",
+      "content": "Marcos lleva 6 años en mantenimiento. En el ejercicio de valor económico, escribió algo que hacía por simple inercia: <em>\"Reparar cosas que otros ya dieron por perdidas\"</em>. Nunca lo vio como algo por lo que alguien pagaría aparte.<br><br>Al explorar el mercado, descubrió que puestos como <strong>\"Supervisor de Mantenimiento Preventivo\"</strong> buscan exactamente esa destreza, ofreciendo hasta un 25% más de salario.<br><br><strong>La gran lección:</strong> Lo que para ti es \"solo parte de la rutina\", para el mercado puede ser una habilidad altamente cotizada.<br><br><hr class=\"sec-divider\" style=\"border-color:var(--border)\">Ahora aplícalo a lo que ya trabajaste. En la IA o en internet, escribe algo como:<br><br><div class=\"tip tip-blue\" style=\"margin-top:6px\">\"Aquí están mis respuestas a dos preguntas: 1) problemas que veo que nadie resuelve: [tus respuestas]. 2) habilidades por las que me han pagado o podrían pagarme: [tus respuestas]. Dime 3 sectores o puestos reales donde esto ya se está pagando hoy, por qué están creciendo, y cómo alguien con mi perfil podría entrar.\"</div><span style=\"font-size:12.5px;color:var(--mist)\">Una vacante con salario visible que mencione exactamente tus palabras es la confirmación que buscas.</span>",
+      "popup": {
+        "title": "Caso",
+        "instr": "Después de tu investigación:",
+        "fields": [
+          {
+            "id": "c1",
+            "label": "¿Qué pista de vacante o sector encontraste que no esperabas?",
+            "tipo": "ta",
+            "rows": 4
+          }
+        ]
+      }
     },
     {
       "label": "5 · Reflexión",
-      "instruction": "Ya tienes tus 4 cuadrantes completos. Crúzalos dos por dos: Amas + Bueno = tu Pasión. Amas + Mundo necesita = tu Misión. Mundo necesita + Te pagan = tu Vocación. Bueno + Te pagan = tu Profesión. Y en el centro, donde las cuatro se tocan, eso se llama IKIGAI — tu razón de ser.<br><br>Última pregunta, para tu testigo: léele tus 4 cruces y pregúntale '¿esto suena a mí?'. Anota qué te respondió."
+      "checkLabel": "Conversaste con alguien de confianza",
+      "noBox": true,
+      "intro": null,
+      "content": "Ya hemos encontrado el cruce de los 4 cuadrantes. En el centro, donde las cuatro se tocan, eso se llama <strong>IKIGAI</strong> — tu razón de ser.<br><br>Seamos sinceros: es casi imposible —y muy frustrante— intentar meter toda tu vida en un solo cajón que toque los cuatro círculos al mismo tiempo. Si estás esperando encontrar el empleo mágico que cumpla con absolutamente todo a la perfección, te vas a quedar atascado.<br><br>El Ikigai no es un destino estático ni un premio de lotería; <strong>es un rompecabezas que se equilibra en el total de tu vida.</strong><br><br><svg viewBox=\"-10 -10 500 500\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;max-width:380px;display:block;margin:14px auto\">\n  <defs>\n    <clipPath id=\"cl-tl\"><circle cx=\"155\" cy=\"155\" r=\"110\"/></clipPath>\n    <clipPath id=\"cl-tr\"><circle cx=\"285\" cy=\"155\" r=\"110\"/></clipPath>\n    <clipPath id=\"cl-bl\"><circle cx=\"155\" cy=\"285\" r=\"110\"/></clipPath>\n    <clipPath id=\"cl-br\"><circle cx=\"285\" cy=\"285\" r=\"110\"/></clipPath>\n  </defs>\n  <circle cx=\"155\" cy=\"155\" r=\"110\" fill=\"rgba(240,192,64,0.13)\" stroke=\"#F0C040\" stroke-width=\"1.5\"/>\n  <circle cx=\"285\" cy=\"155\" r=\"110\" fill=\"rgba(126,200,160,0.13)\" stroke=\"#7EC8A0\" stroke-width=\"1.5\"/>\n  <circle cx=\"155\" cy=\"285\" r=\"110\" fill=\"rgba(106,176,245,0.13)\" stroke=\"#6AB0F5\" stroke-width=\"1.5\"/>\n  <circle cx=\"285\" cy=\"285\" r=\"110\" fill=\"rgba(240,96,96,0.13)\" stroke=\"#F07060\" stroke-width=\"1.5\"/>\n  <text x=\"88\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#92400E\" font-family=\"Segoe UI,Arial,sans-serif\">LO QUE</text>\n  <text x=\"88\" y=\"126\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#92400E\" font-family=\"Segoe UI,Arial,sans-serif\">AMAS</text>\n  <text x=\"352\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#166534\" font-family=\"Segoe UI,Arial,sans-serif\">EN LO QUE</text>\n  <text x=\"352\" y=\"126\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#166534\" font-family=\"Segoe UI,Arial,sans-serif\">ERES BUENO</text>\n  <text x=\"88\" y=\"368\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#1E40AF\" font-family=\"Segoe UI,Arial,sans-serif\">LO QUE EL</text>\n  <text x=\"88\" y=\"382\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#1E40AF\" font-family=\"Segoe UI,Arial,sans-serif\">MUNDO NECESITA</text>\n  <text x=\"352\" y=\"368\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#9B1C1C\" font-family=\"Segoe UI,Arial,sans-serif\">POR LO QUE TE</text>\n  <text x=\"352\" y=\"382\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" fill=\"#9B1C1C\" font-family=\"Segoe UI,Arial,sans-serif\">PUEDEN PAGAR</text>\n  <text x=\"220\" y=\"88\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#78350F\" font-family=\"Segoe UI,Arial,sans-serif\">PASIÓN</text>\n  <text x=\"97\" y=\"218\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#1E3A8A\" font-family=\"Segoe UI,Arial,sans-serif\">MISIÓN</text>\n  <text x=\"343\" y=\"218\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#7F1D1D\" font-family=\"Segoe UI,Arial,sans-serif\">PROFESIÓN</text>\n  <text x=\"220\" y=\"392\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#1E3A8A\" font-family=\"Segoe UI,Arial,sans-serif\">VOCACIÓN</text>\n  <circle cx=\"220\" cy=\"220\" r=\"30\" fill=\"rgba(255,255,255,0.85)\" stroke=\"rgba(0,0,0,0.1)\" stroke-width=\"1\"/>\n  <text x=\"220\" y=\"217\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" fill=\"#14181F\" font-family=\"Georgia,serif\">IKIGAI</text>\n  <text x=\"220\" y=\"230\" text-anchor=\"middle\" font-size=\"8.5\" fill=\"#555\" font-family=\"Segoe UI,Arial,sans-serif\">razón de ser</text>\n</svg>Para cerrar este ejercicio, haz lo siguiente:<br><br><ol style=\"padding-left:18px;color:var(--fog)\"><li style=\"margin-bottom:10px\"><strong style=\"color:var(--white)\">Distribuye las piezas.</strong> No busques que tu trabajo formal tenga que cargarlo todo. Tu fuente de ingresos sostiene tu día a día, mientras tu pasión puede vivir en tus proyectos personales, tu tiempo libre o tu familia.</li><li style=\"margin-bottom:10px\"><strong style=\"color:var(--white)\">Busca la mezcla en tu semana.</strong> Revisa tus cuatro listas y pregúntate: ¿Cómo puedo incluir un poquito de estos ingredientes en mis diferentes espacios?</li><li style=\"margin-bottom:10px\"><strong style=\"color:var(--white)\">Pivota hacia el equilibrio.</strong> Se trata de ajustar el timón poco a poco para que, al sumar todas tus actividades de la semana, sientas que tu tiempo tiene sentido, dirección y bienestar.</li></ol><br>Último ejercicio: elige a una persona real que te conozca y en quien confíes, y cuéntale tus 4 cruces. Pregúntale <strong>\"¿esto suena a mí?\"</strong><br><br>Cuando termines, da clic en <strong>Realizar entrega</strong> para registrar tu avance.",
+      "popup": {
+        "title": "Revisión final",
+        "instr": "Revisa tus respuestas. Si después de platicar con tu persona de confianza quieres editar o completar alguna, adelante.",
+        "fields": "FINAL"
+      }
     }
   ],
   "checklistLabels": [
-    "Cuadrante 3 completo (mínimo 20 ítems)",
-    "Cuadrante 4 completo (mínimo 20 ítems)",
-    "Evidencia de investigación (Ruta A o B) + 1-3 vacantes con salario",
-    "4 cruces + respuesta del testigo",
-    "Subiste tu avance a la plataforma"
+    "Escuchaste el podcast completo",
+    "Entendiste el concepto de IKIGAI",
+    "Encontraste tu misión, vocación y profesión",
+    "Realizaste una investigación de mercado",
+    "Conversaste con alguien de confianza"
   ],
   "recursos": [
     {
       "icono": "📄",
-      "texto": "Hoja de trabajo — Mis cuadrantes 3 y 4 (descargable)",
+      "texto": "Hoja de trabajo — Mis cuadrantes 3 y 4 · Word",
       "url": "recursos/GEB_Ruta_Sem2_Hoja-Cuadrantes.docx"
     },
     {
       "icono": "🎧",
-      "texto": "Podcast Oso Trava — 'Así Encontrarás tu Propósito' · Escúchalo en Spotify antes de completar tus cuadrantes",
+      "texto": "Podcast Oso Trava — \"Así Encontrarás tu Propósito\" · Spotify",
       "url": "https://open.spotify.com/show/5Y4wPln7DbJSh3vLxdVbVs"
     }
   ],
   "entrega": {
     "campos": [
       {
-        "id": "local_cuadrante3",
-        "modo": "local",
-        "tipo": "lista",
-        "label": "Lo que el mundo necesita",
-        "hint": "Mínimo 20 ítems. Se queda en tu celular.",
-        "filas": 20
-      },
-      {
-        "id": "local_cuadrante4",
-        "modo": "local",
-        "tipo": "lista",
-        "label": "Por lo que te pueden pagar",
-        "hint": "Mínimo 20 ítems. Se queda en tu celular.",
-        "filas": 20
-      },
-      {
-        "id": "vacantes",
-        "modo": "entrega",
-        "tipo": "texto3",
-        "label": "Tus vacantes reales encontradas",
-        "hint": "1 a 3, con salario visible."
-      },
-      {
-        "id": "evidencia_resumen",
-        "modo": "entrega",
+        "id": "d1",
         "tipo": "textarea",
-        "label": "¿Qué te dijo la IA o tu búsqueda?",
-        "hint": "Resumen corto de la Ruta A o B."
+        "label": "Lo que recuerdas sobre tu pasión (semana pasada)"
       },
       {
-        "id": "cruce_pasion",
-        "modo": "entrega",
-        "tipo": "texto",
-        "label": "Tu Pasión (Amas + Bueno)"
-      },
-      {
-        "id": "cruce_mision",
-        "modo": "entrega",
-        "tipo": "texto",
-        "label": "Tu Misión (Amas + Mundo necesita)"
-      },
-      {
-        "id": "cruce_vocacion",
-        "modo": "entrega",
-        "tipo": "texto",
-        "label": "Tu Vocación (Mundo necesita + Te pagan)"
-      },
-      {
-        "id": "cruce_profesion",
-        "modo": "entrega",
-        "tipo": "texto",
-        "label": "Tu Profesión (Bueno + Te pagan)"
-      },
-      {
-        "id": "testigo_respuesta",
-        "modo": "entrega",
+        "id": "d2",
         "tipo": "textarea",
-        "label": "¿Esto suena a mí? — qué te respondió tu testigo"
+        "label": "Acción que le resuelve un problema a alguien"
+      },
+      {
+        "id": "m1",
+        "tipo": "textarea",
+        "label": "Problema que ves repetirse que nadie resuelve"
+      },
+      {
+        "id": "m2",
+        "tipo": "textarea",
+        "label": "Habilidad que alguien valoró o pagó alguna vez"
+      },
+      {
+        "id": "m3",
+        "tipo": "textarea",
+        "label": "Diferencia entre IKIGAI y SHIMEI"
+      },
+      {
+        "id": "a1",
+        "tipo": "textarea",
+        "label": "3 cosas por las que te pueden pagar"
+      },
+      {
+        "id": "a2",
+        "tipo": "textarea",
+        "label": "3 necesidades del mundo que quieres resolver"
+      },
+      {
+        "id": "a3",
+        "tipo": "textarea",
+        "label": "Tu misión"
+      },
+      {
+        "id": "a4",
+        "tipo": "textarea",
+        "label": "Tu vocación"
+      },
+      {
+        "id": "a5",
+        "tipo": "textarea",
+        "label": "Tu profesión"
+      },
+      {
+        "id": "c1",
+        "tipo": "textarea",
+        "label": "Pista de vacante o sector inesperado"
+      },
+      {
+        "id": "r1",
+        "tipo": "textarea",
+        "label": "¿Qué te sorprendió de encontrar tu misión, vocación y profesión?"
+      },
+      {
+        "id": "r2",
+        "tipo": "textarea",
+        "label": "¿Qué te dijo tu persona de confianza?"
+      },
+      {
+        "id": "NPS",
+        "tipo": "nps",
+        "label": "¿Qué tan útil fue esta semana?"
       }
     ]
   }
