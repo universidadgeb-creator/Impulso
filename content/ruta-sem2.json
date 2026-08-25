@@ -225,7 +225,33 @@
             "rows": 4
           }
         ]
-      }
+      },
+      "panels": [
+        {
+          "n": "01",
+          "illo": "taller",
+          "quote": null,
+          "text": "Marcos lleva 6 años en mantenimiento. En el ejercicio de valor económico, escribió algo que hacía por simple inercia: <span class=\"ac\">«Reparar cosas que otros ya dieron por perdidas.»</span>"
+        },
+        {
+          "n": "02",
+          "illo": "lista-roja",
+          "quote": null,
+          "text": "Nunca lo vio como algo por lo que alguien pagaría aparte. Era solo <em>lo que hacía</em> — parte de la rutina, invisible."
+        },
+        {
+          "n": "03",
+          "illo": "mercado",
+          "quote": null,
+          "text": "Al explorar el mercado descubrió que puestos como <span class=\"as\">«Supervisor de Mantenimiento Preventivo»</span> buscan exactamente esa destreza — y pagan hasta un 25% más."
+        },
+        {
+          "n": "04",
+          "illo": "insight-coral",
+          "quote": "«Lo que para ti es rutina, para el mercado es escaso»",
+          "text": "Lo que para Marcos era <em>«solo parte de la rutina»</em>, para el mercado puede ser una habilidad <span class=\"ac\">altamente cotizada.</span>"
+        }
+      ]
     },
     {
       "label": "5 · Reflexión",
