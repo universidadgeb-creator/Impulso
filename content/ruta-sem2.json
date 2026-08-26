@@ -6,11 +6,10 @@
   "contexto": "La semana pasada exploramos lo que amas y en lo que eres bueno. Esta semana está dedicada a cerrar tu IKIGAI reflexionando y descubriendo cómo tu valor único encaja en lo que necesita el mundo.",
   "variante": "guia",
   "duracion": "~3-4 h",
-  "video_src": "video/ruta-sem2-apertura.mp4",
   "guion_notebooklm": "Qué tal chicos, soy Marcos. Trabajo en la empresa, llevo seis años en mantenimiento. La semana pasada empezaste a conocerte mejor: descubriste qué amas, y en qué eres bueno. Yo nunca pensé que este programa me iba a hacer pensar tanto en mí mismo, pero claro, ese es el punto de partida. Cuando yo lo hice me pasó algo inesperado: empecé a notar ideas que siempre estuvieron ahí y nunca había nombrado. Esta semana vienen las dos preguntas que más me costaron, porque nunca me las había hecho y abren mucho el panorama. Sé que puede ser abrumador, pero vamos paso a paso... ... Piensa en ¿Qué de lo que sé hacer me pagarían?... ... ¿Qué problema del mundo me enciende las ganas de resolverlo?... Son incómodas porque para contestarlas tienes que mirar hacia afuera, hacia tu contexto, no solo hacia adentro. Conforme transcurra la semana y completes las actividades, verás que cuando las cruzas con lo que ya encontraste la semana pasada, aparece algo que probablemente ya estaba en ti: Tu pasión... Tu misión... Tu vocación... Tu profesión... Y en el centro de todo eso, por primera vez le pones nombre a un concepto: tu razón de ser. Espero esta semana te ayude a encontrar claridad tanto como a mí. Recuerda que si tienes alguna duda puedes buscar al equipo de Universidad. Adelante con el reto, ¡tú puedes!",
   "escena": {
     "audio": {
-      "src": "video/ruta-sem2-apertura.mp4",
+      "src": "audio/ruta-sem2-apertura.mp3",
       "duracion_ms": null
     },
     "subtitulos_forzados": true,

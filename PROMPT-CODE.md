@@ -11,13 +11,15 @@ la tarea concreta de la sesión.
 **Infraestructura lista — no tocar sin instrucción:**
 - `entrega-engine.js` — motor de entregas, no modificar directamente
 - `config.js` — tiene la URL real del backend, no cambiar
-- `bienvenida.html` — Sem. 0 completa: video MP4 + botón "Ver transcripción" (NO subtítulos VTT sincronizados — decisión cerrada)
+- `bienvenida.html` — Sem. 0 completa: audio mp3 + botón "Ver transcripción" (ya NO hay video — decisión cerrada agosto 2026)
 - `cierre.html` — espejo de bienvenida para después de Sem. 6
 
-**Patrón de video para todas las semanas:**
-- `video_src` en el JSON de la semana → MP4 en `video/`
-- El guion completo va en `guion_notebooklm` (string) — se muestra con botón "Ver transcripción", no subtítulos sincronizados
-- Si no hay `video_src`, `bienvenida.html` usa EscenaPlayer como fallback
+**Patrón de audio de apertura para todas las semanas (ya NO hay video, se quitó agosto 2026):**
+- `audio_src` en `content/ruta-sem0.json` (bienvenida); `escena.audio.src` en `content/ruta-semN.json` de ahí en
+  adelante (momento-guia) → mp3 en `audio/`
+- El guion completo va en `guion_notebooklm` (string), o si no existe se arma con `escena.eventos[].texto` — se
+  muestra con botón "Ver transcripción", no subtítulos sincronizados
+- No queda EscenaPlayer ni KineticPlayer — solo un `<audio controls>` plano. No reintroducir `video_src`.
 
 **Personajes (cerrado):**
 - Lupita = triángulo dorado #F0C040 punta arriba
@@ -33,14 +35,14 @@ la tarea concreta de la sesión.
 - Sem 6 → Video YouTube interés compuesto
 
 **Lo que falta en todas las semanas (1-6):**
-- Producción de video: audio ElevenLabs + video Design → merge ffmpeg → `video_src` en JSON
+- Audio ElevenLabs → subir mp3 a `audio/` y apuntar `audio_src`/`escena.audio.src` en el JSON (ya NO hay
+  producción de video ni merge con ffmpeg — se quitó agosto 2026)
 - `guion_notebooklm` poblado con el guion aprobado
 
 **Reglas de trabajo:**
 - No inventar contenido. Placeholders = `[verificar ...]`
 - Push directo a main. Hacer `git status` antes de commit para no incluir basura
-- ffmpeg no persiste: instalar con `apt-get install -y --no-install-recommends ffmpeg` cada sesión
-- Cache-busting si se reemplaza un archivo con el mismo nombre: agregar `?v=N` en `video_src`
+- Cache-busting si se reemplaza un archivo con el mismo nombre: agregar `?v=N` en `audio_src`
 - Si hay `index.lock` en `.git/`: borrarlo con `del .git\index.lock` antes de commitear
 
 ---

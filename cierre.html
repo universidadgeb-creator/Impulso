@@ -300,19 +300,19 @@ function leerDiagnostico() {
   return diag;
 }
 
-/* ── BLOQUE 1: video de cierre — mismo patrón que bienvenida.html: si escena
+/* ── BLOQUE 1: audio de cierre — mismo patrón que bienvenida.html: si escena
    existe pero el reproductor todavía no está construido, se muestra el estado
    "en producción". Si no hay escena en el JSON, el bloque se queda oculto. ── */
 function renderEscena(escena) {
   const block = document.getElementById('media-block');
   if (!escena) { block.style.display = 'none'; block.innerHTML = ''; return; }
   block.innerHTML = `
-    <div class="media-label">Video de cierre — Lupita</div>
+    <div class="media-label">Audio de cierre — Lupita</div>
     <div class="media-placeholder">
-      <span class="media-placeholder-ico">🎬</span>
+      <span class="media-placeholder-ico">🎧</span>
       <div>
         <div class="media-placeholder-title">En producción</div>
-        <div class="media-placeholder-sub">El video de cierre está por terminarse — mientras tanto, sigue con tu evaluación.</div>
+        <div class="media-placeholder-sub">El audio de cierre está por terminarse — mientras tanto, sigue con tu evaluación.</div>
       </div>
     </div>
   `;

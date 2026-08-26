@@ -6,11 +6,10 @@
   "contexto": "¿Alguna vez te han preguntado qué quieres hacer con tu vida... y no supiste qué contestar? No pasa nada si no tienes la respuesta todavía. Esta semana no te la vamos a pedir — vas a empezar a construir el lenguaje para encontrarla, con evidencia real, no con lo primero que se te ocurra.",
   "variante": "guia",
   "duracion": "~3 h",
-  "video_src": "video/ruta-sem1-apertura.mp4",
   "guion_notebooklm": "¿Alguna vez te han preguntado qué quieres hacer con tu vida? ¿Y no supiste qué contestar?\n\nNo pasa nada. La mayoría tampoco tiene la respuesta.\n\nEsta semana no te pediremos que sepas qué quieres. Queremos que lo empieces a pensar y a notar en tu vida diaria.\n\nHay una palabra japonesa que usaremos en este programa: ikigai. No es una fórmula mágica, es más bien una forma de reflexionar y empezar a prestar atención.\n\nAtención a lo que amas — aunque no pague, aunque nadie lo vea.\n\nAtención a lo que se te da bien — y que nunca habías notado.\n\nMás adelante conocerás a Ana, ella lleva tres años en recepción. Ella también te acompañará a realizar el ejercicio de esta semana.\n\nEs muy simple, vamos a pensar, reflexionar y escribir lo que amas, y en lo que eres bueno.\n\nEse es el punto de partida de todo el curso. Recuerda que si tienen dudas puedes buscar al equipo de Universidad. Nos vemos pronto.",
   "escena": {
     "audio": {
-      "src": "video/ruta-sem1-apertura.mp4",
+      "src": "audio/ruta-sem1-apertura.mp3",
       "duracion_ms": null
     },
     "subtitulos_forzados": true,

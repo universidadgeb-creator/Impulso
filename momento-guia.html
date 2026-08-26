@@ -154,57 +154,6 @@ html.unlocked .lock-screen{display:none;}
 .c-profesion .c-label{color:#9B1C1C;}
 @media(max-width:699px){.cross-grid{grid-template-columns:1fr;}}
 
-/* ── KINETICPLAYER: apertura semanal, texto cinético sincronizado a audio ── */
-.kp-wrap{
-  --kp-accent:var(--sage);--kp-accent-dim:rgba(126,200,160,.15);
-  width:100%;border-radius:14px;overflow:hidden;border:1px solid #1E2D46;background:#0D1525;position:relative;
-}
-.kp-wrap[data-accent="gold"]{--kp-accent:var(--gold);--kp-accent-dim:rgba(240,192,64,.15);}
-.kp-wrap[data-accent="coral"]{--kp-accent:var(--coral);--kp-accent-dim:rgba(240,112,96,.15);}
-.kp-wrap[data-accent="sage"]{--kp-accent:var(--sage);--kp-accent-dim:rgba(126,200,160,.15);}
-.kp-env{position:absolute;inset:0;pointer-events:none;z-index:0;}
-.kp-env.env-recepcion{background:radial-gradient(ellipse 55% 35% at 85% 95%,rgba(240,192,64,.11) 0%,transparent 65%),radial-gradient(ellipse 25% 45% at 18% 100%,rgba(240,192,64,.04) 0%,transparent 55%);}
-.kp-env.env-taller{background:radial-gradient(ellipse 45% 70% at 8% 50%,rgba(106,176,245,.08) 0%,transparent 65%),radial-gradient(ellipse 35% 25% at 88% 15%,rgba(240,112,96,.05) 0%,transparent 55%);}
-.kp-env.env-taller::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(106,176,245,.025) 0px,transparent 1px,transparent 52px,rgba(106,176,245,.025) 53px);}
-.kp-env.env-general{background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(126,200,160,.05) 0%,transparent 70%);}
-.kp-star-field{position:absolute;inset:0;}
-.kp-star{position:absolute;border-radius:50%;background:#fff;animation:kp-twinkle var(--dur) ease-in-out infinite var(--delay);}
-@keyframes kp-twinkle{0%,100%{opacity:var(--lo);transform:scale(1);}50%{opacity:var(--hi);transform:scale(1.4);}}
-.kp-stage{position:relative;z-index:2;min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem 1.75rem;gap:1.4rem;}
-.kp-quien{display:flex;align-items:center;gap:.55rem;opacity:0;transition:opacity .6s ease;}
-.kp-quien.visible{opacity:1;}
-.kp-avatar{width:16px;height:16px;flex-shrink:0;transition:background .5s;}
-.kp-avatar[data-quien="lupita"]{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:var(--gold);}
-.kp-avatar[data-quien="marcos"]{border-radius:3px;background:var(--coral);}
-.kp-avatar[data-quien="ana"]{border-radius:50%;background:var(--blue-hi);}
-.kp-avatar[data-quien="narrator"]{border-radius:50%;background:var(--sage);}
-.kp-name{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fog);}
-.kp-text-zone{width:100%;max-width:560px;min-height:96px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;text-align:center;position:relative;}
-.kt-idle{font-size:14px;color:var(--mist);}
-.kt-phrase{width:100%;text-align:center;line-height:1.25;opacity:0;transition:opacity .4s ease,transform .4s ease;}
-.kt-phrase.kt-active{opacity:1;transform:none !important;}
-.kt-foco{font-size:clamp(1.3rem,4vw,2rem);font-weight:800;color:var(--white);letter-spacing:-.01em;transform:scale(.93);}
-.kt-foco.kt-active{transform:scale(1);}
-.kt-recorrido{font-size:clamp(1rem,2.4vw,1.3rem);font-weight:400;color:var(--fog);text-align:left;padding:0 6%;line-height:1.5;transform:translateX(-14px);}
-.kt-careo{font-size:clamp(.95rem,2vw,1.15rem);font-style:italic;color:var(--fog);padding:0 10%;transform:translateX(14px);}
-.kt-word{display:inline-block;margin:0 .14em;font-size:clamp(1.2rem,3.2vw,1.9rem);font-weight:700;color:var(--white);opacity:0;transform:translateY(8px);transition:opacity .28s ease,transform .28s ease;}
-.kt-word.kt-active{opacity:1;transform:translateY(0);}
-.kp-controls{position:relative;z-index:2;display:flex;align-items:center;gap:.8rem;padding:.65rem 1rem;border-top:1px solid #1E2D46;background:rgba(8,12,20,.55);}
-.kp-play-btn{width:30px;height:30px;border-radius:50%;background:#131E30;border:1px solid #2A3D5A;color:var(--white);font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .1s;}
-.kp-play-btn:hover{background:#1E2D46;}
-.kp-play-btn:active{transform:scale(.92);}
-.kp-timeline{flex:1;height:30px;position:relative;cursor:pointer;}
-.kp-track{position:absolute;top:50%;left:0;right:0;height:2px;background:#1E2D46;border-radius:99px;transform:translateY(-50%);}
-.kp-fill{height:100%;border-radius:99px;width:0%;background:var(--kp-accent);}
-.kp-markers{position:absolute;top:50%;left:0;right:0;height:2px;transform:translateY(-50%);}
-.kp-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:#2A3D5A;border:1.5px solid #3D5270;transition:background .3s,border-color .3s;}
-.kp-marker.passed{background:var(--kp-accent);border-color:var(--kp-accent);opacity:.55;}
-.kp-marker.active-m{background:#fff;border-color:#fff;opacity:1;box-shadow:0 0 0 3px var(--kp-accent-dim);transform:translate(-50%,-50%) scale(1.25);}
-.kp-time{font-size:11px;color:var(--fog);min-width:34px;text-align:right;flex-shrink:0;}
-.kp-caption{position:relative;z-index:2;min-height:26px;padding:0 1rem;display:flex;align-items:center;justify-content:center;border-top:1px solid #1E2D46;background:rgba(8,12,20,.35);}
-.kp-caption-text{font-size:11px;color:var(--mist);text-align:center;line-height:1.4;padding:6px 0;opacity:0;transition:opacity .4s;}
-.kp-caption-text.visible{opacity:1;}
-
 /* ── CASOPANELS: caso de la semana, panel a panel ── */
 .caso-panels{background:#0D1525;border:1px solid #1E2D46;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;margin-bottom:14px;}
 .cp-kicker{padding:.7rem 1rem;border-bottom:1px solid #1E2D46;display:flex;align-items:center;gap:.6rem;}
@@ -387,7 +336,6 @@ html.unlocked .lock-screen{display:none;}
 }
 </style>
 <script src="config.js"></script>
-<link rel="stylesheet" href="escena-player.css">
 </head>
 <body>
 
@@ -481,7 +429,6 @@ html.unlocked .lock-screen{display:none;}
   <div class="popup-card" id="popup-card"></div>
 </div>
 
-<script src="escena-player.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
 // Interruptor global: mientras la producción de audio/video no esté lista
@@ -538,8 +485,8 @@ let completed = [];       // paralelo a steps: true si ese paso ya guardó su po
 let answers = {};         // respuestas de todos los popups de paso, en memoria
 let nps = null;
 let entregada = false;
-let hasVideo = false;     // true si el JSON de la semana trae video_src o escena
-let videoActive = false;  // true mientras se muestra el video en vez de un paso
+let hasVideo = false;     // true si el JSON de la semana trae escena (audio de apertura)
+let videoActive = false;  // true mientras se muestra el audio de apertura en vez de un paso
 let videoViewed = false;
 let weekData = null;      // JSON completo de la semana, para el video/transcripción
 
@@ -552,7 +499,7 @@ function renderRail() {
     const cls = isCurrent ? 'current' : (videoViewed ? '' : 'pending');
     const dot = videoViewed ? '✓' : (isCurrent ? '▶' : '');
     html += `<button type="button" class="rail-item ${cls} clickable" id="rail-video-item">
-      <span class="dot">${dot}</span>Video de apertura
+      <span class="dot">${dot}</span>Audio de apertura
     </button>`;
   }
   html += steps.map((s, i) => {
@@ -613,7 +560,7 @@ function renderCenter() {
     `;
     renderVideo(weekData);
 
-    document.getElementById('step-counter').textContent = 'Video de apertura';
+    document.getElementById('step-counter').textContent = 'Audio de apertura';
     btnAnterior.disabled = true;
     btnSiguiente.textContent = 'Comenzar →';
     btnSiguiente.classList.remove('final');
@@ -744,178 +691,7 @@ function initCasoPanels(container) {
   update();
 }
 
-/* ── KINETICPLAYER: texto cinético sincronizado al audio real de la semana ── */
-const KP_SET_CLASS = { general: 'env-general', recepcion: 'env-recepcion', oficina: 'env-recepcion', taller: 'env-taller' };
-
-function montarKineticPlayer(container, data) {
-  const accent = accentDeSemana(data.semana);
-  container.innerHTML = `
-    <div class="kp-wrap" data-accent="${accent}" id="kp">
-      <div class="kp-env" id="kp-env"><div class="kp-star-field" id="kp-stars"></div></div>
-      <div class="kp-stage">
-        <div class="kp-quien" id="kp-quien">
-          <span class="kp-avatar" id="kp-avatar"></span>
-          <span class="kp-name" id="kp-name"></span>
-        </div>
-        <div class="kp-text-zone" id="kp-text-zone"><span class="kt-idle">Presiona ▶ para comenzar</span></div>
-      </div>
-      <div class="kp-controls">
-        <button type="button" class="kp-play-btn" id="kp-play" aria-label="Reproducir / Pausar">▶</button>
-        <div class="kp-timeline" id="kp-timeline" role="slider" aria-label="Línea de tiempo" tabindex="0">
-          <div class="kp-track"><div class="kp-fill" id="kp-fill"></div></div>
-          <div class="kp-markers" id="kp-markers"></div>
-        </div>
-        <span class="kp-time" id="kp-time">0:00</span>
-      </div>
-      <div class="kp-caption"><span class="kp-caption-text" id="kp-caption-text"></span></div>
-    </div>
-  `;
-
-  const eventos = (data.escena && data.escena.eventos) || [];
-  const audioSrc = (data.escena && data.escena.audio && data.escena.audio.src) || data.video_src;
-  const audio = document.createElement('video'); // <video> oculto: decodifica el audio del MP4 de forma más confiable que <audio>
-  audio.src = audioSrc;
-  audio.style.display = 'none';
-  audio.playsInline = true;
-  container.appendChild(audio);
-
-  const kpEnv = document.getElementById('kp-env');
-  const kpStars = document.getElementById('kp-stars');
-  const kpQuien = document.getElementById('kp-quien');
-  const kpAvatar = document.getElementById('kp-avatar');
-  const kpName = document.getElementById('kp-name');
-  const kpZone = document.getElementById('kp-text-zone');
-  const kpPlay = document.getElementById('kp-play');
-  const kpFill = document.getElementById('kp-fill');
-  const kpMarkers = document.getElementById('kp-markers');
-  const kpTime = document.getElementById('kp-time');
-  const kpCaption = document.getElementById('kp-caption-text');
-
-  let durationMs = (eventos.length ? eventos[eventos.length - 1].t + 6000 : 1);
-  let lastEvtIdx = -1;
-  let wordTimers = [];
-
-  function buildStars() {
-    kpStars.innerHTML = '';
-    for (let i = 0; i < 45; i++) {
-      const el = document.createElement('span');
-      el.className = 'kp-star';
-      const sz = .8 + Math.random() * 2;
-      Object.assign(el.style, {
-        width: sz + 'px', height: sz + 'px',
-        left: (Math.random() * 100) + '%', top: (Math.random() * 100) + '%',
-        '--dur': (2.5 + Math.random() * 3.5) + 's', '--delay': (-Math.random() * 5) + 's',
-        '--lo': (.04 + Math.random() * .08), '--hi': (.25 + Math.random() * .5),
-      });
-      kpStars.appendChild(el);
-    }
-  }
-
-  function buildMarkers() {
-    kpMarkers.innerHTML = '';
-    eventos.forEach(ev => {
-      const pct = (ev.t / durationMs) * 100;
-      const m = document.createElement('div');
-      m.className = 'kp-marker';
-      m.style.left = pct + '%';
-      kpMarkers.appendChild(m);
-    });
-  }
-
-  function renderPhrase(texto, tipo) {
-    kpZone.innerHTML = '';
-    const p = document.createElement('p');
-    p.className = `kt-phrase kt-${tipo}`;
-    p.textContent = texto;
-    kpZone.appendChild(p);
-    void p.offsetWidth;
-    requestAnimationFrame(() => p.classList.add('kt-active'));
-  }
-
-  function renderConstellation(texto) {
-    kpZone.innerHTML = '';
-    const words = texto.split(' ');
-    const frag = document.createDocumentFragment();
-    words.forEach((w, i) => {
-      const span = document.createElement('span');
-      span.className = 'kt-word';
-      span.textContent = w;
-      frag.appendChild(span);
-      wordTimers.push(setTimeout(() => span.classList.add('kt-active'), i * 145));
-    });
-    kpZone.appendChild(frag);
-  }
-
-  function renderEvent(ev) {
-    wordTimers.forEach(clearTimeout);
-    wordTimers = [];
-
-    kpEnv.className = `kp-env ${KP_SET_CLASS[ev.set] || 'env-general'}`;
-    kpStars.style.display = (ev.set === 'general' || !ev.set) ? '' : 'none';
-    if (ev.set === 'general' || !ev.set) buildStars();
-
-    kpAvatar.dataset.quien = ev.quien || 'narrator';
-    kpName.textContent = ev.quien ? ev.quien.charAt(0).toUpperCase() + ev.quien.slice(1) : 'Universidad GEB';
-    kpQuien.classList.add('visible');
-
-    kpCaption.textContent = ev.texto;
-    kpCaption.classList.add('visible');
-
-    if (ev.tipo === 'constelacion') renderConstellation(ev.texto);
-    else renderPhrase(ev.texto, ev.tipo || 'foco');
-  }
-
-  function fmt(ms) {
-    const s = Math.floor(ms / 1000);
-    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
-  }
-
-  function syncToTime(ms) {
-    const pct = Math.min(100, (ms / durationMs) * 100);
-    kpFill.style.width = pct + '%';
-    kpTime.textContent = fmt(ms);
-
-    let idx = -1;
-    for (let i = eventos.length - 1; i >= 0; i--) {
-      if (ms >= eventos[i].t) { idx = i; break; }
-    }
-    const mels = kpMarkers.querySelectorAll('.kp-marker');
-    mels.forEach((m, i) => {
-      m.classList.toggle('passed', ms >= eventos[i].t && i !== idx);
-      m.classList.toggle('active-m', i === idx);
-    });
-    if (idx !== lastEvtIdx && idx >= 0) {
-      renderEvent(eventos[idx]);
-      lastEvtIdx = idx;
-    }
-  }
-
-  // timeupdate (no rAF): sigue disparando aunque la pestaña esté en segundo plano
-  audio.addEventListener('timeupdate', () => syncToTime(audio.currentTime * 1000));
-  audio.addEventListener('loadedmetadata', () => {
-    if (isFinite(audio.duration) && audio.duration > 0) durationMs = audio.duration * 1000;
-    buildMarkers();
-  });
-  audio.addEventListener('play', () => { kpPlay.textContent = '⏸'; });
-  audio.addEventListener('pause', () => { kpPlay.textContent = audio.ended ? '↺' : '▶'; });
-  audio.addEventListener('ended', () => { kpPlay.textContent = '↺'; });
-
-  kpPlay.addEventListener('click', () => {
-    if (audio.paused) { if (audio.ended) audio.currentTime = 0; audio.play(); }
-    else audio.pause();
-  });
-
-  document.getElementById('kp-timeline').addEventListener('click', (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    audio.currentTime = pct * (audio.duration || (durationMs / 1000));
-    syncToTime(audio.currentTime * 1000);
-  });
-
-  buildMarkers();
-}
-
-/* ── VIDEO: usa KineticPlayer si hay escena.eventos, si no cae al MP4 plano ── */
+/* ── AUDIO DE APERTURA: reproductor simple + transcripción, sin video ── */
 function renderVideo(data) {
   const vp = document.getElementById('video-wrap');
   const btnTrans = document.getElementById('btn-transcripcion');
@@ -923,27 +699,28 @@ function renderVideo(data) {
   if (!vp || !data) return;
 
   if (!AV_LISTO) {
-    vp.innerHTML = '<div class="video-placeholder">🎬 Video por producir</div>';
+    vp.innerHTML = '<div class="video-placeholder">🎧 Audio por producir</div>';
     if (btnTrans) btnTrans.style.display = 'none';
     return;
   }
 
-  if (data.escena && Array.isArray(data.escena.eventos) && data.escena.eventos.length) {
+  const audioSrc = data.escena && data.escena.audio && data.escena.audio.src;
+  if (audioSrc && audioSrc.indexOf('[verificar') !== 0) {
     vp.innerHTML = '';
-    montarKineticPlayer(vp, data);
-  } else if (data.video_src) {
-    vp.innerHTML = '';
-    const vid = document.createElement('video');
-    vid.src = data.video_src;
-    vid.controls = true;
-    vid.playsInline = true;
-    vp.appendChild(vid);
+    const audio = document.createElement('audio');
+    audio.src = audioSrc;
+    audio.controls = true;
+    audio.style.cssText = 'width:100%;';
+    vp.appendChild(audio);
   } else {
-    vp.innerHTML = '<div class="video-placeholder">[verificar video de apertura]</div>';
+    vp.innerHTML = '<div class="video-placeholder">[verificar audio de apertura]</div>';
   }
 
-  if (data.guion_notebooklm && btnTrans) {
-    transBox.textContent = data.guion_notebooklm;
+  const transcripcion = data.guion_notebooklm ||
+    (data.escena && Array.isArray(data.escena.eventos) &&
+      data.escena.eventos.map(e => e.texto).filter(Boolean).join('\n\n'));
+  if (transcripcion && btnTrans) {
+    transBox.textContent = transcripcion;
     btnTrans.style.display = 'inline-flex';
     btnTrans.onclick = () => {
       const abierta = transBox.classList.toggle('abierta');
@@ -1270,7 +1047,7 @@ fetch(contentUrl)
     if (data.checklistLabels) checklistLabels = data.checklistLabels;
 
     weekData = data;
-    hasVideo = !!(data.video_src || data.escena);
+    hasVideo = !!data.escena;
     videoActive = hasVideo; // arranca en el video, si existe
 
     renderRecursos(data.recursos);

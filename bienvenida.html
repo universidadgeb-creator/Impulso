@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bienvenida a Ruta GEB | Impulso GEB</title>
 <script src="config.js"></script>
-<link rel="stylesheet" href="escena-player.css">
 <style>
 :root {
   --void:    #080C14;
@@ -250,7 +249,7 @@ html.unlocked .lock-screen{display:none;}
 <div class="site-content">
   <div class="bienvenida-wrap">
 
-    <!-- Card 1: contexto + video -->
+    <!-- Card 1: contexto + audio -->
     <div class="bv-card">
       <div class="card-topbar"></div>
       <div class="card-body">
@@ -337,7 +336,6 @@ html.unlocked .lock-screen{display:none;}
 
 </div>
 
-<script src="escena-player.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
 /* ---- CONSTANTES ---- */
@@ -383,8 +381,8 @@ var respuestas = {};     // respuestas encuesta en memoria
 
 /* ---- CHECKLIST ---- */
 var ITEMS = [
-  { id:'video',    nombre:'Ver el video de bienvenida', hintPend:'Se marca al terminar el video',   hintOk:'Visto' },
-  { id:'encuesta', nombre:'Contestar encuesta',          hintPend:'Disponible al terminar el video', hintOk:'Respondida' },
+  { id:'video',    nombre:'Escuchar el audio de bienvenida', hintPend:'Se marca al terminar el audio',   hintOk:'Escuchado' },
+  { id:'encuesta', nombre:'Contestar encuesta',          hintPend:'Disponible al terminar el audio', hintOk:'Respondida' },
   { id:'registro', nombre:'Registro único',              hintPend:'Disponible al responder la encuesta', hintOk:'Registrado' }
 ];
 
@@ -657,23 +655,22 @@ fetch('content/ruta-sem0.json')
       }
     }
 
-    /* Video — usa MP4 cuando existe */
+    /* Audio de apertura — sin video, reproductor simple + transcripción */
     var vp = document.getElementById('video-player');
     var btnTrans = document.getElementById('btn-transcripcion');
     var transBox = document.getElementById('transcripcion-box');
     if (!AV_LISTO) {
-      vp.innerHTML = '<div class="video-placeholder">🎬 Video por producir</div>';
-      // Sin video real que ver, no bloqueamos el diagnóstico esperando a que "termine".
+      vp.innerHTML = '<div class="video-placeholder">🎧 Audio por producir</div>';
+      // Sin audio real que escuchar, no bloqueamos el diagnóstico esperando a que "termine".
       marcarVideoVisto();
-    } else if (data.video_src) {
+    } else if (data.audio_src) {
       vp.innerHTML = '';
-      var vid = document.createElement('video');
-      vid.src = data.video_src;
-      vid.controls = true;
-      vid.playsInline = true;
-      vid.style.cssText = 'width:100%;border-radius:12px;display:block;';
-      vid.addEventListener('ended', marcarVideoVisto);
-      vp.appendChild(vid);
+      var aud = document.createElement('audio');
+      aud.src = data.audio_src;
+      aud.controls = true;
+      aud.style.cssText = 'width:100%;display:block;';
+      aud.addEventListener('ended', marcarVideoVisto);
+      vp.appendChild(aud);
 
       /* Transcripción completa, en vez de subtítulos sincronizados */
       if (data.guion_notebooklm && btnTrans) {
@@ -684,11 +681,9 @@ fetch('content/ruta-sem0.json')
           btnTrans.textContent = abierta ? '📄 Ocultar transcripción' : '📄 Ver transcripción';
         });
       }
-    } else if (data.escena) {
-      vp.innerHTML = '';
-      EscenaPlayer.montar(vp, data.escena);
-      var audioEl = vp.querySelector('.escena-audio');
-      if (audioEl) audioEl.addEventListener('ended', marcarVideoVisto);
+    } else {
+      vp.innerHTML = '<div class="video-placeholder">[verificar audio de apertura]</div>';
+      marcarVideoVisto();
     }
 
     /* Encuesta */

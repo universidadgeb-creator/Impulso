@@ -208,19 +208,13 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
   línea de color solo para lo que se quiere resaltar (caso, recurso multimedia,
   pregunta para profundizar).
 
-## EscenaPlayer — elenco de personajes (decisiones cerradas)
+## Personajes (Lupita, Ana, Marcos) — solo referencia narrativa
 
-Lupita, Ana y Marcos son formas geométricas puras, sin cara ni extremidades.
-
-- **Lupita** → **triángulo equilátero dorado (#F0C040), punta hacia arriba.** Antes
-  era un anillo — se cambió a triángulo en agosto 2026. Ya resuelto: el audio vigente de
-  Sem. 0 dice "soy un triángulo".
-- **Ana** → esfera sólida azul claro (#6AB0F5)
-- **Marcos** → cuadrado de esquinas redondeadas, coral (#F07060)
-
-Los videos de apertura semanal se producen en **Claude Design** (MP4 mudo) y se mezclan
-con el audio de ElevenLabs via ffmpeg. El campo `video_src` en cada JSON de semana apunta
-al MP4 final; mientras no exista, `bienvenida.html` usa EscenaPlayer como fallback.
+Lupita, Ana y Marcos son formas geométricas puras (Lupita: triángulo dorado #F0C040;
+Ana: esfera azul claro #6AB0F5; Marcos: cuadrado de esquinas redondeadas coral #F07060),
+usadas como voces narradoras en el `guion_notebooklm`/`escena.eventos` de cada semana.
+Desde agosto 2026 (ver "Videos de apertura — decisión de quitarlos" abajo) ya no tienen
+representación visual en la plataforma — solo aparecen nombradas dentro del audio.
 
 ## Sistema de identidad + entregas (EntregaEngine, agosto 2026)
 
@@ -249,32 +243,33 @@ al MP4 final; mientras no exista, `bienvenida.html` usa EscenaPlayer como fallba
   placeholder). La usan `bienvenida.html`, `cierre.html`, `momento-guia.html` y
   `momento-video.html` — un solo lugar para cambiarla si el backend se mueve.
 
-## Video de bienvenida — decisiones sobre subtítulos (agosto 2026)
+## Videos de apertura — decisión de quitarlos (agosto 2026)
 
-Se intentó dos veces sincronizar subtítulos VTT al video (primero proporcional al tiempo
-total, después proporcional dentro de los tramos de habla real detectados con
-`ffmpeg silencedetect`) y en ambos casos quedó desfasado — sin poder escuchar el audio
-directamente en este entorno no hay forma confiable de afinar la sincronización al
-segundo exacto.
+**Decisión: ya no hay video de apertura semanal en ninguna vista de la plataforma —
+solo el audio narrado + un botón de transcripción.** Aplica a `bienvenida.html` (Sem. 0)
+y a `momento-guia.html` (Sem. 1-6 y cualquier semana futura de Ruta GEB). No aplica a
+las CONFERENCIAS (`momento-video.html`, ritmo CONF de la malla) — eso no se tocó.
 
-**Decisión: no más subtítulos sincronizados.** En su lugar, un botón **"📄 Ver
-transcripción"** debajo del video que muestra/oculta el guion completo de un jalón
-(`data.guion_notebooklm` del JSON de la semana), sin intentar cuadrarlo al tiempo de
-reproducción. Aplicar el mismo patrón a videos de semanas futuras en vez de repetir el
-intento de sincronización.
+Se abandonó la producción de video (Claude Design MP4 mudo + mezcla ffmpeg con audio de
+ElevenLabs + el intento fallido, dos veces, de sincronizar subtítulos VTT al video) en
+favor de algo mucho más simple: un `<audio controls>` plano con el mp3 de ElevenLabs, más
+el botón **"📄 Ver transcripción"** ya existente que muestra `guion_notebooklm` (o, si no
+existe, el texto de `escena.eventos[].texto` concatenado) — sin intentar sincronizar nada
+al tiempo de reproducción.
 
-## Producción de video/audio — flujo con ffmpeg
-
-1. Ceci sube el video mudo (de Claude Design) y el audio narrado (de ElevenLabs) por
-   separado.
-2. Se combinan con: `ffmpeg -i video.mp4 -i audio.mp3 -map 0:v:0 -map 1:a:0 -c:v copy
-   -c:a aac -b:a 192k -shortest salida.mp4` — copia el video tal cual, codifica el audio
-   a AAC, y recorta al más corto de los dos.
-3. **Cache-busting obligatorio**: GitHub Pages/el navegador cachean agresivamente los
-   `.mp4` (y en menor medida otros assets) por nombre de archivo. Si se reemplaza un
-   video o audio manteniendo el mismo nombre, hay que subir el parámetro de versión en
-   el JSON (`video_src: "video/archivo.mp4?v=N"`) o nadie va a ver el cambio hasta que
-   expire la caché por su cuenta. Ya pasó dos veces con el video de Sem. 0.
-4. Este entorno de trabajo (sandbox de Claude Code) no tiene `ffmpeg` preinstalado —
-   hay que `apt-get install -y --no-install-recommends ffmpeg` cada vez que se necesita
-   (no persiste entre sesiones).
+- El campo que cada semana usa para el audio: `audio_src` en `content/ruta-sem0.json`
+  (bienvenida), `escena.audio.src` en `content/ruta-sem1.json` en adelante (momento-guia).
+  El campo legado `video_src` ya no se lee en ningún lado — no volver a agregarlo.
+- Se borraron `escena-player.js`/`escena-player.css` (EscenaPlayer) y el KineticPlayer
+  (texto cinético sincronizado, vivía en `momento-guia.html`) — ya no se renderiza ningún
+  personaje/escena visual, solo el reproductor de audio nativo.
+- Se borraron los `.mp4` de apertura ya producidos (`video/ruta-sem0-bienvenida.mp4`,
+  `ruta-sem1-apertura.mp4`, `ruta-sem2-apertura.mp4`, `ruta-sem1-mudo.mp4`) — no se vuelven
+  a producir. Los `.mp3` de ElevenLabs sí se conservan y siguen siendo la fuente de verdad
+  (`audio/`).
+- `historial-decisiones.md` (bitácora para la skill `director-video-geb`, que armaba los
+  guiones de escena semana a semana) queda como registro histórico de los guiones ya
+  aprobados, pero esa skill ya no aplica a los audios de apertura — no generar más
+  entradas ahí para semanas nuevas de Ruta GEB.
+- `sistema-diseno-animaciones.html` (elenco/sets de escena) también queda como referencia
+  histórica, sin uso activo en la plataforma.
