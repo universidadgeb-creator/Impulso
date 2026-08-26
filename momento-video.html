@@ -391,7 +391,12 @@ document.getElementById('entrega-form').addEventListener('submit', function (e) 
   if (!npsValue.value) {
     e.preventDefault();
     npsError.textContent = 'Falta calificar del 0 al 10 antes de enviar.';
+    return;
   }
+  /* Misma clave que momento-guia.html, para que el círculo de ruta-geb.html
+     se pinte en verde también en momentos tipo CONFERENCIA. */
+  const semNum = (semana.match(/\d+/) || ['1'])[0];
+  localStorage.setItem(`geb_completado_${curso}_sem${semNum}`.replace(/\s+/g, '_'), '1');
 });
 
 if (dataParam) {
