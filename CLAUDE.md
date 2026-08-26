@@ -231,6 +231,8 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
   audio/video — `ruta-semN-descripcion-corta.docx`, minúsculas, guiones, sin prefijos
   tipo `GEB_`. Mantenerlo consistente entre semanas (ver `recursos/ruta-sem1-hoja-trabajo.docx`,
   `ruta-sem2-hoja-trabajo.docx`).
+- **Orden del arreglo `recursos[]`: siempre primero la plantilla/hoja de trabajo de esa
+  semana, después cualquier recurso extra** (libro, podcast, video externo, etc.).
 
 ## Personajes (Lupita, Ana, Marcos) — referencia histórica, ya no vinculante
 
