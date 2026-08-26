@@ -220,6 +220,17 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
   respuesta...</details>` — colapsables, cerrados por defecto (nunca con `open`). Es
   HTML nativo, sin JS. Aplicar este mismo patrón a cualquier tip-box nuevo con forma de
   pregunta que se agregue en semanas futuras.
+- **Un prompt de IA para copiar y pegar nunca va en caja de color** — es una
+  herramienta, no algo que se "resalte". Va en `<div class="prompt-box"><span
+  class="prompt-label">💬 Prompt para copiar y pegar</span><div
+  class="prompt-text">...</div><button type="button"
+  class="copy-prompt-btn">📋 Copiar prompt</button></div>` — `momento-guia.html` ya
+  trae el listener delegado que copia `.prompt-text` al portapapeles (con fallback si
+  el navegador bloquea `navigator.clipboard`), no hay que agregar JS por semana.
+- **Nombres de archivos de recursos** (`recursos/*.docx`, etc.): mismo patrón que
+  audio/video — `ruta-semN-descripcion-corta.docx`, minúsculas, guiones, sin prefijos
+  tipo `GEB_`. Mantenerlo consistente entre semanas (ver `recursos/ruta-sem1-hoja-trabajo.docx`,
+  `ruta-sem2-hoja-trabajo.docx`).
 
 ## Personajes (Lupita, Ana, Marcos) — referencia histórica, ya no vinculante
 
