@@ -431,12 +431,6 @@ html.unlocked .lock-screen{display:none;}
 
 <script src="entrega-engine.js"></script>
 <script>
-// Interruptor global: mientras la producción de audio/video no esté lista
-// para todas las semanas, se oculta lo ya producido y se muestra "en
-// producción" en su lugar — para no mostrar contenido a medias. Cambiar
-// a true cuando el set completo de video/audio/transcripción esté listo.
-const AV_LISTO = false;
-
 /* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
 const COURSE_PASSWORD = 'rutageb26';
 const STORAGE_KEY = 'impulso_unlock_ruta';
@@ -697,12 +691,6 @@ function renderVideo(data) {
   const btnTrans = document.getElementById('btn-transcripcion');
   const transBox = document.getElementById('transcripcion-box');
   if (!vp || !data) return;
-
-  if (!AV_LISTO) {
-    vp.innerHTML = '<div class="video-placeholder">🎧 Audio por producir</div>';
-    if (btnTrans) btnTrans.style.display = 'none';
-    return;
-  }
 
   const audioSrc = data.escena && data.escena.audio && data.escena.audio.src;
   if (audioSrc && audioSrc.indexOf('[verificar') !== 0) {

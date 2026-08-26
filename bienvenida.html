@@ -339,10 +339,6 @@ html.unlocked .lock-screen{display:none;}
 <script src="entrega-engine.js"></script>
 <script>
 /* ---- CONSTANTES ---- */
-// Mismo interruptor que momento-guia.html: mientras el set de audio/video
-// no esté completo para todas las semanas, se oculta y se muestra "en
-// producción" en su lugar.
-const AV_LISTO = false;
 const COURSE_PASSWORD = 'rutageb26';
 const STORAGE_KEY     = 'impulso_unlock_ruta';
 const BV_STATE_KEY    = 'bv_ruta_v1';
@@ -659,11 +655,7 @@ fetch('content/ruta-sem0.json')
     var vp = document.getElementById('video-player');
     var btnTrans = document.getElementById('btn-transcripcion');
     var transBox = document.getElementById('transcripcion-box');
-    if (!AV_LISTO) {
-      vp.innerHTML = '<div class="video-placeholder">🎧 Audio por producir</div>';
-      // Sin audio real que escuchar, no bloqueamos el diagnóstico esperando a que "termine".
-      marcarVideoVisto();
-    } else if (data.audio_src) {
+    if (data.audio_src) {
       vp.innerHTML = '';
       var aud = document.createElement('audio');
       aud.src = data.audio_src;
