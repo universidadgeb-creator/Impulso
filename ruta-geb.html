@@ -167,9 +167,20 @@ html.unlocked .lock-screen{display:none;}
 }
 .day-panel-title{font-size:16px;color:#14181F;}
 .day-panel-sub{font-size:12px;color:rgba(20,24,31,.45);margin-top:2px;}
+.day-panel-actions{display:flex;align-items:center;gap:12px;flex-shrink:0;}
 .pilar-badge{
   font-size:11px;font-weight:700;padding:5px 13px;border-radius:100px;white-space:nowrap;
 }
+
+/* Botón de ir a la semana — junto al título, sin caja ni texto repetido */
+.day-go-btn{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:#7EC8A0;color:#0B0F16;display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:700;box-shadow:0 8px 20px rgba(126,200,160,.4);
+  transition:transform .15s,box-shadow .2s;
+}
+.day-go-btn:hover{transform:scale(1.08);box-shadow:0 10px 26px rgba(126,200,160,.55);}
+.day-go-btn.done{background:#14181F;color:#7EC8A0;box-shadow:none;}
 
 /* module list (semanas con más de un módulo, ej. Sem 6) */
 .module-list{display:flex;flex-direction:column;gap:8px;}
@@ -192,24 +203,6 @@ html.unlocked .lock-screen{display:none;}
   background:rgba(126,200,160,.15);color:#3F8F63;font-size:13px;font-weight:700;
   display:flex;align-items:center;justify-content:center;
 }
-
-/* CTA única — semanas con un solo módulo: un botón circular, sin título repetido */
-.day-cta{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:18px 20px;border-radius:14px;margin-top:2px;
-  background:rgba(126,200,160,.06);border:1px solid rgba(126,200,160,.2);
-  transition:background .15s,border-color .15s;
-}
-.day-cta:hover{background:rgba(126,200,160,.12);border-color:rgba(126,200,160,.4);}
-.day-cta-info{font-size:13px;font-weight:600;color:rgba(20,24,31,.6);}
-.day-cta-btn{
-  width:52px;height:52px;border-radius:50%;flex-shrink:0;
-  background:#7EC8A0;color:#0B0F16;display:flex;align-items:center;justify-content:center;
-  font-size:20px;font-weight:700;box-shadow:0 8px 22px rgba(126,200,160,.4);
-  transition:transform .15s,box-shadow .2s;
-}
-.day-cta:hover .day-cta-btn{transform:scale(1.07);box-shadow:0 10px 28px rgba(126,200,160,.55);}
-.day-cta-btn.done{background:#14181F;color:#7EC8A0;box-shadow:none;}
 
 .day-placeholder-note{
   margin-top:14px;font-size:11.5px;color:rgba(20,24,31,.4);font-style:italic;
@@ -324,7 +317,10 @@ html.unlocked .lock-screen{display:none;}
           <div class="day-panel-title" id="day-title">—</div>
           <div class="day-panel-sub" id="day-sub">—</div>
         </div>
-        <span class="pilar-badge" id="day-pilar"></span>
+        <div class="day-panel-actions">
+          <span class="pilar-badge" id="day-pilar"></span>
+          <a class="day-go-btn" id="day-go-btn" href="#" style="display:none;"></a>
+        </div>
       </div>
 
       <div class="module-list" id="module-list"></div>
@@ -499,22 +495,24 @@ function render() {
   badge.style.background = color + '20';
   badge.style.color = color;
 
+  const goBtn = document.getElementById('day-go-btn');
   const list = document.getElementById('module-list');
 
   if (d.modules.length === 1) {
-    // Un solo módulo: el título ya está arriba (day-panel-title) — no lo repetimos
-    // en una tarjeta. Un botón circular es la única acción posible, sin ambigüedad.
+    // Un solo módulo: el título ya está arriba (day-panel-title). El botón de
+    // ir a la semana vive junto a ese título — nada de caja ni texto repetido.
     const m = d.modules[0];
     const completado = moduleCompletado(d, m);
-    const url = moduleUrl(d, m);
-    const info = completado ? 'Completado — puedes revisarlo cuando quieras' : (RITMO_DESC[m.type] || m.type);
-    list.innerHTML = `
-    <a class="day-cta" href="${url}" aria-label="${completado ? 'Revisar' : 'Comenzar'}: ${m.title}">
-      <span class="day-cta-info">${info}</span>
-      <span class="day-cta-btn${completado ? ' done' : ''}">${completado ? '✓' : '→'}</span>
-    </a>`;
+    goBtn.href = moduleUrl(d, m);
+    goBtn.textContent = completado ? '✓' : '→';
+    goBtn.classList.toggle('done', completado);
+    goBtn.setAttribute('aria-label', `${completado ? 'Revisar' : 'Comenzar'}: ${m.title}`);
+    goBtn.style.display = 'flex';
+    list.innerHTML = '';
     return;
   }
+
+  goBtn.style.display = 'none';
 
   // Varios módulos en la semana (ej. Sem 6: autogestivo + conferencia) — sí
   // necesitan tarjeta propia porque cada uno tiene un título distinto.
