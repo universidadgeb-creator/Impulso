@@ -130,12 +130,16 @@ html.unlocked .lock-screen{display:none;}
 .check-item.checked{background:rgba(255,255,255,.06);color:#fff;}
 .check-item.checked .check-mark{background:#7EC8A0;color:#0B0F16;border-color:#7EC8A0;}
 
-/* ── PANTALLA DE ÉXITO — mismo patrón que momento-guia.html al entregar ── */
-.success-screen.momento-card{background:var(--deep);color:var(--white);text-align:center;padding:60px 24px 56px;}
-.success-icon{font-size:52px;margin-bottom:14px;}
-.success-title{font-family:Georgia,serif;font-size:24px;color:var(--white);margin-bottom:10px;}
-.success-sub{font-size:14px;color:var(--fog);margin-bottom:6px;max-width:420px;margin-left:auto;margin-right:auto;}
-.success-btn{display:inline-block;background:var(--sage);color:var(--void);font-weight:700;font-size:14px;padding:13px 26px;border-radius:100px;margin-top:22px;border:none;cursor:pointer;}
+/* ── BANNER DE LISTO — no tapa la tarjeta, se queda arriba mientras revisas la semana ── */
+.bv-banner-listo{display:flex;align-items:center;gap:12px;background:var(--sage);color:#0B0F16;border-radius:14px;padding:14px 18px;margin-bottom:14px;flex-wrap:wrap;}
+.bv-banner-ico{font-size:22px;flex-shrink:0;}
+.bv-banner-text{flex:1;min-width:200px;font-size:13px;line-height:1.5;}
+.bv-banner-text strong{font-weight:700;}
+.bv-banner-btn{background:#0B0F16;color:var(--white);border:none;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;cursor:pointer;white-space:nowrap;}
+.bv-banner-btn:hover{opacity:.9;}
+
+/* ── BADGE "completado" dentro de los popups de paso ── */
+.popup-badge-done{display:inline-flex;align-items:center;font-size:10px;font-weight:700;letter-spacing:.03em;background:rgba(126,200,160,.15);color:#3F8F63;padding:3px 9px;border-radius:100px;margin-left:8px;vertical-align:middle;}
 
 /* POPUP OVERLAY (bottom sheet — encuesta y registro son formularios largos) */
 .popup-overlay{
@@ -171,6 +175,9 @@ html.unlocked .lock-screen{display:none;}
 .likert-btn{flex:1;padding:9px 4px;border-radius:9px;border:1.5px solid #ECEAE4;font-size:13px;font-weight:700;color:#888780;text-align:center;cursor:pointer;background:#fff;transition:all .1s;}
 .likert-btn:hover{border-color:#F0C040;background:#FFFDF5;}
 .likert-btn.sel{border-color:#F0C040;background:#FFF8E6;color:#7A5E0A;}
+.likert-btn:disabled{cursor:default;}
+.likert-btn:disabled:hover{border-color:#ECEAE4;background:#fff;}
+.likert-btn.sel:disabled:hover{border-color:#F0C040;background:#FFF8E6;}
 .likert-labs{display:flex;justify-content:space-between;font-size:10px;color:#BEBAB2;padding:0 2px;}
 .pq-divider{height:1px;background:#F0EDE8;margin:20px 0;}
 
@@ -182,12 +189,14 @@ html.unlocked .lock-screen{display:none;}
   transition:border-color .15s;
 }
 .pq-abierta textarea:focus{outline:none;border-color:#F0C040;}
+.pq-abierta textarea:read-only{background:#FAFAF8;color:#6A6460;cursor:default;}
 .pq-progreso{font-size:11.5px;color:#9A968C;text-align:center;margin-bottom:12px;}
 
 /* FORMULARIO REGISTRO */
 .id-intro{font-size:12.5px;color:#6A6460;line-height:1.6;border-left:3px solid #F0C040;padding:10px 12px 10px 14px;background:#FAFAF8;border-radius:0 8px 8px 0;margin-bottom:18px;}
 .id-campo{margin-bottom:14px;}
 .id-campo label{font-size:12px;font-weight:700;color:#14181F;display:block;margin-bottom:3px;}
+.id-campo > div{font-size:13px;color:#3A3630;background:#FAFAF8;border:1.5px solid #ECEAE4;border-radius:9px;padding:10px 13px;}
 .id-campo small{font-size:11px;color:#9A968C;display:block;margin-bottom:5px;}
 .id-campo input{width:100%;font-size:13px;padding:10px 13px;border-radius:9px;border:1.5px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;transition:border-color .15s;}
 .id-campo input:focus{outline:none;border-color:#F0C040;}
@@ -331,7 +340,7 @@ html.unlocked .lock-screen{display:none;}
   <div class="popup-sheet" id="popup-encuesta" style="display:none;">
     <div class="popup-handle"></div>
     <div class="popup-head">
-      <span class="popup-titulo">Encuesta de inicio</span>
+      <span class="popup-titulo">Encuesta de inicio <span class="popup-badge-done" id="encuesta-badge" style="display:none;">✓ Completada</span></span>
       <button class="popup-cerrar" id="cerrar-encuesta" aria-label="Cerrar">×</button>
     </div>
     <div class="popup-body" id="popup-encuesta-body">
@@ -347,13 +356,13 @@ html.unlocked .lock-screen{display:none;}
   <div class="popup-sheet" id="popup-registro" style="display:none;">
     <div class="popup-handle"></div>
     <div class="popup-head">
-      <span class="popup-titulo">Registro único</span>
+      <span class="popup-titulo">Registro único <span class="popup-badge-done" id="registro-badge" style="display:none;">✓ Registrado</span></span>
       <button class="popup-cerrar" id="cerrar-registro" aria-label="Cerrar">×</button>
     </div>
     <div class="popup-body" id="popup-registro-body">
-      <!-- renderizado por EntregaEngine -->
+      <!-- renderizado por EntregaEngine, o resumen de solo lectura si ya está registrado -->
     </div>
-    <div class="popup-footer">
+    <div class="popup-footer" id="registro-footer">
       <button class="btn-primario" id="btn-guardar-registro">Guardar registro →</button>
       <div class="estado-envio" id="estado-envio"></div>
     </div>
@@ -449,29 +458,36 @@ function renderChecklist() {
   }
 }
 
-/* ---- PANTALLA FINAL — mismo patrón que la pantalla de éxito de momento-guia.html ---- */
+/* ---- BANNER DE LISTO — no reemplaza la tarjeta, se queda arriba para poder
+   seguir viendo/revisando lo que ya hiciste en la semana ---- */
 function mostrarBienvenidaLista() {
-  document.getElementById('momento-card').style.display = 'none';
   var wrap = document.getElementById('momento-wrap');
-  var success = document.createElement('div');
-  success.className = 'momento-card success-screen';
-  success.innerHTML =
-    '<div class="success-icon">🎉</div>' +
-    '<div class="success-title">¡Listo, ya puedes empezar!</div>' +
-    '<p class="success-sub">Completaste los tres pasos de bienvenida.</p>' +
-    '<p class="success-sub">La Semana 1 ya está esperándote.</p>' +
-    '<button type="button" class="success-btn" id="btn-ir-sem1">Ir a Semana 1 →</button>';
-  wrap.appendChild(success);
+  var card = document.getElementById('momento-card');
+  var banner = document.createElement('div');
+  banner.className = 'bv-banner-listo';
+  banner.innerHTML =
+    '<span class="bv-banner-ico">🎉</span>' +
+    '<div class="bv-banner-text"><strong>¡Listo, ya puedes empezar!</strong> Completaste los tres pasos de bienvenida.</div>' +
+    '<button type="button" class="bv-banner-btn" id="btn-ir-sem1">Ir a Semana 1 →</button>';
+  wrap.insertBefore(banner, card);
   document.getElementById('btn-ir-sem1').addEventListener('click', function() {
     window.location.href = URL_SEM1;
   });
 }
 
-/* ---- POPUP ---- */
+/* ---- POPUP — si el paso ya está completo, se abre en modo solo lectura:
+   no se puede editar, pero sí ver lo que se contestó/registró ---- */
 function abrirPopup(cual) {
   var overlay = document.getElementById('popup-overlay');
   document.getElementById('popup-encuesta').style.display = 'none';
   document.getElementById('popup-registro').style.display = 'none';
+
+  if (cual === 'encuesta') {
+    renderEncuesta(preguntas, !!estado.encuesta);
+  } else if (cual === 'registro') {
+    renderRegistro(!!estado.registro);
+  }
+
   document.getElementById('popup-' + cual).style.display  = 'flex';
   document.getElementById('popup-' + cual).style.flexDirection = 'column';
   requestAnimationFrame(function() {
@@ -504,12 +520,16 @@ function marcarVideoVisto() {
   renderChecklist();
 }
 
-/* ---- RENDER ENCUESTA ---- */
-function renderEncuesta(pregs) {
+/* ---- RENDER ENCUESTA — si ya está respondida, se abre en solo lectura:
+   se ve lo que se contestó, pero no se puede editar ni reenviar ---- */
+function renderEncuesta(pregs, soloLectura) {
   var body   = document.getElementById('popup-encuesta-body');
   var progEl = document.getElementById('encuesta-progreso');
   var btnOk  = document.getElementById('btn-guardar-encuesta');
+  var badge  = document.getElementById('encuesta-badge');
   body.innerHTML = '';
+  badge.style.display = soloLectura ? 'inline-flex' : 'none';
+  btnOk.style.display = soloLectura ? 'none' : '';
 
   /* recuperar respuestas guardadas si las hay */
   try { respuestas = JSON.parse(localStorage.getItem(BV_ENCUESTA_KEY)) || {}; } catch(e) {}
@@ -518,8 +538,8 @@ function renderEncuesta(pregs) {
     var total = pregs.length;
     var resp  = 0;
     pregs.forEach(function(p) { if (respuestas[p.id] !== undefined && respuestas[p.id] !== '') resp++; });
-    progEl.textContent = resp + ' de ' + total + ' respondidas';
-    btnOk.disabled = (resp < total);
+    progEl.textContent = soloLectura ? 'Respuestas guardadas' : (resp + ' de ' + total + ' respondidas');
+    if (!soloLectura) btnOk.disabled = (resp < total);
     localStorage.setItem(BV_ENCUESTA_KEY, JSON.stringify(respuestas));
   }
 
@@ -554,12 +574,16 @@ function renderEncuesta(pregs) {
           btn.textContent = val;
           btn.dataset.id  = p.id;
           btn.dataset.val = val;
-          btn.addEventListener('click', function() {
-            row.querySelectorAll('.likert-btn').forEach(function(b) { b.classList.remove('sel'); });
-            btn.classList.add('sel');
-            respuestas[p.id] = val;
-            actualizarProgreso();
-          });
+          if (soloLectura) {
+            btn.disabled = true;
+          } else {
+            btn.addEventListener('click', function() {
+              row.querySelectorAll('.likert-btn').forEach(function(b) { b.classList.remove('sel'); });
+              btn.classList.add('sel');
+              respuestas[p.id] = val;
+              actualizarProgreso();
+            });
+          }
           row.appendChild(btn);
         })(v);
       }
@@ -577,10 +601,14 @@ function renderEncuesta(pregs) {
       ta.rows = 3;
       ta.placeholder = p.placeholder || 'Escribe aquí…';
       ta.value = respuestas[p.id] || '';
-      ta.addEventListener('input', function() {
-        respuestas[p.id] = ta.value.trim();
-        actualizarProgreso();
-      });
+      if (soloLectura) {
+        ta.readOnly = true;
+      } else {
+        ta.addEventListener('input', function() {
+          respuestas[p.id] = ta.value.trim();
+          actualizarProgreso();
+        });
+      }
       divAb.appendChild(ta);
       bloque.appendChild(divAb);
     }
@@ -598,9 +626,28 @@ document.getElementById('btn-guardar-encuesta').addEventListener('click', functi
   cerrarPopup();
 });
 
-/* ---- RENDER REGISTRO (con EntregaEngine) ---- */
-function initRegistro() {
+/* ---- RENDER REGISTRO — editable con EntregaEngine mientras no exista;
+   una vez registrado, solo se muestra un resumen de lectura, no se
+   puede volver a editar CURP/PIN desde aquí ---- */
+function renderRegistro(soloLectura) {
   var regBody = document.getElementById('popup-registro-body');
+  var footer  = document.getElementById('registro-footer');
+  var badge   = document.getElementById('registro-badge');
+
+  if (soloLectura) {
+    var identidad = EntregaEngine.obtenIdentidad() || {};
+    var curpOculto = identidad.curp ? identidad.curp.slice(0, 4) + '••••••••••••••' : '—';
+    badge.style.display = 'inline-flex';
+    footer.style.display = 'none';
+    regBody.innerHTML =
+      '<p class="id-intro">Tu registro ya quedó guardado — el CURP y el PIN no se pueden volver a editar desde aquí.</p>' +
+      '<div class="id-campo"><label>Nombre</label><div>' + (identidad.nombre || '—') + '</div></div>' +
+      '<div class="id-campo"><label>CURP</label><div>' + curpOculto + '</div></div>';
+    return;
+  }
+
+  badge.style.display = 'none';
+  footer.style.display = '';
   regBody.innerHTML =
     '<p class="id-intro">Tu CURP y tu PIN son lo que te identifica aquí. El PIN solo lo sabes tú.</p>' +
     '<div id="identidad-mount"></div>';
@@ -655,7 +702,8 @@ function initRegistro() {
   );
 }
 
-/* El botón exterior dispara el submit interno del EntregaEngine */
+/* El botón exterior dispara el submit interno del EntregaEngine (solo
+   existe mientras el registro no está hecho — ver renderRegistro) */
 document.getElementById('btn-guardar-registro').addEventListener('click', function() {
   var submitBtn = document.querySelector('#identidad-mount .campo-enviar');
   if (submitBtn) submitBtn.click();
@@ -696,10 +744,9 @@ fetch('content/ruta-sem0.json')
       marcarVideoVisto();
     }
 
-    /* Encuesta */
+    /* Encuesta — se renderiza al abrir el popup (abrirPopup), no aquí */
     if (data.diagnostico && data.diagnostico.preguntas) {
       preguntas = data.diagnostico.preguntas;
-      renderEncuesta(preguntas);
     }
 
   })
@@ -707,7 +754,6 @@ fetch('content/ruta-sem0.json')
 
 /* ---- INIT ---- */
 renderChecklist();
-initRegistro();
 </script>
 
 </body>
