@@ -616,7 +616,10 @@ function renderCenter() {
   if (s.panels && s.panels.length) {
     const accent = accentDeSemana(weekData.semana);
     const semLabel = `${weekData.semana} · ${weekData.pilar || ''}`;
-    contentWrap.innerHTML = introHtml + renderCasoPanels(s.panels, accent, semLabel);
+    // Los panels cuentan el caso — s.content (si trae algo) es lo que viene
+    // DESPUÉS de leerlo (ej. el ejercicio de aplicarlo), no se pierde.
+    const afterHtml = s.content ? `<div class="step-box-neutral">${s.content}</div>` : '';
+    contentWrap.innerHTML = introHtml + renderCasoPanels(s.panels, accent, semLabel) + afterHtml;
     initCasoPanels(contentWrap);
   } else {
     const contentClass = s.highlight ? 'step-box-highlight' : 'step-box-neutral';
