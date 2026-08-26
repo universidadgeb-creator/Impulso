@@ -3,7 +3,7 @@
   "semana": "Sem. 1",
   "pilar": "Propósito",
   "titulo": "Encontrando mi IKIGAI",
-  "contexto": "¿Alguna vez te han preguntado qué quieres hacer con tu vida... y no supiste qué contestar? No pasa nada si no tienes la respuesta todavía. Esta semana no te la vamos a pedir — vas a empezar a construir el lenguaje para encontrarla, con evidencia real, no con lo primero que se te ocurra.",
+  "contexto": "Esta semana es una invitación a escucharte, descubrir tu valor único y ponerlo al servicio de los demás.",
   "variante": "guia",
   "duracion": "~3 h",
   "video_src": "video/ruta-sem1-apertura.mp4",
@@ -21,9 +21,9 @@
     {
       "label": "1 · Diagnóstico",
       "checkLabel": "Realizaste la meditación inicial",
-      "noBox": false,
-      "intro": null,
-      "content": "Antes de empezar con los conceptos y actividades de esta semana, vamos a hacer un breve ejercicio de reflexión. Un espacio para calentar nuestros motores creativos y conectar con lo esencial.<br><br>Realiza la siguiente reflexión escuchando el audio. Cuando termines ve a la siguiente sección.<br><br><div class=\"audio-placeholder\"><span>▶ Audio de meditación inicial</span><span>~5 min · Toca play para comenzar</span></div>",
+      "highlight": true,
+      "intro": "Antes de empezar con los conceptos y actividades de esta semana, vamos a hacer un breve ejercicio de reflexión. Un espacio para calentar nuestros motores creativos y conectar con lo esencial.<br><br>Realiza la siguiente reflexión escuchando el audio. Cuando termines ve a la siguiente sección.",
+      "content": "<div class=\"step-audio\"><span class=\"step-audio-label\">🎧 Audio de meditación inicial</span><audio controls src=\"audio/ruta-sem1-meditacion.mp3\"></audio><span class=\"step-audio-meta\">~5 min</span></div>",
       "popup": {
         "title": "Diagnóstico",
         "instr": "En base a tu reflexión:",
@@ -42,7 +42,7 @@
       "checkLabel": "Entendiste el concepto de IKIGAI",
       "noBox": false,
       "intro": null,
-      "content": "Antes de ir al ejercicio de esta semana, queremos profundizar en un concepto: <strong>IKIGAI</strong><br><br>El Ikigai es una palabra japonesa que significa \"razón de ser\". Más que un destino fijo, es una brújula personal que nos orienta hacia lo que da sentido a nuestra vida. Encontrarlo implica explorar cuatro preguntas esenciales:<br><br><ul><li>¿Qué amo?</li><li>¿En qué soy bueno/a?</li><li>¿Por qué me podrían pagar?</li><li>¿Qué necesita el mundo?</li></ul><br>Esta semana estaremos trabajando en las <strong>primeras 2 preguntas</strong>.<br><br>Recuerda que acercarte a conocer lo que amas y en lo que eres bueno no es una respuesta definitiva, sino una hipótesis viva que se construye, se prueba y se afina con la experiencia.",
+      "content": "Antes de ir al ejercicio de esta semana, queremos profundizar en un concepto: <strong>IKIGAI</strong><br><br>El Ikigai es una palabra japonesa que significa \"razón de ser\". Más que un destino fijo, es una brújula personal que nos orienta hacia lo que da sentido a nuestra vida. Encontrarlo implica explorar cuatro preguntas esenciales:<br><br><div class=\"step-box-highlight\"><ul><li>¿Qué amo?</li><li>¿En qué soy bueno/a?</li><li>¿Por qué me podrían pagar?</li><li>¿Qué necesita el mundo?</li></ul></div>Esta semana estaremos trabajando en las <strong>primeras 2 preguntas</strong>.<br><br>Recuerda que acercarte a conocer lo que amas y en lo que eres bueno no es una respuesta definitiva, sino una hipótesis viva que se construye, se prueba y se afina con la experiencia.",
       "popup": {
         "title": "Marco",
         "instr": "Reflexiona antes de continuar:",
@@ -66,7 +66,7 @@
       "checkLabel": "Encontraste tu pasión",
       "noBox": false,
       "intro": null,
-      "content": "En la sección de <strong>Recursos</strong> está la plantilla de las dos listas en Word — descárgala si te es más fácil. Si prefieres a mano en un cuaderno, también sirve; lo que importa es el contenido, no el formato. El Test VIA de Fortalezas no es obligatorio, pero contestarlo puede ayudarte con el ejercicio.<br><br><strong>Parte 1. Anota lo que amas.</strong><ul><li><strong>Flujo total (flow):</strong> momentos donde el tiempo desaparece.</li><li><strong>Curiosidades que no sueltas:</strong> temas que investigas por gusto.</li><li><strong>Alegrías pequeñas del día a día:</strong> placeres micro que te iluminan.</li><li><strong>Retos que disfrutas:</strong> difíciles pero deliciosos.</li></ul>Escribe mínimo 20 ítems combinando las categorías. Sin editar, sin juicios. La regla: <em>si da energía, va; si chupa energía, no va</em>.<br><br><div class=\"tip-box tip-gold\"><strong>¿Cómo se ve una respuesta profunda?</strong><br>Superficial: \"Me gusta ver películas.\"<br>Profunda: \"Me gusta ver películas de misterio y tratar de adivinar el final antes que los demás — lo hago hasta con las series que ya vi, releyendo pistas.\"<br><br>No necesitas escribir un párrafo para cada acción, pero sí tratar de hacerlo más específico. Si tu lista se parece más al primer ejemplo, vuelve y pregúntate: ¿qué parte exactamente amo de esto?</div><br><strong>Parte 2. Anota en lo que eres bueno/a.</strong><ul><li><strong>Talentos naturales:</strong> lo que se te da casi sin esfuerzo.</li><li><strong>Habilidades aprendidas:</strong> lo que puliste con estudio, trabajo o práctica.</li><li><strong>Reconocimiento externo:</strong> lo que otros siempre dicen de ti (\"eres buenísimo/a para…\")</li><li><strong>Superpoderes diferenciales:</strong> lo que te distingue del promedio.</li></ul>Escribe mínimo 20 ítems. La regla: que al leerlos pienses: <em>\"Sí, esto soy yo\"</em>.<br><br><div class=\"tip-box tip-sage\"><strong>¿Cómo mejorar esta respuesta?</strong><br>Pregúntale a una persona real — una compañera, tu supervisor, alguien de tu casa — qué cree que se te da bien. No lo que tú imaginas que diría: lo que realmente te responda. Anota su respuesta, textual, junto a tu lista.<br><br>Si esa persona menciona algo que no habías puesto, agrégalo. Eso también cuenta — a veces los demás ven en nosotros lo que nosotros no vemos.</div><br>Ahora haremos una tercera lista, combinando las cosas que se repiten en ambas listas. ¿De lo que amas, en qué eres realmente bueno? Ese cruce es tu <strong>Pasión</strong>.",
+      "content": "En la sección de <strong>Recursos</strong> está la plantilla de las dos listas en Word — descárgala si te es más fácil. Si prefieres a mano en un cuaderno, también sirve; lo que importa es el contenido, no el formato. El Test VIA de Fortalezas no es obligatorio, pero contestarlo puede ayudarte con el ejercicio.<br><br><strong>Parte 1. Anota lo que amas.</strong><ul><li><strong>Flujo total (flow):</strong> momentos donde el tiempo desaparece.</li><li><strong>Curiosidades que no sueltas:</strong> temas que investigas por gusto.</li><li><strong>Alegrías pequeñas del día a día:</strong> placeres micro que te iluminan.</li><li><strong>Retos que disfrutas:</strong> difíciles pero deliciosos.</li></ul>Escribe mínimo 20 ítems combinando las categorías. Sin editar, sin juicios. La regla: <em>si da energía, va; si chupa energía, no va</em>.<br><br><details class=\"tip-box tip-gold\"><summary>¿Cómo se ve una respuesta profunda?</summary>Superficial: \"Me gusta ver películas.\"<br>Profunda: \"Me gusta ver películas de misterio y tratar de adivinar el final antes que los demás — lo hago hasta con las series que ya vi, releyendo pistas.\"<br><br>No necesitas escribir un párrafo para cada acción, pero sí tratar de hacerlo más específico. Si tu lista se parece más al primer ejemplo, vuelve y pregúntate: ¿qué parte exactamente amo de esto?</details><br><strong>Parte 2. Anota en lo que eres bueno/a.</strong><ul><li><strong>Talentos naturales:</strong> lo que se te da casi sin esfuerzo.</li><li><strong>Habilidades aprendidas:</strong> lo que puliste con estudio, trabajo o práctica.</li><li><strong>Reconocimiento externo:</strong> lo que otros siempre dicen de ti (\"eres buenísimo/a para…\")</li><li><strong>Superpoderes diferenciales:</strong> lo que te distingue del promedio.</li></ul>Escribe mínimo 20 ítems. La regla: que al leerlos pienses: <em>\"Sí, esto soy yo\"</em>.<br><br>Ahora haremos una tercera lista, combinando las cosas que se repiten en ambas listas. ¿De lo que amas, en qué eres realmente bueno?<br>Ese cruce es tu <strong>Pasión</strong>.",
       "popup": {
         "title": "Aplicación",
         "instr": "Registra lo que encontraste:",
@@ -86,12 +86,6 @@
           {
             "id": "a3",
             "label": "¿Qué apareció en el cruce de las 2 anteriores que no esperabas?",
-            "tipo": "ta",
-            "rows": 3
-          },
-          {
-            "id": "a4",
-            "label": "¿Qué te dijo la persona a la que preguntaste que te sorprendió?",
             "tipo": "ta",
             "rows": 3
           },
@@ -200,11 +194,6 @@
         "id": "a3",
         "tipo": "textarea",
         "label": "Lo que apareció en el cruce que no esperabas"
-      },
-      {
-        "id": "a4",
-        "tipo": "textarea",
-        "label": "Lo que te dijo la persona que preguntaste"
       },
       {
         "id": "a5",

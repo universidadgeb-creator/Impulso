@@ -206,7 +206,20 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
   `intro` (caja gris), el reproductor en `content` (caja resaltada). Aplicar este mismo
   criterio a cualquier semana nueva que se agregue: caja gris para instrucción/contexto,
   línea de color solo para lo que se quiere resaltar (caso, recurso multimedia,
-  pregunta para profundizar).
+  pregunta para profundizar). El audio real de un paso (ej. `audio/ruta-sem1-meditacion.mp3`)
+  va como `<audio controls src="...">` de verdad dentro de `content` — nunca un div
+  decorativo sin reproductor real.
+- Cuando solo una **parte** del `content` de un paso necesita la caja resaltada (no todo
+  el bloque) — ej. una lista corta de preguntas dentro de un párrafo más largo — se
+  puede envolver esa parte directamente en el HTML con
+  `<div class="step-box-highlight">...</div>`, sin marcar `highlight: true` en el paso
+  completo (eso pondría TODO el contenido en la caja de color). Ver Sem. 1, paso 2
+  (Marco) como referencia.
+- **Los `tip-box` con formato de pregunta** (ej. "¿Cómo se ve una respuesta profunda?")
+  van como `<details class="tip-box tip-TONO"><summary>La pregunta</summary>La
+  respuesta...</details>` — colapsables, cerrados por defecto (nunca con `open`). Es
+  HTML nativo, sin JS. Aplicar este mismo patrón a cualquier tip-box nuevo con forma de
+  pregunta que se agregue en semanas futuras.
 
 ## Personajes (Lupita, Ana, Marcos) — referencia histórica, ya no vinculante
 

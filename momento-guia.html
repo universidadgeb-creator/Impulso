@@ -126,6 +126,21 @@ html.unlocked .lock-screen{display:none;}
 .tip-blue strong{color:#1E4E7A;font-size:11px;}
 .audio-real-label{font-size:12.5px;font-weight:700;color:#7A5E0A;}
 
+/* tip-box tipo pregunta: <details> nativo, colapsado por defecto */
+.tip-box summary{cursor:pointer;font-weight:700;font-size:11px;list-style:none;display:flex;align-items:center;gap:6px;}
+.tip-box summary::-webkit-details-marker{display:none;}
+.tip-box summary::before{content:'▸';font-size:10px;transition:transform .15s;flex-shrink:0;}
+.tip-box[open] summary::before{transform:rotate(90deg);}
+.tip-box[open] summary{margin-bottom:8px;}
+.tip-gold summary{color:#92400E;}
+.tip-sage summary{color:#14532D;}
+.tip-blue summary{color:#1E4E7A;}
+
+/* reproductor de audio embebido dentro de un paso */
+.step-audio-label{font-weight:700;font-size:12.5px;margin-bottom:8px;display:block;}
+.step-audio audio{width:100%;display:block;}
+.step-audio-meta{font-size:11px;color:#9A968C;margin-top:6px;}
+
 .sec-divider{border:none;border-top:1px solid #ECEAE4;margin:16px 0;}
 
 .podcast-block{display:flex;align-items:center;gap:12px;background:#F7F5F0;border-radius:12px;padding:12px 14px;margin:10px 0 14px;text-decoration:none;transition:background .15s;}
