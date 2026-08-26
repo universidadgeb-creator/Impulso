@@ -83,6 +83,8 @@ html.unlocked .lock-screen{display:none;}
 .ctx-ico{font-size:16px;flex-shrink:0;line-height:1.4;}
 .ctx-item.hi{background:#F0FDF4;border-left:3px solid #7EC8A0;border-radius:0 8px 8px 0;padding:10px 12px;color:#166534;}
 
+.video-placeholder{background:#F3F1EC;border-radius:12px;padding:32px 16px;text-align:center;color:#6B6558;font-size:13px;}
+
 /* TRANSCRIPCIÓN */
 .btn-transcripcion{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:none;border:1.5px solid #ECEAE4;color:#6A6460;font-size:12px;font-weight:600;padding:8px 14px;border-radius:100px;cursor:pointer;transition:border-color .15s;}
 .btn-transcripcion:hover{border-color:#F0C040;color:#7A5E0A;}
@@ -339,6 +341,10 @@ html.unlocked .lock-screen{display:none;}
 <script src="entrega-engine.js"></script>
 <script>
 /* ---- CONSTANTES ---- */
+// Mismo interruptor que momento-guia.html: mientras el set de audio/video
+// no esté completo para todas las semanas, se oculta y se muestra "en
+// producción" en su lugar.
+const AV_LISTO = false;
 const COURSE_PASSWORD = 'rutageb26';
 const STORAGE_KEY     = 'impulso_unlock_ruta';
 const BV_STATE_KEY    = 'bv_ruta_v1';
@@ -655,7 +661,11 @@ fetch('content/ruta-sem0.json')
     var vp = document.getElementById('video-player');
     var btnTrans = document.getElementById('btn-transcripcion');
     var transBox = document.getElementById('transcripcion-box');
-    if (data.video_src) {
+    if (!AV_LISTO) {
+      vp.innerHTML = '<div class="video-placeholder">🎬 Video por producir</div>';
+      // Sin video real que ver, no bloqueamos el diagnóstico esperando a que "termine".
+      marcarVideoVisto();
+    } else if (data.video_src) {
       vp.innerHTML = '';
       var vid = document.createElement('video');
       vid.src = data.video_src;

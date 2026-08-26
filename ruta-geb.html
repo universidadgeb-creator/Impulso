@@ -128,7 +128,7 @@ html.unlocked .lock-screen{display:none;}
 }
 .dash-eyebrow::before{content:'●';font-size:8px;}
 .dash-card h2{font-size:clamp(24px,4.5vw,32px);color:#14181F;margin-bottom:6px;}
-.dash-tagline{font-size:14px;color:rgba(20,24,31,.7);line-height:1.5;margin-bottom:6px;max-width:520px;}
+.dash-tagline{font-size:14px;color:rgba(20,24,31,.7);line-height:1.5;margin-bottom:6px;white-space:nowrap;}
 .dash-meta{font-size:13px;color:rgba(20,24,31,.55);}
 .dash-cta{
   background:#14181F;color:#fff;font-size:13px;font-weight:700;padding:11px 20px;
@@ -235,17 +235,13 @@ html.unlocked .lock-screen{display:none;}
 .pillar-body-inner{padding:2px 16px 16px;font-size:12.5px;color:var(--fog);line-height:1.75;}
 .pillar-body-inner p{margin-bottom:10px;}
 .pillar-body-inner p:last-child{margin-bottom:0;}
-.quote{
-  text-align:center;font-style:italic;font-size:13.5px;color:var(--fog);
-  max-width:480px;margin:24px auto 0;line-height:1.7;
-}
-
 @media(max-width:699px){
   .dash-wrap{padding:90px 16px 16px;}
   .dash-card{padding:22px 18px;}
   .dash-topbar{margin:-22px -18px 20px;}
   .about-card{padding:20px 18px;margin-top:16px;}
   .day-node-label{font-size:9px;}
+  .dash-tagline{white-space:normal;}
 }
 </style>
 </head>
@@ -319,8 +315,6 @@ html.unlocked .lock-screen{display:none;}
     <p style="font-size:13.5px;color:var(--fog);line-height:1.7;margin-bottom:18px;">Al concluir Ruta GEB, habrás identificado lo que más te importa en tu vida profesional, construido un plan con metas concretas para los próximos dos años y elaborado un presupuesto personal que traza el camino para llegar.</p>
 
     <div class="pillar-accordion" id="pillar-accordion"></div>
-
-    <p class="quote">"Este programa y sus entregables te pertenecen, dentro o fuera de GEB."</p>
   </div>
 
   <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
@@ -458,7 +452,7 @@ function render() {
     document.getElementById('day-sub').textContent = `Cierra tu ciclo de Ruta GEB`;
   } else if (d.pillar === 'Bienvenida') {
     document.getElementById('dash-meta').textContent = `Antes de Semana 1 · ${d.modules.length} paso`;
-    document.getElementById('day-sub').textContent = `Registro y diagnóstico inicial`;
+    document.getElementById('day-sub').textContent = '';
   } else {
     document.getElementById('dash-meta').textContent = `Semana ${d.semNum} de ${totalSemanas} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
     document.getElementById('day-sub').textContent = d.modules.length > 1
