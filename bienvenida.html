@@ -117,19 +117,6 @@ html.unlocked .lock-screen{display:none;}
 .recurso-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(126,200,160,.25);border-radius:10px;padding:10px 12px;font-size:13px;color:#3F8F63;margin-bottom:8px;}
 .recurso-row:last-child{margin-bottom:0;}
 
-.checklist-card{background:#0B0F16;border-radius:16px;padding:20px;}
-.checklist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.checklist-head span:first-child{font-size:14px;color:#fff;font-weight:700;}
-.checklist-count{font-size:11px;font-weight:700;padding:4px 11px;border-radius:100px;background:#F0C040;color:#0B0F16;}
-.checklist-items{display:flex;flex-direction:column;gap:8px;}
-.check-item{
-  display:flex;align-items:center;gap:10px;border-radius:100px;padding:10px 14px;font-size:12.5px;
-  background:rgba(255,255,255,.03);color:rgba(255,255,255,.6);border:none;text-align:left;width:100%;
-}
-.check-mark{width:17px;height:17px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;border:1.5px solid rgba(255,255,255,.25);}
-.check-item.checked{background:rgba(255,255,255,.06);color:#fff;}
-.check-item.checked .check-mark{background:#7EC8A0;color:#0B0F16;border-color:#7EC8A0;}
-
 /* ── BANNER DE LISTO — no tapa la tarjeta, se queda arriba mientras revisas la semana ── */
 .bv-banner-listo{display:flex;align-items:center;gap:12px;background:var(--sage);color:#0B0F16;border-radius:14px;padding:14px 18px;margin-bottom:14px;flex-wrap:wrap;}
 .bv-banner-ico{font-size:22px;flex-shrink:0;}
@@ -300,12 +287,14 @@ html.unlocked .lock-screen{display:none;}
 
           <div>
             <h1 class="momento-title" id="bv-titulo">Bienvenida a Ruta GEB</h1>
-            <div class="context-block" id="bv-contexto"></div>
+            <div class="context-block" id="bv-contexto-antes"></div>
           </div>
 
           <div class="video-wrap" id="video-player">
             <div class="video-placeholder">Cargando…</div>
           </div>
+
+          <div class="context-block" id="bv-contexto-despues"></div>
         </div>
 
         <div class="side">
@@ -316,13 +305,6 @@ html.unlocked .lock-screen{display:none;}
               <div class="recurso-row">📝 Un plan de vida con tus próximos pasos escritos</div>
               <div class="recurso-row">💰 Un presupuesto personal que funcione para ti</div>
             </div>
-          </div>
-          <div class="checklist-card">
-            <div class="checklist-head">
-              <span>Avance</span>
-              <span class="checklist-count" id="checklist-count">0/3</span>
-            </div>
-            <div class="checklist-items" id="checklist-items"></div>
           </div>
         </div>
 
@@ -420,33 +402,23 @@ var ITEMS = [
 
 function renderChecklist() {
   var railList = document.getElementById('rail-list');
-  var checklistItems = document.getElementById('checklist-items');
   var todoHecho = estado.video && estado.encuesta && estado.registro;
 
-  var doneCount = 0;
   var railHtml = '';
-  var checkHtml = '';
 
   ITEMS.forEach(function(item) {
     var hecho     = !!estado[item.id];
     var anterior  = item.id === 'encuesta' ? estado.video : item.id === 'registro' ? estado.encuesta : true;
     var bloqueado = !anterior && !hecho;
     var clickable = !bloqueado && item.id !== 'video';
-    if (hecho) doneCount++;
 
     var railCls = 'rail-item' + (hecho ? '' : (bloqueado ? ' pending' : ' current')) + (clickable ? ' clickable' : '');
     railHtml += '<button type="button" class="' + railCls + '"' + (clickable ? ' data-open="' + item.id + '"' : '') + (bloqueado ? ' disabled' : '') + '>' +
       '<span class="dot">' + (hecho ? '✓' : '') + '</span>' + item.nombre +
       '</button>';
-
-    checkHtml += '<div class="check-item' + (hecho ? ' checked' : '') + '">' +
-      '<span class="check-mark">' + (hecho ? '✓' : '') + '</span>' + item.nombre +
-      '</div>';
   });
 
   railList.innerHTML = railHtml;
-  checklistItems.innerHTML = checkHtml;
-  document.getElementById('checklist-count').textContent = doneCount + '/' + ITEMS.length;
 
   railList.querySelectorAll('[data-open]').forEach(function(btn) {
     btn.addEventListener('click', function() { abrirPopup(btn.dataset.open); });
@@ -717,15 +689,18 @@ fetch('content/ruta-sem0.json')
     /* Título */
     if (data.titulo) document.getElementById('bv-titulo').textContent = data.titulo;
 
-    /* Contexto (array de párrafos o string legacy) */
-    var ctxEl = document.getElementById('bv-contexto');
+    /* Contexto — el primer párrafo va antes del video, el resto después
+       (array de párrafos o string legacy, que se queda antes por compatibilidad) */
+    var ctxAntes   = document.getElementById('bv-contexto-antes');
+    var ctxDespues = document.getElementById('bv-contexto-despues');
     if (data.contexto) {
       if (Array.isArray(data.contexto)) {
-        ctxEl.innerHTML = data.contexto.map(function(p) {
+        ctxAntes.innerHTML   = data.contexto.length ? '<p>' + data.contexto[0] + '</p>' : '';
+        ctxDespues.innerHTML = data.contexto.slice(1).map(function(p) {
           return '<p>' + p + '</p>';
         }).join('');
       } else {
-        ctxEl.innerHTML = '<p>' + data.contexto + '</p>';
+        ctxAntes.innerHTML = '<p>' + data.contexto + '</p>';
       }
     }
 

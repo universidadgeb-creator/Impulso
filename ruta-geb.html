@@ -477,11 +477,13 @@ function render() {
   if (d.modules.length === 1) {
     // Un solo módulo: el título ya está arriba (day-panel-title). El botón de
     // ir a la semana vive junto a ese título — nada de caja ni texto repetido.
+    // Siempre es la misma flecha, completada o no — si cambia de ícono, se
+    // confunde con un botón de "ya hecho" y deja de leerse como "entrar aquí".
     const m = d.modules[0];
     const completado = moduleCompletado(d, m);
     goBtn.href = moduleUrl(d, m);
-    goBtn.textContent = completado ? '✓' : '→';
-    goBtn.classList.toggle('done', completado);
+    goBtn.textContent = '→';
+    goBtn.classList.remove('done');
     goBtn.setAttribute('aria-label', `${completado ? 'Revisar' : 'Comenzar'}: ${m.title}`);
     goBtn.style.display = 'flex';
     list.innerHTML = '';
