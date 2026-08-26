@@ -38,8 +38,6 @@ nav{
 }
 .nav-logo{font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--white);}
 .nav-logo sup{font-size:11px;color:var(--sage);vertical-align:super;letter-spacing:0.05em;font-family:sans-serif;}
-.nav-back{font-size:13px;font-weight:600;color:var(--fog);}
-.nav-back:hover{color:var(--white);}
 
 /* LOCK SCREEN */
 html:not(.unlocked) .site-content{display:none;}
@@ -65,6 +63,10 @@ html.unlocked .lock-screen{display:none;}
 .breadcrumb b{color:var(--white);}
 .nav-return{font-size:11.5px;font-weight:700;color:var(--fog);border:1px solid var(--border);padding:6px 13px;border-radius:100px;white-space:nowrap;}
 .nav-return:hover{color:var(--white);border-color:rgba(255,255,255,.2);}
+.top-strip-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.week-nav-btn{font-size:11.5px;font-weight:700;color:var(--fog);background:none;border:1px solid var(--border);padding:6px 13px;border-radius:100px;white-space:nowrap;cursor:pointer;font-family:inherit;transition:.15s;}
+.week-nav-btn:hover:not(:disabled){color:var(--white);border-color:rgba(255,255,255,.2);}
+.week-nav-btn:disabled{opacity:.3;cursor:default;}
 
 /* CARD */
 .momento-card{
@@ -97,7 +99,7 @@ html.unlocked .lock-screen{display:none;}
 .tag-pilar{color:#3F8F63;background:rgba(126,200,160,.12);}
 
 .momento-title{font-family:Georgia,serif;font-size:22px;color:#14181F;}
-.momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:-6px;}
+.momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:8px;}
 
 /* ── VIDEO DE APERTURA ── */
 .video-wrap{background:#0B0F16;border-radius:14px;overflow:hidden;}
@@ -336,6 +338,10 @@ html.unlocked .lock-screen{display:none;}
 .popup-field{margin-bottom:14px;}
 .popup-field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#14181F;}
 .popup-field input,.popup-field textarea{width:100%;font-size:13px;padding:10px 12px;border-radius:9px;border:1px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;resize:vertical;}
+.popup-opciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.popup-opcion{padding:6px 18px;border-radius:99px;border:1.5px solid #ECEAE4;background:transparent;color:inherit;font-size:.85rem;font-family:inherit;cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
+.popup-opcion:hover{border-color:#7EC8A0;color:#3F8F63;}
+.popup-opcion.sel{background:#7EC8A0;border-color:#7EC8A0;color:#0B0F16;}
 .popup-field input:focus,.popup-field textarea:focus{outline:none;border-color:#F0C040;}
 .popup-escala{display:flex;gap:4px;flex-wrap:wrap;}
 .popup-escala-btn{flex:1;min-width:28px;font-size:11px;font-weight:700;padding:8px 0;border-radius:7px;border:1.5px solid #ECEAE4;background:#fff;color:#6B6558;cursor:pointer;transition:.15s;}
@@ -387,7 +393,6 @@ html.unlocked .lock-screen{display:none;}
 
 <nav>
   <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
-  <a href="ruta-geb.html" class="nav-back">← Volver a Ruta GEB</a>
 </nav>
 
 <!-- ══ LOCK SCREEN ══ -->
@@ -409,7 +414,11 @@ html.unlocked .lock-screen{display:none;}
   <div class="momento-wrap" id="momento-wrap">
     <div class="top-strip">
       <div class="breadcrumb" id="breadcrumb">Ruta GEB › Sem. 1 · Autogestivo</div>
-      <a href="ruta-geb.html" class="nav-return">← Regresar al curso</a>
+      <div class="top-strip-actions">
+        <button type="button" class="week-nav-btn" id="btn-week-prev">← Semana anterior</button>
+        <button type="button" class="week-nav-btn" id="btn-week-next">Próxima semana →</button>
+        <a href="ruta-geb.html" class="nav-return">← Regresar al curso</a>
+      </div>
     </div>
 
     <div class="momento-card">
@@ -475,6 +484,12 @@ html.unlocked .lock-screen{display:none;}
 <script src="escena-player.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
+// Interruptor global: mientras la producción de audio/video no esté lista
+// para todas las semanas, se oculta lo ya producido y se muestra "en
+// producción" en su lugar — para no mostrar contenido a medias. Cambiar
+// a true cuando el set completo de video/audio/transcripción esté listo.
+const AV_LISTO = false;
+
 /* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
 const COURSE_PASSWORD = 'rutageb26';
 const STORAGE_KEY = 'impulso_unlock_ruta';
@@ -907,6 +922,12 @@ function renderVideo(data) {
   const transBox = document.getElementById('transcripcion-box');
   if (!vp || !data) return;
 
+  if (!AV_LISTO) {
+    vp.innerHTML = '<div class="video-placeholder">🎬 Video por producir</div>';
+    if (btnTrans) btnTrans.style.display = 'none';
+    return;
+  }
+
   if (data.escena && Array.isArray(data.escena.eventos) && data.escena.eventos.length) {
     vp.innerHTML = '';
     montarKineticPlayer(vp, data);
@@ -991,6 +1012,12 @@ function renderCampoPopup(field) {
   if (field.tipo === 'ta') {
     return `<div class="popup-field"><label>${field.label}</label><textarea rows="${field.rows || 4}" data-id="${field.id}">${val}</textarea></div>`;
   }
+  if (field.tipo === 'seleccion' && field.opciones) {
+    const opts = field.opciones.map(o =>
+      `<button type="button" class="popup-opcion${val === o ? ' sel' : ''}" data-group="${field.id}" data-val="${o}">${o}</button>`
+    ).join('');
+    return `<div class="popup-field"><label>${field.label}</label><div class="popup-opciones" data-id="${field.id}">${opts}</div></div>`;
+  }
   return `<div class="popup-field"><label>${field.label}</label><input type="text" data-id="${field.id}" value="${val}"></div>`;
 }
 
@@ -1007,10 +1034,23 @@ function abrirPopupPaso(stepIdx) {
     </div>
   `;
   overlay.classList.add('open');
+  // Pill toggle para campos tipo seleccion
+  popupCard.addEventListener('click', e => {
+    const btn = e.target.closest('.popup-opcion');
+    if (!btn) return;
+    const group = btn.closest('.popup-opciones');
+    group.querySelectorAll('.popup-opcion').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+  });
   document.getElementById('popup-guardar').addEventListener('click', () => {
     p.fields.forEach(f => {
-      const el = popupCard.querySelector(`[data-id="${f.id}"]`);
-      if (el) answers[f.id] = el.value;
+      if (f.tipo === 'seleccion') {
+        const sel = popupCard.querySelector(`.popup-opcion.sel[data-group="${f.id}"]`);
+        if (sel) answers[f.id] = sel.dataset.val;
+      } else {
+        const el = popupCard.querySelector(`[data-id="${f.id}"]`);
+        if (el) answers[f.id] = el.value;
+      }
     });
     completed[stepIdx] = true;
     cerrarPopup();
@@ -1032,13 +1072,16 @@ function abrirPopupFinal() {
   const finalInstr = (lastStep.popup && lastStep.popup.instr) || 'Revisa tus respuestas. Si quieres editar o completar alguna, adelante.';
   const entregaCampos = (weekData.entrega && weekData.entrega.campos) || [];
   const campoEntrega = id => entregaCampos.find(c => c.id === id);
-  const r1Label = (campoEntrega('r1') || {}).label || 'Nombre del compañero con el que conversaste';
-  const r2Label = (campoEntrega('r2') || {}).label || '¿Qué te ayudó a reflexionar tu compañero sobre tu pasión?';
-  const npsLabel = (campoEntrega('NPS') || {}).label || '¿Qué tanto recomendarías este tema a alguien más?';
 
   const grupos = steps
     .filter(s => s.popup && Array.isArray(s.popup.fields))
     .map(s => ({ titulo: s.label.replace(/^\d+\s*·\s*/, ''), ids: s.popup.fields.map(f => f.id) }));
+
+  // Campos extra: entrega.campos que no están en ningún grupo de paso y no son NPS
+  // (ej. r1/r2 de reflexión) — se listan aparte, genérico para futuras semanas.
+  const idsEnGrupos = new Set(grupos.flatMap(g => g.ids));
+  const extraCampos = entregaCampos.filter(c => !idsEnGrupos.has(c.id) && c.tipo !== 'nps');
+  const npsLabel = (campoEntrega('NPS') || {}).label || '¿Qué tanto recomendarías este tema a alguien más?';
 
   function camposDe(ids) {
     return ids.map(id => {
@@ -1047,13 +1090,19 @@ function abrirPopupFinal() {
     }).join('');
   }
 
+  function renderExtraCampo(c) {
+    const val = answers[c.id] || '';
+    if (c.tipo === 'textarea') {
+      return `<div class="popup-field"><label>${c.label}</label><textarea rows="3" data-id="${c.id}">${val}</textarea></div>`;
+    }
+    return `<div class="popup-field"><label>${c.label}</label><input type="text" data-id="${c.id}" value="${val}"></div>`;
+  }
+
   popupCard.innerHTML = `
     <div class="popup-title">Revisión final</div>
     <div class="popup-instr">${finalInstr}</div>
     ${grupos.map(g => `<div class="popup-section-title">${g.titulo}</div>${camposDe(g.ids)}`).join('')}
-    <div class="popup-section-title">Reflexión</div>
-    <div class="popup-field"><label>${r1Label}</label><input type="text" data-id="r1" value="${answers.r1 || ''}"></div>
-    <div class="popup-field"><label>${r2Label}</label><textarea rows="3" data-id="r2">${answers.r2 || ''}</textarea></div>
+    ${extraCampos.length ? `<div class="popup-section-title">Reflexión</div>${extraCampos.map(renderExtraCampo).join('')}` : ''}
     <div class="popup-section-title">${npsLabel} <span class="popup-required">*</span></div>
     <div class="popup-escala" id="popup-nps"></div>
     <div class="popup-error" id="popup-error"></div>
@@ -1228,6 +1277,25 @@ fetch(contentUrl)
     renderAll();
   })
   .catch(() => { /* sin JSON disponible para esta semana: no hay contenido que pintar */ });
+
+/* ── NAV ENTRE SEMANAS: anterior / próxima ── */
+(function () {
+  const maxSemana = esRuta ? 6 : 39; // Ruta GEB: 6 semanas · Impulso GEB: 39
+  const n = parseInt(semNum, 10);
+  const prevBtn = document.getElementById('btn-week-prev');
+  const nextBtn = document.getElementById('btn-week-next');
+
+  function irA(destN) {
+    const url = `momento-guia.html?curso=${encodeURIComponent(curso)}&semana=${encodeURIComponent('Sem ' + destN)}&data=${programaSlug}-sem${destN}.json`;
+    window.location.href = url;
+  }
+
+  if (n <= 1) prevBtn.disabled = true;
+  else prevBtn.addEventListener('click', () => irA(n - 1));
+
+  if (n >= maxSemana) nextBtn.disabled = true;
+  else nextBtn.addEventListener('click', () => irA(n + 1));
+})();
 </script>
 
 </body>
