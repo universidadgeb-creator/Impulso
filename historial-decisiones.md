@@ -17,10 +17,10 @@ antes de elegir personaje, set y tipos de escena, para no repetir la misma combi
 ## Sem. 1 — IKIGAI parte 1: lo que amo + en lo que soy bueno
 
 - **Personaje(s):** Lupita (sola)
-- **Set(s):** recepcion
-- **Tipos de escena (en orden):** foco → recorrido → foco
-- **Nota:** semana conceptual, Caso de Ana aparece en la guía escrita pero no en el video —
-  se decidió Lupita sola para el video de apertura
+- **Set(s):** recepcion (hook + cierre acción) → oficina (concepto ikigai) → recepcion
+- **Tipos de escena (en orden):** foco → recorrido → foco → recorrido → constelacion → foco → recorrido → constelacion → foco → recorrido → constelacion → foco → recorrido
+- **Duración estimada:** ~66s, 13 eventos
+- **Nota:** semana conceptual — Lupita sola. Caso de Ana aparece en la guía escrita, no en el video. Guion aprobado agosto 2026.
 
 ---
 
