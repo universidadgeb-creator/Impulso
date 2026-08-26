@@ -168,6 +168,7 @@ html.unlocked .lock-screen{display:none;}
 .day-panel-title{font-size:16px;color:#14181F;}
 .day-panel-sub{font-size:12px;color:rgba(20,24,31,.45);margin-top:2px;}
 .day-panel-actions{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.pilar-badges{display:flex;gap:6px;}
 .pilar-badge{
   font-size:11px;font-weight:700;padding:5px 13px;border-radius:100px;white-space:nowrap;
 }
@@ -234,20 +235,6 @@ html.unlocked .lock-screen{display:none;}
 .pillar-body-inner{padding:2px 16px 16px;font-size:12.5px;color:var(--fog);line-height:1.75;}
 .pillar-body-inner p{margin-bottom:10px;}
 .pillar-body-inner p:last-child{margin-bottom:0;}
-.ritmos-note{font-size:12.5px;color:var(--fog);margin-bottom:18px;line-height:1.7;}
-.ritmos-note strong{color:var(--white);}
-.bridge{
-  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;
-  padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:9px;
-}
-.bridge-label{font-size:13.5px;font-weight:700;color:var(--white);white-space:nowrap;}
-.bridge-step{
-  font-size:11.5px;font-weight:600;color:var(--fog);padding:6px 13px;
-  border-radius:100px;background:rgba(255,255,255,.05);border:1px solid var(--border);white-space:nowrap;
-}
-.bridge-step.hi{background:rgba(240,192,64,.15);color:var(--gold);border-color:var(--gold);font-weight:700;}
-.bridge-step.dest{background:var(--sage);color:var(--void);border-color:var(--sage);font-weight:700;}
-.bridge-arrow{color:var(--mist);font-size:12px;}
 .quote{
   text-align:center;font-style:italic;font-size:13.5px;color:var(--fog);
   max-width:480px;margin:24px auto 0;line-height:1.7;
@@ -318,7 +305,7 @@ html.unlocked .lock-screen{display:none;}
           <div class="day-panel-sub" id="day-sub">—</div>
         </div>
         <div class="day-panel-actions">
-          <span class="pilar-badge" id="day-pilar"></span>
+          <div class="pilar-badges" id="day-pilar-badges"></div>
           <a class="day-go-btn" id="day-go-btn" href="#" style="display:none;"></a>
         </div>
       </div>
@@ -332,10 +319,6 @@ html.unlocked .lock-screen{display:none;}
     <p style="font-size:13.5px;color:var(--fog);line-height:1.7;margin-bottom:18px;">Al concluir Ruta GEB, habrás identificado lo que más te importa en tu vida profesional, construido un plan con metas concretas para los próximos dos años y elaborado un presupuesto personal que traza el camino para llegar.</p>
 
     <div class="pillar-accordion" id="pillar-accordion"></div>
-
-    <p class="ritmos-note"><strong>Ritmos activos en Ruta:</strong> AUT · autogestivo, semanal &nbsp;·&nbsp; CONF · conferencia magistral</p>
-
-    <div class="bridge" id="bridge"></div>
 
     <p class="quote">"Este programa y sus entregables te pertenecen, dentro o fuera de GEB."</p>
   </div>
@@ -374,11 +357,9 @@ document.addEventListener('click', function(e){
 
 /* ── DAY-BASED COURSE VIEW ── */
 const PILLARS = {
-  'Bienvenida': { color:'#F0C040' },
-  'Propósito':  { color:'#F0C040' },
-  'Maestría':   { color:'#6AB0F5' },
-  'Transición': { color:'#F07060' },
-  'Cierre':     { color:'#F07060' },
+  'Propósito': { color:'#F0C040' },
+  'Maestría':  { color:'#6AB0F5' },
+  'Comunidad': { color:'#7EC8A0' },
 };
 
 // Clave de "semana completada" — la misma fórmula que usa momento-guia.html,
@@ -397,7 +378,7 @@ const days = [
   { label:'Sem 2', pillar:'Propósito', title:'IKIGAI parte 2', modules:[
     { icon:'📱', title:'IKIGAI parte 2', type:'AUTOGESTIVO', data:'ruta-sem2.json' },
   ]},
-  { label:'Sem 3', pillar:'Transición', title:'Plan de Vida parte 1', modules:[
+  { label:'Sem 3', pillar:['Propósito','Maestría'], title:'Plan de Vida parte 1', modules:[
     { icon:'📱', title:'Plan de Vida parte 1', type:'AUTOGESTIVO', data:'ruta-sem3.json' },
   ]},
   { label:'Sem 4', pillar:'Maestría', title:'Plan de Vida parte 2', modules:[
@@ -452,18 +433,15 @@ function renderStepper() {
   });
 }
 
-// Descripción del ritmo — reemplaza el "Semana X de Y" repetido debajo del
-// título (eso ya lo dice dash-meta arriba) por algo que aporte información nueva.
-const RITMO_DESC = {
-  AUTOGESTIVO: 'Autogestivo · a tu propio ritmo, sin horario fijo',
-  CONFERENCIA: 'Conferencia magistral',
-};
+function pilarLabel(d) {
+  return Array.isArray(d.pillar) ? d.pillar.join(' + ') : d.pillar;
+}
 
 function moduleUrl(d, m) {
   if (m.url) return m.url;
   const template = (m.type === 'CONFERENCIA' || m.type === 'VIDEO') ? 'momento-video.html' : 'momento-guia.html';
   const dataQuery = m.data ? `&data=${encodeURIComponent(m.data)}` : '';
-  return `${template}?curso=Ruta%20GEB&semana=${encodeURIComponent(d.label)}&titulo=${encodeURIComponent(m.title)}&pilar=${encodeURIComponent(d.pillar)}${dataQuery}`;
+  return `${template}?curso=Ruta%20GEB&semana=${encodeURIComponent(d.label)}&titulo=${encodeURIComponent(m.title)}&pilar=${encodeURIComponent(pilarLabel(d))}${dataQuery}`;
 }
 
 function moduleCompletado(d, m) {
@@ -474,7 +452,6 @@ function moduleCompletado(d, m) {
 function render() {
   renderStepper();
   const d = days[activeDay];
-  const color = PILLARS[d.pillar].color;
 
   if (d.pillar === 'Cierre') {
     document.getElementById('dash-meta').textContent = `Después de Semana ${totalSemanas} · ${d.modules.length} paso`;
@@ -484,16 +461,21 @@ function render() {
     document.getElementById('day-sub').textContent = `Registro y diagnóstico inicial`;
   } else {
     document.getElementById('dash-meta').textContent = `Semana ${d.semNum} de ${totalSemanas} · ${d.modules.length} módulo${d.modules.length > 1 ? 's' : ''}`;
-    document.getElementById('day-sub').textContent = d.modules.length === 1
-      ? (RITMO_DESC[d.modules[0].type] || '')
-      : `${d.modules.length} módulos esta semana`;
+    document.getElementById('day-sub').textContent = d.modules.length > 1
+      ? `${d.modules.length} módulos esta semana`
+      : '';
   }
   document.getElementById('day-title').textContent = `${d.label} · ${d.title}`;
 
-  const badge = document.getElementById('day-pilar');
-  badge.textContent = d.pillar;
-  badge.style.background = color + '20';
-  badge.style.color = color;
+  // Bienvenida y Cierre no son "pilares" — la cajita se deja vacía ahí, y
+  // semanas que tocan más de un pilar (ej. Sem 3) muestran todos, no una
+  // etiqueta inventada tipo "Transición".
+  const badgeWrap = document.getElementById('day-pilar-badges');
+  const pilares = Array.isArray(d.pillar) ? d.pillar : (PILLARS[d.pillar] ? [d.pillar] : []);
+  badgeWrap.innerHTML = pilares.map(p => {
+    const color = PILLARS[p].color;
+    return `<span class="pilar-badge" style="background:${color}20;color:${color};">${p}</span>`;
+  }).join('');
 
   const goBtn = document.getElementById('day-go-btn');
   const list = document.getElementById('module-list');
@@ -604,22 +586,6 @@ pillarAccordion.querySelectorAll('.pillar-head').forEach(btn => {
   });
 });
 
-const bridgeSteps = [
-  { label:'Puente hacia Impulso →', type:'label' },
-  { label:'Ensayo de postulación', type:'step' },
-  { label:'Entrevista + Stoplight inicial', type:'step' },
-  { label:'Selección + tríadas asignadas', type:'step' },
-  { label:'★ Bootcamp inaugural', type:'hi' },
-  { label:'Impulso Sem 1', type:'dest' },
-];
-const bridge = document.getElementById('bridge');
-bridgeSteps.forEach((s, i) => {
-  if (i > 0) bridge.appendChild(Object.assign(document.createElement('span'), { className:'bridge-arrow', textContent:'→' }));
-  const el = document.createElement('span');
-  el.textContent = s.label;
-  el.className = s.type === 'label' ? 'bridge-label' : `bridge-step${s.type !== 'step' ? ' ' + s.type : ''}`;
-  bridge.appendChild(el);
-});
 </script>
 
 </body>
