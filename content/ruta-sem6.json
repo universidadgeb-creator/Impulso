@@ -5,52 +5,7 @@
   "pilar": "Maestría",
   "variante": "guia",
   "duracion": "4–5 h",
-  "escena": {
-    "audio": {
-      "src": "[verificar mp3 de NotebookLM — guion de Sem. 6, La brecha no se cierra ahorrando]",
-      "duracion_ms": null
-    },
-    "subtitulos_forzados": true,
-    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real.",
-    "eventos": [
-      {
-        "t": 0,
-        "quien": "lupita",
-        "set": "oficina",
-        "tipo": "foco",
-        "accion": "entra",
-        "texto": "Tu brecha tiene un número. Pero no se cierra ahorrando.",
-        "tag": null
-      },
-      {
-        "t": 5000,
-        "quien": "lupita",
-        "set": "oficina",
-        "tipo": "constelacion",
-        "accion": "pulsa",
-        "texto": "Solo hay tres formas de moverla, y el orden importa.",
-        "tag": null
-      },
-      {
-        "t": 11000,
-        "quien": "lupita",
-        "set": "oficina",
-        "tipo": "recorrido",
-        "accion": "pulsa",
-        "texto": "El salto profesional. Reducir la fuga. Ingresos adicionales — un puente, nunca un destino.",
-        "tag": null
-      },
-      {
-        "t": 18000,
-        "quien": "lupita",
-        "set": "oficina",
-        "tipo": "foco",
-        "accion": "pulsa",
-        "texto": "El tiempo hace más que el monto. Empieza hoy, aunque sea poco.",
-        "tag": null
-      }
-    ]
-  },
+  "video_src": "[verificar — video de Sem. 6]",
   "railItems": [
     {
       "label": "Semana 5 · Presupuesto parte 1",

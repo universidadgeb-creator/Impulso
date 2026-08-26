@@ -11,15 +11,16 @@ la tarea concreta de la sesión.
 **Infraestructura lista — no tocar sin instrucción:**
 - `entrega-engine.js` — motor de entregas, no modificar directamente
 - `config.js` — tiene la URL real del backend, no cambiar
-- `bienvenida.html` — Sem. 0 completa: audio mp3 + botón "Ver transcripción" (ya NO hay video — decisión cerrada agosto 2026)
+- `bienvenida.html` — Sem. 0 completa: video real (`video/ruta-sem0-bienvenida.mp4`), sin transcripción (decisión
+  final agosto 2026 — pasó por audio-solo y volvió a video, ver CLAUDE.md)
 - `cierre.html` — espejo de bienvenida para después de Sem. 6
 
-**Patrón de audio de apertura para todas las semanas (ya NO hay video, se quitó agosto 2026):**
-- `audio_src` en `content/ruta-sem0.json` (bienvenida); `escena.audio.src` en `content/ruta-semN.json` de ahí en
-  adelante (momento-guia) → mp3 en `audio/`
-- El guion completo va en `guion_notebooklm` (string), o si no existe se arma con `escena.eventos[].texto` — se
-  muestra con botón "Ver transcripción", no subtítulos sincronizados
-- No queda EscenaPlayer ni KineticPlayer — solo un `<audio controls>` plano. No reintroducir `video_src`.
+**Patrón de video de apertura para todas las semanas (decisión final agosto 2026):**
+- `video_src` en `content/ruta-semN.json` (y `ruta-sem0.json` para bienvenida) → mp4 en `video/`. Placeholder
+  `"[verificar — video de Sem. N]"` mientras no exista.
+- **Sin transcripción de ningún tipo** — no hay botón, no se lee texto de ningún campo. Los videos nuevos NO
+  siguen los guiones viejos (`guion_notebooklm`/`escena.eventos`, ya borrados de los JSON) — no reconstruirlos.
+- No queda EscenaPlayer ni KineticPlayer — solo un `<video controls>` plano.
 
 **Personajes (cerrado):**
 - Lupita = triángulo dorado #F0C040 punta arriba
@@ -35,14 +36,12 @@ la tarea concreta de la sesión.
 - Sem 6 → Video YouTube interés compuesto
 
 **Lo que falta en todas las semanas (1-6):**
-- Audio ElevenLabs → subir mp3 a `audio/` y apuntar `audio_src`/`escena.audio.src` en el JSON (ya NO hay
-  producción de video ni merge con ffmpeg — se quitó agosto 2026)
-- `guion_notebooklm` poblado con el guion aprobado
+- Video real → copiar el `.mp4` a `video/` y apuntar `video_src` en el JSON de esa semana
 
 **Reglas de trabajo:**
 - No inventar contenido. Placeholders = `[verificar ...]`
 - Push directo a main. Hacer `git status` antes de commit para no incluir basura
-- Cache-busting si se reemplaza un archivo con el mismo nombre: agregar `?v=N` en `audio_src`
+- Cache-busting si se reemplaza un archivo con el mismo nombre: agregar `?v=N` en `video_src`
 - Si hay `index.lock` en `.git/`: borrarlo con `del .git\index.lock` antes de commitear
 
 ---

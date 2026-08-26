@@ -108,12 +108,8 @@ html.unlocked .lock-screen{display:none;}
 
 /* AUDIO DE APERTURA */
 .video-wrap{background:#0B0F16;border-radius:14px;overflow:hidden;}
-.video-wrap audio{width:100%;display:block;}
+.video-wrap video{width:100%;display:block;}
 .video-placeholder{padding:32px 16px;text-align:center;color:rgba(255,255,255,.5);font-size:12.5px;}
-.btn-transcripcion{display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid #ECEAE4;color:#6A6460;font-size:12px;font-weight:600;padding:8px 14px;border-radius:100px;cursor:pointer;transition:border-color .15s;align-self:flex-start;}
-.btn-transcripcion:hover{border-color:#F0C040;color:#7A5E0A;}
-.transcripcion-box{display:none;padding:12px 14px;background:#F7F5F0;border-left:3px solid #F0C040;border-radius:8px;font-size:12.5px;color:#3A3630;line-height:1.7;white-space:pre-line;}
-.transcripcion-box.abierta{display:block;}
 
 /* right side: lo que vas a lograr + avance (siempre presente) */
 .side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
@@ -301,8 +297,6 @@ html.unlocked .lock-screen{display:none;}
           <div class="video-wrap" id="video-player">
             <div class="video-placeholder">Cargando…</div>
           </div>
-          <button type="button" class="btn-transcripcion" id="btn-transcripcion" style="display:none;">📄 Ver transcripción</button>
-          <div class="transcripcion-box" id="transcripcion-box"></div>
         </div>
 
         <div class="side">
@@ -410,7 +404,7 @@ var listaMostrada = false;
 /* ---- PASOS: rail (temario clickeable) + checklist del panel lateral,
    mismo par rail/side que usa momento-guia.html para cada semana ---- */
 var ITEMS = [
-  { id:'video',    nombre:'Escuchar el audio de bienvenida' },
+  { id:'video',    nombre:'Ver el video de bienvenida' },
   { id:'encuesta', nombre:'Contestar encuesta' },
   { id:'registro', nombre:'Registro único' }
 ];
@@ -502,7 +496,7 @@ document.getElementById('popup-overlay').addEventListener('click', function(e) {
 document.getElementById('cerrar-encuesta').addEventListener('click', cerrarPopup);
 document.getElementById('cerrar-registro').addEventListener('click', cerrarPopup);
 
-/* ---- AUDIO: marcar visto cuando termina ---- */
+/* ---- VIDEO: marcar visto cuando termina ---- */
 function marcarVideoVisto() {
   if (estado.video) return;
   estado.video = true;
@@ -687,30 +681,18 @@ fetch('content/ruta-sem0.json')
       }
     }
 
-    /* Audio de apertura — sin video, reproductor simple + transcripción */
+    /* Video de apertura — sin transcripción, el guion vive en el video mismo */
     var vp = document.getElementById('video-player');
-    var btnTrans = document.getElementById('btn-transcripcion');
-    var transBox = document.getElementById('transcripcion-box');
-    if (data.audio_src) {
+    if (data.video_src && data.video_src.indexOf('[verificar') !== 0) {
       vp.innerHTML = '';
-      var aud = document.createElement('audio');
-      aud.src = data.audio_src;
-      aud.controls = true;
-      aud.style.cssText = 'width:100%;display:block;';
-      aud.addEventListener('ended', marcarVideoVisto);
-      vp.appendChild(aud);
-
-      /* Transcripción completa, en vez de subtítulos sincronizados */
-      if (data.guion_notebooklm && btnTrans) {
-        transBox.textContent = data.guion_notebooklm;
-        btnTrans.style.display = 'inline-flex';
-        btnTrans.addEventListener('click', function() {
-          var abierta = transBox.classList.toggle('abierta');
-          btnTrans.textContent = abierta ? '📄 Ocultar transcripción' : '📄 Ver transcripción';
-        });
-      }
+      var vid = document.createElement('video');
+      vid.src = data.video_src;
+      vid.controls = true;
+      vid.playsInline = true;
+      vid.addEventListener('ended', marcarVideoVisto);
+      vp.appendChild(vid);
     } else {
-      vp.innerHTML = '<div class="video-placeholder">[verificar audio de apertura]</div>';
+      vp.innerHTML = '<div class="video-placeholder">🎬 Video por producir</div>';
       marcarVideoVisto();
     }
 

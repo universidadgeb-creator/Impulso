@@ -208,13 +208,13 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
   línea de color solo para lo que se quiere resaltar (caso, recurso multimedia,
   pregunta para profundizar).
 
-## Personajes (Lupita, Ana, Marcos) — solo referencia narrativa
+## Personajes (Lupita, Ana, Marcos) — referencia histórica, ya no vinculante
 
-Lupita, Ana y Marcos son formas geométricas puras (Lupita: triángulo dorado #F0C040;
-Ana: esfera azul claro #6AB0F5; Marcos: cuadrado de esquinas redondeadas coral #F07060),
-usadas como voces narradoras en el `guion_notebooklm`/`escena.eventos` de cada semana.
-Desde agosto 2026 (ver "Videos de apertura — decisión de quitarlos" abajo) ya no tienen
-representación visual en la plataforma — solo aparecen nombradas dentro del audio.
+Lupita (triángulo dorado #F0C040), Ana (esfera azul claro #6AB0F5) y Marcos (cuadrado
+de esquinas redondeadas coral #F07060) eran el elenco de EscenaPlayer/KineticPlayer,
+ya retirados. Los videos nuevos (ver "Videos de apertura" abajo) no siguen ese guion ni
+esa coreografía — de existir personajes en el video, es decisión de cada video, no algo
+que la plataforma imponga o verifique.
 
 ## Sistema de identidad + entregas (EntregaEngine, agosto 2026)
 
@@ -243,33 +243,41 @@ representación visual en la plataforma — solo aparecen nombradas dentro del a
   placeholder). La usan `bienvenida.html`, `cierre.html`, `momento-guia.html` y
   `momento-video.html` — un solo lugar para cambiarla si el backend se mueve.
 
-## Videos de apertura — decisión de quitarlos (agosto 2026)
+## Videos de apertura — vuelta a video real, sin guion ni transcripción (agosto 2026)
 
-**Decisión: ya no hay video de apertura semanal en ninguna vista de la plataforma —
-solo el audio narrado + un botón de transcripción.** Aplica a `bienvenida.html` (Sem. 0)
-y a `momento-guia.html` (Sem. 1-6 y cualquier semana futura de Ruta GEB). No aplica a
-las CONFERENCIAS (`momento-video.html`, ritmo CONF de la malla) — eso no se tocó.
+Esta sección **reemplaza** dos decisiones anteriores que ya no aplican: (1) "quitar los
+videos y dejar solo audio + transcripción", y (2) el addendum que mantenía el audio de
+ElevenLabs pero desactivaba la transcripción. Ambas quedaron obsoletas el mismo día —
+la decisión final y vigente es esta.
 
-Se abandonó la producción de video (Claude Design MP4 mudo + mezcla ffmpeg con audio de
-ElevenLabs + el intento fallido, dos veces, de sincronizar subtítulos VTT al video) en
-favor de algo mucho más simple: un `<audio controls>` plano con el mp3 de ElevenLabs, más
-el botón **"📄 Ver transcripción"** ya existente que muestra `guion_notebooklm` (o, si no
-existe, el texto de `escena.eventos[].texto` concatenado) — sin intentar sincronizar nada
-al tiempo de reproducción.
+**Decisión: sí hay video de apertura semanal — un `.mp4` real por semana, sin
+transcripción de ningún tipo.** Aplica a `bienvenida.html` (Sem. 0) y a
+`momento-guia.html` (Sem. 1-6 y cualquier semana futura de Ruta GEB). No aplica a las
+CONFERENCIAS (`momento-video.html`, ritmo CONF de la malla) — eso no se tocó.
 
-- El campo que cada semana usa para el audio: `audio_src` en `content/ruta-sem0.json`
-  (bienvenida), `escena.audio.src` en `content/ruta-sem1.json` en adelante (momento-guia).
-  El campo legado `video_src` ya no se lee en ningún lado — no volver a agregarlo.
-- Se borraron `escena-player.js`/`escena-player.css` (EscenaPlayer) y el KineticPlayer
-  (texto cinético sincronizado, vivía en `momento-guia.html`) — ya no se renderiza ningún
-  personaje/escena visual, solo el reproductor de audio nativo.
-- Se borraron los `.mp4` de apertura ya producidos (`video/ruta-sem0-bienvenida.mp4`,
-  `ruta-sem1-apertura.mp4`, `ruta-sem2-apertura.mp4`, `ruta-sem1-mudo.mp4`) — no se vuelven
-  a producir. Los `.mp3` de ElevenLabs sí se conservan y siguen siendo la fuente de verdad
-  (`audio/`).
-- `historial-decisiones.md` (bitácora para la skill `director-video-geb`, que armaba los
-  guiones de escena semana a semana) queda como registro histórico de los guiones ya
-  aprobados, pero esa skill ya no aplica a los audios de apertura — no generar más
-  entradas ahí para semanas nuevas de Ruta GEB.
-- `sistema-diseno-animaciones.html` (elenco/sets de escena) también queda como referencia
-  histórica, sin uso activo en la plataforma.
+- Los videos nuevos **no siguen los guiones que se habían escrito** (`guion_notebooklm`,
+  `escena.eventos[]`) — se grababan/narraban distinto. Esos campos ya no existen en los
+  JSON de semana (se borraron de Sem. 0-6) y **no hay que regenerarlos ni usarlos como
+  base** para producir un video — cada video nuevo se produce y se sube tal cual, sin
+  guion escrito de por medio en la plataforma.
+- Campo único por semana: `video_src` en `content/ruta-semN.json` (y `ruta-sem0.json`
+  para bienvenida), apuntando a un archivo en `video/`. Placeholder mientras no exista:
+  `"[verificar — video de Sem. N]"` — el reproductor muestra "🎬 Video por producir".
+  El campo `audio_src`/`escena.audio.src` de la iteración anterior ya no se usa.
+- **No hay botón de transcripción en ningún lado** — no se vuelve a agregar. El guion,
+  si existe, vive únicamente dentro del video (voz), no como texto en la plataforma.
+- No hay EscenaPlayer ni KineticPlayer — se borraron en la iteración anterior y siguen
+  sin usarse; el reproductor es un `<video controls>` nativo, sin overlays.
+- Los `.mp3` de apertura anteriores (`audio/ruta-sem0-bienvenida.mp3`,
+  `ruta-sem1-apertura.mp3`, `ruta-sem2-apertura.mp3`) se borraron — ya no sirven. Sigue
+  existiendo `audio/ruta-sem1-meditacion.mp3`, que es un audio distinto, embebido dentro
+  de un paso de Sem. 1 (no es el audio/video de apertura semanal) — ese no se toca.
+- `historial-decisiones.md` (bitácora de guiones para la skill `director-video-geb`)
+  y `sistema-diseno-animaciones.html` (elenco/sets de escena) quedan como referencia
+  histórica, sin ningún uso activo — no generar más entradas ahí, esa skill no aplica
+  a los videos nuevos.
+- Sem. 0 ya tiene su video real (`video/ruta-sem0-bienvenida.mp4`). Sem. 1-6 siguen en
+  placeholder hasta que Ceci suba cada uno — cuando llegue un video nuevo, solo hay que
+  copiarlo a `video/` con un nombre descriptivo y actualizar `video_src` en el JSON de
+  esa semana (con `?v=N` si se reemplaza un archivo con el mismo nombre, por el
+  cache-busting de GitHub Pages).

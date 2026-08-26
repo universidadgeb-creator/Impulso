@@ -105,10 +105,6 @@ html.unlocked .lock-screen{display:none;}
 .video-wrap{background:#0B0F16;border-radius:14px;overflow:hidden;}
 .video-wrap video{width:100%;display:block;}
 .video-placeholder{padding:40px 20px;text-align:center;color:rgba(255,255,255,.5);font-size:12.5px;}
-.btn-transcripcion{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:none;border:1.5px solid #ECEAE4;color:#6A6460;font-size:12px;font-weight:600;padding:8px 14px;border-radius:100px;cursor:pointer;transition:border-color .15s;}
-.btn-transcripcion:hover{border-color:#F0C040;color:#7A5E0A;}
-.transcripcion-box{display:none;margin-top:10px;padding:12px 14px;background:#F7F5F0;border-left:3px solid #F0C040;border-radius:8px;font-size:12.5px;color:#3A3630;line-height:1.7;white-space:pre-line;}
-.transcripcion-box.abierta{display:block;}
 
 /* Regla de diseño: el contenido de un paso va en caja gris neutra por
    defecto (sin línea de color). La línea de color (step-box-highlight,
@@ -479,10 +475,10 @@ let completed = [];       // paralelo a steps: true si ese paso ya guardó su po
 let answers = {};         // respuestas de todos los popups de paso, en memoria
 let nps = null;
 let entregada = false;
-let hasVideo = false;     // true si el JSON de la semana trae escena (audio de apertura)
+let hasVideo = false;     // true si el JSON de la semana trae video_src
 let videoActive = false;  // true mientras se muestra el audio de apertura en vez de un paso
 let videoViewed = false;
-let weekData = null;      // JSON completo de la semana, para el video/transcripción
+let weekData = null;      // JSON completo de la semana, para el video de apertura
 
 /* ── RAIL: video de apertura + momentos/pasos ── */
 function renderRail() {
@@ -493,7 +489,7 @@ function renderRail() {
     const cls = isCurrent ? 'current' : (videoViewed ? '' : 'pending');
     const dot = videoViewed ? '✓' : (isCurrent ? '▶' : '');
     html += `<button type="button" class="rail-item ${cls} clickable" id="rail-video-item">
-      <span class="dot">${dot}</span>Audio de apertura
+      <span class="dot">${dot}</span>Video de apertura
     </button>`;
   }
   html += steps.map((s, i) => {
@@ -547,14 +543,10 @@ function renderCenter() {
   const btnSiguiente = document.getElementById('btn-siguiente');
 
   if (videoActive) {
-    contentWrap.innerHTML = `
-      <div class="video-wrap" id="video-wrap"></div>
-      <button type="button" class="btn-transcripcion" id="btn-transcripcion" style="display:none;">📄 Ver transcripción</button>
-      <div class="transcripcion-box" id="transcripcion-box"></div>
-    `;
+    contentWrap.innerHTML = `<div class="video-wrap" id="video-wrap"></div>`;
     renderVideo(weekData);
 
-    document.getElementById('step-counter').textContent = 'Audio de apertura';
+    document.getElementById('step-counter').textContent = 'Video de apertura';
     btnAnterior.disabled = true;
     btnSiguiente.textContent = 'Comenzar →';
     btnSiguiente.classList.remove('final');
@@ -685,35 +677,20 @@ function initCasoPanels(container) {
   update();
 }
 
-/* ── AUDIO DE APERTURA: reproductor simple + transcripción, sin video ── */
+/* ── VIDEO DE APERTURA: sin transcripción, el guion vive en el video mismo ── */
 function renderVideo(data) {
   const vp = document.getElementById('video-wrap');
-  const btnTrans = document.getElementById('btn-transcripcion');
-  const transBox = document.getElementById('transcripcion-box');
   if (!vp || !data) return;
 
-  const audioSrc = data.escena && data.escena.audio && data.escena.audio.src;
-  if (audioSrc && audioSrc.indexOf('[verificar') !== 0) {
+  if (data.video_src && data.video_src.indexOf('[verificar') !== 0) {
     vp.innerHTML = '';
-    const audio = document.createElement('audio');
-    audio.src = audioSrc;
-    audio.controls = true;
-    audio.style.cssText = 'width:100%;';
-    vp.appendChild(audio);
+    const video = document.createElement('video');
+    video.src = data.video_src;
+    video.controls = true;
+    video.playsInline = true;
+    vp.appendChild(video);
   } else {
-    vp.innerHTML = '<div class="video-placeholder">[verificar audio de apertura]</div>';
-  }
-
-  const transcripcion = data.guion_notebooklm ||
-    (data.escena && Array.isArray(data.escena.eventos) &&
-      data.escena.eventos.map(e => e.texto).filter(Boolean).join('\n\n'));
-  if (transcripcion && btnTrans) {
-    transBox.textContent = transcripcion;
-    btnTrans.style.display = 'inline-flex';
-    btnTrans.onclick = () => {
-      const abierta = transBox.classList.toggle('abierta');
-      btnTrans.textContent = abierta ? '📄 Ocultar transcripción' : '📄 Ver transcripción';
-    };
+    vp.innerHTML = '<div class="video-placeholder">🎬 Video por producir</div>';
   }
 }
 
@@ -1035,7 +1012,7 @@ fetch(contentUrl)
     if (data.checklistLabels) checklistLabels = data.checklistLabels;
 
     weekData = data;
-    hasVideo = !!data.escena;
+    hasVideo = !!data.video_src;
     videoActive = hasVideo; // arranca en el video, si existe
 
     renderRecursos(data.recursos);

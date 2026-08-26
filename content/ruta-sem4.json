@@ -6,43 +6,7 @@
   "contexto": "En la semana 3 aterrizaste tu visión a 24 meses: rol, sector y salario objetivo. Esta semana esa visión sale de tu cabeza y llega a alguien más — 3 conversaciones cortas dentro de GEB, con plantilla lista para copiar.",
   "variante": "guia",
   "duracion": "2-3 h",
-  "escena": {
-    "audio": {
-      "src": "[verificar mp3 de NotebookLM — guion de Sem. 4, Ana da el primer paso]",
-      "duracion_ms": null
-    },
-    "subtitulos_forzados": true,
-    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real.",
-    "eventos": [
-      {
-        "t": 0,
-        "quien": "ana",
-        "set": "recepcion",
-        "tipo": "foco",
-        "accion": "entra",
-        "texto": "Ana también sentía pena de escribirle a su coordinadora.",
-        "tag": null
-      },
-      {
-        "t": 4500,
-        "quien": "ana",
-        "set": "recepcion",
-        "tipo": "recorrido",
-        "accion": "bob",
-        "texto": "Usó la plantilla, cambió solo el nombre, y la mandó sin pensarlo dos veces.",
-        "tag": null
-      },
-      {
-        "t": 9000,
-        "quien": "ana",
-        "set": "oficina",
-        "tipo": "foco",
-        "accion": "pulsa",
-        "texto": "Si lo piensa mucho, no la manda. Su coordinadora respondió en un día.",
-        "tag": null
-      }
-    ]
-  },
+  "video_src": "[verificar — video de Sem. 4]",
   "railItems": [
     {
       "label": "Semana 3 · Plan de Vida parte 1",

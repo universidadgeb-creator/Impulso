@@ -6,43 +6,7 @@
   "tipo": "guia",
   "variante": "guia",
   "contexto": "Esta semana vas a ver un número que quizá nunca has visto completo: cuánto entra y cuánto sale de tu vida en un mes. No es un examen de qué tan bien administras — es un inventario, y los inventarios no tienen calificación.",
-  "escena": {
-    "audio": {
-      "src": "[verificar mp3 de NotebookLM — guion de Sem. 5]",
-      "duracion_ms": null
-    },
-    "subtitulos_forzados": true,
-    "nota": "Tiempos (t) son estimados, ordinales — no precisos. Ajustar en cuanto exista el mp3 real.",
-    "eventos": [
-      {
-        "t": 0,
-        "quien": "marcos",
-        "set": "taller",
-        "tipo": "foco",
-        "accion": "entra",
-        "texto": "El dinero tiene tres estados, como el agua.",
-        "tag": null
-      },
-      {
-        "t": 5000,
-        "quien": "marcos",
-        "set": "taller",
-        "tipo": "recorrido",
-        "accion": "breathe",
-        "texto": "Gaseoso: se evapora sin que lo notes. Líquido: entra y sale, pero tú sabes por dónde.",
-        "tag": null
-      },
-      {
-        "t": 11000,
-        "quien": "marcos",
-        "set": "taller",
-        "tipo": "foco",
-        "accion": "breathe",
-        "texto": "Esta semana no vas a ahorrar. Vas a medir.",
-        "tag": null
-      }
-    ]
-  },
+  "video_src": "[verificar — video de Sem. 5]",
   "railItems": [
     {
       "label": "Guía de la semana",

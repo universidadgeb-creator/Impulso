@@ -1,8 +1,9 @@
 # Historial de decisiones de video — Ruta GEB (discontinuado)
 
-> **Agosto 2026: se dejaron de producir videos de apertura semanal** (ver CLAUDE.md,
-> "Videos de apertura — decisión de quitarlos"). Este archivo queda como registro
-> histórico de los guiones ya aprobados — no se agregan más entradas.
+> **Agosto 2026: los videos nuevos ya no siguen estos guiones** (ver CLAUDE.md,
+> "Videos de apertura — vuelta a video real, sin guion ni transcripción"). Este archivo
+> queda como registro histórico de los guiones que se habían aprobado antes de ese
+> cambio — no se agregan más entradas ni se usan como base para producir video nuevo.
 
 Actualizar al terminar cada semana. La próxima sesión de `director-video-geb` lee esto
 antes de elegir personaje, set y tipos de escena, para no repetir la misma combinación.
