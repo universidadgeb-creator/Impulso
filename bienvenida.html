@@ -74,6 +74,14 @@ html.unlocked .lock-screen{display:none;}
 .context-block{margin-bottom:16px;}
 .context-block p{font-size:13px;color:#4A4640;line-height:1.65;margin-bottom:8px;}
 .context-block p:last-child{margin-bottom:0;}
+.context-block strong{color:#14181F;}
+
+/* Bullets dentro del contexto — la línea de WhatsApp se resalta con la
+   misma regla de caja-de-color del resto de la plataforma. */
+.ctx-list{display:flex;flex-direction:column;gap:8px;margin:10px 0 4px;}
+.ctx-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#4A4640;line-height:1.6;}
+.ctx-ico{font-size:16px;flex-shrink:0;line-height:1.4;}
+.ctx-item.hi{background:#F0FDF4;border-left:3px solid #7EC8A0;border-radius:0 8px 8px 0;padding:10px 12px;color:#166534;}
 
 /* TRANSCRIPCIÓN */
 .btn-transcripcion{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:none;border:1.5px solid #ECEAE4;color:#6A6460;font-size:12px;font-weight:600;padding:8px 14px;border-radius:100px;cursor:pointer;transition:border-color .15s;}
