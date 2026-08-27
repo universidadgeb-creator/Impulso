@@ -115,6 +115,7 @@ html.unlocked .lock-screen{display:none;}
 .step-box-highlight{background:#FAFAF9;border-left:3px solid #F0C040;border-radius:0 10px 10px 0;padding:16px 18px;font-size:13px;color:#3A3630;line-height:1.7;margin-bottom:14px;}
 .step-box-highlight:last-child{margin-bottom:0;}
 .step-box-neutral ul, .step-box-highlight ul{margin:6px 0 6px 18px;}
+.step-box-neutral a, .step-box-highlight a{color:#3A7FC9;text-decoration:underline;}
 .step-box-neutral li, .step-box-highlight li{margin-bottom:4px;}
 
 .tip-box,.tip{border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:12px;line-height:1.65;}
@@ -156,10 +157,27 @@ html.unlocked .lock-screen{display:none;}
 .step-num-row:last-child{margin-bottom:0;}
 .step-num-badge{width:22px;height:22px;border-radius:50%;background:#F0C040;color:#0B0F16;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
 
-/* lista de personas en 2 columnas (ej. Sem. 3, líderes disponibles) */
-.people-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 14px;}
-.people-grid div{background:#F7F5F0;border-radius:8px;padding:9px 12px;font-size:13px;color:#3A3630;}
-@media(max-width:699px){.people-grid{grid-template-columns:1fr;}}
+/* lista de personas en chips de colores (ej. Sem. 3, líderes disponibles) —
+   compacto, no ocupa una fila entera por persona */
+.people-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px;}
+.people-chip{font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:100px;white-space:nowrap;}
+.people-chip:nth-child(4n+1){background:rgba(240,192,64,.15);color:#92400E;}
+.people-chip:nth-child(4n+2){background:rgba(106,176,245,.15);color:#1E4E7A;}
+.people-chip:nth-child(4n+3){background:rgba(126,200,160,.15);color:#166534;}
+.people-chip:nth-child(4n+4){background:rgba(240,112,96,.15);color:#9B1C1C;}
+
+/* 3 planes en columnas (ej. Sem. 3, Odyssey Plan A/B/C) */
+.plan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0;}
+.plan-card{border-radius:10px;padding:12px 14px;}
+.plan-card .plan-title{font-size:12.5px;font-weight:700;margin-bottom:6px;}
+.plan-card .plan-desc{font-size:12px;line-height:1.55;color:#6B6558;}
+.plan-a{background:#FFFBEB;border-left:3px solid #F0C040;}
+.plan-a .plan-title{color:#92400E;}
+.plan-b{background:#EFF8FF;border-left:3px solid #6AB0F5;}
+.plan-b .plan-title{color:#1E4E7A;}
+.plan-c{background:#FDF0EE;border-left:3px solid #F07060;}
+.plan-c .plan-title{color:#9B1C1C;}
+@media(max-width:699px){.plan-grid{grid-template-columns:1fr;}}
 
 .sec-divider{border:none;border-top:1px solid #ECEAE4;margin:16px 0;}
 
