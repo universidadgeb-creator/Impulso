@@ -1,186 +1,206 @@
 {
   "curso": "Ruta GEB",
   "semana": "Sem. 5",
-  "titulo": "Presupuesto parte 1: mi situación actual real",
+  "titulo": "Presupuesto: situación real",
   "pilar": "Maestría",
   "tipo": "guia",
   "variante": "guia",
-  "contexto": "Esta semana vas a ver un número que quizá nunca has visto completo: cuánto entra y cuánto sale de tu vida en un mes. No es un examen de qué tan bien administras — es un inventario, y los inventarios no tienen calificación.",
-  "video_src": "[verificar — video de Sem. 5]",
+  "duracion": "3-4 h",
+  "contexto": "Hemos terminado de aterrizar tu plan de vida. Vamos a ir un paso más allá: un aspecto importante que es necesario alinear a tu plan de vida es tus finanzas personales o familiares. Al terminar esta semana tendrás claridad de cuánto entra y cuánto sale.",
+  "video_src": "video/ruta-sem5-apertura.mp4",
   "railItems": [
     {
-      "label": "Guía de la semana",
+      "label": "Semana 4 · Plan de Vida parte 2",
+      "state": "done"
+    },
+    {
+      "label": "Autogestivo semanal",
       "state": "current"
     },
     {
-      "label": "Plantilla: Mis 30 días reales",
-      "state": "pending"
-    },
-    {
-      "label": "Rebote con IA",
-      "state": "pending"
-    },
-    {
-      "label": "Reflexión y entrega",
+      "label": "Semana 6 · Hoja de ruta y compromiso",
       "state": "pending"
     }
   ],
   "steps": [
     {
       "label": "1 · Diagnóstico",
-      "instruction": "Antes de leer nada, marca cuáles de estas frases has dicho: <b>\"Hace una semana cobré y ya no tengo nada\"</b> · <b>\"No sé bien en qué se me va el dinero\"</b> · <b>\"Estoy pagando algo que ya ni uso\"</b> · <b>\"No sé exactamente cuánto debo\"</b> · <b>\"No me alcanza para ahorrar\"</b> · <b>\"Yo con lo que gano, ¿para qué hago presupuesto?\"</b><br><br>Si marcaste tres o más, esta semana te va a servir mucho. Y si te dio algo de vergüenza marcarlas: eso es información, no defecto. Guárdalo — vamos a volver a ese sentimiento al final."
+      "checkLabel": "Realizaste tu diagnóstico inicial financiero",
+      "highlight": false,
+      "intro": null,
+      "content": "<p>Para ajustar tu plan a 24 meses, primero necesitamos mirar los números sin juicios ni culpa. El dinero no es solo una hoja de cálculo; es el reflejo de nuestras prioridades y una herramienta de tranquilidad.</p>\n\n<div class=\"step-num-row\" style=\"margin-top:18px\">\n  <span class=\"step-num-badge\">1</span>\n  <div>\n    <strong>¿Con qué frase te identificas hoy?</strong> Marca mentalmente todas las que resuenen contigo en este momento de tu vida:\n    <ul>\n      <li>\"A veces siento que el dinero se me disuelve en las manos y al final de la quincena ya no sé en qué se fue.\"</li>\n      <li>\"Si me surge una emergencia médica o un gasto fuerte hoy, me entra un nivel de estrés muy alto porque no tengo un colchón.\"</li>\n      <li>\"Me gustaría ahorrar o invertir en mis metas, pero siento que mi sueldo solo alcanza para apagar fuegos y pagar deudas.\"</li>\n      <li>\"Intento organizar mis cuentas, pero la incertidumbre económica de afuera me descontrola los planes.\"</li>\n      <li>\"Siento que administro bien mi dinero, pero me falta claridad para saber cómo hacerlo crecer a mediano plazo.\"</li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">2</span>\n  <div>\n    <strong>La foto actual.</strong> Responde estas preguntas de forma sincera para ti mismo:\n    <ul>\n      <li><strong>La visibilidad:</strong> ¿Sabes exactamente cuánto dinero entra y sale de tus manos cada mes, o vives con la incertidumbre de no saber a dónde se va el sueldo?</li>\n      <li><strong>El colchón de seguridad:</strong> Si hoy ocurriera un imprevisto fuerte, ¿cuántos días o meses podrías sostener tus gastos básicos sin entrar en desesperación?</li>\n      <li><strong>El estrés financiero:</strong> Del 1 al 10, ¿qué tanta paz mental te da tu situación económica actual?</li>\n    </ul>\n  </div>\n</div>\n\n<p style=\"margin-top:14px\">El objetivo de esta semana no es volverte un experto en finanzas de la noche a la mañana, sino pasar de reaccionar ante los gastos a tomar el control de tu dinero.</p>",
+      "popup": {
+        "title": "Diagnóstico",
+        "instr": "Responde con honestidad, esto es solo para ti.",
+        "fields": [
+          {
+            "id": "d1",
+            "tipo": "textarea",
+            "label": "¿Sabes exactamente cuánto dinero entra y sale de tus manos cada mes?"
+          },
+          {
+            "id": "d2",
+            "tipo": "seleccion",
+            "label": "Del 1 al 10, ¿qué tanta paz mental te da tu situación económica actual?",
+            "opciones": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+          },
+          {
+            "id": "d3",
+            "tipo": "texto",
+            "label": "¿Cuál frase es la que te sorprendió más marcar?"
+          }
+        ]
+      }
     },
     {
       "label": "2 · Marco",
-      "instruction": "<b>El dinero tiene tres estados, como el agua.</b> Gaseoso: el dinero invisible, los números en la app, lo que se cobra solo. Cuando dices \"no sé en qué se me va\", es porque está gaseoso — no desapareció, se evaporó sin que lo notaras. Líquido: entra y sale, pero tú sabes por dónde; es el estado sano. Sólido: se materializó en algo que se queda. Y hay una alarma que no es estado: la <b>deshidratación financiera</b> — sin dinero el cuerpo entra en alerta y las decisiones se toman desde el miedo. No es falta de carácter.<br><br><b>Tres mentiras que te enseñaron:</b> \"no se habla de dinero\" (el silencio sobre el salario nunca protege al que gana menos), \"con trabajar duro basta\" (México es de los países que más horas trabaja y no de los que mejor paga) y \"no me alcanza para ahorrar\" (esta semana no vas a ahorrar: vas a medir).<br><br><b>Dos gastos que casi nadie ve:</b> los <b>hormiga</b>, pequeños y diarios, que normalizamos porque \"son baratos\"; y los <b>fantasma</b>, pagos que ni recuerdas o que ya no usas — los más peligrosos, porque son invisibles y constantes.<br><br>El trabajo de esta semana en una línea: <b>volver líquido lo que hoy tienes en gaseoso.</b>"
+      "checkLabel": "Estás listo para revisar tus finanzas",
+      "highlight": false,
+      "intro": null,
+      "content": "<p>La mayoría de nosotros le entramos al juego del mundo adulto y sus finanzas de manera instintiva. El manejo del dinero no se enseña en la escuela, muchas veces lo aprendemos a prueba y error.</p>\n<p style=\"margin-top:10px\">Para iniciar la actividad de esta semana es importante que mantengas una mente abierta: las finanzas personales no buscan restringirte, sino usar el recurso como la herramienta que financia tu tranquilidad y da soporte a tu plan de vida. Entender tu dinero es pasar del estrés diario a construir un mapa claro para tu futuro.</p>\n<p style=\"margin-top:10px\">Vamos a empezar con un par de conceptos financieros.</p>\n\n<h4 style=\"margin-top:20px\">La física del dinero</h4>\n<p>El dinero tiene tres estados, como el agua. Entenderlos es el primer paso para dejar de adivinar a dónde va:</p>\n<div class=\"plan-grid\" style=\"margin-top:12px\">\n  <div class=\"plan-card plan-c\">\n    <div class=\"plan-title\">Gaseoso (el dinero invisible)</div>\n    <div class=\"plan-desc\">Los números en la app, las compras con un clic y las suscripciones automáticas. Cuando dices \"no sé en qué se me va\", es porque el dinero está en estado gaseoso: no desapareció, se evaporó sin que lo notaras porque no exige fricción física al gastarlo.</div>\n  </div>\n  <div class=\"plan-card plan-b\">\n    <div class=\"plan-title\">Líquido (el flujo consciente)</div>\n    <div class=\"plan-desc\">El dinero entra y sale, pero tú sabes exactamente por dónde fluye. Es el estado sano de operación, donde el recurso se mueve de forma predecible para cubrir tus prioridades.</div>\n  </div>\n  <div class=\"plan-card plan-a\">\n    <div class=\"plan-title\">Sólido (el patrimonio)</div>\n    <div class=\"plan-desc\">El dinero se materializó en algo tangible que se queda, construye estabilidad o genera valor a mediano y largo plazo.</div>\n  </div>\n</div>\n\n<div class=\"tip tip-coral\" style=\"margin-top:16px\"><strong>La deshidratación financiera</strong><br>Fuera de los estados físicos existe una alerta crítica: cuando te quedas sin reservas, el cuerpo entra en estado de supervivencia y las decisiones económicas empiezan a tomarse desde el miedo y la urgencia, no desde la estrategia. No es falta de carácter, es falta de liquidez. En la actividad vamos a iniciar por tener claridad para evitar llegar a la deshidratación financiera.</div>\n\n<h4 style=\"margin-top:20px\">Tres mentiras financieras que te enseñaron</h4>\n<p><strong>«De dinero no se habla»:</strong> el tabú cultural de mantener en secreto el salario o los ingresos nunca te protege a ti; las finanzas personales y familiares se moldean a través de los hábitos que heredamos. Hablar de dinero y de educación financiera es importante.</p>\n<p style=\"margin-top:8px\"><strong>«Con trabajar duro basta»:</strong> nos enseñaron que el esfuerzo físico o las horas en la oficina garantizan prosperidad. La realidad de nuestro entorno laboral demuestra lo contrario. Todos necesitamos una buena estrategia financiera que nos permita vivir con tranquilidad.</p>\n<p style=\"margin-top:8px\"><strong>«No me alcanza para ahorrar»:</strong> una falacia común. La presión de pensar en montos grandes paraliza. El hábito de ahorro empieza con pequeñas acciones. Tranquilo, esta semana no vas a ahorrar: vamos por el primer paso, que es medir.</p>\n\n<h4 style=\"margin-top:20px\">Los dos gastos que casi nadie ve</h4>\n<p>Empezaremos por detectarlos y buscar mantenerlos al margen.</p>\n<div class=\"cross-grid\" style=\"margin-top:10px\">\n  <div class=\"cross-card c-pasion\"><div class=\"c-label\">🐜 Gastos hormiga</div><div class=\"c-desc\">Pequeños consumos cotidianos que normalizamos bajo la premisa de que \"son baratos\", pero que al multiplicarse por treinta días representan un porcentaje brutal del ingreso.</div></div>\n  <div class=\"cross-card c-profesion\"><div class=\"c-label\">👻 Gastos fantasma</div><div class=\"c-desc\">Cargos recurrentes, comisiones bancarias o servicios que ni recuerdas o ya no usas. Son los más peligrosos del sistema porque operan en automático y drenan tu cuenta en silencio.</div></div>\n</div>",
+      "popup": {
+        "title": "Marco",
+        "instr": "Antes de pasar a la próxima sección es importante que tengas a la mano toda tu información financiera, así como acceso a tus aplicaciones bancarias para revisar.",
+        "fields": [
+          {
+            "id": "m1",
+            "tipo": "seleccion",
+            "label": "Confirma antes de continuar",
+            "opciones": ["Tengo toda la información disponible y a la mano"]
+          },
+          {
+            "id": "m2",
+            "tipo": "textarea",
+            "label": "Reflexiona antes de continuar: ¿dónde aprendiste a manejar tus finanzas?"
+          }
+        ]
+      }
     },
     {
       "label": "3 · Aplicación",
-      "instruction": "Descarga la plantilla <b>\"Mis 30 días reales\"</b> e imprímela o cópiala en una libreta. <b>Regla de oro: nada de memoria.</b> Cada dato sale de una fuente real — app del banco, recibos de nómina, tickets, estado de cuenta. Si no encuentras de dónde sacarlo, escribe tu estimado y anota \"estimado\" al lado.<br><br><b>1. Todo lo que entra</b> (mes completo): sueldo neto, horas extra, propinas, apoyos, lo que vendes por fuera, lo que aporta tu pareja.<br><b>2. Lo que sale:</b> fijos y fantasmas a mes completo, revisando movimiento por movimiento; hormiga solo <b>15 días</b> y al final multiplicas por 2.<br><b>3. Tus deudas:</b> institución, saldo, pago mínimo y tasa o CAT si la encuentras. Incluye tandas, fiado y préstamos de familiares.<br><b>4. Tu número:</b> lo que entra menos lo que sale. Sobra, empata o falta.<br><br>Sea cual sea el resultado, hoy lo sabes. Ayer no.<br><br><b>Después, el rebote con IA</b> (esta parte no es opcional): con tus números en la mano, pídele a una inteligencia artificial que te arme tu presupuesto mensual. Puedes usar <b>Meta AI dentro de WhatsApp</b> — es la más fácil y ya la tienes —, chatgpt.com o gemini.google.com. El prompt completo, los pasos y las reglas de qué no escribirle vienen en la guía descargable."
+      "checkLabel": "Elaboraste y optimizaste tu presupuesto",
+      "highlight": false,
+      "intro": null,
+      "content": "<p>En la sección de <strong>Recursos</strong> de esta semana está la plantilla: descárgala si te es más fácil llenarla en tu computadora o celular. Si prefieres a mano en un cuaderno, también sirve; lo que importa es el contenido, no el formato.</p>\n\n<div class=\"tip tip-gold\" style=\"margin-top:14px\"><strong>Regla de oro</strong><br>No apuntes números de memoria. Es importante que cada dato salga de una fuente real: app del banco, recibos de nómina, tickets, estado de cuenta. Si no encuentras de dónde sacarlo, escribe tu estimado y anota «Estimado» al lado. Entre más datos reales tengas, más te servirá realizar la actividad.</div>\n\n<div class=\"step-num-row\" style=\"margin-top:18px\">\n  <span class=\"step-num-badge\">1</span>\n  <div><strong>Todo lo que entra (ingresos mensuales).</strong> Suma el mes completo. Incluye tu sueldo neto, horas extra, propinas, bonos, apoyos gubernamentales o familiares, ingresos extra por ventas por fuera, y lo que aporta tu pareja si comparten gastos.</div>\n</div>\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">2</span>\n  <div><strong>Lo que sale (gastos mensuales y hormiga).</strong> Desglosa los gastos fijos (renta, luz, internet, transporte) y busca los fantasmas (suscripciones automáticas o comisiones bancarias). Para los gastos hormiga (cafés, antojitos, pequeños taxis), anota solo los de los últimos 15 días y multiplica el resultado por dos al final.</div>\n</div>\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">3</span>\n  <div><strong>Tus deudas (pasivos actuales).</strong> Anota cada una de tus obligaciones: institución o persona a la que le debes, saldo total pendiente, pago mínimo mensual y la tasa de interés o CAT si la conoces. Incluye tarjetas de crédito, departamentales, tandas, dinero fiado en la tiendita o préstamos familiares.</div>\n</div>\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">4</span>\n  <div><strong>Tu número final (el balance).</strong> Haz la operación clave: resta tus gastos totales a tus ingresos totales. Descubre si al final del mes sobra, empata o falta.</div>\n</div>\n\n<p style=\"margin-top:16px\">Antes de continuar, confirma que ya hiciste esto:</p>\n<ul>\n  <li>Tengo claro todo lo que entra (mes completo)</li>\n  <li>Tengo claro gastos fijos y fantasmas (mes completo)</li>\n  <li>Tengo claro gastos hormiga (15 días, antes de multiplicar por 2)</li>\n  <li>Tengo clara la suma de mis deudas (pago total)</li>\n  <li>Tengo claro lo que entra menos lo que sale</li>\n</ul>\n\n<p style=\"margin-top:16px\">Con ese número final, el siguiente paso es usarlo para obtener claridad inmediata. Abre una herramienta de inteligencia artificial en tu celular y pídele que te ayude a armar tu presupuesto mensual con base en la información que recabaste.</p>\n\n<div class=\"prompt-box\">\n  <span class=\"prompt-label\">💬 Prompt para copiar y pegar</span>\n  <div class=\"prompt-text\">Tengo este resumen de mis gastos del último mes: [pega tus números organizados por categoría]. Ayúdame a identificar gastos fantasmas, gastos hormiga, y qué porcentaje de mi ingreso va a deudas. Luego dime cuál sería un primer paso realista para mejorar mi situación, sin que suene a privación extrema.</div>\n  <button type=\"button\" class=\"copy-prompt-btn\">📋 Copiar prompt</button>\n  <p style=\"margin-top:12px;font-size:13px\">¿Nunca has usado una IA o te surgió una duda? Escríbenos:</p>\n  <a class=\"wa-btn\" href=\"https://wa.me/523314112703?text=Necesito%20ayuda%20con%20el%20ejercicio%20de%20IA%20de%20la%20Semana%205\" target=\"_blank\">💬 Necesito ayuda con el ejercicio de IA</a>\n</div>",
+      "popup": {
+        "title": "Aplicación",
+        "instr": "No queremos conocer tus números reales, esos son para ti.",
+        "fields": [
+          {
+            "id": "reconstruccion_evidencia",
+            "tipo": "textarea",
+            "label": "De los días que rastreaste, ¿cuántos reconstruiste con evidencia real y cuántos de memoria? ¿Qué te dice eso?"
+          },
+          {
+            "id": "gasto_fantasma_nombre",
+            "tipo": "texto",
+            "label": "Nombra un gasto fantasma que encontraste. ¿Cuánto llevabas pagándolo?"
+          },
+          {
+            "id": "gasto_hormiga_sorpresa",
+            "tipo": "textarea",
+            "label": "De tus gastos hormiga, ¿cuál te sorprendió más al multiplicarlo por el mes?"
+          },
+          {
+            "id": "estado_dinero",
+            "tipo": "seleccion",
+            "label": "Hoy tu dinero, ¿en qué estado pasa más tiempo?",
+            "opciones": ["Gaseoso", "Líquido", "Sólido / estancado"]
+          },
+          {
+            "id": "reaccion_cuerpo",
+            "tipo": "textarea",
+            "label": "¿Qué pasó en tu cuerpo cuando viste tu número final? Descríbelo sin adornarlo."
+          }
+        ]
+      }
     },
     {
       "label": "4 · Caso",
-      "instruction": "<b>Marcos</b> lleva cuatro años en mantenimiento. No confió en su memoria: se sentó con los recibos de nómina de su caja de herramienta y el historial del banco.<br><br>Encontró tres cosas. <b>Un fantasma:</b> $189 al mes por un servicio que dejó de usar, y llevaba catorce meses pagándolo — $2,646. Lo canceló esa noche en veinte minutos. <b>Una hormiga:</b> $1,180 al mes en refrescos y garnachas de los turnos largos; no se propuso dejarlos, se propuso llevar algo de casa tres días a la semana. <b>Y algo que no esperaba:</b> al llenar la hoja de deudas se dio cuenta de que debía en tres lados y nunca los había visto juntos. La tarjeta departamental le cobraba mucho más interés que las otras dos, y era justo a la que le pagaba el mínimo. Subió ese pago de $400 a $600 y dejó los mínimos en las otras.<br><br>Cuando le preguntaron cómo se sintió al ver su número, dijo: <i>\"Sabía que estaba apretado. No sabía que $2,646 se me habían ido en nada.\"</i><br><br>Nada de lo que hizo fue un sacrificio. Fue dejar de pagar por cosas que ya no le daban nada."
+      "checkLabel": null,
+      "highlight": true,
+      "intro": "Cada semana, leerás un caso que aplica lo que estuviste trabajando. Sigue los paneles.",
+      "content": "",
+      "popup": null,
+      "panels": [
+        {
+          "illo": "🔧",
+          "quote": null,
+          "text": "Marcos lleva cuatro años en mantenimiento. No confió en su memoria: se sentó con los recibos de nómina de su caja de herramienta y el historial del banco."
+        },
+        {
+          "illo": "👻",
+          "quote": null,
+          "text": "Encontró un fantasma: $189 al mes por un servicio que dejó de usar, y llevaba catorce meses pagándolo: $2,646. Lo canceló esa noche en veinte minutos."
+        },
+        {
+          "illo": "🐜",
+          "quote": null,
+          "text": "Una hormiga: $1,180 al mes en refrescos y garnachas de los turnos largos. No se propuso dejarlos, se propuso llevar algo de casa tres días a la semana."
+        },
+        {
+          "illo": "📋",
+          "quote": "«Sabía que estaba apretado. No sabía que $2,646 se me habían ido en nada.»",
+          "text": "Al llenar la hoja de deudas se dio cuenta de que debía en tres lados y nunca los había visto juntos. La tarjeta departamental le cobraba mucho más interés, y era a la que le pagaba el mínimo. Subió ese pago de $400 a $600 y dejó los mínimos en las otras."
+        }
+      ]
     },
     {
       "label": "5 · Reflexión",
-      "instruction": "Sube solo esto. <b>Sin cifras de tus gastos</b>, salvo donde se te pida.<br><br>1. De los días que rastreaste, ¿cuántos reconstruiste con evidencia real y cuántos de memoria? ¿Qué te dice eso?<br>2. Nombra <b>un</b> gasto fantasma que encontraste. ¿Cuánto llevabas pagándolo?<br>3. De tus gastos hormiga, ¿cuál te sorprendió más al multiplicarlo por el mes? No por el monto: por lo que descubriste de ti.<br>4. Hoy tu dinero, ¿en qué estado pasa más tiempo: gaseoso, líquido o estancado?<br>5. ¿Qué pasó en tu cuerpo cuando viste tu número final? Descríbelo sin adornarlo.<br>6. Del rebote con la IA: ¿qué te dijo que <b>sí</b> te sirvió y qué te dijo que <b>no aplicaba</b> a tu vida?<br>7. Una acción concreta para esta semana, con fecha.<br>8. Escribe tu <b>salario objetivo a 24 meses</b> (Semana 3) y <b>lo que realmente entra hoy</b>. ¿De cuánto es la diferencia? <b>No la resuelvas todavía. Solo míralas juntas.</b>"
+      "checkLabel": "Empezaré a mejorar mis finanzas gasto a gasto",
+      "highlight": false,
+      "intro": null,
+      "content": "<p><strong>De tu presupuesto real a tu meta a 24 meses.</strong> Ya conoces tus números de hoy. Ahora recuérdalos junto con el ejercicio de las vacantes y salarios reales que investigaste la semana pasada. Tener un plan de crecimiento a 24 meses, o aspirar a un nuevo rol dentro de la empresa, deja de ser una ilusión abstracta cuando cruzas ambas realidades. El ejercicio de conectar tus ingresos reales con tu proyección profesional es personal y optativo, y sería dar el siguiente paso.</p>\n\n<a class=\"resource-card\" href=\"https://clarabanregio.com/articulos/audita-tu-plan-financiero-con-ia-prompts-incluidos\" target=\"_blank\">\n  <span class=\"resource-ico\">📰</span>\n  <div class=\"resource-txt\">\n    <div class=\"resource-title\">Audita tu plan financiero con IA</div>\n    <div class=\"resource-sub\">Clara Banregio · Prompts prácticos para seguir tomando el control de tu dinero sin culpas</div>\n  </div>\n  <span class=\"resource-btn\">Ir →</span>\n</a>",
+      "popup": {
+        "title": "Reflexión final",
+        "instr": "Revisa tus respuestas, puedes editar o completar alguna antes de entregar.",
+        "fields": "FINAL"
+      }
     }
   ],
   "checklistLabels": [
-    "Marqué mis frases del diagnóstico",
-    "Llené lo que entra y lo que sale con evidencia real",
-    "Registré 15 días de gastos hormiga y los multipliqué por 2",
-    "Hice el inventario de mis deudas",
-    "Saqué mi número: entra menos sale",
-    "Roté mis números con una IA y guardé mi presupuesto",
-    "Comparé mi salario objetivo con lo que entra hoy",
-    "Subí mis 8 respuestas de reflexión"
+    "Realizaste tu diagnóstico inicial financiero",
+    "Estás listo para revisar tus finanzas",
+    "Elaboraste y optimizaste tu presupuesto",
+    "Empezaré a mejorar mis finanzas gasto a gasto"
   ],
   "recursos": [
     {
       "icono": "📄",
-      "texto": "Guía de la Semana 5 · Presupuesto parte 1",
-      "url": "recursos/GEB_Ruta_Sem5_Guia_Presupuesto_Parte1.docx"
+      "texto": "Plantilla · Mis 30 días reales",
+      "url": "[verificar — plantilla Sem. 5]"
     },
     {
-      "icono": "🖨️",
-      "texto": "Plantilla imprimible: Mis 30 días reales",
-      "url": "recursos/GEB_Ruta_Sem5_Plantilla_Mis30DiasReales.docx"
-    },
-    {
-      "icono": "💬",
-      "texto": "¿Nunca has usado una IA? Escríbenos por WhatsApp",
-      "url": "https://wa.me/523314112703?text=Necesito%20ayuda%20con%20el%20ejercicio%20de%20IA%20de%20la%20Semana%205"
-    },
-    {
-      "icono": "📖",
-      "texto": "Lectura — El hombre más rico de Babilonia · George Clason. Lee los capítulos 'El hombre más rico de Babilonia' y 'Las siete curas para una bolsa flaca' antes de hacer tu diagnóstico. Menos de 30 páginas",
-      "url": null
+      "icono": "📰",
+      "texto": "Clara Banregio: audita tu plan financiero con IA",
+      "url": "https://clarabanregio.com/articulos/audita-tu-plan-financiero-con-ia-prompts-incluidos"
     }
   ],
-  "nota": "Tus números no se suben a la plataforma. Solo tus respuestas de reflexión.",
   "entrega": {
     "campos": [
-      {
-        "id": "local_ingreso_mensual",
-        "modo": "local",
-        "tipo": "numero",
-        "label": "Todo lo que entra (mes completo)"
-      },
-      {
-        "id": "local_gastos_fijos",
-        "modo": "local",
-        "tipo": "numero",
-        "label": "Gastos fijos y fantasmas (mes completo)"
-      },
-      {
-        "id": "local_gastos_hormiga_quincena",
-        "modo": "local",
-        "tipo": "numero",
-        "label": "Gastos hormiga (15 días, antes de multiplicar por 2)"
-      },
-      {
-        "id": "local_deudas_total",
-        "modo": "local",
-        "tipo": "numero",
-        "label": "Suma de tus deudas (pago mínimo total)"
-      },
-      {
-        "id": "local_numero_final",
-        "modo": "local",
-        "tipo": "calculado",
-        "formula": "local_ingreso_mensual - (local_gastos_fijos + local_gastos_hormiga_quincena*2)",
-        "label": "Lo que entra menos lo que sale (solo para ti)"
-      },
-      {
-        "id": "local_salario_objetivo",
-        "modo": "local",
-        "tipo": "numero",
-        "label": "Tu salario objetivo (Semana 3)"
-      },
-      {
-        "id": "local_diferencia",
-        "modo": "local",
-        "tipo": "calculado",
-        "formula": "local_salario_objetivo - local_ingreso_mensual",
-        "label": "La diferencia (solo para ti — no la resuelvas todavía)"
-      },
-      {
-        "id": "reconstruccion_evidencia",
-        "modo": "entrega",
-        "tipo": "textarea",
-        "label": "¿Cuántos días reconstruiste con evidencia real y cuántos de memoria? ¿Qué te dice eso?"
-      },
-      {
-        "id": "gasto_fantasma_nombre",
-        "modo": "entrega",
-        "tipo": "texto",
-        "label": "Nombra un gasto fantasma que encontraste",
-        "hint": "Sin decir cuánto — solo qué es."
-      },
-      {
-        "id": "gasto_fantasma_meses",
-        "modo": "entrega",
-        "tipo": "texto",
-        "label": "¿Cuántos meses llevabas pagándolo?",
-        "hint": "Solo el tiempo, nunca el monto."
-      },
-      {
-        "id": "gasto_hormiga_sorpresa",
-        "modo": "entrega",
-        "tipo": "textarea",
-        "label": "¿Cuál gasto hormiga te sorprendió más al multiplicarlo?",
-        "hint": "Sin cifras — qué descubriste de ti, no el monto."
-      },
-      {
-        "id": "estado_dinero",
-        "modo": "entrega",
-        "tipo": "seleccion",
-        "label": "Hoy tu dinero, ¿en qué estado pasa más tiempo?",
-        "opciones": [
-          "Gaseoso",
-          "Líquido",
-          "Sólido / estancado"
-        ]
-      },
-      {
-        "id": "reaccion_cuerpo",
-        "modo": "entrega",
-        "tipo": "textarea",
-        "label": "¿Qué pasó en tu cuerpo cuando viste tu número final?"
-      },
       {
         "id": "rebote_ia",
         "modo": "entrega",
         "tipo": "textarea",
-        "label": "Del rebote con la IA: ¿qué sí te sirvió y qué no aplicaba a tu vida?"
+        "label": "Del rebote con la IA: ¿qué te dijo que sí te sirvió y qué te dijo que no aplicaba a tu vida?"
       },
       {
         "id": "accion_fecha",
         "modo": "entrega",
         "tipo": "texto",
         "label": "Una acción concreta para esta semana, con fecha"
+      },
+      {
+        "id": "retro_lider",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Esta semana debió suceder la conversación con el líder que elegiste. ¿Qué retroalimentación valiosa te dio? ¿Qué aprendiste?"
+      },
+      {
+        "id": "diferencia_salario",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Escribe tu salario objetivo a 24 meses y lo que realmente entra hoy. ¿De cuánto porcentaje es la diferencia?"
       }
     ]
   }

@@ -111,6 +111,12 @@ html.unlocked .lock-screen{display:none;}
 .video-wrap video{width:100%;display:block;}
 .video-placeholder{padding:32px 16px;text-align:center;color:rgba(255,255,255,.5);font-size:12.5px;}
 
+/* placeholder para la grabación de la sesión — se sube más adelante */
+.media-placeholder{background:#14181F;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;}
+.media-placeholder-ico{font-size:26px;flex-shrink:0;}
+.media-placeholder-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+.media-placeholder-sub{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;}
+
 /* right side: lo que vas a lograr + avance (siempre presente) */
 .side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
 .label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;}
@@ -292,6 +298,14 @@ html.unlocked .lock-screen{display:none;}
 
           <div class="video-wrap" id="video-player">
             <div class="video-placeholder">Cargando…</div>
+          </div>
+
+          <div class="media-placeholder">
+            <span class="media-placeholder-ico">🎥</span>
+            <div>
+              <div class="media-placeholder-title">Grabación de la sesión</div>
+              <div class="media-placeholder-sub">La grabación será subida aquí.</div>
+            </div>
           </div>
 
           <div class="context-block" id="bv-contexto-despues"></div>

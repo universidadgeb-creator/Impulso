@@ -4,6 +4,20 @@
   "titulo": "Cierre de Ruta GEB",
   "contexto": "Llegaste al final de las 6 semanas de Ruta GEB. Antes de cerrar tu ciclo, cuéntanos cómo te fue: nos sirve para mejorar el programa para las próximas generaciones, y a ti para ver qué tanto cambió desde que empezaste.",
   "escena": null,
+  "mensajeFinal": [
+    "Has llegado al final de estas seis semanas, y el mapa que hoy tienes en tus manos es el reflejo de un trabajo profundo de introspección, honestidad y valentía.",
+    "Hay algo que queremos recordarte: este programa y sus entregables te pertenecen, dentro o fuera de GEB. Este plan no es un documento estático para guardarse en un cajón, sino una brújula viva. Lo que construiste aquí es el cimiento de la vida que mereces habitar.",
+    "Gracias por regalarte este tiempo, por atreverte a mirar tus finanzas y tu futuro sin filtros, y por caminar este proceso con la certeza de que tu desarrollo es el motor más importante de tu bienestar.",
+    "Te invitamos a leer y reflexionar este documento escrito por nuestra directora, Julia Rodríguez.",
+    "En el equipo de Universidad, estamos a tus órdenes para acompañarte en este camino. ¡Gracias!"
+  ],
+  "recursos": [
+    {
+      "icono": "📖",
+      "texto": "Florecer, por Julia Rodríguez",
+      "url": "recursos/ruta-cierre-florecer-para-ruta-geb.pdf"
+    }
+  ],
   "diagnostico": [
     {
       "id": "diag1",

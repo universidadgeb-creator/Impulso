@@ -942,6 +942,12 @@ function abrirPopupFinal() {
     if (c.tipo === 'textarea') {
       return `<div class="popup-field"><label>${c.label}</label><textarea rows="3" data-id="${c.id}">${val}</textarea></div>`;
     }
+    if (c.tipo === 'seleccion' && c.opciones) {
+      const opts = c.opciones.map(o =>
+        `<button type="button" class="popup-opcion${val === o ? ' sel' : ''}" data-group="${c.id}" data-val="${o}">${o}</button>`
+      ).join('');
+      return `<div class="popup-field"><label>${c.label}</label><div class="popup-opciones" data-id="${c.id}">${opts}</div></div>`;
+    }
     return `<div class="popup-field"><label>${c.label}</label><input type="text" data-id="${c.id}" value="${val}"></div>`;
   }
 
@@ -987,7 +993,14 @@ function buscarFieldPorId(id) {
 }
 
 async function realizarEntrega() {
-  popupCard.querySelectorAll('[data-id]').forEach(el => { answers[el.dataset.id] = el.value; });
+  // input/textarea reales: se lee .value. Los grupos de selección (pills) son
+  // divs sin .value — se leen aparte por el botón .sel dentro del grupo, igual
+  // que hace el guardado de cada paso individual.
+  popupCard.querySelectorAll('textarea[data-id], input[data-id]').forEach(el => { answers[el.dataset.id] = el.value; });
+  popupCard.querySelectorAll('.popup-opciones[data-id]').forEach(wrap => {
+    const sel = wrap.querySelector('.popup-opcion.sel');
+    if (sel) answers[wrap.dataset.id] = sel.dataset.val;
+  });
 
   if (nps === null) {
     document.getElementById('popup-error').textContent = 'Falta seleccionar qué tanto recomendarías este tema.';
