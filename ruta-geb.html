@@ -398,29 +398,57 @@ const esModoRevision = localStorage.getItem(ADMIN_FLAG) === '1';
    para bloquear el acceso directo por URL a una semana que no le toca).
    Hora local del dispositivo, no se fuerza zona horaria (población en México,
    sin librerías externas por filosofía zero-budget del proyecto). */
+const BIENVENIDA_INICIO_ISO = '2026-08-27T00:00:00'; // abierta temporalmente para pruebas
+const SEM1_INICIO_ISO = '2026-08-28T09:00:00';
 const PRIMER_DOMINGO_ISO = '2026-09-06T20:00:00'; // domingo en que se habilita la Semana 2
 
 function fechaProgramada(semNum) {
-  if (semNum <= 1) return null; // Semana 1 no depende de fecha
+  if (semNum === 1) return new Date(SEM1_INICIO_ISO);
   const base = new Date(PRIMER_DOMINGO_ISO);
   base.setDate(base.getDate() + (semNum - 2) * 7);
   return base;
 }
 
+function fechaTxt(fecha) {
+  return fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })
+    + ' a las ' + fecha.toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit' });
+}
+
+function bienvenidaDesbloqueada() {
+  if (esModoRevision) return true;
+  return Date.now() >= new Date(BIENVENIDA_INICIO_ISO).getTime();
+}
+
+function mensajeBloqueoBienvenida() {
+  return `Se habilita el ${fechaTxt(new Date(BIENVENIDA_INICIO_ISO))}.`;
+}
+
 function estaDesbloqueada(semNum) {
   if (esModoRevision) return true;
-  if (semNum <= 1) return true;
+  if (semNum === 1) return Date.now() >= fechaProgramada(1).getTime();
   const anteriorCompletada = localStorage.getItem(claveCompletado('Ruta GEB', semNum - 1)) === '1';
   const fecha = fechaProgramada(semNum);
   return anteriorCompletada && Date.now() >= fecha.getTime();
 }
 
 function mensajeBloqueo(semNum) {
+  if (semNum === 1) return `Se habilita el ${fechaTxt(fechaProgramada(1))}.`;
   const anteriorCompletada = localStorage.getItem(claveCompletado('Ruta GEB', semNum - 1)) === '1';
   const fecha = fechaProgramada(semNum);
-  const fechaTxt = fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
   if (!anteriorCompletada) return `Completa la Semana ${semNum - 1} para desbloquear esta semana.`;
-  return `Se habilita el ${fechaTxt} por la noche.`;
+  return `Se habilita el ${fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })} por la noche.`;
+}
+
+// Envuelve Bienvenida + semanas normales en una sola llamada — Cierre nunca
+// se bloquea por calendario, se llega ahí completando todo lo anterior.
+function estaDiaBloqueado(d) {
+  if (d.pillar === 'Cierre') return false;
+  if (d.pillar === 'Bienvenida') return !bienvenidaDesbloqueada();
+  return !estaDesbloqueada(d.semNum);
+}
+
+function mensajeBloqueoDia(d) {
+  return d.pillar === 'Bienvenida' ? mensajeBloqueoBienvenida() : mensajeBloqueo(d.semNum);
 }
 
 const days = [
@@ -476,7 +504,7 @@ function renderStepper() {
     const node = document.createElement('button');
     node.type = 'button';
     const completado = estaCompletado(d);
-    const bloqueada = !d.especial && !estaDesbloqueada(d.semNum);
+    const bloqueada = estaDiaBloqueado(d);
     node.className = 'day-node' + (i === activeDay ? ' active' : '') + (completado ? ' completed' : '') + (bloqueada ? ' locked' : '');
     let dotLabel;
     if (completado) dotLabel = '✓';
@@ -537,10 +565,10 @@ function render() {
   const goBtn = document.getElementById('day-go-btn');
   const list = document.getElementById('module-list');
   const lockWrap = document.getElementById('lock-msg-wrap');
-  const bloqueada = !d.especial && !estaDesbloqueada(d.semNum);
+  const bloqueada = estaDiaBloqueado(d);
 
   lockWrap.innerHTML = bloqueada
-    ? `<div class="lock-msg"><span class="lock-msg-ico">🔒</span><span>${mensajeBloqueo(d.semNum)}</span></div>`
+    ? `<div class="lock-msg"><span class="lock-msg-ico">🔒</span><span>${mensajeBloqueoDia(d)}</span></div>`
     : '';
 
   if (d.modules.length === 1) {

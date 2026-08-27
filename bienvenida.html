@@ -392,6 +392,25 @@ document.getElementById('lock-form').addEventListener('submit', function(e) {
   }
 });
 
+/* ---- CANDADO POR CALENDARIO — misma fecha y misma bandera de modo revisión
+   que ruta-geb.html / momento-guia.html; si se ajusta, ajustar en los 3. ---- */
+(function () {
+  const BIENVENIDA_INICIO_ISO = '2026-08-27T00:00:00'; // abierta temporalmente para pruebas
+  const esModoRevision = localStorage.getItem('geb_admin_ruta') === '1';
+  if (esModoRevision || Date.now() >= new Date(BIENVENIDA_INICIO_ISO).getTime()) return;
+  const fecha = new Date(BIENVENIDA_INICIO_ISO);
+  const fechaTxt = fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })
+    + ' a las ' + fecha.toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit' });
+  document.getElementById('momento-wrap').innerHTML = `
+    <div class="momento-card" style="padding:60px 24px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;">🔒</div>
+      <h1 style="font-family:Georgia,serif;font-size:20px;color:#14181F;margin-bottom:10px;">Bienvenida todavía no se habilita</h1>
+      <p style="font-size:13.5px;color:#6B6558;line-height:1.6;max-width:380px;margin:0 auto 22px;">Se habilita el ${fechaTxt}.</p>
+      <a href="ruta-geb.html" class="nav-return" style="display:inline-block;">Regresar al curso</a>
+    </div>`;
+  throw new Error('bienvenida bloqueada'); // detiene el resto del script de este archivo
+})();
+
 /* ---- ESTADO CHECKLIST ---- */
 function cargarEstado() {
   try { return JSON.parse(localStorage.getItem(BV_STATE_KEY)) || {}; }

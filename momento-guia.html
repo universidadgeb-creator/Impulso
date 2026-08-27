@@ -1121,20 +1121,32 @@ const contentUrl = dataParam ? `content/${dataParam}` : `content/${programaSlug}
    una semana que todavía no le toca a este dispositivo. Misma regla y misma
    fecha que ruta-geb.html: si se ajusta ahí, ajustar aquí también. ── */
 const esModoRevision = localStorage.getItem('geb_admin_ruta') === '1';
-if (esRuta && Number(semNum) > 1 && !esModoRevision) {
-  const PRIMER_DOMINGO_ISO = '2026-09-06T20:00:00';
-  const fecha = new Date(PRIMER_DOMINGO_ISO);
-  fecha.setDate(fecha.getDate() + (Number(semNum) - 2) * 7);
-  const claveAnterior = `geb_completado_Ruta_GEB_sem${Number(semNum) - 1}`;
-  const anteriorCompletada = localStorage.getItem(claveAnterior) === '1';
-  const bloqueada = !(anteriorCompletada && Date.now() >= fecha.getTime());
+if (esRuta && !esModoRevision) {
+  const INICIO_ISO = '2026-08-28T09:00:00'; // Semana 1
+  const PRIMER_DOMINGO_ISO = '2026-09-06T20:00:00'; // Semana 2 en adelante
+  let bloqueada, fecha, anteriorCompletada;
+
+  if (Number(semNum) === 1) {
+    fecha = new Date(INICIO_ISO);
+    bloqueada = Date.now() < fecha.getTime();
+    anteriorCompletada = true; // no aplica, Semana 1 no depende de otra
+  } else if (Number(semNum) > 1) {
+    fecha = new Date(PRIMER_DOMINGO_ISO);
+    fecha.setDate(fecha.getDate() + (Number(semNum) - 2) * 7);
+    const claveAnterior = `geb_completado_Ruta_GEB_sem${Number(semNum) - 1}`;
+    anteriorCompletada = localStorage.getItem(claveAnterior) === '1';
+    bloqueada = !(anteriorCompletada && Date.now() >= fecha.getTime());
+  }
+
   if (bloqueada) {
+    const fechaTxt = fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })
+      + (Number(semNum) === 1 ? (' a las ' + fecha.toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit' })) : ' por la noche');
     document.getElementById('momento-wrap').innerHTML = `
       <div class="momento-card" style="padding:60px 24px;text-align:center;">
         <div style="font-size:32px;margin-bottom:12px;">🔒</div>
         <h1 style="font-family:Georgia,serif;font-size:20px;color:#14181F;margin-bottom:10px;">Esta semana todavía no se habilita</h1>
         <p style="font-size:13.5px;color:#6B6558;line-height:1.6;max-width:380px;margin:0 auto 22px;">${anteriorCompletada
-          ? `Se habilita el ${fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })} por la noche.`
+          ? `Se habilita el ${fechaTxt}.`
           : `Completa la Semana ${Number(semNum) - 1} para desbloquearla.`}</p>
         <a href="ruta-geb.html" class="nav-return" style="display:inline-block;">Regresar al curso</a>
       </div>`;
