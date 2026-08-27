@@ -410,7 +410,7 @@ html.unlocked .lock-screen{display:none;}
     <p>Ingresa la contraseña del curso para continuar.</p>
     <form class="lock-form" id="lock-form">
       <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
-      <button type="submit" class="lock-submit">Acceder →</button>
+      <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
     <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
@@ -422,8 +422,8 @@ html.unlocked .lock-screen{display:none;}
     <div class="top-strip">
       <div class="breadcrumb" id="breadcrumb">Ruta GEB › Sem. 1 · Autogestivo</div>
       <div class="top-strip-actions">
-        <button type="button" class="week-nav-btn" id="btn-week-prev">← Semana anterior</button>
-        <button type="button" class="week-nav-btn" id="btn-week-next">Próxima semana →</button>
+        <button type="button" class="week-nav-btn" id="btn-week-prev">Semana anterior</button>
+        <button type="button" class="week-nav-btn" id="btn-week-next">Próxima semana</button>
         <a href="ruta-geb.html" class="nav-return">Regresar al curso</a>
       </div>
     </div>
@@ -454,9 +454,9 @@ html.unlocked .lock-screen{display:none;}
           <div id="step-content-wrap"></div>
 
           <div class="step-nav">
-            <button type="button" class="step-nav-btn" id="btn-anterior">← Anterior</button>
+            <button type="button" class="step-nav-btn" id="btn-anterior">Anterior</button>
             <span class="step-counter" id="step-counter">1 de 5</span>
-            <button type="button" class="step-nav-btn primary" id="btn-siguiente">Siguiente →</button>
+            <button type="button" class="step-nav-btn primary" id="btn-siguiente">Siguiente</button>
           </div>
         </div>
 
@@ -611,7 +611,7 @@ function renderCenter() {
 
     document.getElementById('step-counter').textContent = 'Video de apertura';
     btnAnterior.disabled = true;
-    btnSiguiente.textContent = 'Comenzar →';
+    btnSiguiente.textContent = 'Comenzar';
     btnSiguiente.classList.remove('final');
     return;
   }
@@ -643,7 +643,7 @@ function renderCenter() {
   btnAnterior.disabled = activeStep === 0 && !hasVideo;
 
   const esUltimo = activeStep === steps.length - 1;
-  btnSiguiente.textContent = esUltimo ? 'Realizar entrega' : 'Siguiente →';
+  btnSiguiente.textContent = esUltimo ? 'Realizar entrega' : 'Siguiente';
   btnSiguiente.classList.toggle('final', esUltimo);
 }
 
@@ -711,8 +711,8 @@ function renderCasoPanels(panels, accent, semLabel) {
       <div class="cp-nav">
         <div class="cp-dots" id="cp-dots">${dotsHtml}</div>
         <div class="cp-btns">
-          <button type="button" class="cp-btn" id="cp-prev" disabled>← Anterior</button>
-          <button type="button" class="cp-btn primary" id="cp-next">Siguiente →</button>
+          <button type="button" class="cp-btn" id="cp-prev" disabled>Anterior</button>
+          <button type="button" class="cp-btn primary" id="cp-next">Siguiente</button>
         </div>
       </div>
     </div>`;
@@ -737,7 +737,7 @@ function initCasoPanels(container) {
       next.textContent = '✓ Fin del caso';
       next.disabled = true;
     } else {
-      next.textContent = 'Siguiente →';
+      next.textContent = 'Siguiente';
       next.disabled = false;
     }
   }

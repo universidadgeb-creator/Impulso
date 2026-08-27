@@ -157,7 +157,7 @@ html.unlocked .lock-screen{display:none;}
 
 <nav>
   <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
-  <a href="ruta-geb.html" class="nav-back">← Volver a Ruta GEB</a>
+  <a href="ruta-geb.html" class="nav-back">Volver a Ruta GEB</a>
 </nav>
 
 <!-- ══ LOCK SCREEN ══ -->
@@ -168,7 +168,7 @@ html.unlocked .lock-screen{display:none;}
     <p>Ingresa la contraseña del curso para continuar.</p>
     <form class="lock-form" id="lock-form">
       <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
-      <button type="submit" class="lock-submit">Acceder →</button>
+      <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
     <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
@@ -194,7 +194,7 @@ html.unlocked .lock-screen{display:none;}
         <!-- ═══ Guardia: si no hay identidad registrada, no se puede cerrar el ciclo ═══ -->
         <div class="cierre-guardia" id="cierre-guardia" style="display:none;">
           <p>Antes de cerrar tu ciclo necesitas haberte registrado en la Bienvenida de Ruta GEB.</p>
-          <a href="bienvenida.html">Ir a la Bienvenida →</a>
+          <a href="bienvenida.html">Ir a la Bienvenida</a>
         </div>
 
         <!-- ═══ Contenido normal (solo si ya hay identidad) ═══ -->
@@ -358,7 +358,7 @@ fetch('content/ruta-cierre.json')
           <a class="resource-card" href="${r.url}" target="_blank" rel="noopener">
             <span class="resource-ico">${r.icono || '📄'}</span>
             <div class="resource-txt"><div class="resource-title">${r.texto}</div></div>
-            <span class="resource-btn">Ir →</span>
+            <span class="resource-btn">Ir</span>
           </a>
         `).join('');
     }

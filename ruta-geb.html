@@ -270,7 +270,7 @@ html.unlocked .lock-screen{display:none;}
         <a href="impulso-geb.html" class="nav-dropdown-item">Impulso GEB <span class="lock-ico">🔒</span></a>
       </div>
     </div>
-    <a href="index.html" class="nav-back">← Inicio</a>
+    <a href="index.html" class="nav-back">Inicio</a>
   </div>
 </nav>
 
@@ -282,7 +282,7 @@ html.unlocked .lock-screen{display:none;}
     <p>Esta es la plataforma de aprendizaje del curso. Ingresa la contraseña del curso para continuar.</p>
     <form class="lock-form" id="lock-form">
       <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
-      <button type="submit" class="lock-submit">Acceder →</button>
+      <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
     <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
@@ -579,7 +579,7 @@ function render() {
     const m = d.modules[0];
     const completado = moduleCompletado(d, m);
     goBtn.href = bloqueada ? '#' : moduleUrl(d, m);
-    goBtn.textContent = bloqueada ? '🔒' : '→';
+    goBtn.textContent = bloqueada ? '🔒' : 'Ir';
     goBtn.classList.remove('done');
     goBtn.classList.toggle('locked', bloqueada);
     goBtn.setAttribute('aria-label', bloqueada ? 'Todavía bloqueada' : `${completado ? 'Revisar' : 'Comenzar'}: ${m.title}`);
@@ -606,7 +606,7 @@ function render() {
         <div class="module-title">${m.title}</div>
         <div class="module-sub"><b>${sub}</b></div>
       </div>
-      <span class="module-arrow">${completado ? '✓' : '→'}</span>
+      <span class="module-arrow">${completado ? '✓' : 'Ir'}</span>
     </a>
   `;
   }).join('');

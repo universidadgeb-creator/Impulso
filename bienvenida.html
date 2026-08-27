@@ -208,7 +208,7 @@ html.unlocked .lock-screen{display:none;}
 .identidad-input::placeholder{color:#BEBAB2;}
 .identidad-caja .campo-hint{font-size:11px;color:#9A968C;line-height:1.5;margin-top:-4px;}
 .identidad-error{font-size:11.5px;color:#C0392B;min-height:15px;}
-#identidad-mount .campo-enviar{display:none;} /* el botón real es "Guardar registro →" en el footer del popup */
+#identidad-mount .campo-enviar{display:none;} /* el botón real es "Guardar registro" en el footer del popup */
 
 /* BOTONES */
 .btn-primario{width:100%;background:#F0C040;color:#0B0F16;border:none;font-size:14px;font-weight:700;padding:14px;border-radius:10px;cursor:pointer;letter-spacing:.01em;}
@@ -248,7 +248,7 @@ html.unlocked .lock-screen{display:none;}
 
 <nav>
   <div class="nav-logo">Impulso<sup>(GEB)</sup></div>
-  <a href="ruta-geb.html" class="nav-back">← Ruta GEB</a>
+  <a href="ruta-geb.html" class="nav-back">Ruta GEB</a>
 </nav>
 
 <!-- LOCK SCREEN -->
@@ -259,7 +259,7 @@ html.unlocked .lock-screen{display:none;}
     <p>Ingresa la contraseña del curso para ver la bienvenida.</p>
     <form class="lock-form" id="lock-form">
       <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
-      <button type="submit" class="lock-submit">Acceder →</button>
+      <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
     <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador.</p>
@@ -344,7 +344,7 @@ html.unlocked .lock-screen{display:none;}
     </div>
     <div class="popup-footer">
       <div class="pq-progreso" id="encuesta-progreso">0 de 10 respondidas</div>
-      <button class="btn-primario" id="btn-guardar-encuesta" disabled>Guardar encuesta →</button>
+      <button class="btn-primario" id="btn-guardar-encuesta" disabled>Guardar encuesta</button>
     </div>
   </div>
 
@@ -359,7 +359,7 @@ html.unlocked .lock-screen{display:none;}
       <!-- renderizado por EntregaEngine, o resumen de solo lectura si ya está registrado -->
     </div>
     <div class="popup-footer" id="registro-footer">
-      <button class="btn-primario" id="btn-guardar-registro">Guardar registro →</button>
+      <button class="btn-primario" id="btn-guardar-registro">Guardar registro</button>
       <div class="estado-envio" id="estado-envio"></div>
     </div>
   </div>
@@ -473,7 +473,7 @@ function mostrarBienvenidaLista() {
   banner.innerHTML =
     '<span class="bv-banner-ico">🎉</span>' +
     '<div class="bv-banner-text"><strong>¡Listo, ya puedes empezar!</strong> Completaste los tres pasos de bienvenida.</div>' +
-    '<button type="button" class="bv-banner-btn" id="btn-ir-sem1">Ir a Semana 1 →</button>';
+    '<button type="button" class="bv-banner-btn" id="btn-ir-sem1">Ir a Semana 1</button>';
   wrap.insertBefore(banner, card);
   document.getElementById('btn-ir-sem1').addEventListener('click', function() {
     window.location.href = URL_SEM1;
@@ -517,12 +517,15 @@ document.getElementById('popup-overlay').addEventListener('click', function(e) {
 document.getElementById('cerrar-encuesta').addEventListener('click', cerrarPopup);
 document.getElementById('cerrar-registro').addEventListener('click', cerrarPopup);
 
-/* ---- VIDEO: marcar visto cuando termina ---- */
+/* ---- VIDEO: marcar visto cuando termina, y pasar directo a la encuesta —
+   así siempre hay una siguiente actividad clara, sin que la persona tenga
+   que ir a buscarla en el temario. ---- */
 function marcarVideoVisto() {
   if (estado.video) return;
   estado.video = true;
   guardarEstado(estado);
   renderChecklist();
+  abrirPopup('encuesta');
 }
 
 /* ---- RENDER ENCUESTA — si ya está respondida, se abre en solo lectura:
@@ -623,12 +626,13 @@ function renderEncuesta(pregs, soloLectura) {
   });
 }
 
-/* ---- GUARDAR ENCUESTA ---- */
+/* ---- GUARDAR ENCUESTA — pasa directo a registro, la última actividad ---- */
 document.getElementById('btn-guardar-encuesta').addEventListener('click', function() {
   estado.encuesta = true;
   guardarEstado(estado);
   renderChecklist();
   cerrarPopup();
+  setTimeout(function() { abrirPopup('registro'); }, 280);
 });
 
 /* ---- RENDER REGISTRO — editable con EntregaEngine mientras no exista;
@@ -653,9 +657,7 @@ function renderRegistro(soloLectura) {
 
   badge.style.display = 'none';
   footer.style.display = '';
-  regBody.innerHTML =
-    '<p class="id-intro">Tu CURP y tu PIN son lo que te identifica aquí. El PIN solo lo sabes tú.</p>' +
-    '<div id="identidad-mount"></div>';
+  regBody.innerHTML = '<div id="identidad-mount"></div>';
 
   EntregaEngine.montarIdentidad(
     document.getElementById('identidad-mount'),

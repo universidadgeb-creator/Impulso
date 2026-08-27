@@ -23,7 +23,7 @@
       "checkLabel": "Escuchaste el podcast completo",
       "highlight": false,
       "intro": "Antes de empezar con los conceptos y actividades de esta semana, vamos a escuchar un capítulo de podcast. En este episodio, <strong>Oso Trava</strong> desmitifica la idea de que el propósito de vida es algo \"místico\" que te cae del cielo como un rayo. En lugar de eso, nos invita a verlo como un proceso continuo de autoconocimiento y exploración que se vive día a día.<br><br>Cuando termines ve a la siguiente sección.",
-      "content": "<a class=\"resource-card\" href=\"https://open.spotify.com/episode/4BVqGe6j7ddvdFwg59MOVE\" target=\"_blank\"><span class=\"resource-ico\">🎧</span><div class=\"resource-txt\"><div class=\"resource-title\">Podcast Oso Trava</div><div class=\"resource-sub\">\"Así Encontrarás tu Propósito\" · Spotify</div></div><span class=\"resource-btn\">Ir →</span></a>",
+      "content": "<a class=\"resource-card\" href=\"https://open.spotify.com/episode/4BVqGe6j7ddvdFwg59MOVE\" target=\"_blank\"><span class=\"resource-ico\">🎧</span><div class=\"resource-txt\"><div class=\"resource-title\">Podcast Oso Trava</div><div class=\"resource-sub\">\"Así Encontrarás tu Propósito\" · Spotify</div></div><span class=\"resource-btn\">Ir</span></a>",
       "popup": {
         "title": "Diagnóstico",
         "instr": "En base a lo que escuchaste:",
