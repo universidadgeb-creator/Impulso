@@ -1117,6 +1117,31 @@ const esRuta = curso.toLowerCase().includes('ruta');
 const programaSlug = esRuta ? 'ruta' : 'impulso';
 const contentUrl = dataParam ? `content/${dataParam}` : `content/${programaSlug}-sem${semNum}.json`;
 
+/* ── CANDADO POR CALENDARIO (Ruta GEB) — bloquea el acceso directo por URL a
+   una semana que todavía no le toca a este dispositivo. Misma regla y misma
+   fecha que ruta-geb.html: si se ajusta ahí, ajustar aquí también. ── */
+const esModoRevision = localStorage.getItem('geb_admin_ruta') === '1';
+if (esRuta && Number(semNum) > 1 && !esModoRevision) {
+  const PRIMER_DOMINGO_ISO = '2026-08-30T20:00:00';
+  const fecha = new Date(PRIMER_DOMINGO_ISO);
+  fecha.setDate(fecha.getDate() + (Number(semNum) - 2) * 7);
+  const claveAnterior = `geb_completado_Ruta_GEB_sem${Number(semNum) - 1}`;
+  const anteriorCompletada = localStorage.getItem(claveAnterior) === '1';
+  const bloqueada = !(anteriorCompletada && Date.now() >= fecha.getTime());
+  if (bloqueada) {
+    document.getElementById('momento-wrap').innerHTML = `
+      <div class="momento-card" style="padding:60px 24px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:12px;">🔒</div>
+        <h1 style="font-family:Georgia,serif;font-size:20px;color:#14181F;margin-bottom:10px;">Esta semana todavía no se habilita</h1>
+        <p style="font-size:13.5px;color:#6B6558;line-height:1.6;max-width:380px;margin:0 auto 22px;">${anteriorCompletada
+          ? `Se habilita el ${fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })} por la noche.`
+          : `Completa la Semana ${Number(semNum) - 1} para desbloquearla.`}</p>
+        <a href="ruta-geb.html" class="nav-return" style="display:inline-block;">Regresar al curso</a>
+      </div>`;
+    throw new Error('semana bloqueada'); // detiene el resto del script de este archivo
+  }
+}
+
 fetch(contentUrl)
   .then(r => r.ok ? r.json() : Promise.reject('no-content'))
   .then(data => {
