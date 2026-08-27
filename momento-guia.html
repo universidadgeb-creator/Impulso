@@ -61,8 +61,8 @@ html.unlocked .lock-screen{display:none;}
 .top-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
 .breadcrumb{font-size:11.5px;color:var(--fog);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .breadcrumb b{color:var(--white);}
-.nav-return{font-size:11.5px;font-weight:700;color:var(--fog);border:1px solid var(--border);padding:6px 13px;border-radius:100px;white-space:nowrap;}
-.nav-return:hover{color:var(--white);border-color:rgba(255,255,255,.2);}
+.nav-return{font-size:11.5px;font-weight:700;color:var(--void);background:var(--sage);padding:6px 15px;border-radius:100px;white-space:nowrap;}
+.nav-return:hover{opacity:.9;}
 .top-strip-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .week-nav-btn{font-size:11.5px;font-weight:700;color:var(--fog);background:none;border:1px solid var(--border);padding:6px 13px;border-radius:100px;white-space:nowrap;cursor:pointer;font-family:inherit;transition:.15s;}
 .week-nav-btn:hover:not(:disabled){color:var(--white);border-color:rgba(255,255,255,.2);}
@@ -125,6 +125,8 @@ html.unlocked .lock-screen{display:none;}
 .tip-sage strong{color:#14532D;font-size:11px;}
 .tip-blue{background:#EFF8FF;border-left:3px solid #6AB0F5;color:#1E4E7A;}
 .tip-blue strong{color:#1E4E7A;font-size:11px;}
+.tip-coral{background:#FDF0EE;border-left:3px solid #F07060;color:#7F1D1D;}
+.tip-coral strong{color:#9B1C1C;font-size:11px;}
 .audio-real-label{font-size:12.5px;font-weight:700;color:#7A5E0A;}
 
 /* tip-box tipo pregunta: <details> nativo, colapsado por defecto */
@@ -136,11 +138,7 @@ html.unlocked .lock-screen{display:none;}
 .tip-gold summary{color:#92400E;}
 .tip-sage summary{color:#14532D;}
 .tip-blue summary{color:#1E4E7A;}
-
-/* reproductor de audio embebido dentro de un paso */
-.step-audio-label{font-weight:700;font-size:12.5px;margin-bottom:8px;display:block;}
-.step-audio audio{width:100%;display:block;}
-.step-audio-meta{font-size:11px;color:#9A968C;margin-top:6px;}
+.tip-coral summary{color:#9B1C1C;}
 
 /* prompt de IA para copiar y pegar — caja gris neutra, nunca de color
    (no es algo que se "resalte", es una herramienta que se usa) */
@@ -161,10 +159,10 @@ html.unlocked .lock-screen{display:none;}
    compacto, no ocupa una fila entera por persona */
 .people-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px;}
 .people-chip{font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:100px;white-space:nowrap;}
-.people-chip:nth-child(4n+1){background:rgba(240,192,64,.15);color:#92400E;}
-.people-chip:nth-child(4n+2){background:rgba(106,176,245,.15);color:#1E4E7A;}
-.people-chip:nth-child(4n+3){background:rgba(126,200,160,.15);color:#166534;}
-.people-chip:nth-child(4n+4){background:rgba(240,112,96,.15);color:#9B1C1C;}
+.people-chip:nth-child(4n+1){background:rgba(240,192,64,.15);color:#92400E;border-left:3px solid #F0C040;}
+.people-chip:nth-child(4n+2){background:rgba(106,176,245,.15);color:#1E4E7A;border-left:3px solid #6AB0F5;}
+.people-chip:nth-child(4n+3){background:rgba(126,200,160,.15);color:#166534;border-left:3px solid #7EC8A0;}
+.people-chip:nth-child(4n+4){background:rgba(240,112,96,.15);color:#9B1C1C;border-left:3px solid #F07060;}
 
 /* 3 planes en columnas (ej. Sem. 3, Odyssey Plan A/B/C) */
 .plan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0;}
@@ -181,13 +179,20 @@ html.unlocked .lock-screen{display:none;}
 
 .sec-divider{border:none;border-top:1px solid #ECEAE4;margin:16px 0;}
 
-.podcast-block{display:flex;align-items:center;gap:12px;background:#F7F5F0;border-radius:12px;padding:12px 14px;margin:10px 0 14px;text-decoration:none;transition:background .15s;}
-.podcast-block:hover{background:#F0EDE5;}
-.pod-ico{font-size:22px;flex-shrink:0;}
-.pod-txt{flex:1;min-width:0;}
-.pod-title{font-size:13px;font-weight:700;color:#14181F;}
-.pod-sub{font-size:11.5px;color:#6B6558;}
-.pod-btn{font-size:12px;font-weight:700;color:#3A7FC9;white-space:nowrap;}
+/* ── RESOURCE CARD: recurso externo embebido dentro de un paso
+   (meditación, podcast, video TED/YouTube) — un solo componente, un solo
+   color (violeta), no usado para nada más en el sitio. Variante .resource-audio
+   para audio real embebido (sin botón "Ir", trae <audio controls> real). ── */
+.resource-card{display:flex;align-items:center;gap:12px;background:#F5F2FB;border:1px solid rgba(139,120,184,.25);border-radius:12px;padding:12px 14px;margin:10px 0 14px;text-decoration:none;transition:background .15s;}
+.resource-card:hover{background:#EEE8F8;}
+.resource-card.resource-audio{align-items:stretch;flex-direction:column;}
+.resource-top{display:flex;align-items:center;gap:12px;width:100%;}
+.resource-ico{font-size:22px;flex-shrink:0;}
+.resource-txt{flex:1;min-width:0;}
+.resource-title{font-size:13px;font-weight:700;color:#14181F;}
+.resource-sub{font-size:11.5px;color:#6B6558;margin-top:1px;}
+.resource-btn{font-size:12px;font-weight:700;color:#7A5FB0;white-space:nowrap;flex-shrink:0;}
+.resource-card audio{width:100%;display:block;margin-top:10px;}
 
 .cross-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
 .cross-card{border-radius:10px;padding:12px 14px;}
@@ -253,6 +258,7 @@ html.unlocked .lock-screen{display:none;}
 .insight-quote,.insight-quote-coral{font-size:10.5px;font-style:italic;text-align:center;padding:0 .4rem;line-height:1.5;}
 .insight-quote{color:var(--gold);}
 .insight-quote-coral{color:var(--coral);}
+.illo-emoji{background:linear-gradient(170deg,#080C14 0%,#0D1525 55%,#172038 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem;}
 .illo-mercado,.illo-taller{background:#131E30;}
 .illo-mercado{padding:.5rem .7rem;display:flex;flex-direction:column;gap:.22rem;justify-content:center;}
 .mk-header{display:flex;align-items:center;gap:.35rem;margin-bottom:.08rem;}
@@ -324,6 +330,10 @@ html.unlocked .lock-screen{display:none;}
 .check-item.checked .check-mark{background:#7EC8A0;color:#0B0F16;border-color:#7EC8A0;}
 
 .placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:18px;}
+
+/* botón compacto de WhatsApp dentro de un paso — nunca en caja/panel, solo el botón */
+.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 20px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;margin:4px 0;}
+.wa-btn:hover{opacity:.92;}
 
 /* ── POPUP POR PASO ── */
 .popup-overlay{position:fixed;inset:0;background:rgba(8,12,20,.6);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;}
@@ -414,7 +424,7 @@ html.unlocked .lock-screen{display:none;}
       <div class="top-strip-actions">
         <button type="button" class="week-nav-btn" id="btn-week-prev">← Semana anterior</button>
         <button type="button" class="week-nav-btn" id="btn-week-next">Próxima semana →</button>
-        <a href="ruta-geb.html" class="nav-return">← Regresar al curso</a>
+        <a href="ruta-geb.html" class="nav-return">Regresar al curso</a>
       </div>
     </div>
 
@@ -467,7 +477,7 @@ html.unlocked .lock-screen{display:none;}
       </div>
     </div>
 
-    <p class="placeholder-note">Plantilla de momento — el contenido específico de cada guía se completará más adelante.</p>
+    <p class="placeholder-note">© 2026 Grupo Empresarial Bienestar / GEB University. Todos los derechos reservados.</p>
   </div>
 
   <a class="help-fab" href="https://wa.me/523314112703?text=Tengo%20una%20duda%20sobre%20mi%20curso" target="_blank" rel="noopener" title="¿Tienes dudas? Escríbenos por WhatsApp">💬</a>
@@ -674,12 +684,20 @@ function renderCasoPanels(panels, accent, semLabel) {
     <div class="ll-row"><div class="ll-dot plain"></div><div class="ll-bar" style="width:45%"></div></div>
     <div class="ll-row"><div class="ll-dot ${hlClass}"></div><div class="ll-bar ${hlClass}" style="width:66%"></div></div>`;
 
-  const panelsHtml = panels.map((p, i) => `
+  const KNOWN_ILLOS = ['recepcion', 'oficina', 'taller', 'lista', 'lista-roja', 'conv', 'insight', 'insight-coral', 'mercado'];
+  const panelsHtml = panels.map((p, i) => {
+    // Si el illo no es una de las ilustraciones CSS conocidas, se trata como
+    // emoji de respaldo (ej. "😬") en vez de dejar el panel vacío.
+    const conocido = KNOWN_ILLOS.includes(p.illo);
+    const illoClass = conocido ? `illo-${p.illo}` : 'illo-emoji';
+    const illoInner = conocido ? illoMarkup(p.illo, p.quote) : `<span>${p.illo || ''}</span>`;
+    return `
     <div class="cp-panel" id="cp-p${i}">
       <div class="cp-n">${p.n || String(i + 1).padStart(2, '0')}</div>
-      <div class="cp-illo illo-${p.illo}">${illoMarkup(p.illo, p.quote)}</div>
+      <div class="cp-illo ${illoClass}">${illoInner}</div>
       <p class="cp-text">${p.text || ''}</p>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   const dotsHtml = panels.map((_, i) => `<div class="cp-dot${i === 0 ? ' active' : ''}"></div>`).join('');
 
@@ -1074,7 +1092,7 @@ function mostrarExito() {
     <div class="success-title">¡Felicidades, terminaste la ${semana}!</div>
     <p class="success-sub">Tu entrega fue enviada.</p>
     <p class="success-sub">La siguiente semana estará disponible el día lunes.</p>
-    <a class="success-btn" href="ruta-geb.html">← Regresar al curso</a>
+    <a class="success-btn" href="ruta-geb.html">Regresar al curso</a>
   `;
   wrap.appendChild(success);
 }

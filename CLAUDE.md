@@ -234,6 +234,56 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
 - **Orden del arreglo `recursos[]`: siempre primero la plantilla/hoja de trabajo de esa
   semana, después cualquier recurso extra** (libro, podcast, video externo, etc.).
 
+## Sistema de diseño de contenido dentro de un "momento" (agosto 2026)
+
+Reglas fijas para el HTML que va dentro de `content[].steps[].content` en `momento-guia.html`
+(Ruta GEB, semanas 0-4 ya migradas; aplican igual a semanas futuras e Impulso GEB cuando se
+migre). Todas usan clases ya definidas en el `<style>` de `momento-guia.html` — nunca estilos
+inline sueltos (`style="background:rgba(...)"`) copiados de un componente a otro, que es como se
+originó la inconsistencia que se corrigió esta sesión.
+
+- **Caja de contenido de un paso**: `step-box-neutral` (gris, sin línea) por defecto siempre,
+  incluido Diagnóstico — antes se usaba `highlight: true` en pasos con audio/video/podcast
+  embebido, ya no: esos recursos llevan su propio color (ver siguiente punto), así que la caja
+  que los envuelve vuelve a ser neutra. `step-box-highlight` (línea de color) se reserva para un
+  elemento puntual dentro del contenido (el caso de la semana vía `panels`, una pregunta para
+  profundizar) — nunca para todo un paso completo.
+- **Recurso externo embebido dentro de un paso** (meditación, podcast, video/TED-YouTube): un
+  solo componente, `resource-card` — ícono + título + fuente/autor + botón "Ir →". Color violeta
+  (`#F5F2FB` fondo, `#7A5FB0` texto del botón), el único color del sitio reservado para "esto es
+  multimedia externa". Variante `resource-card resource-audio` para audio real embebido: mismo
+  encabezado (ícono/título/subtítulo) pero sin botón "Ir", con un `<audio controls>` real debajo
+  (nunca fake — ver regla de audio real más abajo). Un libro/PDF referenciado solo en el panel de
+  Recursos (no embebido en el texto) sigue usando `recurso-row`, sin cambios.
+- **3 conceptos o planes en columnas** (ej. Marco de Sem. 4, Odyssey Plan A/B/C de Sem. 3):
+  reutilizar `plan-grid` / `plan-card plan-a|b|c` (dorado/azul/coral en ese orden fijo) — nunca
+  estilos sueltos nuevos por semana.
+- **Pasos numerados dentro de una instrucción** (1, 2, 3 de una lista de acciones): `step-num-row`
+  + `step-num-badge` (círculo dorado con el número).
+- **Chips de personas** (ej. líderes disponibles): `people-chips` / `people-chip` — fondo de color
+  rotando 4 tonos, ahora con borde izquierdo del mismo tono para que se note más.
+- **`tip-box`** (pregunta colapsable) o **`tip`** (callout fijo): 4 colores disponibles —
+  `tip-gold`, `tip-sage`, `tip-blue`, `tip-coral` — se elige por lo que se quiere destacar, no por
+  rotación automática.
+- **Botón de WhatsApp dentro de un paso** (ej. Reflexión con recordatorio de agendar algo): solo
+  el botón compacto `wa-btn`, nunca envuelto en un panel/caja verde con padding — el FAB 💬 ya
+  cubre "tengo dudas generales", así que un CTA inline es siempre puntual y va ligero.
+- **Caso de la semana** (`panels[].illo`): si no existe una ilustración CSS diseñada para esa
+  escena (`recepcion`, `oficina`, `taller`, `lista`, `lista-roja`, `conv`, `insight`,
+  `insight-coral`, `mercado`), usar directamente un emoji como valor de `illo` (ej. `"😬"`) — el
+  script ya trae un fallback (`illo-emoji`) que lo muestra en grande. Antes esto dejaba el panel
+  vacío si el valor no coincidía con una clase CSS conocida.
+- **Guión largo (—)**: no usar en texto nuevo, se lee artificial/generado por IA. Usar coma, dos
+  puntos o paréntesis según el caso. Única excepción: el marcador de placeholder pendiente
+  `[verificar — ...]`, que es la convención ya establecida del sitio y no cambia.
+- **Footer de "momento"** (`.placeholder-note`, debajo de la tarjeta blanca en
+  `momento-guia.html` y `momento-video.html`): texto fijo de copyright — "© 2026 Grupo Empresarial
+  Bienestar / GEB University. Todos los derechos reservados." — ya no el aviso de plantilla
+  pendiente.
+- **Botón "Regresar al curso"** (`.nav-return`, en `momento-guia.html` y `bienvenida.html`): sin
+  flecha "←", fondo sólido `var(--sage)` (verde azulado, el color de CTA principal del sitio) para
+  que destaque en vez de ser un borde discreto.
+
 ## Personajes (Lupita, Ana, Marcos) — referencia histórica, ya no vinculante
 
 Lupita (triángulo dorado #F0C040), Ana (esfera azul claro #6AB0F5) y Marcos (cuadrado

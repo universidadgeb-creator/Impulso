@@ -2,8 +2,8 @@
   "curso": "Ruta GEB",
   "semana": "Sem. 4",
   "pilar": "Maestría",
-  "titulo": "Plan de Vida parte 2: convierte tu visión en un plan completo",
-  "contexto": "Esta semana esa visión profesional a 24 meses sale de tu cabeza y llega a alguien más — retroalimentación real de un líder dentro de GEB y un plan de vida que equilibra las 4 dimensiones que importan.",
+  "titulo": "Mi plan de vida integral",
+  "contexto": "Esta semana vamos a convertir esa visión profesional a 24 meses en tu primer plan de vida completo: retroalimentación real de un líder dentro de GEB y un plan que equilibra las 4 dimensiones que importan.",
   "variante": "guia",
   "duracion": "2-3 h",
   "video_src": "video/ruta-sem4-apertura.mp4",
@@ -24,10 +24,10 @@
   "steps": [
     {
       "label": "1 · Diagnóstico",
-      "checkLabel": "Viste la charla TED y elegiste a tu líder",
-      "highlight": true,
+      "checkLabel": "Viste el video y elegiste a tu líder",
+      "highlight": false,
       "intro": null,
-      "content": "<p>Venimos de trabajar en nuestra visión profesional. Antes de seguir avanzando, vamos a utilizar uno de los recursos más poderosos: la retroalimentación. En el mundo del design thinking, los mejores prototipos se mejoran hablando con los usuarios. En este caso, tu \"usuario\" será un líder o colaborador con experiencia dentro de la empresa que pueda darte una perspectiva fresca, realista y constructiva sobre tu visión.</p>\n\n<a href=\"https://www.youtube.com/watch?v=4KvnESD44D0\" target=\"_blank\" style=\"display:flex;align-items:center;gap:14px;background:rgba(255,50,50,0.06);border:1px solid rgba(255,80,80,0.2);border-radius:10px;padding:14px 16px;text-decoration:none;margin:16px 0\">\n  <span style=\"font-size:26px;flex-shrink:0\">▶️</span>\n  <div>\n    <div style=\"font-size:11px;color:var(--muted,#8899AA);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px\">YouTube · Charla</div>\n    <div style=\"font-size:14px;color:var(--text,#E8EDF5);font-weight:600\">Sofía Quilici — El networking que sí funciona</div>\n    <div style=\"font-size:12px;color:var(--muted,#8899AA);margin-top:2px\">Cómo construir vínculos basados en confianza, escucha e intercambio a largo plazo</div>\n  </div>\n</a>\n\n<div style=\"background:rgba(200,169,110,0.06);border:1px solid rgba(200,169,110,0.18);border-left:3px solid #C8A96E;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--muted,#8899AA)\">\n  📖 <b style=\"color:var(--text,#E8EDF5)\">Lectura complementaria:</b> Capítulo 9 — <em>Elegir la felicidad</em> (páginas 137–152)\n</div>\n\n<p style=\"font-weight:700;margin:18px 0 10px\">1. Revisa la lista de líderes disponibles</p>\n<p style=\"font-size:13px;color:var(--muted,#8899AA);margin-bottom:10px\">Las siguientes personas dentro de la empresa se han sumado para apoyar este proceso:</p>\n<div style=\"display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px\">\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Raúl Mantecón</div>\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Marco Peregrina</div>\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Julia Rodríguez</div>\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Zor Padilla</div>\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Ismael Castillo</div>\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Hiram González</div>\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Patricia Ibarra</div>\n  <div style=\"background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.18);border-radius:8px;padding:10px 14px;font-size:13px\">Michelle Mejía</div>\n</div>\n\n<p style=\"font-weight:700;margin-bottom:8px\">2. Elige a tu interlocutor</p>\n<p style=\"font-size:14px;margin-bottom:12px\">Selecciona a una persona a quien te gustaría buscar esta semana para platicarle brevemente que estás participando en este programa y mostrarle el borrador general de tu visión profesional a 24 meses.</p>\n\n<details style=\"background:rgba(79,156,249,0.05);border:1px solid rgba(79,156,249,0.2);border-left:3px solid #4F9CF9;border-radius:8px;padding:0;margin-bottom:18px;overflow:hidden\">\n  <summary style=\"cursor:pointer;font-weight:600;font-size:13px;color:#4F9CF9;padding:12px 16px;list-style:none\">💬 Plantilla de mensaje WhatsApp — haz clic para ver</summary>\n  <div style=\"padding:0 16px 14px;font-size:13px;line-height:1.8;color:var(--text,#E8EDF5)\">\n    <em>\"Hola, [Nombre del Líder]. Espero que estés teniendo una excelente semana.<br><br>\n    Te escribo porque estoy trabajando en un ejercicio de desarrollo personal y profesional a 24 meses con Universidad, y dentro del proceso nos invitaron a buscar a alguien cuya trayectoria y experiencia admiremos para pedirle retroalimentación.<br><br>\n    Pensé en ti porque valoro mucho tu perspectiva y experiencia. ¿Crees que durante la semana podrías regalarme 15 o 20 minutos de tu tiempo para platicar un ratito y compartirte mis ideas? Me encantaría conocer tu opinión.<br><br>\n    ¡Muchas gracias y avísame si te es posible! Saludos.\"</em>\n  </div>\n</details>\n\n<p style=\"font-weight:700;margin-bottom:8px\">3. Prepara una pregunta clave y valiosa</p>\n<p style=\"font-size:14px;margin-bottom:10px\">No se trata de pedir una evaluación estricta, sino de abrir una conversación enriquecedora. Por ejemplo:</p>\n<ul style=\"padding-left:18px;font-size:13px;color:var(--muted,#8899AA);line-height:1.9\">\n  <li>\"Basado en tu experiencia en la empresa, ¿qué habilidades o áreas de oportunidad ves clave para desarrollar si quiero enfocarme hacia este rumbo en los próximos dos años?\"</li>\n  <li>\"Si estuvieras en mi lugar evaluando estas opciones, ¿qué factor o riesgo crees que debería tomar más en cuenta?\"</li>\n</ul>",
+      "content": "<p>Venimos de trabajar en tu visión profesional. Antes de seguir avanzando, vamos a utilizar uno de los recursos más poderosos: la retroalimentación. En el mundo del design thinking, los mejores prototipos se mejoran hablando con los usuarios. En este caso, tu \"usuario\" será un líder o colaborador con experiencia dentro de la empresa que pueda darte una perspectiva fresca, realista y constructiva sobre tu visión.</p>\n\n<a class=\"resource-card\" href=\"https://www.youtube.com/watch?v=4KvnESD44D0\" target=\"_blank\">\n  <span class=\"resource-ico\">▶️</span>\n  <div class=\"resource-txt\">\n    <div class=\"resource-title\">Sofía Quilici: el networking que sí funciona</div>\n    <div class=\"resource-sub\">YouTube · Charla · Cómo construir vínculos basados en confianza, escucha e intercambio a largo plazo</div>\n  </div>\n  <span class=\"resource-btn\">Ir →</span>\n</a>\n\n<div class=\"step-num-row\" style=\"margin-top:18px\">\n  <span class=\"step-num-badge\">1</span>\n  <div>\n    <strong>Revisa la lista de líderes disponibles.</strong> Las siguientes personas dentro de la empresa se han sumado para apoyar este proceso:\n    <div class=\"people-chips\">\n      <span class=\"people-chip\">Raúl Mantecón</span>\n      <span class=\"people-chip\">Marco Peregrina</span>\n      <span class=\"people-chip\">Julia Rodríguez</span>\n      <span class=\"people-chip\">Zor Padilla</span>\n      <span class=\"people-chip\">Ismael Castillo</span>\n      <span class=\"people-chip\">Hiram González</span>\n      <span class=\"people-chip\">Patricia Ibarra</span>\n      <span class=\"people-chip\">Michelle Mejía</span>\n    </div>\n  </div>\n</div>\n\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">2</span>\n  <div>\n    <strong>Elige a tu interlocutor.</strong> Selecciona a una persona a quien te gustaría buscar esta semana para platicarle brevemente que estás participando en este programa y mostrarle el borrador general de tu visión profesional a 24 meses.\n    <details class=\"tip-box tip-blue\">\n      <summary>💬 Plantilla de mensaje WhatsApp</summary>\n      <em>\"Hola, [Nombre del Líder]. Espero que estés teniendo una excelente semana.<br><br>\n      Te escribo porque estoy trabajando en un ejercicio de desarrollo personal y profesional a 24 meses con Universidad, y dentro del proceso nos invitaron a buscar a alguien cuya trayectoria y experiencia admiremos para pedirle retroalimentación.<br><br>\n      Pensé en ti porque valoro mucho tu perspectiva y experiencia. ¿Crees que durante la semana podrías regalarme 15 o 20 minutos de tu tiempo para platicar un ratito y compartirte mis ideas? Me encantaría conocer tu opinión.<br><br>\n      ¡Muchas gracias y avísame si te es posible! Saludos.\"</em>\n    </details>\n  </div>\n</div>\n\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">3</span>\n  <div>\n    <strong>Prepara una pregunta clave y valiosa.</strong> No se trata de pedir una evaluación estricta, sino de abrir una conversación enriquecedora. Por ejemplo:\n    <ul>\n      <li>\"Basado en tu experiencia en la empresa, ¿qué habilidades o áreas de oportunidad ves clave para desarrollar si quiero enfocarme hacia este rumbo en los próximos dos años?\"</li>\n      <li>\"Si estuvieras en mi lugar evaluando estas opciones, ¿qué factor o riesgo crees que debería tomar más en cuenta?\"</li>\n    </ul>\n  </div>\n</div>",
       "popup": {
         "title": "Diagnóstico",
         "instr": "Define con quién hablarás y qué le preguntarás.",
@@ -50,7 +50,7 @@
       "checkLabel": "Profundizaste en el concepto de Plan de vida",
       "highlight": false,
       "intro": null,
-      "content": "<p>El error más común al planificar el futuro es enfocar toda la energía exclusivamente en la casilla profesional —el trabajo, el puesto, el sueldo—, olvidando que somos un sistema interconectado.</p>\n<p style=\"margin-top:12px\">Para construir un plan a 24 meses que realmente funcione, vamos a utilizar tres conceptos clave:</p>\n\n<div style=\"margin-top:16px;display:flex;flex-direction:column;gap:14px\">\n  <div style=\"background:rgba(200,169,110,0.06);border:1px solid rgba(200,169,110,0.15);border-radius:10px;padding:16px 18px\">\n    <div style=\"font-weight:700;color:#C8A96E;margin-bottom:6px\">1. La Rueda de la Energía — Sostenibilidad</div>\n    <div style=\"font-size:13px;color:var(--muted,#8899AA);line-height:1.7\">Un plan profesional ambicioso requiere combustible. Ese combustible es tu energía física y mental. Si tu meta a 24 meses implica asumir más responsabilidades, pero tus hábitos de salud están en ceros, el plan va a fracasar no por falta de talento, sino por falta de energía sistémica.</div>\n  </div>\n  <div style=\"background:rgba(200,169,110,0.06);border:1px solid rgba(200,169,110,0.15);border-radius:10px;padding:16px 18px\">\n    <div style=\"font-weight:700;color:#C8A96E;margin-bottom:6px\">2. El Ecosistema de Apoyo — Relaciones</div>\n    <div style=\"font-size:13px;color:var(--muted,#8899AA);line-height:1.7\">Nadie se gradúa solo, nadie crece solo en una empresa. Las metas profesionales siempre impactan —y necesitan— al entorno cercano: la familia, la pareja o los amigos. Integrar las relaciones en el plan significa asegurarte de que tu crecimiento no sacrifique lo que más valoras.</div>\n  </div>\n  <div style=\"background:rgba(200,169,110,0.06);border:1px solid rgba(200,169,110,0.15);border-radius:10px;padding:16px 18px\">\n    <div style=\"font-weight:700;color:#C8A96E;margin-bottom:6px\">3. El Balance de las 4 Esquinas</div>\n    <div style=\"font-size:13px;color:var(--muted,#8899AA);line-height:1.7\">Un plan de vida integral a 24 meses equilibra cuatro dimensiones:</div>\n    <ul style=\"padding-left:16px;font-size:13px;color:var(--muted,#8899AA);line-height:2;margin-top:6px\">\n      <li><b style=\"color:var(--text,#E8EDF5)\">Trabajo / Profesión:</b> Qué aportas al mundo y cómo creces laboralmente (tu Ikigai profesional).</li>\n      <li><b style=\"color:var(--text,#E8EDF5)\">Salud / Bienestar:</b> La energía y el cuerpo que te sostienen.</li>\n      <li><b style=\"color:var(--text,#E8EDF5)\">Desarrollo Personal:</b> Lo que aprendes, lees o disfrutas por placer y crecimiento interno.</li>\n      <li><b style=\"color:var(--text,#E8EDF5)\">Comunidad / Relaciones:</b> La calidad de tus vínculos y tu red de apoyo.</li>\n    </ul>\n  </div>\n</div>",
+      "content": "<p>El error más común al planificar el futuro es enfocar toda la energía exclusivamente en la casilla profesional: el trabajo, el puesto, el sueldo, olvidando que somos un sistema interconectado.</p>\n<p style=\"margin-top:12px\">Para construir un plan a 24 meses que realmente funcione, vamos a utilizar tres conceptos clave:</p>\n\n<div class=\"plan-grid\" style=\"margin-top:16px\">\n  <div class=\"plan-card plan-a\">\n    <div class=\"plan-title\">1 · La Rueda de la Energía</div>\n    <div class=\"plan-desc\">Un plan profesional ambicioso requiere combustible: tu energía física y mental. Si tu meta a 24 meses implica asumir más responsabilidades, pero tus hábitos de salud están en ceros, el plan va a fracasar no por falta de talento, sino por falta de energía.</div>\n  </div>\n  <div class=\"plan-card plan-b\">\n    <div class=\"plan-title\">2 · El Ecosistema de Apoyo</div>\n    <div class=\"plan-desc\">Nadie se gradúa solo, nadie crece solo en una empresa. Las metas profesionales siempre impactan y necesitan al entorno cercano: la familia, la pareja o los amigos. Integrar las relaciones significa asegurarte de que tu crecimiento no sacrifique lo que más valoras.</div>\n  </div>\n  <div class=\"plan-card plan-c\">\n    <div class=\"plan-title\">3 · El Balance de las 4 Esquinas</div>\n    <div class=\"plan-desc\">Un plan de vida integral a 24 meses equilibra cuatro dimensiones:\n      <ul style=\"padding-left:14px;margin-top:6px;line-height:1.7\">\n        <li><strong>Trabajo:</strong> qué aportas y cómo creces laboralmente.</li>\n        <li><strong>Salud:</strong> la energía y el cuerpo que te sostienen.</li>\n        <li><strong>Desarrollo:</strong> lo que aprendes y disfrutas por gusto propio.</li>\n        <li><strong>Comunidad:</strong> tus vínculos y tu red de apoyo.</li>\n      </ul>\n    </div>\n  </div>\n</div>",
       "popup": {
         "title": "Marco",
         "instr": "Reflexiona antes de continuar.",
@@ -73,7 +73,7 @@
       "checkLabel": "Creaste tu primer plan de vida",
       "highlight": false,
       "intro": null,
-      "content": "<p>En la sección de Recursos de esta semana está la plantilla descárgala si te es más fácil llenarla en tu computadora o celular. Si prefieres a mano en un cuaderno también sirve; lo que importa es el contenido, no el formato.</p>\n<p style=\"margin-top:10px\">Vamos a construir una radiografía de los siguientes 24 meses y someter tu visión profesional a una \"prueba de realidad\".</p>\n\n<div style=\"margin-top:18px\">\n  <div style=\"font-weight:700;font-size:15px;margin-bottom:10px\">Paso 1: La Prueba de Coherencia</div>\n  <p style=\"font-size:13px;color:var(--muted,#8899AA);margin-bottom:10px\">Mira tu objetivo profesional principal a 24 meses. Ahora responde:</p>\n  <ul style=\"padding-left:18px;font-size:13px;color:var(--muted,#8899AA);line-height:2\">\n    <li>¿Qué nivel de energía física y mental me va a exigir este objetivo profesional?</li>\n    <li>¿Qué hábito de salud o bienestar necesito empezar a cuidar hoy? <em>(Ejemplo: Dormir mejor, salir a caminar, separar espacios de desconexión)</em></li>\n    <li>¿Quiénes de mi entorno personal se ven afectados o involucrados en este cambio? <em>(Ejemplo: Acuerdos de tiempo con la familia)</em></li>\n  </ul>\n</div>\n\n<div style=\"margin-top:18px\">\n  <div style=\"font-weight:700;font-size:15px;margin-bottom:10px\">Paso 2: El Plan de los Otros Ámbitos (a 24 meses)</div>\n  <p style=\"font-size:13px;color:var(--muted,#8899AA);margin-bottom:10px\">Define una sola meta clara para los próximos dos años en cada pilar:</p>\n  <div style=\"display:flex;flex-direction:column;gap:8px\">\n    <div style=\"background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:12px 14px;font-size:13px\"><b>🏃 Salud y Energía:</b> <span style=\"color:var(--muted,#8899AA)\">\"Mantener una rutina de ejercicio 3 veces por semana y chequeos médicos anuales.\"</span></div>\n    <div style=\"background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:12px 14px;font-size:13px\"><b>📚 Desarrollo Personal / Aprendizaje:</b> <span style=\"color:var(--muted,#8899AA)\">\"Aprender inglés básico o desarrollar una habilidad digital que complemente mi perfil.\"</span></div>\n    <div style=\"background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:12px 14px;font-size:13px\"><b>🤝 Relaciones y Entorno:</b> <span style=\"color:var(--muted,#8899AA)\">\"Tiempo de calidad ininterrumpido los fines de semana y fortalecer mi red interna en la empresa.\"</span></div>\n  </div>\n</div>\n\n<div style=\"margin-top:18px\">\n  <div style=\"font-weight:700;font-size:15px;margin-bottom:10px\">Paso 3: El Primer Hito de 30 Días</div>\n  <p style=\"font-size:13px;color:var(--muted,#8899AA);margin-bottom:10px\">Elige <b>una sola micro-acción</b> que puedas empezar mañana mismo.</p>\n  <details style=\"background:rgba(200,169,110,0.05);border:1px solid rgba(200,169,110,0.2);border-left:3px solid #C8A96E;border-radius:8px;overflow:hidden\">\n    <summary style=\"cursor:pointer;font-weight:600;font-size:13px;color:#C8A96E;padding:12px 16px;list-style:none\">💡 Regla de oro — haz clic para ver</summary>\n    <div style=\"padding:0 16px 14px;font-size:13px;color:var(--muted,#8899AA);line-height:1.7\">Debe ser tan pequeña que sea <b>imposible de rechazar</b>.<br><br>Ejemplos: \"Voy a agendar 15 minutos en la mañana para estirar\" o \"Voy a escribirle a un líder de otra área para tomar un café y conocer su rol\".</div>\n  </details>\n</div>",
+      "content": "<p>En la sección de <strong>Recursos</strong> está la plantilla: descárgala si te es más fácil llenarla en tu computadora o celular. Si prefieres a mano en un cuaderno también sirve; lo que importa es el contenido, no el formato.</p>\n<p style=\"margin-top:10px\">Vamos a construir una radiografía de los siguientes 24 meses y someter tu visión profesional a una prueba de realidad.</p>\n\n<div class=\"step-num-row\" style=\"margin-top:18px\">\n  <span class=\"step-num-badge\">1</span>\n  <div>\n    <strong>La Prueba de Coherencia.</strong> Mira tu objetivo profesional principal a 24 meses. Ahora responde:\n    <ul>\n      <li>¿Qué nivel de energía física y mental me va a exigir este objetivo?</li>\n      <li>¿Qué hábito de salud o bienestar necesito empezar a cuidar hoy? <em>(ej. dormir mejor, salir a caminar, separar espacios de desconexión)</em></li>\n      <li>¿Quiénes de mi entorno personal se ven afectados o involucrados en este cambio? <em>(ej. acuerdos de tiempo con la familia)</em></li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">2</span>\n  <div>\n    <strong>El Plan de los Otros Ámbitos (a 24 meses).</strong> Define una sola meta clara para los próximos dos años en cada pilar:\n    <div class=\"plan-grid\" style=\"margin-top:10px\">\n      <div class=\"plan-card plan-a\"><div class=\"plan-title\">🏃 Salud y Energía</div><div class=\"plan-desc\">\"Mantener una rutina de ejercicio 3 veces por semana y chequeos médicos anuales.\"</div></div>\n      <div class=\"plan-card plan-b\"><div class=\"plan-title\">📚 Desarrollo Personal</div><div class=\"plan-desc\">\"Aprender inglés básico o desarrollar una habilidad digital que complemente mi perfil.\"</div></div>\n      <div class=\"plan-card plan-c\"><div class=\"plan-title\">🤝 Relaciones y Entorno</div><div class=\"plan-desc\">\"Tiempo de calidad ininterrumpido los fines de semana y fortalecer mi red interna en la empresa.\"</div></div>\n    </div>\n  </div>\n</div>\n\n<div class=\"step-num-row\">\n  <span class=\"step-num-badge\">3</span>\n  <div>\n    <strong>El Primer Hito de 30 Días.</strong> Elige una sola micro-acción que puedas empezar mañana mismo.\n    <details class=\"tip-box tip-gold\">\n      <summary>💡 Regla de oro</summary>\n      Debe ser tan pequeña que sea <strong>imposible de rechazar</strong>.<br><br>Ejemplos: \"Voy a agendar 15 minutos en la mañana para estirar\" o \"Voy a escribirle a un líder de otra área para tomar un café y conocer su rol\".\n    </details>\n  </div>\n</div>",
       "popup": {
         "title": "Aplicación",
         "instr": "Registra tu plan de vida completo.",
@@ -86,17 +86,17 @@
           {
             "id": "a2",
             "tipo": "texto",
-            "label": "Meta a 24 meses — Salud y energía"
+            "label": "Meta a 24 meses: salud y energía"
           },
           {
             "id": "a3",
             "tipo": "texto",
-            "label": "Meta a 24 meses — Desarrollo personal y aprendizaje"
+            "label": "Meta a 24 meses: desarrollo personal y aprendizaje"
           },
           {
             "id": "a4",
             "tipo": "texto",
-            "label": "Meta a 24 meses — Relaciones y entorno"
+            "label": "Meta a 24 meses: relaciones y entorno"
           },
           {
             "id": "a5",
@@ -122,7 +122,7 @@
         {
           "illo": "📱",
           "quote": "\"Claro que sí, nos tomamos un café el jueves.\"",
-          "text": "Menos de 24 horas después, su teléfono vibró. El mensaje había funcionado porque era directo, transparente y honesto. Ana no pedía un ascenso inmediato — solo 15 minutos. Descubrió que los líderes están más dispuestos a escuchar de lo que imaginamos cuando la intención es genuina."
+          "text": "Menos de 24 horas después, su teléfono vibró. El mensaje había funcionado porque era directo, transparente y honesto. Ana no pedía un ascenso inmediato, solo 15 minutos. Descubrió que los líderes están más dispuestos a escuchar de lo que imaginamos cuando la intención es genuina."
         },
         {
           "illo": "🚪",
@@ -132,16 +132,16 @@
         {
           "illo": "🗺️",
           "quote": "\"Dar el primer paso cambia todo el panorama.\"",
-          "text": "Al final de la semana, Ana tenía algo que no poseía antes: una conversación real, retroalimentación valiosa y la certeza de que actuar cambia todo. La plantilla no hizo que el miedo desapareciera — cumplió su propósito real: reducir la fricción para empezar."
+          "text": "Al final de la semana, Ana tenía algo que no poseía antes: una conversación real, retroalimentación valiosa y la certeza de que actuar cambia todo. La plantilla no hizo que el miedo desapareciera, cumplió su propósito real: reducir la fricción para empezar."
         }
       ]
     },
     {
       "label": "5 · Reflexión",
       "checkLabel": "Agendaste retroalimentación de un líder",
-      "highlight": true,
+      "highlight": false,
       "intro": null,
-      "content": "<p>Si aún no has agendado la conversación con el líder que elegiste, es momento de hacerlo. Esta debe suceder <b>a más tardar la próxima semana</b>, pues deberás subir el resultado en la siguiente entrega.</p>\n\n<div style=\"margin-top:20px;padding:16px;background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.2);border-radius:10px\">\n  <div style=\"font-size:13px;color:var(--muted,#8899AA);margin-bottom:10px\">¿Tienes un caso particular o necesitas orientación para iniciar la conversación?</div>\n  <a href=\"https://wa.me/523314112703?text=Necesito+ayuda+para+resolver+la+conversaci%C3%B3n+con+l%C3%ADder\" target=\"_blank\" style=\"display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px\">\n    💬 Necesito ayuda para resolver la conversación con líder\n  </a>\n</div>",
+      "content": "<p>Si aún no has agendado la conversación con el líder que elegiste, es momento de hacerlo. Esta debe suceder <strong>a más tardar la próxima semana</strong>, pues deberás subir el resultado en la siguiente entrega.</p>\n\n<p style=\"margin-top:16px\">¿Tienes un caso particular o necesitas orientación para iniciar la conversación?</p>\n<a class=\"wa-btn\" href=\"https://wa.me/523314112703?text=Necesito+ayuda+para+resolver+la+conversaci%C3%B3n+con+l%C3%ADder\" target=\"_blank\">💬 Necesito ayuda para resolver la conversación con líder</a>",
       "popup": {
         "title": "Reflexión final",
         "instr": "Revisa tus respuestas, puedes editar o completar alguna antes de entregar.",
@@ -150,7 +150,7 @@
     }
   ],
   "checklistLabels": [
-    "Viste la charla TED y elegiste a tu líder",
+    "Viste el video y elegiste a tu líder",
     "Profundizaste en el concepto de Plan de vida",
     "Creaste tu primer plan de vida",
     "Agendaste retroalimentación de un líder"
@@ -163,7 +163,7 @@
     },
     {
       "icono": "📺",
-      "texto": "YouTube — Sofía Quilici: El networking que sí funciona · Cómo construir vínculos basados en confianza antes de elegir a tu líder",
+      "texto": "YouTube: Sofía Quilici, el networking que sí funciona · Cómo construir vínculos basados en confianza antes de elegir a tu líder",
       "url": "https://www.youtube.com/watch?v=4KvnESD44D0"
     }
   ],
@@ -203,19 +203,19 @@
         "id": "a2",
         "modo": "entrega",
         "tipo": "texto",
-        "label": "Meta a 24 meses — Salud y energía"
+        "label": "Meta a 24 meses: salud y energía"
       },
       {
         "id": "a3",
         "modo": "entrega",
         "tipo": "texto",
-        "label": "Meta a 24 meses — Desarrollo personal"
+        "label": "Meta a 24 meses: desarrollo personal"
       },
       {
         "id": "a4",
         "modo": "entrega",
         "tipo": "texto",
-        "label": "Meta a 24 meses — Relaciones y entorno"
+        "label": "Meta a 24 meses: relaciones y entorno"
       },
       {
         "id": "a5",
