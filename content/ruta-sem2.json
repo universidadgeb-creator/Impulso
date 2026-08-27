@@ -119,22 +119,11 @@
     },
     {
       "label": "4 · Caso",
-      "checkLabel": "Realizaste una investigación de mercado",
+      "checkLabel": null,
       "noBox": true,
       "intro": "Cada semana, leerás un caso que aplica lo que estuviste trabajando.",
-      "content": "Vamos a aplicar este ejercicio en lo que ya trabajaste. En la IA de tu preferencia o bien, en internet escribe algo como lo siguiente:<br><br><div class=\"prompt-box\"><span class=\"prompt-label\">💬 Prompt para copiar y pegar</span><div class=\"prompt-text\">Aquí están mis respuestas a dos preguntas: 1) problemas que veo que nadie resuelve: [escribe aquí tus respuestas]. 2) habilidades por las que me han pagado o podrían pagarme: [escribe aquí tus respuestas]. Dime 3 sectores o puestos reales donde esto ya se está pagando hoy, por qué están creciendo, y cómo alguien con mi perfil podría entrar.</div><button type=\"button\" class=\"copy-prompt-btn\">📋 Copiar prompt</button></div><details class=\"tip-box tip-gold\"><summary>¿Cómo sé que encontré algo real?</summary>Una vacante con salario visible que mencione exactamente tus palabras. Si el resultado son nombres genéricos sin número de salario, pídele que busque una vacante concreta en OCC, Indeed o Computrabajo.</details>",
-      "popup": {
-        "title": "Caso",
-        "instr": "Después de tu investigación:",
-        "fields": [
-          {
-            "id": "c1",
-            "label": "¿Qué pista de vacante o sector encontraste que no esperabas?",
-            "tipo": "ta",
-            "rows": 4
-          }
-        ]
-      },
+      "content": "",
+      "popup": null,
       "panels": [
         {
           "n": "01",
@@ -179,7 +168,6 @@
     "Escuchaste el podcast completo",
     "Entendiste el concepto de IKIGAI",
     "Encontraste tu misión, vocación y profesión",
-    "Realizaste una investigación de mercado",
     "Conversaste con alguien de confianza"
   ],
   "recursos": [
@@ -245,11 +233,6 @@
         "id": "a5",
         "tipo": "textarea",
         "label": "Tu profesión"
-      },
-      {
-        "id": "c1",
-        "tipo": "textarea",
-        "label": "Pista de vacante o sector inesperado"
       },
       {
         "id": "r1",
