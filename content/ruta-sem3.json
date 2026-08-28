@@ -184,9 +184,9 @@
   ],
   "recursos": [
     {
-      "icono": "📋",
-      "texto": "Plantilla · Plan de Vida a 24 meses",
-      "url": "recursos/ruta-sem3-plantilla-plan-de-vida.docx"
+      "icono": "📝",
+      "texto": "Hoja de trabajo de esta semana (Word)",
+      "url": "recursos/ruta-sem3-hoja-trabajo.docx"
     },
     {
       "icono": "📖",
