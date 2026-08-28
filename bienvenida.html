@@ -117,6 +117,17 @@ html.unlocked .lock-screen{display:none;}
 .media-placeholder-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
 .media-placeholder-sub{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;}
 
+/* barra inferior de respaldo — por si el avance automático de un paso a otro
+   falla (video que no dispara "ended", etc.), mismo patrón que el step-nav
+   del resto de las semanas en momento-guia.html */
+.step-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;}
+.step-nav-btn{font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:100px;border:1.5px solid #ECEAE4;background:none;color:#6B6558;cursor:pointer;transition:.15s;}
+.step-nav-btn:disabled{opacity:.35;cursor:default;}
+.step-nav-btn:not(:disabled):hover{border-color:#D8D3C6;}
+.step-nav-btn.primary{background:#F0C040;color:#0B0F16;border:none;}
+.step-nav-btn.primary.final{background:#7EC8A0;}
+.step-counter{font-size:11.5px;color:#9A968C;font-weight:700;white-space:nowrap;}
+
 /* right side: lo que vas a lograr + avance (siempre presente) */
 .side{border-left:1px solid #ECEAE4;padding:22px;background:#FAFAF8;display:flex;flex-direction:column;gap:20px;}
 .label-caps{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9A968C;}
@@ -309,6 +320,11 @@ html.unlocked .lock-screen{display:none;}
           </div>
 
           <div class="context-block" id="bv-contexto-despues"></div>
+
+          <div class="step-nav" id="step-nav">
+            <span class="step-counter" id="step-counter"></span>
+            <button type="button" class="step-nav-btn primary" id="btn-siguiente"></button>
+          </div>
         </div>
 
         <div class="side">
@@ -461,7 +477,38 @@ function renderChecklist() {
     listaMostrada = true;
     mostrarBienvenidaLista();
   }
+
+  renderStepNav(todoHecho);
 }
+
+/* ---- BOTÓN DE RESPALDO al final de la tarjeta — por si el avance
+   automático de un paso a otro no ocurre (ej. el video no dispara "ended"),
+   siempre hay una forma manual de seguir. ---- */
+function renderStepNav(todoHecho) {
+  var nav = document.getElementById('step-nav');
+  var counter = document.getElementById('step-counter');
+  var btn = document.getElementById('btn-siguiente');
+
+  if (todoHecho) { nav.style.display = 'none'; return; }
+  nav.style.display = 'flex';
+
+  if (!estado.video) {
+    counter.textContent = 'Paso 1 de 3 · Video de bienvenida';
+    btn.textContent = 'Continuar';
+  } else if (!estado.encuesta) {
+    counter.textContent = 'Paso 2 de 3 · Encuesta';
+    btn.textContent = 'Continuar';
+  } else {
+    counter.textContent = 'Paso 3 de 3 · Registro único';
+    btn.textContent = 'Continuar';
+  }
+}
+
+document.getElementById('btn-siguiente').addEventListener('click', function() {
+  if (!estado.video) { marcarVideoVisto(); return; }
+  if (!estado.encuesta) { abrirPopup('encuesta'); return; }
+  if (!estado.registro) { abrirPopup('registro'); return; }
+});
 
 /* ---- BANNER DE LISTO — no reemplaza la tarjeta, se queda arriba para poder
    seguir viendo/revisando lo que ya hiciste en la semana ---- */
@@ -698,12 +745,14 @@ function renderRegistro(soloLectura) {
         }
       })
       .catch(function() {
-        /* Si falla el POST, guardamos local y continuamos */
-        estado.registro = true;
-        guardarEstado(estado);
-        estado_el.className = 'estado-envio';
-        estado_el.textContent = 'Sin conexión — registro local guardado.';
-        setTimeout(function() { cerrarPopup(); renderChecklist(); }, 1200);
+        /* No se pudo confirmar que el registro llegó al servidor — nunca se
+           marca como completado sin esa confirmación, o se pierden entregas
+           en silencio (esto pasó: 3 registros de prueba no llegaron a la
+           hoja porque este catch los daba por buenos). Se deja el popup
+           abierto para reintentar; los datos que ya escribió no se pierden,
+           EntregaEngine.montarIdentidad ya los guardó localmente. */
+        estado_el.className = 'estado-envio err';
+        estado_el.textContent = 'No se pudo guardar tu registro. Revisa tu conexión e inténtalo de nuevo.';
       });
     }
   );
