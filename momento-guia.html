@@ -55,11 +55,11 @@ html.unlocked .lock-screen{display:none;}
 .lock-submit:hover{transform:translateY(-1px);}
 .lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
 .lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
-.lock-wa-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:100px;}
+.lock-wa-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:var(--sage);color:var(--void);font-size:13px;font-weight:700;padding:9px 18px;border-radius:100px;}
 .lock-wa-btn:hover{opacity:.92;}
 
 /* PAGE */
-.momento-wrap{max-width:min(96vw,1600px);margin:0 auto;padding:96px 20px 60px;}
+.momento-wrap{max-width:1100px;margin:0 auto;padding:96px 20px 60px;}
 .top-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
 .breadcrumb{font-size:11.5px;color:var(--fog);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .breadcrumb b{color:var(--white);}
@@ -76,7 +76,7 @@ html.unlocked .lock-screen{display:none;}
   box-shadow:0 30px 80px rgba(0,0,0,.4);
 }
 .card-topbar{height:5px;background:linear-gradient(90deg,#F0C040,#F07060,#7EC8A0,#6AB0F5);}
-.momento-grid{display:grid;grid-template-columns:220px 1fr 300px;min-height:calc(100vh - 180px);}
+.momento-grid{display:grid;grid-template-columns:220px 1fr 300px;}
 
 /* left rail: temario de la semana */
 .rail{border-right:1px solid #ECEAE4;padding:24px 18px;background:#FAFAF8;}
@@ -101,7 +101,7 @@ html.unlocked .lock-screen{display:none;}
 .tag-pilar{color:#3F8F63;background:rgba(126,200,160,.12);}
 
 .momento-title{font-family:Georgia,serif;font-size:22px;color:#14181F;}
-.momento-context{font-size:13px;color:#6B6558;line-height:1.6;margin-top:8px;}
+.momento-context{font-size:14.5px;color:#6B6558;line-height:1.6;margin-top:8px;}
 
 /* ── VIDEO DE APERTURA ── */
 .video-wrap{background:#0B0F16;border-radius:14px;overflow:hidden;}
@@ -112,15 +112,18 @@ html.unlocked .lock-screen{display:none;}
    defecto (sin línea de color). La línea de color (step-box-highlight,
    o los tip-box) se reserva para resaltar algo puntual — ej. el caso
    de la semana, o una pregunta para profundizar. */
-.step-box-neutral{background:#F3F1EC;border-radius:10px;padding:16px 18px;font-size:13px;color:#3A3630;line-height:1.7;margin-bottom:14px;}
+.step-box-neutral{background:#F3F1EC;border-radius:10px;padding:16px 18px;font-size:14.5px;color:#3A3630;line-height:1.7;margin-bottom:14px;}
 .step-box-neutral:last-child{margin-bottom:0;}
-.step-box-highlight{background:#FAFAF9;border-left:3px solid #F0C040;border-radius:0 10px 10px 0;padding:16px 18px;font-size:13px;color:#3A3630;line-height:1.7;margin-bottom:14px;}
+.step-box-highlight{background:#FAFAF9;border-left:3px solid var(--blue-hi);border-radius:0 10px 10px 0;padding:16px 18px;font-size:14.5px;color:#3A3630;line-height:1.7;margin-bottom:14px;}
 .step-box-highlight:last-child{margin-bottom:0;}
 .step-box-neutral ul, .step-box-highlight ul{margin:6px 0 6px 18px;}
+.check-visual-list{display:flex;flex-direction:column;gap:8px;margin:10px 0;list-style:none;padding-left:0;}
+.check-visual{display:flex;align-items:flex-start;gap:8px;cursor:pointer;}
+.check-visual input{margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:#7EC8A0;cursor:pointer;}
 .step-box-neutral a, .step-box-highlight a{color:#3A7FC9;text-decoration:underline;}
 .step-box-neutral li, .step-box-highlight li{margin-bottom:4px;}
 
-.tip-box,.tip{border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:12px;line-height:1.65;}
+.tip-box,.tip{border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:13.5px;line-height:1.65;}
 .tip-gold{background:#FFFBEB;border-left:3px solid #F0C040;color:#78350F;}
 .tip-gold strong{color:#92400E;font-size:11px;}
 .tip-sage{background:#F0FDF4;border-left:3px solid #7EC8A0;color:#166534;}
@@ -142,13 +145,13 @@ html.unlocked .lock-screen{display:none;}
 .tip-blue summary{color:#1E4E7A;}
 .tip-coral summary{color:#9B1C1C;}
 
-/* prompt de IA para copiar y pegar — caja gris neutra, nunca de color
-   (no es algo que se "resalte", es una herramienta que se usa) */
-.prompt-box{margin-bottom:14px;}
-.prompt-label{font-weight:700;font-size:12.5px;margin-bottom:8px;display:block;}
-.prompt-text{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#3A3630;background:#fff;border:1px solid #ECEAE4;border-radius:8px;padding:10px 12px;line-height:1.6;white-space:pre-wrap;margin-bottom:10px;}
-.copy-prompt-btn{font-size:12px;font-weight:700;padding:8px 14px;border-radius:100px;border:1.5px solid #ECEAE4;background:#fff;color:#6B6558;cursor:pointer;transition:.15s;}
-.copy-prompt-btn:hover{border-color:#D8D3C6;}
+/* prompt de IA para copiar y pegar — tratado como recurso: misma familia
+   violeta que .resource-card, con el texto del prompt y botón de copiar. */
+.prompt-box{background:#EAE2F7;border:1.5px solid rgba(122,95,176,.4);border-radius:12px;padding:14px 16px;margin-bottom:14px;}
+.prompt-label{font-weight:700;font-size:12.5px;margin-bottom:8px;display:block;color:#4A3A73;}
+.prompt-text{font-family:ui-monospace,Consolas,monospace;font-size:13px;color:#3A3630;background:#fff;border:1px solid rgba(122,95,176,.25);border-radius:8px;padding:10px 12px;line-height:1.6;white-space:pre-wrap;margin-bottom:10px;}
+.copy-prompt-btn{font-size:12px;font-weight:700;padding:8px 14px;border-radius:100px;border:1.5px solid rgba(122,95,176,.35);background:#fff;color:#7A5FB0;cursor:pointer;transition:.15s;}
+.copy-prompt-btn:hover{border-color:#7A5FB0;}
 .copy-prompt-btn.copiado{border-color:#7EC8A0;color:#3F8F63;}
 
 /* pasos numerados con ícono, para distinguir 1/2/3 dentro de una lista de
@@ -159,18 +162,15 @@ html.unlocked .lock-screen{display:none;}
 
 /* lista de personas en chips de colores (ej. Sem. 3, líderes disponibles) —
    compacto, no ocupa una fila entera por persona */
-.people-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px;}
-.people-chip{font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:100px;white-space:nowrap;}
-.people-chip:nth-child(4n+1){background:rgba(240,192,64,.15);color:#92400E;border-left:3px solid #F0C040;}
-.people-chip:nth-child(4n+2){background:rgba(106,176,245,.15);color:#1E4E7A;border-left:3px solid #6AB0F5;}
-.people-chip:nth-child(4n+3){background:rgba(126,200,160,.15);color:#166534;border-left:3px solid #7EC8A0;}
-.people-chip:nth-child(4n+4){background:rgba(240,112,96,.15);color:#9B1C1C;border-left:3px solid #F07060;}
+.people-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 14px;}
+.people-chip{font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:100px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#F3F1EC;color:#3A3630;text-align:center;}
+@media(max-width:480px){.people-chips{grid-template-columns:1fr;}}
 
 /* 3 planes en columnas (ej. Sem. 3, Odyssey Plan A/B/C) */
 .plan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0;}
 .plan-card{border-radius:10px;padding:12px 14px;}
 .plan-card .plan-title{font-size:12.5px;font-weight:700;margin-bottom:6px;}
-.plan-card .plan-desc{font-size:12px;line-height:1.55;color:#6B6558;}
+.plan-card .plan-desc{font-size:13px;line-height:1.55;color:#6B6558;}
 .plan-a{background:#FFFBEB;border-left:3px solid #F0C040;}
 .plan-a .plan-title{color:#92400E;}
 .plan-b{background:#EFF8FF;border-left:3px solid #6AB0F5;}
@@ -185,8 +185,10 @@ html.unlocked .lock-screen{display:none;}
    (meditación, podcast, video TED/YouTube) — un solo componente, un solo
    color (violeta), no usado para nada más en el sitio. Variante .resource-audio
    para audio real embebido (sin botón "Ir", trae <audio controls> real). ── */
-.resource-card{display:flex;align-items:center;gap:12px;background:#F5F2FB;border:1px solid rgba(139,120,184,.25);border-radius:12px;padding:12px 14px;margin:10px 0 14px;text-decoration:none;transition:background .15s;}
-.resource-card:hover{background:#EEE8F8;}
+.resource-card{display:flex;align-items:center;gap:12px;background:#EAE2F7;border:1.5px solid rgba(122,95,176,.4);border-radius:12px;padding:12px 14px;margin:10px 0 14px;text-decoration:none;transition:background .15s;}
+.resource-card:hover{background:#E1D5F5;}
+.step-box-neutral .resource-card,.step-box-highlight .resource-card{text-decoration:none;}
+.step-box-neutral .resource-card *,.step-box-highlight .resource-card *{text-decoration:none;}
 .resource-card.resource-audio{align-items:stretch;flex-direction:column;}
 .resource-top{display:flex;align-items:center;gap:12px;width:100%;}
 .resource-ico{font-size:22px;flex-shrink:0;}
@@ -199,7 +201,7 @@ html.unlocked .lock-screen{display:none;}
 .cross-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
 .cross-card{border-radius:10px;padding:12px 14px;}
 .c-label{font-size:12px;font-weight:700;margin-bottom:4px;}
-.c-desc{font-size:11.5px;line-height:1.5;color:#6B6558;}
+.c-desc{font-size:12.5px;line-height:1.5;color:#6B6558;}
 .c-pasion{background:#FFFBEB;border-left:3px solid #F0C040;}
 .c-pasion .c-label{color:#92400E;}
 .c-mision{background:#EFF8FF;border-left:3px solid #6AB0F5;}
@@ -260,7 +262,12 @@ html.unlocked .lock-screen{display:none;}
 .insight-quote,.insight-quote-coral{font-size:10.5px;font-style:italic;text-align:center;padding:0 .4rem;line-height:1.5;}
 .insight-quote{color:var(--gold);}
 .insight-quote-coral{color:var(--coral);}
-.illo-emoji{background:linear-gradient(170deg,#080C14 0%,#0D1525 55%,#172038 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem;}
+.illo-emoji{background:linear-gradient(170deg,#080C14 0%,#0D1525 55%,#172038 100%);display:flex;align-items:center;justify-content:center;}
+.emoji-badge{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:rgba(255,255,255,.04);}
+.emoji-badge-gold{border:1.5px solid var(--gold);animation:kp-pulse-g 2s ease-in-out infinite;}
+.emoji-badge-coral{border:1.5px solid var(--coral);animation:kp-pulse-c 2s ease-in-out infinite;}
+.emoji-badge-sage{border:1.5px solid var(--sage);animation:kp-pulse-s 2s ease-in-out infinite;}
+@keyframes kp-pulse-s{0%,100%{box-shadow:0 0 0 0 rgba(126,200,160,.3);}50%{box-shadow:0 0 0 7px rgba(126,200,160,0);}}
 .illo-mercado,.illo-taller{background:#131E30;}
 .illo-mercado{padding:.5rem .7rem;display:flex;flex-direction:column;gap:.22rem;justify-content:center;}
 .mk-header{display:flex;align-items:center;gap:.35rem;margin-bottom:.08rem;}
@@ -279,7 +286,7 @@ html.unlocked .lock-screen{display:none;}
 .illo-taller .worker{position:absolute;bottom:30%;right:30%;}
 .illo-taller .w-head{width:16px;height:16px;border-radius:50%;background:var(--coral);margin:0 auto;}
 .illo-taller .w-body{width:24px;height:14px;background:#243050;border-radius:3px 3px 0 0;margin:2px auto 0;}
-.cp-text{font-size:12.5px;line-height:1.6;color:var(--fog);flex:1;}
+.cp-text{font-size:13.5px;line-height:1.6;color:var(--fog);flex:1;}
 .cp-text em{font-style:italic;color:var(--white);}
 .cp-text strong{color:var(--white);font-weight:600;}
 .cp-text .ag{color:var(--gold);font-weight:600;}
@@ -333,8 +340,14 @@ html.unlocked .lock-screen{display:none;}
 
 .placeholder-note{font-size:11.5px;color:var(--mist);text-align:center;margin-top:18px;}
 
-/* botón compacto de WhatsApp dentro de un paso — nunca en caja/panel, solo el botón */
-.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 20px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;margin:4px 0;}
+/* caja neutra, tono bajo, para la instrucción que antecede a un botón de
+   WhatsApp (ej. "¿te surgió una duda? Escríbenos:") — agrupa texto + botón
+   sin ser tan vistosa como una caja de recurso o un tip */
+.wa-box{background:#F3F1EC;border-radius:10px;padding:14px 16px;margin:10px 0 14px;}
+.wa-box p{font-size:13px;color:#3A3630;line-height:1.6;margin-bottom:10px;}
+
+/* botón compacto de WhatsApp dentro de un paso */
+.wa-btn{display:inline-flex;align-items:center;gap:8px;background:var(--sage);color:#0B0F16;padding:10px 20px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;margin:4px 0;}
 .wa-btn:hover{opacity:.92;}
 
 /* ── POPUP POR PASO ── */
@@ -388,7 +401,7 @@ html.unlocked .lock-screen{display:none;}
 
 /* ── MOBILE: side panels move below center, stay visible ── */
 @media(max-width:900px){
-  .momento-grid{display:flex;flex-direction:column;min-height:0;}
+  .momento-grid{display:flex;flex-direction:column;}
   .center{order:1;}
   .rail{order:2;border-right:none;border-top:1px solid #ECEAE4;}
   .side{order:3;border-left:none;border-top:1px solid #ECEAE4;}
@@ -698,7 +711,7 @@ function renderCasoPanels(panels, accent, semLabel) {
     // emoji de respaldo (ej. "😬") en vez de dejar el panel vacío.
     const conocido = KNOWN_ILLOS.includes(p.illo);
     const illoClass = conocido ? `illo-${p.illo}` : 'illo-emoji';
-    const illoInner = conocido ? illoMarkup(p.illo, p.quote) : `<span>${p.illo || ''}</span>`;
+    const illoInner = conocido ? illoMarkup(p.illo, p.quote) : `<div class="emoji-badge emoji-badge-${accent}"><span>${p.illo || ''}</span></div>`;
     return `
     <div class="cp-panel" id="cp-p${i}">
       <div class="cp-n">${p.n || String(i + 1).padStart(2, '0')}</div>

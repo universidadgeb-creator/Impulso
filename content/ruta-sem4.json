@@ -141,7 +141,7 @@
       "checkLabel": "Agendaste retroalimentación de un líder",
       "highlight": false,
       "intro": null,
-      "content": "<p>Si aún no has agendado la conversación con el líder que elegiste, es momento de hacerlo. Esta debe suceder <strong>a más tardar la próxima semana</strong>, pues deberás subir el resultado en la siguiente entrega.</p>\n\n<p style=\"margin-top:16px\">¿Tienes un caso particular o necesitas orientación para iniciar la conversación?</p>\n<a class=\"wa-btn\" href=\"https://wa.me/523314112703?text=Necesito+ayuda+para+resolver+la+conversaci%C3%B3n+con+l%C3%ADder\" target=\"_blank\">💬 Necesito ayuda para resolver la conversación con líder</a>",
+      "content": "<p>Si aún no has agendado la conversación con el líder que elegiste, es momento de hacerlo. Esta debe suceder <strong>a más tardar la próxima semana</strong>, pues deberás subir el resultado en la siguiente entrega.</p>\n\n<div class=\"wa-box\" style=\"margin-top:16px\"><p>¿Tienes un caso particular o necesitas orientación para iniciar la conversación?</p><a class=\"wa-btn\" href=\"https://wa.me/523314112703?text=Necesito+ayuda+para+resolver+la+conversaci%C3%B3n+con+l%C3%ADder\" target=\"_blank\">💬 Necesito ayuda para resolver la conversación con líder</a></div>",
       "popup": {
         "title": "Reflexión final",
         "instr": "Revisa tus respuestas, puedes editar o completar alguna antes de entregar.",

@@ -112,14 +112,14 @@ html.unlocked .lock-screen{display:none;}
 .lock-submit:hover{transform:translateY(-1px);}
 .lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
 .lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
-.lock-wa-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:100px;}
+.lock-wa-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:var(--sage);color:var(--void);font-size:13px;font-weight:700;padding:9px 18px;border-radius:100px;}
 .lock-wa-btn:hover{opacity:.92;}
 
 /* ── DASHBOARD ── */
-.dash-wrap{max-width:min(96vw,1600px);margin:0 auto;padding:110px 24px 24px;}
+.dash-wrap{max-width:900px;margin:0 auto;padding:110px 24px 24px;}
 .dash-card{
   background:linear-gradient(180deg,#FFFFFF 0%,#F7F5F0 100%);color:#14181F;
-  border-radius:24px;padding:40px 48px;position:relative;overflow:hidden;
+  border-radius:24px;padding:30px 34px;position:relative;overflow:hidden;
   box-shadow:0 30px 80px rgba(20,24,31,.35);border:1px solid rgba(20,24,31,.06);
 }
 .dash-topbar{height:6px;margin:-30px -34px 26px;background:linear-gradient(90deg,#7EC8A0,#6AB0F5,#F0C040,#F07060);}
@@ -494,9 +494,8 @@ const days = [
   ]},
   { label:'Sem 6', pillar:'Maestría', title:'Hoja de ruta y compromiso', modules:[
     { icon:'📱', title:'Hoja de ruta y compromiso', type:'AUTOGESTIVO', data:'ruta-sem6.json' },
-    { icon:'🎤', title:'Conferencia magistral de cierre', type:'CONFERENCIA' },
   ]},
-  { label:'Cierre', pillar:'Cierre', title:'Cierre de Ruta GEB', especial:true, modules:[
+  { label:'Cierre', pillar:'Cierre', title:'Finaliza tu experiencia de aprendizaje', especial:true, modules:[
     { icon:'🏁', title:'Cierre de Ruta GEB', type:'CIERRE', url:'cierre.html' },
   ]},
 ];
@@ -562,7 +561,7 @@ function render() {
 
   if (d.pillar === 'Cierre') {
     document.getElementById('dash-meta').textContent = `Después de Semana ${totalSemanas} · ${d.modules.length} paso`;
-    document.getElementById('day-sub').textContent = `Cierra tu ciclo de Ruta GEB`;
+    document.getElementById('day-sub').textContent = '';
   } else if (d.pillar === 'Bienvenida') {
     document.getElementById('dash-meta').textContent = `Antes de Semana 1 · ${d.modules.length} paso`;
     document.getElementById('day-sub').textContent = '';

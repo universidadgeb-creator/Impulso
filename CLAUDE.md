@@ -357,3 +357,75 @@ CONFERENCIAS (`momento-video.html`, ritmo CONF de la malla) — eso no se tocó.
   copiarlo a `video/` con un nombre descriptivo y actualizar `video_src` en el JSON de
   esa semana (con `?v=N` si se reemplaza un archivo con el mismo nombre, por el
   cache-busting de GitHub Pages).
+
+## Ajustes visuales de Ruta GEB (agosto 2026, revisión de Ceci sobre las 6 semanas)
+
+Ronda de feedback visual sobre `momento-guia.html` y las 6 semanas de contenido. Estos
+cambios **superseden** algunas reglas anteriores documentadas arriba — donde haya
+conflicto, esta sección manda.
+
+- **Tamaño de tarjeta: se revirtió el ancho ampliado.** `.momento-wrap`/`.dash-wrap`
+  volvieron a `max-width:1100px`/`900px` (el valor previo a la iteración que las llevó
+  a `min(96vw,1600px)`) — a Ceci le gustaba el tamaño anterior. En su lugar se subió
+  ligeramente el tamaño de letra del contenido de un paso (`.step-box-neutral`,
+  `.step-box-highlight`, `.momento-context`: 13px → 14.5px; `.tip-box`/`.tip`,
+  `.cp-text`: 12-12.5px → 13.5px) — pedido explícito de "letra 4 niveles más grande,
+  ligera, porque no se leía fácil", sin tocar el ancho de la tarjeta.
+- **`.step-box-highlight` ahora usa `var(--blue-hi)`, no gold.** Colisionaba
+  visualmente con `.tip-gold` (mismo color de línea, dos usos distintos). Sigue
+  reservado para lo mismo (el caso de la semana, una pregunta para profundizar), solo
+  cambió el color de la línea.
+- **`.resource-card` con más saturación.** Fondo `#EAE2F7` (antes `#F5F2FB`, se veía
+  gris, no lila) y borde `1.5px rgba(122,95,176,.4)`. Mismo cambio replicado en
+  `cierre.html`.
+- **Bug de subrayado corregido.** `.step-box-neutral a, .step-box-highlight a` tiene
+  más especificidad que `.resource-card{text-decoration:none}`, así que un
+  `resource-card` anidado dentro de un step-box salía subrayado (visible en el video
+  TED de Sem. 4). Se agregó `.step-box-neutral .resource-card, .step-box-highlight
+  .resource-card` (y `* `) con `text-decoration:none` explícito.
+- **Todo tip-box es colapsable — ya no existen `.tip` estáticos.** Antes había una
+  variante `.tip` (siempre abierta) y `.tip-box` (`<details>`, colapsable). Se
+  eliminó el uso de `.tip` en el contenido: cualquier caja de tip nueva debe ser
+  `<details class="tip-box tip-COLOR"><summary>...</summary>...</details>`, cerrada
+  por defecto (nunca `open`). Aplica también a cajas que antes no eran colapsables
+  (ej. "Regla de oro" de Sem. 4/5, "Sesión de bina" de Sem. 6).
+- **`.prompt-box` (prompt de IA para copiar y pegar) ahora es un recurso visual,
+  no gris neutro.** Esto reemplaza la regla anterior ("un prompt nunca va en caja de
+  color, es herramienta no recurso") — pedido explícito de Ceci en Sem. 3 y Sem. 5.
+  `.prompt-box` ahora comparte la paleta violeta de `.resource-card` (mismo fondo
+  `#EAE2F7`, mismo borde), conserva el texto monoespaciado y el botón
+  `.copy-prompt-btn` de copiar.
+- **`.wa-btn`/`.lock-wa-btn` cambiaron de verde WhatsApp (`#25D366`) a
+  `var(--sage)`.** Ceci lo describió como "chillante"/"horrible" — no combinaba con
+  la paleta del sitio. Aplicado en los 5 archivos que definen estos botones
+  (`momento-guia.html`, `momento-video.html`, `bienvenida.html`, `cierre.html`,
+  `ruta-geb.html`).
+- **Nuevo componente `.wa-box`.** Caja gris neutra (`background:#F3F1EC`, mismo tono
+  que `.step-box-neutral`) para agrupar el texto de instrucción que antecede a un
+  botón de WhatsApp dentro de un paso (ej. "¿Tienes dudas? Escríbenos:" + el botón).
+  Antes ese texto iba suelto o mezclado dentro de un `.prompt-box`; ahora que
+  `.prompt-box` es violeta/recurso, la instrucción de WhatsApp se separó a su propia
+  caja de tono bajo. Usar este patrón para cualquier instrucción nueva que anteceda a
+  un `.wa-btn`.
+- **`.people-chips` ya no rota 4 colores por chip.** Ahora es una cuadrícula de 2
+  columnas (`display:grid;grid-template-columns:1fr 1fr`, 1 columna en mobile
+  `max-width:480px`) con chips uniformes en gris neutro (`#F3F1EC`), sin borde de
+  color — Ceci pidió unificar en vez de que cada nombre tuviera un color distinto.
+- **`.illo-emoji` (fallback de Caso cuando el panel usa un emoji crudo en vez de una
+  ilustración CSS conocida) ya no muestra el emoji suelto y grande.** Ahora envuelve
+  el emoji en `.emoji-badge` — un círculo de 52px con anillo de color (`emoji-badge-
+  gold/coral/sage`, mismo lenguaje visual que `.insight-ring`), con la animación de
+  pulso ya existente. El color del anillo sigue el acento de la semana
+  (`accentDeSemana()`). Aplica automáticamente a cualquier semana futura cuyos
+  `panels[].illo` sean emoji en vez de una de las ilustraciones CSS conocidas
+  (`KNOWN_ILLOS` en `momento-guia.html`).
+- **Sem. 6 ya no tiene el módulo "Conferencia magistral de cierre".** Era un
+  placeholder roto (sin `data`/`url`) en `ruta-geb.html` — se quitó del arreglo
+  `days`. Sem. 6 solo tiene el módulo autogestivo.
+- **`cierre.html`: el mensaje final ("🎉 Gracias por cerrar tu ciclo...") ahora es un
+  popup/modal**, no un bloque que aparecía inline debajo del botón de envío. Mismo
+  patrón visual que el popup de paso de `momento-guia.html` (`.gracias-overlay` +
+  `.cierre-gracias` como card centrada, con botón "Volver a Ruta GEB" que regresa a
+  `ruta-geb.html`). El título de la entrada "Cierre" en `ruta-geb.html` se simplificó
+  a "Finaliza tu experiencia de aprendizaje" (antes repetía "Cierre" y "Cierra" tres
+  veces entre label, título y subtítulo).
