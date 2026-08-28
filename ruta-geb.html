@@ -112,6 +112,8 @@ html.unlocked .lock-screen{display:none;}
 .lock-submit:hover{transform:translateY(-1px);}
 .lock-error{font-size:12.5px;color:var(--coral);min-height:16px;margin-top:2px;}
 .lock-hint{font-size:12px;color:var(--mist);margin-top:18px;}
+.lock-wa-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:100px;}
+.lock-wa-btn:hover{opacity:.92;}
 
 /* ── DASHBOARD ── */
 .dash-wrap{max-width:min(96vw,1600px);margin:0 auto;padding:110px 24px 24px;}
@@ -285,7 +287,8 @@ html.unlocked .lock-screen{display:none;}
       <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
-    <p class="lock-hint">¿No tienes tu contraseña? Pregúntale a tu facilitador GEB.</p>
+    <p class="lock-hint">¿No tienes tu contraseña? Escribe al siguiente WhatsApp:</p>
+    <a class="lock-wa-btn" href="https://wa.me/523314112703" target="_blank" rel="noopener">💬 3314112703</a>
   </div>
 </div>
 
