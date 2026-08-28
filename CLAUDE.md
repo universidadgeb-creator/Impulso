@@ -216,10 +216,11 @@ Botón circular flotante (💬, `.help-fab`, esquina inferior izquierda) present
   completo (eso pondría TODO el contenido en la caja de color). Ver Sem. 1, paso 2
   (Marco) como referencia.
 - **Los `tip-box` con formato de pregunta** (ej. "¿Cómo se ve una respuesta profunda?")
-  van como `<details class="tip-box tip-TONO"><summary>La pregunta</summary>La
-  respuesta...</details>` — colapsables, cerrados por defecto (nunca con `open`). Es
-  HTML nativo, sin JS. Aplicar este mismo patrón a cualquier tip-box nuevo con forma de
-  pregunta que se agregue en semanas futuras.
+  van como `<div class="tip-box tip-TONO"><strong>La pregunta</strong><br>La
+  respuesta...</div>` — **siempre visible, no colapsable** (ver la regla final en
+  "Ajustes visuales de Ruta GEB" más abajo, que supersede el `<details>/<summary>`
+  usado en una iteración intermedia). Aplicar este mismo patrón a cualquier tip-box
+  nuevo con forma de pregunta que se agregue en semanas futuras.
 - **Un prompt de IA para copiar y pegar nunca va en caja de color** — es una
   herramienta, no algo que se "resalte". Va en `<div class="prompt-box"><span
   class="prompt-label">💬 Prompt para copiar y pegar</span><div
@@ -383,12 +384,14 @@ conflicto, esta sección manda.
   `resource-card` anidado dentro de un step-box salía subrayado (visible en el video
   TED de Sem. 4). Se agregó `.step-box-neutral .resource-card, .step-box-highlight
   .resource-card` (y `* `) con `text-decoration:none` explícito.
-- **Todo tip-box es colapsable — ya no existen `.tip` estáticos.** Antes había una
-  variante `.tip` (siempre abierta) y `.tip-box` (`<details>`, colapsable). Se
-  eliminó el uso de `.tip` en el contenido: cualquier caja de tip nueva debe ser
-  `<details class="tip-box tip-COLOR"><summary>...</summary>...</details>`, cerrada
-  por defecto (nunca `open`). Aplica también a cajas que antes no eran colapsables
-  (ej. "Regla de oro" de Sem. 4/5, "Sesión de bina" de Sem. 6).
+- **Ninguna caja del sitio se colapsa — regla final, confirmada por Ceci.** Hubo una
+  iteración intermedia (mismo día) donde se probó hacer todo tip-box colapsable con
+  `<details>/<summary>`; Ceci lo revirtió explícitamente: "quedamos que ya ninguna
+  caja estará colapsada ni tendrá manera de colapsarse en todo el sitio". `.tip-box`
+  ya **no** usa `<details>/<summary>` en ningún archivo — es un `<div>` normal,
+  siempre visible, con el encabezado en `<strong>` seguido de `<br>` (ej.
+  `<div class="tip-box tip-gold"><strong>💡 Regla de oro</strong><br>texto...</div>`).
+  No volver a introducir `<details>` para tips nuevos.
 - **`.prompt-box` (prompt de IA para copiar y pegar) ahora es un recurso visual,
   no gris neutro.** Esto reemplaza la regla anterior ("un prompt nunca va en caja de
   color, es herramienta no recurso") — pedido explícito de Ceci en Sem. 3 y Sem. 5.

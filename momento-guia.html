@@ -134,16 +134,9 @@ html.unlocked .lock-screen{display:none;}
 .tip-coral strong{color:#9B1C1C;font-size:11px;}
 .audio-real-label{font-size:12.5px;font-weight:700;color:#7A5E0A;}
 
-/* tip-box tipo pregunta: <details> nativo, colapsado por defecto */
-.tip-box summary{cursor:pointer;font-weight:700;font-size:11px;list-style:none;display:flex;align-items:center;gap:6px;}
-.tip-box summary::-webkit-details-marker{display:none;}
-.tip-box summary::before{content:'▸';font-size:10px;transition:transform .15s;flex-shrink:0;}
-.tip-box[open] summary::before{transform:rotate(90deg);}
-.tip-box[open] summary{margin-bottom:8px;}
-.tip-gold summary{color:#92400E;}
-.tip-sage summary{color:#14532D;}
-.tip-blue summary{color:#1E4E7A;}
-.tip-coral summary{color:#9B1C1C;}
+/* .tip-box: caja siempre visible, nunca colapsable — el encabezado del tip
+   va en <strong> seguido de <br>, igual que el resto del contenido
+   (ninguna caja del sitio usa <details>/<summary>) */
 
 /* prompt de IA para copiar y pegar — tratado como recurso: misma familia
    violeta que .resource-card, con el texto del prompt y botón de copiar. */
