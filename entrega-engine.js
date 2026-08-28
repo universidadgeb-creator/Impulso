@@ -11,105 +11,24 @@
  *  - Todo campo se autoguarda en cada cambio, sin botón de "guardar". Perder el
  *    trabajo de alguien por no darle a un botón no es un error que nos podamos
  *    permitir con esta población.
- *  - La identidad (CURP + nombre) se captura una sola vez y se reutiliza en las
- *    46 semanas — nunca se vuelve a pedir.
+ *  - La identidad ya no la captura este motor: viene del login (AuthEngine,
+ *    ver auth-engine.js). Cada página con candado exige iniciar sesión antes
+ *    de mostrar contenido, así que para cuando se llega a un formulario de
+ *    entrega la identidad siempre existe.
  */
 
 const EntregaEngine = (function () {
-
-  const CLAVE_IDENTIDAD = 'geb_identidad';
 
   function claveLocal(curso, semana) {
     return `geb_entrega_${curso}_${semana}`.replace(/\s+/g, '_');
   }
 
   // ---------------------------------------------------------------- Identidad
+  // Delgado sobre AuthEngine — se mantiene el mismo nombre de función para no
+  // tener que tocar cada página que ya llama EntregaEngine.obtenIdentidad().
 
   function obtenIdentidad() {
-    try {
-      return JSON.parse(localStorage.getItem(CLAVE_IDENTIDAD) || 'null');
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function guardaIdentidad(curp, nombre, pin) {
-    localStorage.setItem(CLAVE_IDENTIDAD, JSON.stringify({ curp, nombre, pin: pin || null }));
-  }
-
-  // ---------------------------------------------------------------- Identidad
-
-  function esCurpValido(v) {
-    return /^[A-Z0-9]{18}$/i.test(String(v).trim());
-  }
-
-  function esPinValido(v) {
-    return /^\d{4}$/.test(String(v).trim());
-  }
-
-  function renderIdentidad(contenedor, alGuardar) {
-    contenedor.innerHTML = '';
-
-    const caja = document.createElement('div');
-    caja.className = 'identidad-caja';
-
-    const intro = document.createElement('p');
-    intro.className = 'identidad-intro';
-    intro.textContent = 'Antes de tu primera entrega, regístrate. Solo se pide una vez — ' +
-      'en las próximas semanas ya no te lo vamos a preguntar.';
-    caja.appendChild(intro);
-
-    const nombre = document.createElement('input');
-    nombre.type = 'text';
-    nombre.placeholder = 'Tu nombre completo';
-    nombre.className = 'identidad-input';
-
-    const curp = document.createElement('input');
-    curp.type = 'text';
-    curp.placeholder = 'Tu CURP';
-    curp.maxLength = 18;
-    curp.className = 'identidad-input';
-    curp.style.textTransform = 'uppercase';
-
-    const pin = document.createElement('input');
-    pin.type = 'tel';
-    pin.inputMode = 'numeric';
-    pin.maxLength = 4;
-    pin.placeholder = 'Los últimos 4 dígitos de tu celular';
-    pin.className = 'identidad-input';
-
-    const pinHint = document.createElement('div');
-    pinHint.className = 'campo-hint';
-    pinHint.textContent = 'Con esto puedes recuperar tus entregas si algún día cambias de ' +
-      'celular. No te lo vamos a volver a pedir para entregar.';
-
-    const error = document.createElement('div');
-    error.className = 'identidad-error';
-
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'campo-enviar';
-    btn.textContent = 'Guardar y continuar';
-    btn.addEventListener('click', () => {
-      const v = { nombre: nombre.value.trim(), curp: curp.value.trim().toUpperCase(), pin: pin.value.trim() };
-
-      if (!v.nombre) return mostrarError('Falta tu nombre.');
-      if (!esCurpValido(v.curp)) return mostrarError('El CURP debe tener 18 caracteres.');
-      if (!esPinValido(v.pin)) return mostrarError('Escribe los 4 dígitos de tu celular.');
-
-      guardaIdentidad(v.curp, v.nombre, v.pin);
-      alGuardar();
-    });
-
-    function mostrarError(msg) { error.textContent = msg; }
-
-    caja.appendChild(nombre);
-    caja.appendChild(curp);
-    caja.appendChild(pin);
-    caja.appendChild(pinHint);
-    caja.appendChild(error);
-    caja.appendChild(btn);
-    contenedor.appendChild(caja);
+    return AuthEngine.sesionActual();
   }
 
   // ---------------------------------------------------------------- Storage local
@@ -312,11 +231,6 @@ const EntregaEngine = (function () {
    * listo para mandar al backend.
    */
   function montar(contenedor, { curso, semana, campos, onEnviar }) {
-    if (!obtenIdentidad()) {
-      renderIdentidad(contenedor, () => montar(contenedor, { curso, semana, campos, onEnviar }));
-      return;
-    }
-
     contenedor.innerHTML = '';
 
     let datos = recalculaDerivados(campos, cargaGuardado(curso, semana));
@@ -361,8 +275,8 @@ const EntregaEngine = (function () {
 
   async function enviar(curso, semana, campos, datos, onEnviar, boton, estado) {
     const identidad = obtenIdentidad();
-    if (!identidad || !identidad.curp) {
-      alert('Falta tu identidad. Ve al inicio del curso para registrarte primero.');
+    if (!identidad || !identidad.id) {
+      alert('Tu sesión expiró. Vuelve a iniciar sesión desde el inicio del curso.');
       return;
     }
 
@@ -389,15 +303,11 @@ const EntregaEngine = (function () {
     });
 
     const payload = {
-      id: identidad.curp,
+      id: identidad.id,
       nombre: identidad.nombre,
       curso, semana,
       campos: paraEnviar
     };
-
-    if (!identidad.pinEnviado) {
-      payload.pin = identidad.pin;
-    }
 
     boton.disabled = true;
     boton.textContent = 'Enviando…';
@@ -405,10 +315,6 @@ const EntregaEngine = (function () {
     try {
       const resultado = await onEnviar(payload);
       if (resultado && resultado.ok) {
-        if (resultado.pinRegistrado) {
-          identidad.pinEnviado = true;
-          guardaIdentidad(identidad.curp, identidad.nombre, identidad.pin);
-        }
         boton.textContent = '✓ Entregado';
       } else {
         boton.disabled = false;
@@ -420,5 +326,5 @@ const EntregaEngine = (function () {
     }
   }
 
-  return { montar, montarIdentidad: renderIdentidad, obtenIdentidad, guardaIdentidad, cargaGuardado };
+  return { montar, obtenIdentidad, cargaGuardado };
 })();

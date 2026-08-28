@@ -163,13 +163,13 @@ html.unlocked .lock-screen{display:none;}
   <div class="lock-card">
     <div class="lock-ico-big">🔒</div>
     <h1>Plataforma</h1>
-    <p>Ingresa la contraseña del curso para continuar.</p>
+    <p>Ingresa tu contraseña para continuar.</p>
     <form class="lock-form" id="lock-form">
-      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Tu contraseña" autocomplete="off">
       <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
-    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+    <p class="lock-hint">¿No tienes tu contraseña? Pregúntale a tu facilitador GEB.</p>
   </div>
 </div>
 
@@ -257,22 +257,22 @@ html.unlocked .lock-screen{display:none;}
 </div>
 
 <script src="config.js"></script>
+<script src="auth-engine.js"></script>
 <script>
 document.getElementById('entrega-form').action = CONFIG.BACKEND;
 
-/* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
-const COURSE_PASSWORD = 'rutageb26';
-const STORAGE_KEY = 'impulso_unlock_ruta';
-if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
+/* ── LOGIN (AuthEngine) ── */
+if (AuthEngine.estaLogueado()) document.documentElement.classList.add('unlocked');
 document.getElementById('lock-form').addEventListener('submit', function(e){
   e.preventDefault();
   const val = document.getElementById('lock-input').value.trim();
-  if (val === COURSE_PASSWORD) {
-    localStorage.setItem(STORAGE_KEY, '1');
-    document.documentElement.classList.add('unlocked');
-  } else {
-    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
-  }
+  AuthEngine.intentarLogin(val).then(function(res){
+    if (res.ok) {
+      document.documentElement.classList.add('unlocked');
+    } else {
+      document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+    }
+  });
 });
 
 /* ── CONTEXT FROM QUERY PARAMS ── */

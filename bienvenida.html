@@ -196,31 +196,6 @@ html.unlocked .lock-screen{display:none;}
 .pq-abierta textarea:read-only{background:#FAFAF8;color:#6A6460;cursor:default;}
 .pq-progreso{font-size:11.5px;color:#9A968C;text-align:center;margin-bottom:12px;}
 
-/* FORMULARIO REGISTRO */
-.id-intro{font-size:12.5px;color:#6A6460;line-height:1.6;border-left:3px solid #F0C040;padding:10px 12px 10px 14px;background:#FAFAF8;border-radius:0 8px 8px 0;margin-bottom:18px;}
-.id-campo{margin-bottom:14px;}
-.id-campo label{font-size:12px;font-weight:700;color:#14181F;display:block;margin-bottom:3px;}
-.id-campo > div{font-size:13px;color:#3A3630;background:#FAFAF8;border:1.5px solid #ECEAE4;border-radius:9px;padding:10px 13px;}
-.id-campo small{font-size:11px;color:#9A968C;display:block;margin-bottom:5px;}
-.id-campo input{width:100%;font-size:13px;padding:10px 13px;border-radius:9px;border:1.5px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;transition:border-color .15s;}
-.id-campo input:focus{outline:none;border-color:#F0C040;}
-.id-campo input::placeholder{color:#BEBAB2;}
-.id-error{font-size:11.5px;color:#C0392B;margin-top:3px;min-height:15px;}
-.pin-row{display:flex;gap:10px;margin-bottom:4px;}
-.pin-box{flex:1;text-align:center;font-size:20px;font-weight:700;padding:10px 0;border-radius:9px;border:1.5px solid #ECEAE4;background:#fff;color:#14181F;letter-spacing:.1em;}
-.pin-box.activo{border-color:#F0C040;background:#FFF8E6;}
-
-/* Markup real que pinta EntregaEngine.montarIdentidad() dentro de #identidad-mount —
-   mismo lenguaje visual que .id-campo/.pin-box de arriba. */
-.identidad-caja{display:flex;flex-direction:column;gap:12px;}
-.identidad-intro{display:none;} /* ya hay una intro propia (.id-intro) arriba del mount */
-.identidad-input{width:100%;font-size:13px;padding:10px 13px;border-radius:9px;border:1.5px solid #ECEAE4;font-family:inherit;background:#fff;color:#14181F;transition:border-color .15s;}
-.identidad-input:focus{outline:none;border-color:#F0C040;}
-.identidad-input::placeholder{color:#BEBAB2;}
-.identidad-caja .campo-hint{font-size:11px;color:#9A968C;line-height:1.5;margin-top:-4px;}
-.identidad-error{font-size:11.5px;color:#C0392B;min-height:15px;}
-#identidad-mount .campo-enviar{display:none;} /* el botón real es "Guardar registro" en el footer del popup */
-
 /* BOTONES */
 .btn-primario{width:100%;background:#F0C040;color:#0B0F16;border:none;font-size:14px;font-weight:700;padding:14px;border-radius:10px;cursor:pointer;letter-spacing:.01em;}
 .btn-primario:disabled{opacity:.45;cursor:not-allowed;}
@@ -267,13 +242,13 @@ html.unlocked .lock-screen{display:none;}
   <div class="lock-card">
     <div class="lock-ico-big">⭐</div>
     <h1>Ruta GEB</h1>
-    <p>Ingresa la contraseña del curso para ver la bienvenida.</p>
+    <p>Ingresa tu contraseña para ver la bienvenida.</p>
     <form class="lock-form" id="lock-form">
-      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Tu contraseña" autocomplete="off">
       <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
-    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador.</p>
+    <p class="lock-hint">¿No tienes tu contraseña? Pregúntale a tu facilitador.</p>
   </div>
 </div>
 
@@ -361,32 +336,16 @@ html.unlocked .lock-screen{display:none;}
     <div class="popup-footer">
       <div class="pq-progreso" id="encuesta-progreso">0 de 10 respondidas</div>
       <button class="btn-primario" id="btn-guardar-encuesta" disabled>Guardar encuesta</button>
-    </div>
-  </div>
-
-  <!-- POPUP: Registro único -->
-  <div class="popup-sheet" id="popup-registro" style="display:none;">
-    <div class="popup-handle"></div>
-    <div class="popup-head">
-      <span class="popup-titulo">Registro único <span class="popup-badge-done" id="registro-badge" style="display:none;">✓ Registrado</span></span>
-      <button class="popup-cerrar" id="cerrar-registro" aria-label="Cerrar">×</button>
-    </div>
-    <div class="popup-body" id="popup-registro-body">
-      <!-- renderizado por EntregaEngine, o resumen de solo lectura si ya está registrado -->
-    </div>
-    <div class="popup-footer" id="registro-footer">
-      <button class="btn-primario" id="btn-guardar-registro">Guardar registro</button>
       <div class="estado-envio" id="estado-envio"></div>
     </div>
   </div>
 
 </div>
 
+<script src="auth-engine.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
 /* ---- CONSTANTES ---- */
-const COURSE_PASSWORD = 'rutageb26';
-const STORAGE_KEY     = 'impulso_unlock_ruta';
 const BV_STATE_KEY    = 'bv_ruta_v1';
 const BV_ENCUESTA_KEY = 'bv_ruta_encuesta_v1';
 const CURSO  = 'Ruta GEB';
@@ -395,25 +354,29 @@ const URL_SEM1 = 'momento-guia.html?curso=Ruta%20GEB&semana=Sem%201'
   + '&titulo=IKIGAI%20parte%201%3A%20lo%20que%20amo%20%2B%20en%20lo%20que%20soy%20bueno'
   + '&pilar=Prop%C3%B3sito&data=ruta-sem1.json';
 
-/* ---- LOCK ---- */
-if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
+/* ---- LOGIN (AuthEngine) ---- */
+if (AuthEngine.estaLogueado()) document.documentElement.classList.add('unlocked');
 document.getElementById('lock-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const val = document.getElementById('lock-input').value.trim();
-  if (val === COURSE_PASSWORD) {
-    localStorage.setItem(STORAGE_KEY, '1');
-    document.documentElement.classList.add('unlocked');
-  } else {
-    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
-  }
+  AuthEngine.intentarLogin(val).then(function(res) {
+    if (res.ok) {
+      // El candado por calendario más abajo ya se evaluó antes de que
+      // hubiera sesión — si es cuenta admin, recargar para que se
+      // reevalúe ya con la sesión activa.
+      if (res.sesion && res.sesion.admin) { location.reload(); return; }
+      document.documentElement.classList.add('unlocked');
+    } else {
+      document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+    }
+  });
 });
 
 /* ---- CANDADO POR CALENDARIO — misma fecha y misma bandera de modo revisión
    que ruta-geb.html / momento-guia.html; si se ajusta, ajustar en los 3. ---- */
 (function () {
   const BIENVENIDA_INICIO_ISO = '2026-08-27T00:00:00'; // abierta temporalmente para pruebas
-  const esModoRevision = localStorage.getItem('geb_admin_ruta') === '1';
-  if (esModoRevision || Date.now() >= new Date(BIENVENIDA_INICIO_ISO).getTime()) return;
+  if (AuthEngine.esAdmin() || Date.now() >= new Date(BIENVENIDA_INICIO_ISO).getTime()) return;
   const fecha = new Date(BIENVENIDA_INICIO_ISO);
   const fechaTxt = fecha.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })
     + ' a las ' + fecha.toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit' });
@@ -445,19 +408,18 @@ var listaMostrada = false;
    mismo par rail/side que usa momento-guia.html para cada semana ---- */
 var ITEMS = [
   { id:'video',    nombre:'Ver el video de bienvenida' },
-  { id:'encuesta', nombre:'Contestar encuesta' },
-  { id:'registro', nombre:'Registro único' }
+  { id:'encuesta', nombre:'Contestar encuesta' }
 ];
 
 function renderChecklist() {
   var railList = document.getElementById('rail-list');
-  var todoHecho = estado.video && estado.encuesta && estado.registro;
+  var todoHecho = estado.video && estado.encuesta;
 
   var railHtml = '';
 
   ITEMS.forEach(function(item) {
     var hecho     = !!estado[item.id];
-    var anterior  = item.id === 'encuesta' ? estado.video : item.id === 'registro' ? estado.encuesta : true;
+    var anterior  = item.id === 'encuesta' ? estado.video : true;
     var bloqueado = !anterior && !hecho;
     var clickable = !bloqueado && item.id !== 'video';
 
@@ -493,21 +455,16 @@ function renderStepNav(todoHecho) {
   nav.style.display = 'flex';
 
   if (!estado.video) {
-    counter.textContent = 'Paso 1 de 3 · Video de bienvenida';
-    btn.textContent = 'Continuar';
-  } else if (!estado.encuesta) {
-    counter.textContent = 'Paso 2 de 3 · Encuesta';
-    btn.textContent = 'Continuar';
+    counter.textContent = 'Paso 1 de 2 · Video de bienvenida';
   } else {
-    counter.textContent = 'Paso 3 de 3 · Registro único';
-    btn.textContent = 'Continuar';
+    counter.textContent = 'Paso 2 de 2 · Encuesta';
   }
+  btn.textContent = 'Continuar';
 }
 
 document.getElementById('btn-siguiente').addEventListener('click', function() {
   if (!estado.video) { marcarVideoVisto(); return; }
   if (!estado.encuesta) { abrirPopup('encuesta'); return; }
-  if (!estado.registro) { abrirPopup('registro'); return; }
 });
 
 /* ---- BANNER DE LISTO — no reemplaza la tarjeta, se queda arriba para poder
@@ -519,7 +476,7 @@ function mostrarBienvenidaLista() {
   banner.className = 'bv-banner-listo';
   banner.innerHTML =
     '<span class="bv-banner-ico">🎉</span>' +
-    '<div class="bv-banner-text"><strong>¡Listo, ya puedes empezar!</strong> Completaste los tres pasos de bienvenida.</div>' +
+    '<div class="bv-banner-text"><strong>¡Listo, ya puedes empezar!</strong> Completaste los pasos de bienvenida.</div>' +
     '<button type="button" class="bv-banner-btn" id="btn-ir-sem1">Ir a Semana 1</button>';
   wrap.insertBefore(banner, card);
   document.getElementById('btn-ir-sem1').addEventListener('click', function() {
@@ -532,12 +489,9 @@ function mostrarBienvenidaLista() {
 function abrirPopup(cual) {
   var overlay = document.getElementById('popup-overlay');
   document.getElementById('popup-encuesta').style.display = 'none';
-  document.getElementById('popup-registro').style.display = 'none';
 
   if (cual === 'encuesta') {
     renderEncuesta(preguntas, !!estado.encuesta);
-  } else if (cual === 'registro') {
-    renderRegistro(!!estado.registro);
   }
 
   document.getElementById('popup-' + cual).style.display  = 'flex';
@@ -554,7 +508,6 @@ function cerrarPopup() {
   document.body.classList.remove('popup-abierto');
   setTimeout(function() {
     document.getElementById('popup-encuesta').style.display = 'none';
-    document.getElementById('popup-registro').style.display = 'none';
   }, 260);
 }
 
@@ -562,7 +515,6 @@ document.getElementById('popup-overlay').addEventListener('click', function(e) {
   if (e.target === this) cerrarPopup();
 });
 document.getElementById('cerrar-encuesta').addEventListener('click', cerrarPopup);
-document.getElementById('cerrar-registro').addEventListener('click', cerrarPopup);
 
 /* ---- VIDEO: marcar visto cuando termina, y pasar directo a la encuesta —
    así siempre hay una siguiente actividad clara, sin que la persona tenga
@@ -673,96 +625,52 @@ function renderEncuesta(pregs, soloLectura) {
   });
 }
 
-/* ---- GUARDAR ENCUESTA — pasa directo a registro, la última actividad ---- */
+/* ---- GUARDAR ENCUESTA — última actividad de Bienvenida. La identidad ya
+   viene del login (AuthEngine), así que esto manda directo al backend en
+   vez de pasar por un registro aparte.
+   Nunca se marca como completado sin confirmación del servidor — si el
+   POST falla se avisa y se puede reintentar, no se pierde en silencio
+   (esto pasó antes con el registro: 3 pruebas no llegaron a la hoja
+   porque el catch las daba por buenas). ---- */
 document.getElementById('btn-guardar-encuesta').addEventListener('click', function() {
-  estado.encuesta = true;
-  guardarEstado(estado);
-  renderChecklist();
-  cerrarPopup();
-  setTimeout(function() { abrirPopup('registro'); }, 280);
-});
+  var identidad = AuthEngine.sesionActual();
+  var btn = this;
+  var estado_el = document.getElementById('estado-envio');
+  estado_el.className = 'estado-envio';
+  estado_el.textContent = 'Guardando…';
+  btn.disabled = true;
 
-/* ---- RENDER REGISTRO — editable con EntregaEngine mientras no exista;
-   una vez registrado, solo se muestra un resumen de lectura, no se
-   puede volver a editar CURP/PIN desde aquí ---- */
-function renderRegistro(soloLectura) {
-  var regBody = document.getElementById('popup-registro-body');
-  var footer  = document.getElementById('registro-footer');
-  var badge   = document.getElementById('registro-badge');
+  var payload = {
+    accion: 'guardar',
+    curso:  CURSO,
+    semana: SEMANA,
+    id:     identidad.id,
+    nombre: identidad.nombre,
+    campos: respuestas
+  };
 
-  if (soloLectura) {
-    var identidad = EntregaEngine.obtenIdentidad() || {};
-    var curpOculto = identidad.curp ? identidad.curp.slice(0, 4) + '••••••••••••••' : '—';
-    badge.style.display = 'inline-flex';
-    footer.style.display = 'none';
-    regBody.innerHTML =
-      '<p class="id-intro">Tu registro ya quedó guardado — el CURP y el PIN no se pueden volver a editar desde aquí.</p>' +
-      '<div class="id-campo"><label>Nombre</label><div>' + (identidad.nombre || '—') + '</div></div>' +
-      '<div class="id-campo"><label>CURP</label><div>' + curpOculto + '</div></div>';
-    return;
-  }
-
-  badge.style.display = 'none';
-  footer.style.display = '';
-  regBody.innerHTML = '<div id="identidad-mount"></div>';
-
-  EntregaEngine.montarIdentidad(
-    document.getElementById('identidad-mount'),
-    function() {
-      /* EntregaEngine ya guardó en localStorage — leerlo con obtenIdentidad */
-      var identidad = EntregaEngine.obtenIdentidad() || {};
-      var estado_el = document.getElementById('estado-envio');
-      estado_el.className = 'estado-envio';
-      estado_el.textContent = 'Guardando…';
-
-      var encuestaGuardada = {};
-      try { encuestaGuardada = JSON.parse(localStorage.getItem(BV_ENCUESTA_KEY)) || {}; } catch(e) {}
-
-      var payload = {
-        accion: 'guardar',
-        curso:  CURSO,
-        semana: SEMANA,
-        curp:   identidad.curp,
-        nombre: identidad.nombre,
-        campos: encuestaGuardada
-      };
-
-      fetch(CONFIG.BACKEND, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload)
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(res) {
-        if (res.ok || res.status === 'ok') {
-          estado.registro = true;
-          guardarEstado(estado);
-          estado_el.className = 'estado-envio ok';
-          estado_el.textContent = '¡Listo!';
-          setTimeout(function() { cerrarPopup(); renderChecklist(); }, 700);
-        } else {
-          throw new Error(res.error || 'Error del servidor');
-        }
-      })
-      .catch(function() {
-        /* No se pudo confirmar que el registro llegó al servidor — nunca se
-           marca como completado sin esa confirmación, o se pierden entregas
-           en silencio (esto pasó: 3 registros de prueba no llegaron a la
-           hoja porque este catch los daba por buenos). Se deja el popup
-           abierto para reintentar; los datos que ya escribió no se pierden,
-           EntregaEngine.montarIdentidad ya los guardó localmente. */
-        estado_el.className = 'estado-envio err';
-        estado_el.textContent = 'No se pudo guardar tu registro. Revisa tu conexión e inténtalo de nuevo.';
-      });
+  fetch(CONFIG.BACKEND, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(res) {
+    if (res.ok || res.status === 'ok') {
+      estado.encuesta = true;
+      guardarEstado(estado);
+      estado_el.className = 'estado-envio ok';
+      estado_el.textContent = '¡Listo!';
+      setTimeout(function() { cerrarPopup(); renderChecklist(); }, 700);
+    } else {
+      throw new Error(res.error || 'Error del servidor');
     }
-  );
-}
-
-/* El botón exterior dispara el submit interno del EntregaEngine (solo
-   existe mientras el registro no está hecho — ver renderRegistro) */
-document.getElementById('btn-guardar-registro').addEventListener('click', function() {
-  var submitBtn = document.querySelector('#identidad-mount .campo-enviar');
-  if (submitBtn) submitBtn.click();
+  })
+  .catch(function() {
+    btn.disabled = false;
+    estado_el.className = 'estado-envio err';
+    estado_el.textContent = 'No se pudo guardar. Revisa tu conexión e inténtalo de nuevo.';
+  });
 });
 
 /* ---- FETCH JSON SEM 0 ---- */

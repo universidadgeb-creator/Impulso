@@ -407,13 +407,13 @@ html.unlocked .lock-screen{display:none;}
   <div class="lock-card">
     <div class="lock-ico-big">🔒</div>
     <h1>Plataforma</h1>
-    <p>Ingresa la contraseña del curso para continuar.</p>
+    <p>Ingresa tu contraseña para continuar.</p>
     <form class="lock-form" id="lock-form">
-      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Tu contraseña" autocomplete="off">
       <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
-    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+    <p class="lock-hint">¿No tienes tu contraseña? Pregúntale a tu facilitador GEB.</p>
   </div>
 </div>
 
@@ -488,21 +488,26 @@ html.unlocked .lock-screen{display:none;}
   <div class="popup-card" id="popup-card"></div>
 </div>
 
+<script src="auth-engine.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
-/* ── LOCK / PASSWORD GATE (comparte contraseña con Ruta GEB) ── */
-const COURSE_PASSWORD = 'rutageb26';
-const STORAGE_KEY = 'impulso_unlock_ruta';
-if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
+/* ── LOGIN (AuthEngine — contraseña individual, ver auth-engine.js) ── */
+if (AuthEngine.estaLogueado()) document.documentElement.classList.add('unlocked');
 document.getElementById('lock-form').addEventListener('submit', function(e){
   e.preventDefault();
   const val = document.getElementById('lock-input').value.trim();
-  if (val === COURSE_PASSWORD) {
-    localStorage.setItem(STORAGE_KEY, '1');
-    document.documentElement.classList.add('unlocked');
-  } else {
-    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
-  }
+  AuthEngine.intentarLogin(val).then(function(res){
+    if (res.ok) {
+      // El candado por calendario (más abajo en este script) ya evaluó
+      // "modo revisión" antes de que hubiera sesión — si esta cuenta es
+      // admin, se recarga para que ese candado se vuelva a evaluar ya con
+      // la sesión activa, en vez de quedarse con el resultado viejo.
+      if (res.sesion && res.sesion.admin) { location.reload(); return; }
+      document.documentElement.classList.add('unlocked');
+    } else {
+      document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+    }
+  });
 });
 
 /* ── CONTEXT FROM QUERY PARAMS ── */
@@ -906,15 +911,10 @@ function abrirPopupPaso(stepIdx) {
   });
 }
 
-/* ── POPUP FINAL: revisión + reflexión + NPS + entrega ── */
+/* ── POPUP FINAL: revisión + reflexión + NPS + entrega ──
+   La identidad ya viene del login (AuthEngine) — para llegar hasta aquí ya
+   se inició sesión, nunca hace falta pedirla de nuevo. ── */
 function abrirPopupFinal() {
-  if (!EntregaEngine.obtenIdentidad()) {
-    popupCard.innerHTML = `<div id="identidad-wrap"></div>`;
-    overlay.classList.add('open');
-    EntregaEngine.montarIdentidad(document.getElementById('identidad-wrap'), () => abrirPopupFinal());
-    return;
-  }
-
   const lastStep = steps[steps.length - 1];
   const finalInstr = (lastStep.popup && lastStep.popup.instr) || 'Revisa tus respuestas. Si quieres editar o completar alguna, adelante.';
   const entregaCampos = (weekData.entrega && weekData.entrega.campos) || [];
@@ -1013,7 +1013,7 @@ async function realizarEntrega() {
   btn.textContent = 'Enviando…';
 
   const payload = {
-    id: identidad.curp,
+    id: identidad.id,
     nombre: identidad.nombre,
     curso, semana,
     campos: Object.assign({}, answers, { nps })

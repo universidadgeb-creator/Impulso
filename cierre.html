@@ -165,13 +165,13 @@ html.unlocked .lock-screen{display:none;}
   <div class="lock-card">
     <div class="lock-ico-big">🔒</div>
     <h1>Ruta GEB</h1>
-    <p>Ingresa la contraseña del curso para continuar.</p>
+    <p>Ingresa tu contraseña para continuar.</p>
     <form class="lock-form" id="lock-form">
-      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Tu contraseña" autocomplete="off">
       <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
-    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+    <p class="lock-hint">¿No tienes tu contraseña? Pregúntale a tu facilitador GEB.</p>
   </div>
 </div>
 
@@ -245,26 +245,27 @@ html.unlocked .lock-screen{display:none;}
 </div>
 
 <script src="config.js"></script>
+<script src="auth-engine.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
-/* ── LOCK / PASSWORD GATE (comparte contraseña y storage key con el resto de la plataforma) ── */
-const COURSE_PASSWORD = 'rutageb26';
-const STORAGE_KEY = 'impulso_unlock_ruta';
-if (localStorage.getItem(STORAGE_KEY) === '1') document.documentElement.classList.add('unlocked');
+/* ── LOGIN (AuthEngine) ── */
+if (AuthEngine.estaLogueado()) document.documentElement.classList.add('unlocked');
 document.getElementById('lock-form').addEventListener('submit', function(e){
   e.preventDefault();
   const val = document.getElementById('lock-input').value.trim();
-  if (val === COURSE_PASSWORD) {
-    localStorage.setItem(STORAGE_KEY, '1');
-    document.documentElement.classList.add('unlocked');
-  } else {
-    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
-  }
+  AuthEngine.intentarLogin(val).then(function(res){
+    if (res.ok) {
+      document.documentElement.classList.add('unlocked');
+    } else {
+      document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+    }
+  });
 });
 
-/* ── GUARDIA: sin identidad registrada, no hay cierre que hacer ── */
+/* ── GUARDIA: sin sesión, no hay cierre que hacer (defensivo — el login ya
+   lo exige antes de mostrar cualquier contenido de esta página) ── */
 const identidad = EntregaEngine.obtenIdentidad();
-if (!identidad || !identidad.curp) {
+if (!identidad || !identidad.id) {
   document.getElementById('cierre-guardia').style.display = 'flex';
   document.getElementById('cierre-contenido').style.display = 'none';
 }
@@ -378,7 +379,7 @@ document.getElementById('cierre-enviar').addEventListener('click', function () {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify({
-      id: identidad.curp,
+      id: identidad.id,
       nombre: identidad.nombre,
       curso: 'Ruta GEB',
       semana: 'Cierre',

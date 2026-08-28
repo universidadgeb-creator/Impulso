@@ -279,13 +279,13 @@ html.unlocked .lock-screen{display:none;}
   <div class="lock-card">
     <div class="lock-ico-big">🔒</div>
     <h1>Ruta GEB</h1>
-    <p>Esta es la plataforma de aprendizaje del curso. Ingresa la contraseña del curso para continuar.</p>
+    <p>Esta es la plataforma de aprendizaje del curso. Ingresa tu contraseña para continuar.</p>
     <form class="lock-form" id="lock-form">
-      <input type="password" class="lock-input" id="lock-input" placeholder="Contraseña del curso" autocomplete="off">
+      <input type="password" class="lock-input" id="lock-input" placeholder="Tu contraseña" autocomplete="off">
       <button type="submit" class="lock-submit">Acceder</button>
       <div class="lock-error" id="lock-error"></div>
     </form>
-    <p class="lock-hint">¿No tienes la contraseña? Pregúntale a tu facilitador GEB.</p>
+    <p class="lock-hint">¿No tienes tu contraseña? Pregúntale a tu facilitador GEB.</p>
   </div>
 </div>
 
@@ -333,28 +333,51 @@ html.unlocked .lock-screen{display:none;}
 
 </div>
 
+<script src="config.js"></script>
+<script src="auth-engine.js"></script>
 <script src="entrega-engine.js"></script>
 <script>
-/* ── LOCK / PASSWORD GATE ──
-   Contraseña compartida por curso (no es autenticación real: cualquiera con acceso
-   al código fuente puede verla). Cambiar aquí cuando se necesite rotarla. */
-const COURSE_PASSWORD = 'rutageb26';
-const STORAGE_KEY = 'impulso_unlock_ruta';
-
-if (localStorage.getItem(STORAGE_KEY) === '1') {
+/* ── LOGIN (AuthEngine — contraseña individual, ver auth-engine.js) ── */
+if (AuthEngine.estaLogueado()) {
   document.documentElement.classList.add('unlocked');
+  sincronizarAvance();
 }
 
 document.getElementById('lock-form').addEventListener('submit', function(e){
   e.preventDefault();
   const val = document.getElementById('lock-input').value.trim();
-  if (val === COURSE_PASSWORD) {
-    localStorage.setItem(STORAGE_KEY, '1');
-    document.documentElement.classList.add('unlocked');
-  } else {
-    document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
-  }
+  AuthEngine.intentarLogin(val).then(function(res){
+    if (res.ok) {
+      document.documentElement.classList.add('unlocked');
+      if (typeof render === 'function') render(); // refresca candados con la sesión ya activa (ej. admin)
+      sincronizarAvance();
+    } else {
+      document.getElementById('lock-error').textContent = 'Contraseña incorrecta.';
+    }
+  });
 });
+
+/* ── SINCRONIZAR AVANCE — al iniciar sesión (en cualquier dispositivo),
+   trae de la hoja qué semanas ya entregó esta persona y pinta los checks
+   verdes, aunque este sea un navegador nuevo que nunca los vio localmente.
+   Si falla (sin internet, Apps Script caído) no rompe nada — el sitio
+   sigue funcionando con lo que ya haya localmente. ── */
+function sincronizarAvance() {
+  const sesion = AuthEngine.sesionActual();
+  if (!sesion || !sesion.id) return;
+  fetch(CONFIG.BACKEND + '?accion=avance&id=' + encodeURIComponent(sesion.id))
+    .then(r => r.json())
+    .then(data => {
+      if (!data || !data.ok || !data.semanas) return;
+      Object.keys(data.semanas).forEach(semana => {
+        const n = (semana.match(/\d+/) || [])[0];
+        if (n) localStorage.setItem(claveCompletado('Ruta GEB', n), '1');
+      });
+      if (data.semanas['Cierre']) localStorage.setItem('geb_cierre_completado', '1');
+      if (typeof render === 'function') render();
+    })
+    .catch(() => { /* sin conexión al Apps Script — se queda con lo local */ });
+}
 
 document.addEventListener('click', function(e){
   var menu = document.getElementById('platform-menu');
@@ -374,16 +397,12 @@ function claveCompletado(curso, semNum) {
   return `geb_completado_${curso}_sem${semNum}`.replace(/\s+/g, '_');
 }
 
-/* ── MODO REVISIÓN (Ceci) — bypassa el candado por calendario en este
-   navegador. Se activa una sola vez visitando ruta-geb.html?admin=CLAVE;
-   queda guardado y ya no hace falta repetir el parámetro. No afecta a los
-   participantes, que nunca reciben este link. ── */
-const ADMIN_KEY = 'cecirevisa26';
-const ADMIN_FLAG = 'geb_admin_ruta';
-if (new URLSearchParams(location.search).get('admin') === ADMIN_KEY) {
-  localStorage.setItem(ADMIN_FLAG, '1');
-}
-const esModoRevision = localStorage.getItem(ADMIN_FLAG) === '1';
+/* ── MODO REVISIÓN — cuentas con "admin": true en content/usuarios.json
+   (hoy: Ceci, Julia) ven todas las semanas sin candado de calendario en
+   ningún dispositivo. Es un dato de la cuenta, no un parámetro de URL.
+   Función (no const) para que quede al día justo después de iniciar sesión,
+   sin esperar a recargar la página. ── */
+function esModoRevision() { return AuthEngine.esAdmin(); }
 
 /* ── DESBLOQUEO AUTOMÁTICO POR CALENDARIO ──
    Semana 1 siempre abierta. Semana N (N≥2) se habilita el domingo por la
@@ -415,7 +434,7 @@ function fechaTxt(fecha) {
 }
 
 function bienvenidaDesbloqueada() {
-  if (esModoRevision) return true;
+  if (esModoRevision()) return true;
   return Date.now() >= new Date(BIENVENIDA_INICIO_ISO).getTime();
 }
 
@@ -424,7 +443,7 @@ function mensajeBloqueoBienvenida() {
 }
 
 function estaDesbloqueada(semNum) {
-  if (esModoRevision) return true;
+  if (esModoRevision()) return true;
   if (semNum === 1) return Date.now() >= fechaProgramada(1).getTime();
   const anteriorCompletada = localStorage.getItem(claveCompletado('Ruta GEB', semNum - 1)) === '1';
   const fecha = fechaProgramada(semNum);
