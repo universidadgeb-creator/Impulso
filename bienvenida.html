@@ -289,11 +289,13 @@ html.unlocked .lock-screen{display:none;}
             <div class="video-placeholder">Cargando…</div>
           </div>
 
-          <div class="media-placeholder">
-            <span class="media-placeholder-ico">🎥</span>
-            <div>
-              <div class="media-placeholder-title">Grabación de la sesión</div>
-              <div class="media-placeholder-sub">La grabación será subida aquí.</div>
+          <div id="grabacion-wrap">
+            <div class="media-placeholder">
+              <span class="media-placeholder-ico">🎥</span>
+              <div>
+                <div class="media-placeholder-title">Grabación de la sesión</div>
+                <div class="media-placeholder-sub">La grabación será subida aquí.</div>
+              </div>
             </div>
           </div>
 
@@ -712,6 +714,20 @@ fetch('content/ruta-sem0.json')
     } else {
       vp.innerHTML = '<div class="video-placeholder">🎬 Video por producir</div>';
       marcarVideoVisto();
+    }
+
+    /* Grabación de la sesión — recurso aparte del video de apertura */
+    var gw = document.getElementById('grabacion-wrap');
+    if (data.grabacion_src && data.grabacion_src.indexOf('[verificar') !== 0) {
+      var gvid = document.createElement('video');
+      gvid.src = data.grabacion_src;
+      gvid.controls = true;
+      gvid.playsInline = true;
+      gvid.style.width = '100%';
+      gvid.style.display = 'block';
+      gvid.style.borderRadius = '14px';
+      gw.innerHTML = '';
+      gw.appendChild(gvid);
     }
 
     /* Encuesta — se renderiza al abrir el popup (abrirPopup), no aquí */
