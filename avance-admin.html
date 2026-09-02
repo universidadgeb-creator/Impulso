@@ -107,6 +107,10 @@ tbody tr:hover{background:rgba(126,200,160,.08);}
 .detalle-estado.ok{color:#3F8F63;font-weight:700;}
 .detalle-estado.progreso{color:#B8860B;font-weight:700;}
 .popup-cerrar{margin-top:18px;background:#14181F;color:#fff;border:none;font-size:13px;font-weight:700;padding:10px 20px;border-radius:100px;cursor:pointer;width:100%;}
+.respuestas-box{background:#FAFAF8;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:12px;}
+.respuestas-item{margin-bottom:6px;line-height:1.5;}
+.respuestas-item:last-child{margin-bottom:0;}
+.respuestas-campo{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#9A968C;}
 
 @media(max-width:699px){
   .admin-wrap{padding:88px 16px 44px;}
@@ -289,19 +293,32 @@ function labelPaso(paso, total) {
   return `Completó hasta el paso ${paso} de ${total} (${nombres[paso - 1] || ('paso ' + paso)})`;
 }
 
+function respuestasHtml(clave, progreso) {
+  const raw = progreso[clave] && progreso[clave].respuestas;
+  if (!raw) return '';
+  let obj;
+  try { obj = JSON.parse(raw); } catch (e) { return ''; }
+  const filas = Object.keys(obj).filter(k => obj[k] !== undefined && obj[k] !== '');
+  if (!filas.length) return '';
+  return `<div class="respuestas-box">${filas.map(k =>
+    `<div class="respuestas-item"><span class="respuestas-campo">${k}</span>${String(obj[k]).replace(/</g, '&lt;')}</div>`
+  ).join('')}</div>`;
+}
+
 function abrirDetalle(r) {
   const { u, semanas, progreso } = r;
   document.getElementById('detalle-nombre').textContent = u.nombre;
   document.getElementById('detalle-cuerpo').innerHTML = COLUMNAS.map(c => {
     const estado = estadoColumna(c, semanas, progreso);
-    let texto, clase;
+    let texto, clase, extra = '';
     if (estado === 'ok') { texto = 'Entregado'; clase = 'ok'; }
     else if (estado === 'progreso') {
       const clave = Object.keys(progreso).find(k => c.match(k));
       texto = labelPaso(progreso[clave].paso, progreso[clave].totalPasos);
       clase = 'progreso';
+      extra = respuestasHtml(clave, progreso);
     } else { texto = 'Sin empezar'; clase = ''; }
-    return `<div class="detalle-row"><span class="detalle-label">${c.label}</span><span class="detalle-estado ${clase}">${texto}</span></div>`;
+    return `<div class="detalle-row"><span class="detalle-label">${c.label}</span><span class="detalle-estado ${clase}">${texto}</span></div>${extra}`;
   }).join('');
   document.getElementById('detalle-overlay').classList.add('open');
 }
