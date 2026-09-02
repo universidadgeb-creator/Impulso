@@ -919,10 +919,12 @@ function borrarBorrador() {
   try { localStorage.removeItem(claveBorrador()); } catch (e) { /* nada que borrar */ }
 }
 
-/* ── AVISO DE PROGRESO PARCIAL — no reemplaza la entrega final, es una
-   señal ligera para que la vista de avance-admin.html sepa en qué paso
-   se quedó alguien que todavía no entrega. Se manda "en caliente" (fire
-   and forget, sin bloquear la UI); si falla no rompe nada. ── */
+/* ── AVISO DE PROGRESO PARCIAL — manda también las respuestas que ya
+   llevaba escritas (no solo el número de paso), para poder recuperarlas
+   completas si la persona cambia de dispositivo o navegador a medio
+   llenar una semana. También alimenta avance-admin.html. Se manda "en
+   caliente" (fire and forget, sin bloquear la UI); si falla no rompe
+   nada — el borrador local (localStorage) sigue funcionando igual. ── */
 function enviarProgreso(paso, totalPasos) {
   const identidad = EntregaEngine.obtenIdentidad();
   if (!identidad || !identidad.id) return;
@@ -934,7 +936,8 @@ function enviarProgreso(paso, totalPasos) {
       id: identidad.id,
       nombre: identidad.nombre,
       curso, semana,
-      paso, totalPasos
+      paso, totalPasos,
+      respuestas: answers
     })
   }).catch(() => { /* sin conexión — no es crítico, se reintenta en el siguiente paso */ });
 }
@@ -1254,8 +1257,44 @@ fetch(contentUrl)
     renderRecursos(data.recursos);
     renderAll();
     enviarProgreso(0, steps.length);
+    recuperarProgresoRemoto();
   })
   .catch(() => { /* sin JSON disponible para esta semana: no hay contenido que pintar */ });
+
+/* ── RECUPERAR PROGRESO DESDE EL BACKEND (cross-device) — el borrador local
+   ya pintó algo de inmediato sin esperar red; esto llega después y, si el
+   backend tiene más avance que este dispositivo (por ejemplo porque la
+   persona venía avanzando en su celular y ahora abre en una computadora),
+   lo reemplaza. Nunca hace retroceder el progreso: si este dispositivo va
+   más adelantado que lo último guardado en el backend, se queda como está
+   — el siguiente paso que se guarde va a actualizar el backend de todos
+   modos. ── */
+function recuperarProgresoRemoto() {
+  const identidad = EntregaEngine.obtenIdentidad();
+  if (!identidad || !identidad.id) return;
+  fetch(CONFIG.BACKEND + '?accion=avance&id=' + encodeURIComponent(identidad.id))
+    .then(r => r.json())
+    .then(d => {
+      if (!d || !d.ok || !d.progreso) return;
+      const clave = `${curso} ${semana}`.replace(/\s+/g, ' ').trim();
+      const remoto = d.progreso[clave];
+      if (!remoto || !remoto.respuestas) return;
+
+      let respuestasRemotas;
+      try { respuestasRemotas = JSON.parse(remoto.respuestas); } catch (e) { return; }
+
+      const nivelRemoto = Number(remoto.paso) || 0;
+      const nivelLocal = completed.filter(Boolean).length;
+      if (nivelRemoto < nivelLocal) return; // este dispositivo ya va más adelante
+
+      answers = respuestasRemotas;
+      for (let i = 0; i < steps.length; i++) completed[i] = i < nivelRemoto;
+      activeStep = Math.min(nivelRemoto, steps.length - 1);
+      guardarBorrador();
+      renderAll();
+    })
+    .catch(() => { /* sin conexión — se queda con lo que ya había local */ });
+}
 
 /* ── NAV ENTRE SEMANAS: anterior / próxima ── */
 (function () {

@@ -538,9 +538,43 @@ function enviarProgreso(paso, totalPasos) {
       id: identidad.id,
       nombre: identidad.nombre,
       curso: CURSO, semana: SEMANA,
-      paso: paso, totalPasos: totalPasos
+      paso: paso, totalPasos: totalPasos,
+      respuestas: respuestas
     })
   }).catch(function() { /* sin conexión — no es crítico */ });
+}
+
+/* manda las respuestas parciales de la encuesta (cross-device, igual que
+   momento-guia.html) — paso se queda en 1 (video ya visto) mientras la
+   encuesta no se entrega completa; "respuestas" es lo que importa aquí. */
+function enviarProgresoEncuesta(respondidas, total) {
+  if (!respondidas) return; // nada que mandar todavía
+  enviarProgreso(1, 2);
+}
+
+/* ---- RECUPERAR ENCUESTA DESDE EL BACKEND (cross-device) — si la persona
+   viene de otro dispositivo/navegador con respuestas parciales guardadas
+   allá, esto las trae. Nunca borra lo que ya hay local si el backend no
+   tiene nada. ---- */
+function recuperarEncuestaRemota() {
+  var identidad = AuthEngine.sesionActual();
+  if (!identidad || !identidad.id) return;
+  fetch(CONFIG.BACKEND + '?accion=avance&id=' + encodeURIComponent(identidad.id))
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d || !d.ok || !d.progreso) return;
+      var clave = (CURSO + ' ' + SEMANA).replace(/\s+/g, ' ').trim();
+      var remoto = d.progreso[clave];
+      if (!remoto || !remoto.respuestas) return;
+      var remotas;
+      try { remotas = JSON.parse(remoto.respuestas); } catch (e) { return; }
+      var localesCount = Object.keys(respuestas).filter(function(k) { return respuestas[k] !== undefined && respuestas[k] !== ''; }).length;
+      var remotasCount = Object.keys(remotas).filter(function(k) { return remotas[k] !== undefined && remotas[k] !== ''; }).length;
+      if (remotasCount <= localesCount) return; // este dispositivo ya va igual o más adelante
+      respuestas = remotas;
+      localStorage.setItem(BV_ENCUESTA_KEY, JSON.stringify(respuestas));
+    })
+    .catch(function() { /* sin conexión — se queda con lo que ya había local */ });
 }
 
 function marcarVideoVisto() {
@@ -573,6 +607,7 @@ function renderEncuesta(pregs, soloLectura) {
     progEl.textContent = soloLectura ? 'Respuestas guardadas' : (resp + ' de ' + total + ' respondidas');
     if (!soloLectura) btnOk.disabled = (resp < total);
     localStorage.setItem(BV_ENCUESTA_KEY, JSON.stringify(respuestas));
+    if (!soloLectura) enviarProgresoEncuesta(resp, total);
   }
 
   pregs.forEach(function(p, idx) {
@@ -761,6 +796,7 @@ fetch('content/ruta-sem0.json')
 /* ---- INIT ---- */
 renderChecklist();
 enviarProgreso(0, 2);
+recuperarEncuestaRemota();
 </script>
 
 </body>
