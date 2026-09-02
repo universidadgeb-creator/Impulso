@@ -304,6 +304,7 @@ html.unlocked .lock-screen{display:none;}
           <h2>Ruta GEB</h2>
           <p class="dash-tagline">Seis semanas para saber a dónde vas, cómo vas a llegar y con qué cuentas para hacerlo.</p>
           <div class="dash-meta" id="dash-meta">Semana 1 de 6 · 1 módulo</div>
+          <a href="avance-admin.html" id="admin-link" style="display:none;font-size:12px;font-weight:700;color:#3F8F63;margin-top:6px;">📊 Ver avance por participante</a>
         </div>
       </div>
 
@@ -558,6 +559,8 @@ function moduleCompletado(d, m) {
 function render() {
   renderStepper();
   const d = days[activeDay];
+
+  document.getElementById('admin-link').style.display = AuthEngine.esAdmin() ? 'inline-block' : 'none';
 
   if (d.pillar === 'Cierre') {
     document.getElementById('dash-meta').textContent = `Después de Semana ${totalSemanas} · ${d.modules.length} paso`;

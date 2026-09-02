@@ -524,11 +524,31 @@ document.getElementById('cerrar-encuesta').addEventListener('click', cerrarPopup
 /* ---- VIDEO: marcar visto cuando termina, y pasar directo a la encuesta —
    así siempre hay una siguiente actividad clara, sin que la persona tenga
    que ir a buscarla en el temario. ---- */
+/* ---- AVISO DE PROGRESO PARCIAL — misma señal ligera que momento-guia.html,
+   para que avance-admin.html sepa en qué paso de Bienvenida se quedó
+   alguien que todavía no la termina. Fire and forget. ---- */
+function enviarProgreso(paso, totalPasos) {
+  var identidad = AuthEngine.sesionActual();
+  if (!identidad || !identidad.id) return;
+  fetch(CONFIG.BACKEND, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      accion: 'progreso',
+      id: identidad.id,
+      nombre: identidad.nombre,
+      curso: CURSO, semana: SEMANA,
+      paso: paso, totalPasos: totalPasos
+    })
+  }).catch(function() { /* sin conexión — no es crítico */ });
+}
+
 function marcarVideoVisto() {
   if (estado.video) return;
   estado.video = true;
   guardarEstado(estado);
   renderChecklist();
+  enviarProgreso(1, 2);
   abrirPopup('encuesta');
 }
 
@@ -740,6 +760,7 @@ fetch('content/ruta-sem0.json')
 
 /* ---- INIT ---- */
 renderChecklist();
+enviarProgreso(0, 2);
 </script>
 
 </body>

@@ -852,6 +852,7 @@ document.getElementById('btn-siguiente').addEventListener('click', () => {
     abrirPopupPaso(activeStep);
   } else {
     // paso sin popup (ej. Caso): avanza directo
+    enviarProgreso(activeStep + 1, steps.length);
     if (activeStep < steps.length - 1) { activeStep++; renderAll(); }
   }
 });
@@ -889,6 +890,26 @@ function renderCampoPopup(field) {
   return `<div class="popup-field"><label>${field.label}</label><input type="text" data-id="${field.id}" value="${val}"></div>`;
 }
 
+/* ── AVISO DE PROGRESO PARCIAL — no reemplaza la entrega final, es una
+   señal ligera para que la vista de avance-admin.html sepa en qué paso
+   se quedó alguien que todavía no entrega. Se manda "en caliente" (fire
+   and forget, sin bloquear la UI); si falla no rompe nada. ── */
+function enviarProgreso(paso, totalPasos) {
+  const identidad = EntregaEngine.obtenIdentidad();
+  if (!identidad || !identidad.id) return;
+  fetch(CONFIG.BACKEND, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      accion: 'progreso',
+      id: identidad.id,
+      nombre: identidad.nombre,
+      curso, semana,
+      paso, totalPasos
+    })
+  }).catch(() => { /* sin conexión — no es crítico, se reintenta en el siguiente paso */ });
+}
+
 /* ── POPUP DE PASO (Diagnóstico / Marco / Aplicación) ── */
 function abrirPopupPaso(stepIdx) {
   const s = steps[stepIdx];
@@ -921,6 +942,7 @@ function abrirPopupPaso(stepIdx) {
       }
     });
     completed[stepIdx] = true;
+    enviarProgreso(stepIdx + 1, steps.length);
     cerrarPopup();
     if (activeStep < steps.length - 1) activeStep++;
     renderAll();
@@ -1188,6 +1210,7 @@ fetch(contentUrl)
 
     renderRecursos(data.recursos);
     renderAll();
+    enviarProgreso(0, steps.length);
   })
   .catch(() => { /* sin JSON disponible para esta semana: no hay contenido que pintar */ });
 
