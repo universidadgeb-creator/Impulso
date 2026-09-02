@@ -841,6 +841,7 @@ document.getElementById('btn-siguiente').addEventListener('click', () => {
   if (videoActive) {
     videoActive = false;
     videoViewed = true;
+    guardarBorrador();
     renderAll();
     return;
   }
@@ -852,8 +853,11 @@ document.getElementById('btn-siguiente').addEventListener('click', () => {
     abrirPopupPaso(activeStep);
   } else {
     // paso sin popup (ej. Caso): avanza directo
+    completed[activeStep] = true;
     enviarProgreso(activeStep + 1, steps.length);
-    if (activeStep < steps.length - 1) { activeStep++; renderAll(); }
+    if (activeStep < steps.length - 1) activeStep++;
+    guardarBorrador();
+    renderAll();
   }
 });
 
@@ -888,6 +892,31 @@ function renderCampoPopup(field) {
     return `<div class="popup-field"><label>${field.label}</label><div class="popup-opciones" data-id="${field.id}">${opts}</div></div>`;
   }
   return `<div class="popup-field"><label>${field.label}</label><input type="text" data-id="${field.id}" value="${val}"></div>`;
+}
+
+/* ── BORRADOR LOCAL DEL PASO A PASO — antes, "answers" y "completed" solo
+   vivían en memoria de JS: si alguien cerraba la pestaña, se le acababa la
+   batería o el navegador recargaba la página a medio llenar los popups de
+   un paso, perdía todo lo que llevaba esa semana aunque nunca hubiera
+   cambiado de dispositivo. Esto lo guarda en localStorage en cada paso
+   guardado, para poder recuperarlo si la página se vuelve a abrir. Se borra
+   solo cuando la entrega final ya se mandó (realizarEntrega). ── */
+function claveBorrador() {
+  return `geb_borrador_${curso}_${semana}`.replace(/\s+/g, '_');
+}
+function guardarBorrador() {
+  try {
+    localStorage.setItem(claveBorrador(), JSON.stringify({ answers, completed, activeStep, videoViewed }));
+  } catch (e) { /* localStorage lleno o bloqueado — no es crítico */ }
+}
+function cargarBorrador() {
+  try {
+    const raw = localStorage.getItem(claveBorrador());
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+function borrarBorrador() {
+  try { localStorage.removeItem(claveBorrador()); } catch (e) { /* nada que borrar */ }
 }
 
 /* ── AVISO DE PROGRESO PARCIAL — no reemplaza la entrega final, es una
@@ -945,6 +974,7 @@ function abrirPopupPaso(stepIdx) {
     enviarProgreso(stepIdx + 1, steps.length);
     cerrarPopup();
     if (activeStep < steps.length - 1) activeStep++;
+    guardarBorrador();
     renderAll();
   });
 }
@@ -1069,6 +1099,7 @@ async function realizarEntrega() {
   completed[lastIdx] = true;
   entregada = true;
   localStorage.setItem(claveCompletado(curso, semNum), '1');
+  borrarBorrador();
   cerrarPopup();
   mostrarExito();
 }
@@ -1207,6 +1238,18 @@ fetch(contentUrl)
     weekData = data;
     hasVideo = !!data.video_src;
     videoActive = hasVideo; // arranca en el video, si existe
+
+    // Recupera lo que ya se había guardado en este dispositivo para esta
+    // semana, si lo hay y si el contenido no cambió de tamaño (defensivo
+    // ante una semana editada después de que alguien ya empezó).
+    const borrador = cargarBorrador();
+    if (borrador && Array.isArray(borrador.completed) && borrador.completed.length === steps.length) {
+      answers = borrador.answers || {};
+      completed = borrador.completed;
+      activeStep = Math.min(borrador.activeStep || 0, steps.length - 1);
+      videoViewed = !!borrador.videoViewed;
+      videoActive = hasVideo && !videoViewed;
+    }
 
     renderRecursos(data.recursos);
     renderAll();
