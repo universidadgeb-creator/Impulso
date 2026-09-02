@@ -85,8 +85,9 @@ tbody td{padding:10px;text-align:center;border-top:1px solid #ECEAE4;}
 tbody td:first-child{text-align:left;padding-left:16px;font-weight:600;color:#14181F;}
 tbody tr:nth-child(even){background:#FAFAF8;}
 tbody tr.sin-avance{background:rgba(240,112,96,.06);}
-tbody tr{cursor:pointer;}
-tbody tr:hover{background:rgba(126,200,160,.08);}
+tbody td.col-nombre,tbody td.col-semana{cursor:pointer;}
+tbody td.col-nombre:hover{background:rgba(20,24,31,.05);}
+tbody td.col-semana:hover{background:rgba(126,200,160,.14);}
 .chk-ok{color:#3F8F63;font-weight:700;font-size:14px;}
 .chk-progreso{color:#B8860B;font-weight:700;font-size:14px;}
 .chk-no{color:#D8D3C6;}
@@ -108,9 +109,14 @@ tbody tr:hover{background:rgba(126,200,160,.08);}
 .detalle-estado.progreso{color:#B8860B;font-weight:700;}
 .popup-cerrar{margin-top:18px;background:#14181F;color:#fff;border:none;font-size:13px;font-weight:700;padding:10px 20px;border-radius:100px;cursor:pointer;width:100%;}
 .respuestas-box{background:#FAFAF8;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:12px;}
-.respuestas-item{margin-bottom:6px;line-height:1.5;}
+.respuestas-item{margin-bottom:10px;line-height:1.5;}
 .respuestas-item:last-child{margin-bottom:0;}
-.respuestas-campo{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#9A968C;}
+.respuestas-campo{display:block;font-size:11.5px;font-weight:700;color:#14181F;margin-bottom:2px;}
+.zoom-momentos{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.zoom-momento{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#B3AFA4;}
+.zoom-momento.hecho{color:#14181F;font-weight:600;}
+.zoom-momento span{width:16px;text-align:center;color:#3F8F63;flex-shrink:0;}
+.zoom-vacio{font-size:12.5px;color:#9A968C;text-align:center;padding:10px 0;}
 
 @media(max-width:699px){
   .admin-wrap{padding:88px 16px 44px;}
@@ -238,6 +244,7 @@ function init() {
           .then(d => ({
             u,
             semanas: (d && d.ok && d.semanas) ? Object.keys(d.semanas) : [],
+            semanasRaw: (d && d.ok && d.semanas) ? d.semanas : {},
             progreso: (d && d.ok && d.progreso) ? d.progreso : {},
             error: false
           }))
@@ -251,20 +258,23 @@ function init() {
       const body = document.getElementById('tabla-body');
       body.innerHTML = resultados.map((r, idx) => {
         const { u, semanas, progreso, error } = r;
-        const marcas = COLUMNAS.map(c => {
+        const marcas = COLUMNAS.map((c, colIdx) => {
           const estado = estadoColumna(c, semanas, progreso);
-          if (estado === 'ok') return '<td><span class="chk-ok">✓</span></td>';
-          if (estado === 'progreso') return '<td><span class="chk-progreso">●</span></td>';
-          return '<td><span class="chk-no">—</span></td>';
+          if (estado === 'ok') return `<td class="col-semana" data-idx="${idx}" data-col="${colIdx}"><span class="chk-ok">✓</span></td>`;
+          if (estado === 'progreso') return `<td class="col-semana" data-idx="${idx}" data-col="${colIdx}"><span class="chk-progreso">●</span></td>`;
+          return `<td class="col-semana" data-idx="${idx}" data-col="${colIdx}"><span class="chk-no">—</span></td>`;
         }).join('');
         const total = COLUMNAS.filter(c => estadoColumna(c, semanas, progreso) === 'ok').length;
         const filaClase = total === 0 ? ' class="sin-avance"' : '';
         const totalTexto = error ? '<span class="col-error">error</span>' : `<span class="col-total">${total}/${COLUMNAS.length}</span>`;
-        return `<tr${filaClase} data-idx="${idx}"><td>${u.nombre}</td>${marcas}<td>${totalTexto}</td></tr>`;
+        return `<tr><td class="col-nombre" data-idx="${idx}">${u.nombre}</td>${marcas}<td>${totalTexto}</td></tr>`;
       }).join('');
 
-      body.querySelectorAll('tr').forEach(tr => {
-        tr.addEventListener('click', () => abrirDetalle(window.__resultados[Number(tr.dataset.idx)]));
+      body.querySelectorAll('td.col-nombre').forEach(td => {
+        td.addEventListener('click', () => abrirDetalle(window.__resultados[Number(td.dataset.idx)]));
+      });
+      body.querySelectorAll('td.col-semana').forEach(td => {
+        td.addEventListener('click', () => abrirZoomSemana(window.__resultados[Number(td.dataset.idx)], COLUMNAS[Number(td.dataset.col)]));
       });
 
       const conError = resultados.filter(r => r.error).length;
@@ -303,6 +313,101 @@ function respuestasHtml(clave, progreso) {
   return `<div class="respuestas-box">${filas.map(k =>
     `<div class="respuestas-item"><span class="respuestas-campo">${k}</span>${String(obj[k]).replace(/</g, '&lt;')}</div>`
   ).join('')}</div>`;
+}
+
+/* ── ZOOM A UNA SEMANA — a diferencia de abrirDetalle (resumen de las 8
+   semanas), esto se enfoca en una sola: qué momentos completó y qué
+   contestó en cada pregunta, con el texto real de la pregunta (no el id
+   crudo del campo). El contenido de cada semana (labels de pasos y de
+   campos de entrega) se trae bajo demanda de content/*.json y se guarda
+   en caché para no volver a pedirlo si se abre otra vez. ── */
+const CONTENT_MAP = {
+  'Bienvenida': { url: 'content/ruta-sem0.json', tipo: 'bienvenida' },
+  'Sem 1': { url: 'content/ruta-sem1.json', tipo: 'semana' },
+  'Sem 2': { url: 'content/ruta-sem2.json', tipo: 'semana' },
+  'Sem 3': { url: 'content/ruta-sem3.json', tipo: 'semana' },
+  'Sem 4': { url: 'content/ruta-sem4.json', tipo: 'semana' },
+  'Sem 5': { url: 'content/ruta-sem5.json', tipo: 'semana' },
+  'Sem 6': { url: 'content/ruta-sem6.json', tipo: 'semana' },
+  'Cierre': { url: 'content/ruta-cierre.json', tipo: 'cierre' },
+};
+const contentCache = {};
+
+function cargarContenidoSemana(columna) {
+  const info = CONTENT_MAP[columna.label];
+  if (!info) return Promise.resolve(null);
+  if (contentCache[info.url]) return Promise.resolve(contentCache[info.url]);
+  return fetch(info.url).then(r => r.json()).then(data => {
+    contentCache[info.url] = { data, tipo: info.tipo };
+    return contentCache[info.url];
+  }).catch(() => null);
+}
+
+function momentosYCampos(contenido) {
+  if (!contenido) return { momentos: [], camposLabel: {} };
+  const { data, tipo } = contenido;
+  if (tipo === 'bienvenida') {
+    const camposLabel = {};
+    (data.diagnostico && data.diagnostico.preguntas || []).forEach(p => { camposLabel[p.id] = p.pregunta; });
+    return { momentos: ['Video de bienvenida', 'Encuesta'], camposLabel };
+  }
+  if (tipo === 'cierre') {
+    const camposLabel = {};
+    (data.diagnostico || []).forEach(p => { camposLabel[p.id] = p.pregunta; });
+    return { momentos: ['Cierre'], camposLabel };
+  }
+  const momentos = (data.steps || []).map(s => s.label || '');
+  const camposLabel = {};
+  ((data.entrega && data.entrega.campos) || []).forEach(c => { camposLabel[c.id] = c.label; });
+  camposLabel.nps = camposLabel.nps || '¿Qué tan útil fue esta semana? (NPS)';
+  return { momentos, camposLabel };
+}
+
+function respuestasConLabelsHtml(obj, camposLabel) {
+  const excluir = ['id', 'nombre', 'fecha'];
+  const filas = Object.keys(obj).filter(k => !excluir.includes(k) && obj[k] !== undefined && obj[k] !== '');
+  if (!filas.length) return '<p class="zoom-vacio">Todavía no hay respuestas escritas.</p>';
+  return filas.map(k =>
+    `<div class="respuestas-item"><span class="respuestas-campo">${camposLabel[k] || k}</span>${String(obj[k]).replace(/</g, '&lt;')}</div>`
+  ).join('');
+}
+
+function abrirZoomSemana(r, columna) {
+  const { u, semanas, semanasRaw, progreso } = r;
+  const estado = estadoColumna(columna, semanas, progreso);
+
+  document.getElementById('detalle-nombre').textContent = `${u.nombre} — ${columna.label}`;
+  document.getElementById('detalle-cuerpo').innerHTML = '<p class="zoom-vacio">Cargando…</p>';
+  document.getElementById('detalle-overlay').classList.add('open');
+
+  cargarContenidoSemana(columna).then(contenido => {
+    const { momentos, camposLabel } = momentosYCampos(contenido);
+
+    let nivelCompletado = 0;
+    let respuestasObj = null;
+    if (estado === 'ok') {
+      nivelCompletado = momentos.length;
+      const hoja = semanas.find(s => columna.match(s));
+      respuestasObj = hoja ? (semanasRaw[hoja] || {}) : {};
+    } else if (estado === 'progreso') {
+      const clave = Object.keys(progreso).find(k => columna.match(k));
+      nivelCompletado = Number(progreso[clave].paso) || 0;
+      try { respuestasObj = JSON.parse(progreso[clave].respuestas || '{}'); } catch (e) { respuestasObj = {}; }
+    }
+
+    const momentosHtml = momentos.length
+      ? `<div class="zoom-momentos">${momentos.map((m, i) => {
+          const hecho = i < nivelCompletado || estado === 'ok';
+          return `<div class="zoom-momento ${hecho ? 'hecho' : ''}"><span>${hecho ? '✓' : '○'}</span>${m}</div>`;
+        }).join('')}</div>`
+      : '';
+
+    const respuestasHtml = estado === 'no'
+      ? '<p class="zoom-vacio">Sin empezar — no hay ninguna actividad registrada todavía.</p>'
+      : `<div class="respuestas-box">${respuestasConLabelsHtml(respuestasObj || {}, camposLabel)}</div>`;
+
+    document.getElementById('detalle-cuerpo').innerHTML = momentosHtml + respuestasHtml;
+  });
 }
 
 function abrirDetalle(r) {
