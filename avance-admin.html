@@ -303,18 +303,6 @@ function labelPaso(paso, total) {
   return `Completó hasta el paso ${paso} de ${total} (${nombres[paso - 1] || ('paso ' + paso)})`;
 }
 
-function respuestasHtml(clave, progreso) {
-  const raw = progreso[clave] && progreso[clave].respuestas;
-  if (!raw) return '';
-  let obj;
-  try { obj = JSON.parse(raw); } catch (e) { return ''; }
-  const filas = Object.keys(obj).filter(k => obj[k] !== undefined && obj[k] !== '');
-  if (!filas.length) return '';
-  return `<div class="respuestas-box">${filas.map(k =>
-    `<div class="respuestas-item"><span class="respuestas-campo">${k}</span>${String(obj[k]).replace(/</g, '&lt;')}</div>`
-  ).join('')}</div>`;
-}
-
 /* ── ZOOM A UNA SEMANA — a diferencia de abrirDetalle (resumen de las 8
    semanas), esto se enfoca en una sola: qué momentos completó y qué
    contestó en cada pregunta, con el texto real de la pregunta (no el id
@@ -411,21 +399,33 @@ function abrirZoomSemana(r, columna) {
 }
 
 function abrirDetalle(r) {
-  const { u, semanas, progreso } = r;
+  const { u, semanas, semanasRaw, progreso } = r;
   document.getElementById('detalle-nombre').textContent = u.nombre;
-  document.getElementById('detalle-cuerpo').innerHTML = COLUMNAS.map(c => {
-    const estado = estadoColumna(c, semanas, progreso);
-    let texto, clase, extra = '';
-    if (estado === 'ok') { texto = 'Entregado'; clase = 'ok'; }
-    else if (estado === 'progreso') {
-      const clave = Object.keys(progreso).find(k => c.match(k));
-      texto = labelPaso(progreso[clave].paso, progreso[clave].totalPasos);
-      clase = 'progreso';
-      extra = respuestasHtml(clave, progreso);
-    } else { texto = 'Sin empezar'; clase = ''; }
-    return `<div class="detalle-row"><span class="detalle-label">${c.label}</span><span class="detalle-estado ${clase}">${texto}</span></div>${extra}`;
-  }).join('');
+  document.getElementById('detalle-cuerpo').innerHTML = '<p class="zoom-vacio">Cargando…</p>';
   document.getElementById('detalle-overlay').classList.add('open');
+
+  Promise.all(COLUMNAS.map(c => cargarContenidoSemana(c))).then(contenidos => {
+    const filas = COLUMNAS.map((c, i) => {
+      const estado = estadoColumna(c, semanas, progreso);
+      const { camposLabel } = momentosYCampos(contenidos[i]);
+      let texto, clase, extra = '';
+      if (estado === 'ok') {
+        texto = 'Entregado'; clase = 'ok';
+        const hoja = semanas.find(s => c.match(s));
+        const respuestasObj = hoja ? (semanasRaw[hoja] || {}) : {};
+        extra = `<div class="respuestas-box">${respuestasConLabelsHtml(respuestasObj, camposLabel)}</div>`;
+      } else if (estado === 'progreso') {
+        const clave = Object.keys(progreso).find(k => c.match(k));
+        texto = labelPaso(progreso[clave].paso, progreso[clave].totalPasos);
+        clase = 'progreso';
+        let respuestasObj = {};
+        try { respuestasObj = JSON.parse(progreso[clave].respuestas || '{}'); } catch (e) {}
+        extra = `<div class="respuestas-box">${respuestasConLabelsHtml(respuestasObj, camposLabel)}</div>`;
+      } else { texto = 'Sin empezar'; clase = ''; }
+      return `<div class="detalle-row"><span class="detalle-label">${c.label}</span><span class="detalle-estado ${clase}">${texto}</span></div>${extra}`;
+    }).join('');
+    document.getElementById('detalle-cuerpo').innerHTML = filas;
+  });
 }
 
 document.getElementById('detalle-cerrar').addEventListener('click', () => {
