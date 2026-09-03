@@ -28,14 +28,57 @@
       "checkLabel": "Escuchaste la meditación inicial",
       "highlight": false,
       "intro": null,
-      "content": "<p>Saber cuánto te falta ganar es solo un dato; construir el puente entre tu realidad financiera y tu plan de vida es lo que cambia realmente la perspectiva. Hay algo natural y obvio que tenemos que mencionar: todos queremos ganar más. Quedarnos solo en el deseo de un mejor sueldo no cambia la realidad.</p>\n<p style=\"margin-top:12px\">Antes de empezar, te invitamos a escuchar la siguiente meditación guiada:</p>\n\n<div class=\"resource-card resource-audio\" style=\"margin-top:12px\">\n  <div class=\"resource-top\">\n    <span class=\"resource-ico\">🎧</span>\n    <div class=\"resource-txt\">\n      <div class=\"resource-title\">Meditación guiada · Semana 6</div>\n      <div class=\"resource-sub\">Ruta GEB</div>\n    </div>\n  </div>\n  <audio controls src=\"audio/ruta-sem6-meditacion.mp3\"></audio>\n</div>",
+      "content": "<p>Antes de cerrar el ciclo, vamos a tomar una foto completa de dónde estás parado/a. La <strong>Rueda de la Vida</strong> es una herramienta de autoconocimiento: calificas del 0 al 10 qué tan bien está cada área de tu vida hoy. No hay una respuesta correcta, es solo un punto de partida honesto antes de armar tu hoja de ruta final.</p>\n<p style=\"margin-top:12px\">Saber cuánto te falta ganar es solo un dato; construir el puente entre tu realidad financiera y tu plan de vida es lo que cambia realmente la perspectiva. Hay algo natural y obvio que tenemos que mencionar: todos queremos ganar más. Quedarnos solo en el deseo de un mejor sueldo no cambia la realidad.</p>\n<p style=\"margin-top:12px\">Antes de empezar, te invitamos a escuchar la siguiente meditación guiada:</p>\n\n<div class=\"resource-card resource-audio\" style=\"margin-top:12px\">\n  <div class=\"resource-top\">\n    <span class=\"resource-ico\">🎧</span>\n    <div class=\"resource-txt\">\n      <div class=\"resource-title\">Meditación guiada · Semana 6</div>\n      <div class=\"resource-sub\">Ruta GEB</div>\n    </div>\n  </div>\n  <audio controls src=\"audio/ruta-sem6-meditacion.mp3\"></audio>\n</div>",
       "popup": {
         "title": "Diagnóstico",
-        "instr": "En base a tu reflexión:",
+        "instr": "Tu Rueda de la Vida — califica cada área del 0 (nada bien) al 10 (muy bien):",
         "fields": [
           {
+            "id": "rueda_proposito",
+            "tipo": "seleccion",
+            "label": "🟠 Propósito — qué tan clara tienes tu razón de ser",
+            "opciones": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+          },
+          {
+            "id": "rueda_carrera",
+            "tipo": "seleccion",
+            "label": "🎯 Carrera / trabajo — qué tan alineado sientes tu trabajo con hacia dónde quieres ir",
+            "opciones": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+          },
+          {
+            "id": "rueda_finanzas",
+            "tipo": "seleccion",
+            "label": "💰 Finanzas — qué tanto control sientes de tu dinero",
+            "opciones": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+          },
+          {
+            "id": "rueda_salud",
+            "tipo": "seleccion",
+            "label": "🏃 Salud y energía",
+            "opciones": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+          },
+          {
+            "id": "rueda_desarrollo",
+            "tipo": "seleccion",
+            "label": "📚 Desarrollo personal — aprendizaje, crecimiento",
+            "opciones": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+          },
+          {
+            "id": "rueda_relaciones",
+            "tipo": "seleccion",
+            "label": "🤝 Relaciones / comunidad",
+            "opciones": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+          },
+          {
+            "id": "rueda_accion",
+            "tipo": "ta",
+            "rows": 3,
+            "label": "¿Cuál área quedó más baja, y cuál sería una acción concreta para empezar a subirla?"
+          },
+          {
             "id": "d1",
-            "tipo": "textarea",
+            "tipo": "ta",
+            "rows": 4,
             "label": "¿Qué parte de tu vida diaria actual tendrías que proteger hoy mismo para asegurarte de que tu siguiente nivel de ingresos no te cueste la salud o la tranquilidad?"
           }
         ]
@@ -105,6 +148,48 @@
   ],
   "entrega": {
     "campos": [
+      {
+        "id": "rueda_proposito",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "Rueda de la Vida — Propósito"
+      },
+      {
+        "id": "rueda_carrera",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "Rueda de la Vida — Carrera / trabajo"
+      },
+      {
+        "id": "rueda_finanzas",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "Rueda de la Vida — Finanzas"
+      },
+      {
+        "id": "rueda_salud",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "Rueda de la Vida — Salud y energía"
+      },
+      {
+        "id": "rueda_desarrollo",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "Rueda de la Vida — Desarrollo personal"
+      },
+      {
+        "id": "rueda_relaciones",
+        "modo": "entrega",
+        "tipo": "seleccion",
+        "label": "Rueda de la Vida — Relaciones / comunidad"
+      },
+      {
+        "id": "rueda_accion",
+        "modo": "entrega",
+        "tipo": "textarea",
+        "label": "Área más baja de la Rueda de la Vida y acción concreta"
+      },
       {
         "id": "bina_nombre",
         "modo": "entrega",
