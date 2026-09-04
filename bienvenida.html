@@ -223,7 +223,12 @@ html.unlocked .lock-screen{display:none;}
   .rail{order:2;border-right:none;border-top:1px solid #ECEAE4;}
   .side{order:3;border-left:none;border-top:1px solid #ECEAE4;}
   .momento-wrap{padding:88px 16px 44px;max-width:520px;}
-  .center{padding:22px 18px;}
+  .center{padding:22px 18px 90px;}
+  /* El botón "Continuar" quedaba enterrado muy abajo del contenido (video +
+     contexto largo) y mucha gente nunca hacía scroll hasta encontrarlo — se
+     fija abajo de la pantalla, siempre visible, para que nadie se quede
+     sin saber cómo avanzar. */
+  .step-nav{position:fixed;bottom:0;left:0;right:0;z-index:150;background:#fff;padding:12px 16px;margin:0;box-shadow:0 -6px 20px rgba(0,0,0,.1);}
 }
 @media(max-width:699px){
   .popup-body{padding:16px 16px;}
@@ -795,7 +800,10 @@ fetch('content/ruta-sem0.json')
 
 /* ---- INIT ---- */
 renderChecklist();
-enviarProgreso(0, 2);
+// OJO: manda el nivel real (estado.video ya restaurado de localStorage), no 0
+// fijo — mandar 0 aquí siempre pisaba el progreso ya guardado en el backend
+// con cada recarga de la página.
+enviarProgreso(estado.video ? 1 : 0, 2);
 recuperarEncuestaRemota();
 </script>
 

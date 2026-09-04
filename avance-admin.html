@@ -85,6 +85,7 @@ tbody td{padding:10px;text-align:center;border-top:1px solid #ECEAE4;}
 tbody td:first-child{text-align:left;padding-left:16px;font-weight:600;color:#14181F;}
 tbody tr:nth-child(even){background:#FAFAF8;}
 tbody tr.sin-avance{background:rgba(240,112,96,.06);}
+tbody td.col-password{font-family:ui-monospace,Consolas,monospace;color:#6B6558;letter-spacing:.02em;}
 tbody td.col-nombre,tbody td.col-semana{cursor:pointer;}
 tbody td.col-nombre:hover{background:rgba(20,24,31,.05);}
 tbody td.col-semana:hover{background:rgba(126,200,160,.14);}
@@ -230,7 +231,7 @@ function init() {
   }
 
   const head = document.getElementById('tabla-head');
-  head.innerHTML = '<th>Participante</th>' +
+  head.innerHTML = '<th>Participante</th><th>Contraseña</th>' +
     COLUMNAS.map(c => `<th>${c.label}</th>`).join('') +
     '<th>Total</th>';
 
@@ -267,7 +268,7 @@ function init() {
         const total = COLUMNAS.filter(c => estadoColumna(c, semanas, progreso) === 'ok').length;
         const filaClase = total === 0 ? ' class="sin-avance"' : '';
         const totalTexto = error ? '<span class="col-error">error</span>' : `<span class="col-total">${total}/${COLUMNAS.length}</span>`;
-        return `<tr><td class="col-nombre" data-idx="${idx}">${u.nombre}</td>${marcas}<td>${totalTexto}</td></tr>`;
+        return `<tr><td class="col-nombre" data-idx="${idx}">${u.nombre}</td><td class="col-password">${u.password}</td>${marcas}<td>${totalTexto}</td></tr>`;
       }).join('');
 
       body.querySelectorAll('td.col-nombre').forEach(td => {
@@ -286,18 +287,36 @@ function init() {
     });
 }
 
+function tieneRespuestasReales(raw) {
+  if (!raw) return false;
+  try {
+    const obj = JSON.parse(raw);
+    return Object.keys(obj).some(k => obj[k] !== undefined && obj[k] !== '');
+  } catch (e) { return false; }
+}
+
 /* 'ok' = ya entregó esa semana · 'progreso' = tiene avance parcial guardado
-   pero no entregó · 'no' = sin ninguna señal */
+   pero no entregó · 'no' = sin ninguna señal.
+   Ojo: además de "paso > 0", también cuenta si ya hay texto real escrito en
+   "respuestas" aunque paso siga en 0 — una versión anterior del sitio podía
+   mandar paso:0 en la primera visita a una semana ya reabierta, pisando el
+   número aunque las respuestas sí llegaban completas (bug ya corregido del
+   lado del sitio, esto es para que el panel muestre bien los casos de antes
+   de la corrección sin tener que esperar a que esa persona vuelva a entrar). */
 function estadoColumna(columna, semanas, progreso) {
   if (semanas.some(s => columna.match(s))) return 'ok';
   const clave = Object.keys(progreso).find(k => columna.match(k));
-  if (clave && progreso[clave] && Number(progreso[clave].paso) > 0) return 'progreso';
+  if (!clave || !progreso[clave]) return 'no';
+  if (Number(progreso[clave].paso) > 0) return 'progreso';
+  if (tieneRespuestasReales(progreso[clave].respuestas)) return 'progreso';
   return 'no';
 }
 
-function labelPaso(paso, total) {
+function labelPaso(paso, total, tieneRespuestas) {
   paso = Number(paso); total = Number(total);
-  if (!paso) return 'Abrió la semana, sin completar ningún paso todavía';
+  if (!paso) return tieneRespuestas
+    ? 'Tiene respuestas guardadas (paso exacto no disponible)'
+    : 'Abrió la semana, sin completar ningún paso todavía';
   if (total === 2) return paso === 1 ? 'Vio el video de bienvenida' : 'Completó la encuesta';
   const nombres = ['Diagnóstico', 'Marco', 'Aplicación', 'Caso', 'Reflexión'];
   return `Completó hasta el paso ${paso} de ${total} (${nombres[paso - 1] || ('paso ' + paso)})`;
@@ -345,10 +364,27 @@ function momentosYCampos(contenido) {
     return { momentos: ['Cierre'], camposLabel };
   }
   const momentos = (data.steps || []).map(s => s.label || '');
+  const pasosFields = (data.steps || []).map(s => (s.popup && Array.isArray(s.popup.fields)) ? s.popup.fields.map(f => f.id) : []);
   const camposLabel = {};
   ((data.entrega && data.entrega.campos) || []).forEach(c => { camposLabel[c.id] = c.label; });
   camposLabel.nps = camposLabel.nps || '¿Qué tan útil fue esta semana? (NPS)';
-  return { momentos, camposLabel };
+  return { momentos, camposLabel, pasosFields };
+}
+
+/* Cuando "paso" viene en 0 pero sí hay respuestas guardadas (rastro de un bug
+   ya corregido del sitio, ver estadoColumna), esto estima hasta qué paso
+   llegó alguien mirando qué campos de cada paso ya tienen respuesta —
+   cuenta pasos consecutivos desde el inicio con al menos un campo lleno. */
+function estimarNivelPorRespuestas(pasosFields, respuestasObj) {
+  if (!pasosFields || !pasosFields.length) return 0;
+  let nivel = 0;
+  for (const ids of pasosFields) {
+    if (!ids.length) break; // paso sin popup (ej. Caso) corta la cuenta consecutiva
+    const tieneAlguna = ids.some(id => respuestasObj[id] !== undefined && respuestasObj[id] !== '');
+    if (!tieneAlguna) break;
+    nivel++;
+  }
+  return nivel;
 }
 
 function respuestasConLabelsHtml(obj, camposLabel) {
@@ -369,7 +405,7 @@ function abrirZoomSemana(r, columna) {
   document.getElementById('detalle-overlay').classList.add('open');
 
   cargarContenidoSemana(columna).then(contenido => {
-    const { momentos, camposLabel } = momentosYCampos(contenido);
+    const { momentos, camposLabel, pasosFields } = momentosYCampos(contenido);
 
     let nivelCompletado = 0;
     let respuestasObj = null;
@@ -379,8 +415,8 @@ function abrirZoomSemana(r, columna) {
       respuestasObj = hoja ? (semanasRaw[hoja] || {}) : {};
     } else if (estado === 'progreso') {
       const clave = Object.keys(progreso).find(k => columna.match(k));
-      nivelCompletado = Number(progreso[clave].paso) || 0;
       try { respuestasObj = JSON.parse(progreso[clave].respuestas || '{}'); } catch (e) { respuestasObj = {}; }
+      nivelCompletado = Number(progreso[clave].paso) || estimarNivelPorRespuestas(pasosFields, respuestasObj);
     }
 
     const momentosHtml = momentos.length
@@ -407,7 +443,7 @@ function abrirDetalle(r) {
   Promise.all(COLUMNAS.map(c => cargarContenidoSemana(c))).then(contenidos => {
     const filas = COLUMNAS.map((c, i) => {
       const estado = estadoColumna(c, semanas, progreso);
-      const { camposLabel } = momentosYCampos(contenidos[i]);
+      const { camposLabel, pasosFields } = momentosYCampos(contenidos[i]);
       let texto, clase, extra = '';
       if (estado === 'ok') {
         texto = 'Entregado'; clase = 'ok';
@@ -416,10 +452,11 @@ function abrirDetalle(r) {
         extra = `<div class="respuestas-box">${respuestasConLabelsHtml(respuestasObj, camposLabel)}</div>`;
       } else if (estado === 'progreso') {
         const clave = Object.keys(progreso).find(k => c.match(k));
-        texto = labelPaso(progreso[clave].paso, progreso[clave].totalPasos);
-        clase = 'progreso';
         let respuestasObj = {};
         try { respuestasObj = JSON.parse(progreso[clave].respuestas || '{}'); } catch (e) {}
+        const paso = Number(progreso[clave].paso) || estimarNivelPorRespuestas(pasosFields, respuestasObj);
+        texto = labelPaso(paso, progreso[clave].totalPasos, tieneRespuestasReales(progreso[clave].respuestas));
+        clase = 'progreso';
         extra = `<div class="respuestas-box">${respuestasConLabelsHtml(respuestasObj, camposLabel)}</div>`;
       } else { texto = 'Sin empezar'; clase = ''; }
       return `<div class="detalle-row"><span class="detalle-label">${c.label}</span><span class="detalle-estado ${clase}">${texto}</span></div>${extra}`;
