@@ -510,9 +510,13 @@ let activeDay = 1; // arranca en Sem 1, no en Bienvenida
 
 function estaCompletado(d) {
   if (d.pillar === 'Bienvenida') {
+    // sincronizarAvance() ya guarda esta bandera cross-device cuando detecta
+    // "Ruta GEB Sem. 0" entregada en el backend — se checa primero para que
+    // funcione igual en cualquier dispositivo, no solo en el que se completó.
+    if (localStorage.getItem(claveCompletado('Ruta GEB', 0)) === '1') return true;
     try {
       const s = JSON.parse(localStorage.getItem('bv_ruta_v1')) || {};
-      return !!(s.video && s.encuesta && s.registro);
+      return !!(s.video && s.encuesta);
     } catch (e) { return false; }
   }
   if (d.pillar === 'Cierre') return localStorage.getItem('geb_cierre_completado') === '1';
