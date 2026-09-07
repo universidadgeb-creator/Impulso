@@ -30,6 +30,7 @@
     { "id": "andrea-acuna-robledo", "nombre": "Andrea Acuña Robledo", "password": "ruta24" },
     { "id": "pilar", "nombre": "Pilar", "password": "ruta25" },
     { "id": "alejandro-caram", "nombre": "Alejandro Caram", "password": "ruta26" },
-    { "id": "ilse-cameros", "nombre": "Ilse Cameros", "password": "ruta27" }
+    { "id": "ilse-cameros", "nombre": "Ilse Cameros", "password": "ruta27" },
+    { "id": "leonardo-ramirez", "nombre": "Leonardo Ramírez", "password": "ruta28" }
   ]
 }
