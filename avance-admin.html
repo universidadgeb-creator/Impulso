@@ -253,7 +253,21 @@ function init() {
       ));
     })
     .then(resultados => {
-      resultados.sort((a, b) => a.u.nombre.localeCompare(b.u.nombre, 'es'));
+      // Ordena por avance: primero quien tiene más semanas entregadas por
+      // completo, y entre empates, quien tiene más semanas con progreso
+      // parcial — el nombre solo desempata al final. Quien lleva más va
+      // arriba.
+      function puntaje(r) {
+        const ok = COLUMNAS.filter(c => estadoColumna(c, r.semanas, r.progreso) === 'ok').length;
+        const progreso = COLUMNAS.filter(c => estadoColumna(c, r.semanas, r.progreso) === 'progreso').length;
+        return { ok, progreso };
+      }
+      resultados.sort((a, b) => {
+        const pa = puntaje(a), pb = puntaje(b);
+        if (pb.ok !== pa.ok) return pb.ok - pa.ok;
+        if (pb.progreso !== pa.progreso) return pb.progreso - pa.progreso;
+        return a.u.nombre.localeCompare(b.u.nombre, 'es');
+      });
       window.__resultados = resultados; // para el popup de detalle
 
       const body = document.getElementById('tabla-body');
